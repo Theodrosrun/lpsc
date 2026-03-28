@@ -438,6 +438,20 @@ architecture arch of scalp_user_design is
             HdmiTxxDIO        : inout t_hdmi_tx);
     end component scalp_hdmi;
 
+    component scalp_video_mem is
+        generic (
+            C_VGA_CONFIG : t_vga_config);
+        port (
+            WrClkxCI  : in  std_logic;
+            WrEnxSI   : in  std_logic;
+            WrAddrxDI : in  std_logic_vector(18 downto 0);
+            WrDataxDI : in  std_logic;
+            RdClkxCI  : in  std_logic;
+            RdEnxSI   : in  std_logic;
+            RdAddrxDI : in  std_logic_vector(18 downto 0);
+            RdDataxDO : out std_logic);
+    end component scalp_video_mem;
+
     -- Signals
     -- Clocks
     -- Processing system clock
@@ -817,11 +831,21 @@ begin
             constant C_AXI_CROSS_REGISTER : t_axi_register := (RegxD => x"00ffffff");
             constant C_AXI_BG_REGISTER    : t_axi_register := (RegxD => x"00ff0000");
 
+            -- Address width for a 720x720 frame buffer (2^19 = 524 288 > 518 400)
+            constant C_VIDEO_MEM_ADDR_WIDTH : integer := 19;
+
             -- Signals
+            -- CDC colour registers (AXI clock → VGA clock domain)
             signal CDCPatternPortsxD : t_axi_bunch_of_registers(1 downto 0) := (0 => C_AXI_BG_REGISTER,
                                                                                 1 => C_AXI_CROSS_REGISTER);
             signal BramAddrxD : std_logic_vector(8 downto 0) := (others => '0');
             signal BramWexD   : std_logic_vector(3 downto 0) := (others => '1');
+
+            -- Video memory signals
+            signal VideoMemRdAddrxD : std_logic_vector((C_VIDEO_MEM_ADDR_WIDTH - 1) downto 0) := (others => '0');
+            signal VideoMemRdDataxD : std_logic                                                := '0';
+            -- VidOn delayed by 1 VGA clock cycle to align with the BRAM read latency
+            signal VidOnDelayedxS   : std_logic                                                := '0';
 
             -- Attributes
             attribute mark_debug : string;
@@ -829,13 +853,19 @@ begin
 
             -- attribute mark_debug of CDCPatternPortsxD : signal is "true";
             -- attribute keep of CDCPatternPortsxD       : signal is "true";
-            -- attribute mark_debug of BramAddrxD        : signal is "true";
-            -- attribute keep of BramAddrxD              : signal is "true";
-            -- attribute mark_debug of BramWexD          : signal is "true";
-            -- attribute keep of BramWexD                : signal is "true";
+            -- attribute mark_debug of VideoMemRdAddrxD  : signal is "true";
+            -- attribute keep of VideoMemRdAddrxD        : signal is "true";
+            -- attribute mark_debug of VideoMemRdDataxD  : signal is "true";
+            -- attribute keep of VideoMemRdDataxD        : signal is "true";
 
         begin  -- block ImGenxB
 
+            ---------------------------------------------------------------------------
+            -- CDC BRAMs: cross the two AXI colour registers (background and cross)
+            -- from the 125 MHz AXI clock domain to the 48 MHz VGA clock domain.
+            -- The write address and read address are both fixed at 0; the BRAM is
+            -- used here purely as a dual-clock register for CDC purposes.
+            ---------------------------------------------------------------------------
             BramSDPMacro1xI : BRAM_SDP_MACRO
                 generic map (
                     BRAM_SIZE           => "18Kb",
@@ -886,42 +916,76 @@ begin
                     WRCLK  => ClpxNumRegsAxixD.ClockxC.ClkxC,
                     WREN   => '1');
 
-            SwissFlagxP : process (HdmiVgaClocksxC.PllLockedxS,
-                                   HdmiVgaClocksxC.VgaResetxRNA,
-                                   HdmiVgaClocksxC.VgaxC) is
-            begin  -- process SwissFlagxP
+            ---------------------------------------------------------------------------
+            -- Video memory (frame buffer)
+            -- Compute the linear pixel address: addr = V * H_ACTIVE + H
+            -- This combinatorial signal is registered by the BRAM on the next rising
+            -- edge of the VGA clock, producing the read data one cycle later.
+            ---------------------------------------------------------------------------
+            VideoMemRdAddrxAS : VideoMemRdAddrxD <=
+                std_logic_vector(
+                    to_unsigned(
+                        to_integer(unsigned(VgaPixCountersxD.VxD)) * C_VGA_720X720_60HZ_H_ACTIVE +
+                        to_integer(unsigned(VgaPixCountersxD.HxD)),
+                        C_VIDEO_MEM_ADDR_WIDTH));
+
+            VideoMemxI : entity work.scalp_video_mem
+                generic map (
+                    C_VGA_CONFIG => C_VGA_720X720_60HZ_CONFIG)
+                port map (
+                    -- Write port: tied off; the frame buffer is pre-initialised at
+                    -- synthesis time and can be updated here in future.
+                    WrClkxCI  => HdmiVgaClocksxC.VgaxC,
+                    WrEnxSI   => '0',
+                    WrAddrxDI => (others => '0'),
+                    WrDataxDI => '0',
+                    -- Read port: addressed by the current VGA pixel counters
+                    RdClkxCI  => HdmiVgaClocksxC.VgaxC,
+                    RdEnxSI   => '1',
+                    RdAddrxDI => VideoMemRdAddrxD,
+                    RdDataxDO => VideoMemRdDataxD);
+
+            ---------------------------------------------------------------------------
+            -- VidOn delay register
+            -- Delays the VidOn flag by exactly 1 VGA clock cycle to compensate for
+            -- the 1-cycle read latency of the video memory BRAM.
+            ---------------------------------------------------------------------------
+            VidOnDelayxP : process (HdmiVgaClocksxC.PllLockedxS,
+                                    HdmiVgaClocksxC.VgaResetxRNA,
+                                    HdmiVgaClocksxC.VgaxC) is
+            begin  -- process VidOnDelayxP
                 if (HdmiVgaClocksxC.PllLockedxS = '0') or (HdmiVgaClocksxC.VgaResetxRNA = '0') then
-                    PixelxD <= C_HDMI_VGA_PIX_IDLE;
+                    VidOnDelayedxS <= '0';
                 elsif rising_edge(HdmiVgaClocksxC.VgaxC) then
-                    if VgaPixCountersxD.VidOnxS = '1' then
-                        PixelxD.RxD <= CDCPatternPortsxD(0).RegxD((C_VGA_PIXELS_SIZE - 1) downto (C_VGA_PIXEL_SIZE * 2));
-                        PixelxD.GxD <= CDCPatternPortsxD(0).RegxD(((C_VGA_PIXEL_SIZE * 2) - 1) downto (C_VGA_PIXEL_SIZE));
-                        PixelxD.BxD <= CDCPatternPortsxD(0).RegxD((C_VGA_PIXEL_SIZE - 1) downto 0);
-
-                        if (to_integer(unsigned(VgaPixCountersxD.HxD)) >= 288) and
-                            (to_integer(unsigned(VgaPixCountersxD.HxD)) < 432) then
-                            if (to_integer(unsigned(VgaPixCountersxD.VxD)) >= 144) and
-                                (to_integer(unsigned(VgaPixCountersxD.VxD)) < 576) then
-                                PixelxD.RxD <= CDCPatternPortsxD(1).RegxD((C_VGA_PIXELS_SIZE - 1) downto (C_VGA_PIXEL_SIZE * 2));
-                                PixelxD.GxD <= CDCPatternPortsxD(1).RegxD(((C_VGA_PIXEL_SIZE * 2) - 1) downto (C_VGA_PIXEL_SIZE));
-                                PixelxD.BxD <= CDCPatternPortsxD(1).RegxD((C_VGA_PIXEL_SIZE - 1) downto 0);
-                            end if;
-                        end if;
-
-                        if (to_integer(unsigned(VgaPixCountersxD.HxD)) >= 144) and
-                            (to_integer(unsigned(VgaPixCountersxD.HxD)) < 576) then
-                            if (to_integer(unsigned(VgaPixCountersxD.VxD)) >= 288) and
-                                (to_integer(unsigned(VgaPixCountersxD.VxD)) < 432) then
-                                PixelxD.RxD <= CDCPatternPortsxD(1).RegxD((C_VGA_PIXELS_SIZE - 1) downto (C_VGA_PIXEL_SIZE * 2));
-                                PixelxD.GxD <= CDCPatternPortsxD(1).RegxD(((C_VGA_PIXEL_SIZE * 2) - 1) downto (C_VGA_PIXEL_SIZE));
-                                PixelxD.BxD <= CDCPatternPortsxD(1).RegxD((C_VGA_PIXEL_SIZE - 1) downto 0);
-                            end if;
-                        end if;
-                    else
-                        PixelxD <= C_HDMI_VGA_PIX_IDLE;
-                    end if;
+                    VidOnDelayedxS <= VgaPixCountersxD.VidOnxS;
                 end if;
-            end process SwissFlagxP;
+            end process VidOnDelayxP;
+
+            ---------------------------------------------------------------------------
+            -- Colour MUX
+            -- Maps the 1-bit video memory output to a full 24-bit RGB pixel using
+            -- the two CDC colour registers:
+            --   VideoMemRdDataxD = '0' → background colour (CDCPatternPortsxD(0))
+            --   VideoMemRdDataxD = '1' → cross colour     (CDCPatternPortsxD(1))
+            -- When VidOnDelayedxS = '0' (blanking interval) the output is forced to
+            -- the idle (black) value.
+            ---------------------------------------------------------------------------
+            ColorMuxxP : process (all) is
+            begin  -- process ColorMuxxP
+                if VidOnDelayedxS = '1' then
+                    if VideoMemRdDataxD = '1' then
+                        PixelxD.RxD <= CDCPatternPortsxD(1).RegxD((C_VGA_PIXELS_SIZE - 1) downto (C_VGA_PIXEL_SIZE * 2));
+                        PixelxD.GxD <= CDCPatternPortsxD(1).RegxD(((C_VGA_PIXEL_SIZE * 2) - 1) downto C_VGA_PIXEL_SIZE);
+                        PixelxD.BxD <= CDCPatternPortsxD(1).RegxD((C_VGA_PIXEL_SIZE - 1) downto 0);
+                    else
+                        PixelxD.RxD <= CDCPatternPortsxD(0).RegxD((C_VGA_PIXELS_SIZE - 1) downto (C_VGA_PIXEL_SIZE * 2));
+                        PixelxD.GxD <= CDCPatternPortsxD(0).RegxD(((C_VGA_PIXEL_SIZE * 2) - 1) downto C_VGA_PIXEL_SIZE);
+                        PixelxD.BxD <= CDCPatternPortsxD(0).RegxD((C_VGA_PIXEL_SIZE - 1) downto 0);
+                    end if;
+                else
+                    PixelxD <= C_HDMI_VGA_PIX_IDLE;
+                end if;
+            end process ColorMuxxP;
 
         end block ImGenxB;
 

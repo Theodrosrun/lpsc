@@ -144,6 +144,13 @@ set vhdl_ips_file_list [findFiles ${ip_dir}/scalp_cdc_sync/src/hdl *.vhd]
 		print_status "VHDL 2008 mode configured for the file $j" "OK"
 		set_property is_enabled true [get_files $j]
 	}
+set vhdl_ips_file_list [findFiles ${ip_dir}/scalp_video_mem/src/hdl *.vhd]
+	add_files -norecurse $vhdl_ips_file_list
+	foreach j $vhdl_ips_file_list {
+		set_property file_type {VHDL 2008} [get_files $j]
+		print_status "VHDL 2008 mode configured for the file $j" "OK"
+		set_property is_enabled true [get_files $j]
+	}
 
 } elseif {$PRJ_TYPE == "COMP_PRJ_TYPE"} {
   # add IPs source files
