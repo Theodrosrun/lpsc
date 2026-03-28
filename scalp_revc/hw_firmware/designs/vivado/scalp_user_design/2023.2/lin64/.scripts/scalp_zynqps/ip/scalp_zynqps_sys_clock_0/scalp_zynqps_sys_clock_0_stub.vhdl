@@ -1,0 +1,34 @@
+-- Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+-- Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+-- --------------------------------------------------------------------------------
+-- Tool Version: Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
+-- Date        : Wed Mar  4 14:13:17 2026
+-- Host        : theodros-ThinkPad-P16s-Gen-2 running 64-bit Ubuntu 24.04.2 LTS
+-- Command     : write_vhdl -force -mode synth_stub
+--               /home/theodros/Documents/Master/LPSC/scalp_board_files/scalp_revc/hw_firmware/designs/vivado/scalp_user_design/2023.2/lin64/.scripts/scalp_zynqps/ip/scalp_zynqps_sys_clock_0/scalp_zynqps_sys_clock_0_stub.vhdl
+-- Design      : scalp_zynqps_sys_clock_0
+-- Purpose     : Stub declaration of top-level module interface
+-- Device      : xc7z015clg485-2
+-- --------------------------------------------------------------------------------
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity scalp_zynqps_sys_clock_0 is
+  Port ( 
+    clk_125 : out STD_LOGIC;
+    resetn : in STD_LOGIC;
+    locked : out STD_LOGIC;
+    clk_in1 : in STD_LOGIC
+  );
+
+  attribute CORE_GENERATION_INFO : string;
+  attribute CORE_GENERATION_INFO of scalp_zynqps_sys_clock_0 : entity is "scalp_zynqps_sys_clock_0,clk_wiz_v6_0_13_0_0,{component_name=scalp_zynqps_sys_clock_0,use_phase_alignment=true,use_min_o_jitter=false,use_max_i_jitter=false,use_dyn_phase_shift=false,use_inclk_switchover=false,use_dyn_reconfig=false,enable_axi=0,feedback_source=FDBK_AUTO,PRIMITIVE=MMCM,num_out_clk=1,clkin1_period=8.000,clkin2_period=10.000,use_power_down=false,use_reset=true,use_locked=true,use_inclk_stopped=false,feedback_type=SINGLE,CLOCK_MGR_TYPE=NA,manual_override=false}";
+end scalp_zynqps_sys_clock_0;
+
+architecture stub of scalp_zynqps_sys_clock_0 is
+  attribute syn_black_box : boolean;
+  attribute black_box_pad_pin : string;
+  attribute syn_black_box of stub : architecture is true;
+  attribute black_box_pad_pin of stub : architecture is "clk_125,resetn,locked,clk_in1";
+begin
+end;
