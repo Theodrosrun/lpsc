@@ -962,16 +962,18 @@ begin
             end process VidOnDelayxP;
 
             ---------------------------------------------------------------------------
-            -- Colour MUX
+            -- Colour MUX (combinatorial, consistent with vga_stripes pattern)
             -- Maps the 1-bit video memory output to a full 24-bit RGB pixel using
             -- the two CDC colour registers:
             --   VideoMemRdDataxD = '0' → background colour (CDCPatternPortsxD(0))
             --   VideoMemRdDataxD = '1' → cross colour     (CDCPatternPortsxD(1))
             -- When VidOnDelayedxS = '0' (blanking interval) the output is forced to
             -- the idle (black) value.
+            -- Both VidOnDelayedxS and VideoMemRdDataxD are registered signals so
+            -- PixelxD has no combinatorial path from non-registered inputs.
             ---------------------------------------------------------------------------
             ColorMuxxP : process (all) is
-            begin  -- process ColorMuxxP
+            begin  -- process ColorMuxxP (combinatorial)
                 if VidOnDelayedxS = '1' then
                     if VideoMemRdDataxD = '1' then
                         PixelxD.RxD <= CDCPatternPortsxD(1).RegxD((C_VGA_PIXELS_SIZE - 1) downto (C_VGA_PIXEL_SIZE * 2));
