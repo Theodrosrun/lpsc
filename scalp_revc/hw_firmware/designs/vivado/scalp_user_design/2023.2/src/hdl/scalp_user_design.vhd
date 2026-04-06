@@ -477,6 +477,14 @@ architecture arch of scalp_user_design is
     signal GPIOSwitchesxD   : std_logic_vector((C_GPIO_SWITCHES_SIZE - 1) downto 0) := (others => '0');
     signal GPIOJoystickxD   : std_logic_vector((C_GPIO_JOYSTICK_SIZE - 1) downto 0) := (others => '0');
 
+    ---------------------------------------------------------------------------
+    -- Clock user
+    ---------------------------------------------------------------------------
+    signal ClkUserxC          : std_logic := '0';
+    signal ClkUserRstxR       : std_logic := '1';
+    signal ClkUserRstxRNA     : std_logic := '0';
+    signal ClkUserPllLockedxS : std_logic := '0';
+
     -- Attributes
     attribute mark_debug       : string;
     attribute keep             : string;
@@ -804,6 +812,22 @@ begin
 
         end block HdmixB;
 
+        ClkUserPllxB : block is
+        begin
+
+            ScalpUserPllxI : entity work.clk_wiz_0
+                port map (
+                    clk_in1  => Clk125xC,
+                    reset    => Clk125RstxR,
+                    clk_out1 => ClkUserxC,
+                    locked   => ClkUserPllLockedxS
+                );
+
+            ClkUserRstxR   <= not (Clk125PllLockedxS and ClkUserPllLockedxS);
+            ClkUserRstxRNA <=      Clk125PllLockedxS and ClkUserPllLockedxS;
+
+        end block ClkUserPllxB;
+
         ImGenxB : block is
 
             -- Constants
@@ -818,7 +842,7 @@ begin
             constant C_AXI_BG_REGISTER    : t_axi_register := (RegxD => x"00ff0000");
 
             -- Signals
-            signal CDCPatternPortsxD : t_axi_bunch_of_registers(1 downto 0) := (0 => C_AXI_BG_REGISTER,
+            signal CDCPatternPortsxD : t_axi_bunch_of_registers(1 downto 0) := (0 =>       C_AXI_BG_REGISTER,
                                                                                 1 => C_AXI_CROSS_REGISTER);
             signal BramAddrxD : std_logic_vector(8 downto 0) := (others => '0');
             signal BramWexD   : std_logic_vector(3 downto 0) := (others => '1');
