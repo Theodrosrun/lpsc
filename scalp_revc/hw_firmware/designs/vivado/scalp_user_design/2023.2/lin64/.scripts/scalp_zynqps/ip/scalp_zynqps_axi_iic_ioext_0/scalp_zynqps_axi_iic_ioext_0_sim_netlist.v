@@ -2,10 +2,10 @@
 // Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
-// Date        : Wed Mar  4 14:12:52 2026
+// Date        : Mon Apr  6 16:54:21 2026
 // Host        : theodros-ThinkPad-P16s-Gen-2 running 64-bit Ubuntu 24.04.2 LTS
-// Command     : write_verilog -force -mode funcsim
-//               /home/theodros/Documents/Master/LPSC/scalp_board_files/scalp_revc/hw_firmware/designs/vivado/scalp_user_design/2023.2/lin64/.scripts/scalp_zynqps/ip/scalp_zynqps_axi_iic_ioext_0/scalp_zynqps_axi_iic_ioext_0_sim_netlist.v
+// Command     : write_verilog -force -mode funcsim -rename_top scalp_zynqps_axi_iic_ioext_0 -prefix
+//               scalp_zynqps_axi_iic_ioext_0_ scalp_zynqps_axi_iic_ioext_0_sim_netlist.v
 // Design      : scalp_zynqps_axi_iic_ioext_0
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -13,172 +13,6 @@
 // --------------------------------------------------------------------------------
 `timescale 1 ps / 1 ps
 
-(* CHECK_LICENSE_TYPE = "scalp_zynqps_axi_iic_ioext_0,axi_iic,{}" *) (* downgradeipidentifiedwarnings = "yes" *) (* x_core_info = "axi_iic,Vivado 2023.2" *) 
-(* NotValidForBitStream *)
-module scalp_zynqps_axi_iic_ioext_0
-   (s_axi_aclk,
-    s_axi_aresetn,
-    iic2intc_irpt,
-    s_axi_awaddr,
-    s_axi_awvalid,
-    s_axi_awready,
-    s_axi_wdata,
-    s_axi_wstrb,
-    s_axi_wvalid,
-    s_axi_wready,
-    s_axi_bresp,
-    s_axi_bvalid,
-    s_axi_bready,
-    s_axi_araddr,
-    s_axi_arvalid,
-    s_axi_arready,
-    s_axi_rdata,
-    s_axi_rresp,
-    s_axi_rvalid,
-    s_axi_rready,
-    sda_i,
-    sda_o,
-    sda_t,
-    scl_i,
-    scl_o,
-    scl_t,
-    gpo);
-  (* x_interface_info = "xilinx.com:signal:clock:1.0 S_AXI_ACLK CLK" *) (* x_interface_parameter = "XIL_INTERFACENAME S_AXI_ACLK, ASSOCIATED_BUSIF S_AXI, ASSOCIATED_RESET s_axi_aresetn, FREQ_HZ 125000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN /sys_clock_clk_out1, INSERT_VIP 0" *) input s_axi_aclk;
-  (* x_interface_info = "xilinx.com:signal:reset:1.0 S_AXI_ARESETN RST" *) (* x_interface_parameter = "XIL_INTERFACENAME S_AXI_ARESETN, POLARITY ACTIVE_LOW, INSERT_VIP 0" *) input s_axi_aresetn;
-  (* x_interface_info = "xilinx.com:signal:interrupt:1.0 INTERRUPT INTERRUPT" *) (* x_interface_parameter = "XIL_INTERFACENAME INTERRUPT, SENSITIVITY LEVEL_HIGH, PORTWIDTH 1" *) output iic2intc_irpt;
-  (* x_interface_info = "xilinx.com:interface:aximm:1.0 S_AXI AWADDR" *) (* x_interface_parameter = "XIL_INTERFACENAME S_AXI, DATA_WIDTH 32, PROTOCOL AXI4LITE, FREQ_HZ 125000000, ID_WIDTH 0, ADDR_WIDTH 9, AWUSER_WIDTH 0, ARUSER_WIDTH 0, WUSER_WIDTH 0, RUSER_WIDTH 0, BUSER_WIDTH 0, READ_WRITE_MODE READ_WRITE, HAS_BURST 0, HAS_LOCK 0, HAS_PROT 0, HAS_CACHE 0, HAS_QOS 0, HAS_REGION 0, HAS_WSTRB 1, HAS_BRESP 1, HAS_RRESP 1, SUPPORTS_NARROW_BURST 0, NUM_READ_OUTSTANDING 2, NUM_WRITE_OUTSTANDING 2, MAX_BURST_LENGTH 1, PHASE 0.0, CLK_DOMAIN /sys_clock_clk_out1, NUM_READ_THREADS 1, NUM_WRITE_THREADS 1, RUSER_BITS_PER_BYTE 0, WUSER_BITS_PER_BYTE 0, INSERT_VIP 0" *) input [8:0]s_axi_awaddr;
-  (* x_interface_info = "xilinx.com:interface:aximm:1.0 S_AXI AWVALID" *) input s_axi_awvalid;
-  (* x_interface_info = "xilinx.com:interface:aximm:1.0 S_AXI AWREADY" *) output s_axi_awready;
-  (* x_interface_info = "xilinx.com:interface:aximm:1.0 S_AXI WDATA" *) input [31:0]s_axi_wdata;
-  (* x_interface_info = "xilinx.com:interface:aximm:1.0 S_AXI WSTRB" *) input [3:0]s_axi_wstrb;
-  (* x_interface_info = "xilinx.com:interface:aximm:1.0 S_AXI WVALID" *) input s_axi_wvalid;
-  (* x_interface_info = "xilinx.com:interface:aximm:1.0 S_AXI WREADY" *) output s_axi_wready;
-  (* x_interface_info = "xilinx.com:interface:aximm:1.0 S_AXI BRESP" *) output [1:0]s_axi_bresp;
-  (* x_interface_info = "xilinx.com:interface:aximm:1.0 S_AXI BVALID" *) output s_axi_bvalid;
-  (* x_interface_info = "xilinx.com:interface:aximm:1.0 S_AXI BREADY" *) input s_axi_bready;
-  (* x_interface_info = "xilinx.com:interface:aximm:1.0 S_AXI ARADDR" *) input [8:0]s_axi_araddr;
-  (* x_interface_info = "xilinx.com:interface:aximm:1.0 S_AXI ARVALID" *) input s_axi_arvalid;
-  (* x_interface_info = "xilinx.com:interface:aximm:1.0 S_AXI ARREADY" *) output s_axi_arready;
-  (* x_interface_info = "xilinx.com:interface:aximm:1.0 S_AXI RDATA" *) output [31:0]s_axi_rdata;
-  (* x_interface_info = "xilinx.com:interface:aximm:1.0 S_AXI RRESP" *) output [1:0]s_axi_rresp;
-  (* x_interface_info = "xilinx.com:interface:aximm:1.0 S_AXI RVALID" *) output s_axi_rvalid;
-  (* x_interface_info = "xilinx.com:interface:aximm:1.0 S_AXI RREADY" *) input s_axi_rready;
-  (* x_interface_info = "xilinx.com:interface:iic:1.0 IIC SDA_I" *) (* x_interface_parameter = "XIL_INTERFACENAME IIC, BOARD.ASSOCIATED_PARAM IIC_BOARD_INTERFACE" *) input sda_i;
-  (* x_interface_info = "xilinx.com:interface:iic:1.0 IIC SDA_O" *) output sda_o;
-  (* x_interface_info = "xilinx.com:interface:iic:1.0 IIC SDA_T" *) output sda_t;
-  (* x_interface_info = "xilinx.com:interface:iic:1.0 IIC SCL_I" *) input scl_i;
-  (* x_interface_info = "xilinx.com:interface:iic:1.0 IIC SCL_O" *) output scl_o;
-  (* x_interface_info = "xilinx.com:interface:iic:1.0 IIC SCL_T" *) output scl_t;
-  output [0:0]gpo;
-
-  wire \<const0> ;
-  wire [0:0]gpo;
-  wire iic2intc_irpt;
-  wire s_axi_aclk;
-  wire [8:0]s_axi_araddr;
-  wire s_axi_aresetn;
-  wire s_axi_arready;
-  wire s_axi_arvalid;
-  wire [8:0]s_axi_awaddr;
-  wire s_axi_awready;
-  wire s_axi_awvalid;
-  wire s_axi_bready;
-  wire [1:1]\^s_axi_bresp ;
-  wire s_axi_bvalid;
-  wire [31:0]\^s_axi_rdata ;
-  wire s_axi_rready;
-  wire [1:1]\^s_axi_rresp ;
-  wire s_axi_rvalid;
-  wire [31:0]s_axi_wdata;
-  wire s_axi_wready;
-  wire s_axi_wvalid;
-  wire scl_i;
-  wire scl_t;
-  wire sda_i;
-  wire sda_t;
-  wire NLW_U0_scl_o_UNCONNECTED;
-  wire NLW_U0_sda_o_UNCONNECTED;
-  wire [0:0]NLW_U0_s_axi_bresp_UNCONNECTED;
-  wire [30:11]NLW_U0_s_axi_rdata_UNCONNECTED;
-  wire [0:0]NLW_U0_s_axi_rresp_UNCONNECTED;
-
-  assign s_axi_bresp[1] = \^s_axi_bresp [1];
-  assign s_axi_bresp[0] = \<const0> ;
-  assign s_axi_rdata[31] = \^s_axi_rdata [31];
-  assign s_axi_rdata[30] = \<const0> ;
-  assign s_axi_rdata[29] = \<const0> ;
-  assign s_axi_rdata[28] = \<const0> ;
-  assign s_axi_rdata[27] = \<const0> ;
-  assign s_axi_rdata[26] = \<const0> ;
-  assign s_axi_rdata[25] = \<const0> ;
-  assign s_axi_rdata[24] = \<const0> ;
-  assign s_axi_rdata[23] = \<const0> ;
-  assign s_axi_rdata[22] = \<const0> ;
-  assign s_axi_rdata[21] = \<const0> ;
-  assign s_axi_rdata[20] = \<const0> ;
-  assign s_axi_rdata[19] = \<const0> ;
-  assign s_axi_rdata[18] = \<const0> ;
-  assign s_axi_rdata[17] = \<const0> ;
-  assign s_axi_rdata[16] = \<const0> ;
-  assign s_axi_rdata[15] = \<const0> ;
-  assign s_axi_rdata[14] = \<const0> ;
-  assign s_axi_rdata[13] = \<const0> ;
-  assign s_axi_rdata[12] = \<const0> ;
-  assign s_axi_rdata[11] = \<const0> ;
-  assign s_axi_rdata[10:0] = \^s_axi_rdata [10:0];
-  assign s_axi_rresp[1] = \^s_axi_rresp [1];
-  assign s_axi_rresp[0] = \<const0> ;
-  assign scl_o = \<const0> ;
-  assign sda_o = \<const0> ;
-  GND GND
-       (.G(\<const0> ));
-  (* C_DEFAULT_VALUE = "8'b00000000" *) 
-  (* C_DISABLE_SETUP_VIOLATION_CHECK = "0" *) 
-  (* C_FAMILY = "zynq" *) 
-  (* C_GPO_WIDTH = "1" *) 
-  (* C_IIC_FREQ = "100000" *) 
-  (* C_SCL_INERTIAL_DELAY = "0" *) 
-  (* C_SDA_INERTIAL_DELAY = "0" *) 
-  (* C_SDA_LEVEL = "1" *) 
-  (* C_SMBUS_PMBUS_HOST = "0" *) 
-  (* C_STATIC_TIMING_REG_WIDTH = "0" *) 
-  (* C_S_AXI_ACLK_FREQ_HZ = "125000000" *) 
-  (* C_S_AXI_ADDR_WIDTH = "9" *) 
-  (* C_S_AXI_DATA_WIDTH = "32" *) 
-  (* C_TEN_BIT_ADR = "0" *) 
-  (* C_TIMING_REG_WIDTH = "32" *) 
-  (* downgradeipidentifiedwarnings = "yes" *) 
-  scalp_zynqps_axi_iic_ioext_0_axi_iic U0
-       (.gpo(gpo),
-        .iic2intc_irpt(iic2intc_irpt),
-        .s_axi_aclk(s_axi_aclk),
-        .s_axi_araddr(s_axi_araddr),
-        .s_axi_aresetn(s_axi_aresetn),
-        .s_axi_arready(s_axi_arready),
-        .s_axi_arvalid(s_axi_arvalid),
-        .s_axi_awaddr(s_axi_awaddr),
-        .s_axi_awready(s_axi_awready),
-        .s_axi_awvalid(s_axi_awvalid),
-        .s_axi_bready(s_axi_bready),
-        .s_axi_bresp({\^s_axi_bresp ,NLW_U0_s_axi_bresp_UNCONNECTED[0]}),
-        .s_axi_bvalid(s_axi_bvalid),
-        .s_axi_rdata(\^s_axi_rdata ),
-        .s_axi_rready(s_axi_rready),
-        .s_axi_rresp({\^s_axi_rresp ,NLW_U0_s_axi_rresp_UNCONNECTED[0]}),
-        .s_axi_rvalid(s_axi_rvalid),
-        .s_axi_wdata({s_axi_wdata[31],1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,s_axi_wdata[10:0]}),
-        .s_axi_wready(s_axi_wready),
-        .s_axi_wstrb({1'b0,1'b0,1'b0,1'b0}),
-        .s_axi_wvalid(s_axi_wvalid),
-        .scl_i(scl_i),
-        .scl_o(NLW_U0_scl_o_UNCONNECTED),
-        .scl_t(scl_t),
-        .sda_i(sda_i),
-        .sda_o(NLW_U0_sda_o_UNCONNECTED),
-        .sda_t(sda_t));
-endmodule
-
-(* ORIG_REF_NAME = "SRL_FIFO" *) 
 module scalp_zynqps_axi_iic_ioext_0_SRL_FIFO
    (Rc_Data_Exists,
     Rc_addr,
@@ -567,7 +401,7 @@ module scalp_zynqps_axi_iic_ioext_0_SRL_FIFO_0
     earlyAckHdr,
     callingReadAccess,
     shift_reg_ld,
-    scndry_out);
+    Sda_clean);
   output Tx_data_exists_sgl;
   output [3:0]Tx_addr_0;
   output [7:0]Tx_fifo_data_0;
@@ -591,7 +425,7 @@ module scalp_zynqps_axi_iic_ioext_0_SRL_FIFO_0
   input earlyAckHdr;
   input callingReadAccess;
   input shift_reg_ld;
-  input scndry_out;
+  input Sda_clean;
 
   wire \Addr_Counters[0].MUXCY_L_I_i_2__1_n_0 ;
   wire \Addr_Counters[0].MUXCY_L_I_i_3__1_n_0 ;
@@ -606,6 +440,7 @@ module scalp_zynqps_axi_iic_ioext_0_SRL_FIFO_0
   wire S;
   wire S0_out;
   wire S1_out;
+  wire Sda_clean;
   wire [3:0]Tx_addr_0;
   wire Tx_data_exists_sgl;
   wire [7:0]Tx_fifo_data_0;
@@ -625,7 +460,6 @@ module scalp_zynqps_axi_iic_ioext_0_SRL_FIFO_0
   wire rdCntrFrmTxFifo0;
   wire s_axi_aclk;
   wire [7:0]s_axi_wdata;
-  wire scndry_out;
   wire shift_reg_ld;
   wire \sr_i[0]_i_2_n_0 ;
   wire sum_A_0;
@@ -910,7 +744,7 @@ module scalp_zynqps_axi_iic_ioext_0_SRL_FIFO_0
     \data_int[0]_i_1 
        (.I0(Tx_fifo_data_0[0]),
         .I1(shift_reg_ld),
-        .I2(scndry_out),
+        .I2(Sda_clean),
         .O(\FIFO_RAM[7].SRL16E_I_0 ));
   LUT3 #(
     .INIT(8'h40)) 
@@ -1189,7 +1023,6 @@ module scalp_zynqps_axi_iic_ioext_0_SRL_FIFO__parameterized0
         .O(\FIFO_RAM[1].SRL16E_I_0 ));
 endmodule
 
-(* ORIG_REF_NAME = "address_decoder" *) 
 module scalp_zynqps_axi_iic_ioext_0_address_decoder
    (AXI_IP2Bus_RdAck1_reg,
     AXI_IP2Bus_WrAck1_reg,
@@ -2533,7 +2366,7 @@ endmodule
 (* C_SDA_INERTIAL_DELAY = "0" *) (* C_SDA_LEVEL = "1" *) (* C_SMBUS_PMBUS_HOST = "0" *) 
 (* C_STATIC_TIMING_REG_WIDTH = "0" *) (* C_S_AXI_ACLK_FREQ_HZ = "125000000" *) (* C_S_AXI_ADDR_WIDTH = "9" *) 
 (* C_S_AXI_DATA_WIDTH = "32" *) (* C_TEN_BIT_ADR = "0" *) (* C_TIMING_REG_WIDTH = "32" *) 
-(* ORIG_REF_NAME = "axi_iic" *) (* downgradeipidentifiedwarnings = "yes" *) 
+(* downgradeipidentifiedwarnings = "yes" *) 
 module scalp_zynqps_axi_iic_ioext_0_axi_iic
    (s_axi_aclk,
     s_axi_aresetn,
@@ -2672,7 +2505,6 @@ module scalp_zynqps_axi_iic_ioext_0_axi_iic
         .sda_t(sda_t));
 endmodule
 
-(* ORIG_REF_NAME = "axi_ipif_ssp1" *) 
 module scalp_zynqps_axi_iic_ioext_0_axi_ipif_ssp1
    (s_axi_rresp,
     Bus2IIC_Reset,
@@ -3049,7 +2881,6 @@ module scalp_zynqps_axi_iic_ioext_0_axi_ipif_ssp1
         .sw_rst_cond_d1(sw_rst_cond_d1));
 endmodule
 
-(* ORIG_REF_NAME = "axi_lite_ipif" *) 
 module scalp_zynqps_axi_iic_ioext_0_axi_lite_ipif
    (s_axi_rresp,
     s_axi_rvalid_i_reg,
@@ -3412,217 +3243,83 @@ module scalp_zynqps_axi_iic_ioext_0_axi_lite_ipif
         .sw_rst_cond_d1(sw_rst_cond_d1));
 endmodule
 
-(* ORIG_REF_NAME = "cdc_sync" *) 
-module scalp_zynqps_axi_iic_ioext_0_cdc_sync
-   (\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4_0 ,
-    scndry_out,
-    sda_rin_d1,
-    sda_i,
-    s_axi_aclk);
-  output \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4_0 ;
-  output scndry_out;
-  input sda_rin_d1;
-  input sda_i;
-  input s_axi_aclk;
-
-  wire \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4_0 ;
-  wire \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.s_level_out_d2 ;
-  wire \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.s_level_out_d3 ;
-  wire Q;
-  wire s_axi_aclk;
-  wire scndry_out;
-  wire sda_i;
-  wire sda_rin_d1;
-
-  (* ASYNC_REG *) 
-  (* XILINX_LEGACY_PRIM = "FDR" *) 
-  (* XILINX_TRANSFORM_PINMAP = "VCC:CE" *) 
-  (* box_type = "PRIMITIVE" *) 
-  FDRE #(
-    .INIT(1'b0)) 
-    \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_IN_cdc_to 
-       (.C(s_axi_aclk),
-        .CE(1'b1),
-        .D(sda_i),
-        .Q(Q),
-        .R(1'b0));
-  (* ASYNC_REG *) 
-  (* XILINX_LEGACY_PRIM = "FDR" *) 
-  (* XILINX_TRANSFORM_PINMAP = "VCC:CE" *) 
-  (* box_type = "PRIMITIVE" *) 
-  FDRE #(
-    .INIT(1'b0)) 
-    \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d2 
-       (.C(s_axi_aclk),
-        .CE(1'b1),
-        .D(Q),
-        .Q(\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.s_level_out_d2 ),
-        .R(1'b0));
-  (* ASYNC_REG *) 
-  (* XILINX_LEGACY_PRIM = "FDR" *) 
-  (* XILINX_TRANSFORM_PINMAP = "VCC:CE" *) 
-  (* box_type = "PRIMITIVE" *) 
-  FDRE #(
-    .INIT(1'b0)) 
-    \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d3 
-       (.C(s_axi_aclk),
-        .CE(1'b1),
-        .D(\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.s_level_out_d2 ),
-        .Q(\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.s_level_out_d3 ),
-        .R(1'b0));
-  (* ASYNC_REG *) 
-  (* XILINX_LEGACY_PRIM = "FDR" *) 
-  (* XILINX_TRANSFORM_PINMAP = "VCC:CE" *) 
-  (* box_type = "PRIMITIVE" *) 
-  FDRE #(
-    .INIT(1'b0)) 
-    \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 
-       (.C(s_axi_aclk),
-        .CE(1'b1),
-        .D(\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.s_level_out_d3 ),
-        .Q(scndry_out),
-        .R(1'b0));
-  LUT2 #(
-    .INIT(4'h2)) 
-    detect_stop_i_3
-       (.I0(scndry_out),
-        .I1(sda_rin_d1),
-        .O(\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4_0 ));
-endmodule
-
-(* ORIG_REF_NAME = "cdc_sync" *) 
-module scalp_zynqps_axi_iic_ioext_0_cdc_sync_4
-   (scl_rising_edge0,
-    \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4_0 ,
-    scl_rin_d1,
+module scalp_zynqps_axi_iic_ioext_0_debounce
+   (Scl_clean,
+    scl_rising_edge0,
     scl_i,
-    s_axi_aclk);
+    s_axi_aclk,
+    scl_rin_d1);
+  output Scl_clean;
   output scl_rising_edge0;
-  output \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4_0 ;
-  input scl_rin_d1;
   input scl_i;
   input s_axi_aclk;
+  input scl_rin_d1;
 
-  wire \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4_0 ;
-  wire \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.s_level_out_d2 ;
-  wire \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.s_level_out_d3 ;
-  wire Q;
+  wire Scl_clean;
   wire s_axi_aclk;
   wire scl_i;
   wire scl_rin_d1;
   wire scl_rising_edge0;
 
-  (* ASYNC_REG *) 
-  (* XILINX_LEGACY_PRIM = "FDR" *) 
-  (* XILINX_TRANSFORM_PINMAP = "VCC:CE" *) 
-  (* box_type = "PRIMITIVE" *) 
-  FDRE #(
-    .INIT(1'b0)) 
-    \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_IN_cdc_to 
-       (.C(s_axi_aclk),
-        .CE(1'b1),
-        .D(scl_i),
-        .Q(Q),
-        .R(1'b0));
-  (* ASYNC_REG *) 
-  (* XILINX_LEGACY_PRIM = "FDR" *) 
-  (* XILINX_TRANSFORM_PINMAP = "VCC:CE" *) 
-  (* box_type = "PRIMITIVE" *) 
-  FDRE #(
-    .INIT(1'b0)) 
-    \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d2 
-       (.C(s_axi_aclk),
-        .CE(1'b1),
-        .D(Q),
-        .Q(\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.s_level_out_d2 ),
-        .R(1'b0));
-  (* ASYNC_REG *) 
-  (* XILINX_LEGACY_PRIM = "FDR" *) 
-  (* XILINX_TRANSFORM_PINMAP = "VCC:CE" *) 
-  (* box_type = "PRIMITIVE" *) 
-  FDRE #(
-    .INIT(1'b0)) 
-    \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d3 
-       (.C(s_axi_aclk),
-        .CE(1'b1),
-        .D(\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.s_level_out_d2 ),
-        .Q(\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.s_level_out_d3 ),
-        .R(1'b0));
-  (* ASYNC_REG *) 
-  (* XILINX_LEGACY_PRIM = "FDR" *) 
-  (* XILINX_TRANSFORM_PINMAP = "VCC:CE" *) 
-  (* box_type = "PRIMITIVE" *) 
-  FDRE #(
-    .INIT(1'b0)) 
-    \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 
-       (.C(s_axi_aclk),
-        .CE(1'b1),
-        .D(\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.s_level_out_d3 ),
-        .Q(\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4_0 ),
-        .R(1'b0));
+  (* DEST_SYNC_FF = "4" *) 
+  (* INIT_SYNC_FF = "0" *) 
+  (* SIM_ASSERT_CHK = "0" *) 
+  (* SRC_INPUT_REG = "0" *) 
+  (* VERSION = "0" *) 
+  (* XPM_CDC = "SINGLE" *) 
+  (* XPM_MODULE = "TRUE" *) 
+  scalp_zynqps_axi_iic_ioext_0_xpm_cdc_single__1 INPUT_DOUBLE_REGS
+       (.dest_clk(s_axi_aclk),
+        .dest_out(Scl_clean),
+        .src_clk(1'b0),
+        .src_in(scl_i));
   LUT2 #(
     .INIT(4'h2)) 
     scl_rising_edge_i_1
-       (.I0(\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4_0 ),
+       (.I0(Scl_clean),
         .I1(scl_rin_d1),
         .O(scl_rising_edge0));
 endmodule
 
 (* ORIG_REF_NAME = "debounce" *) 
-module scalp_zynqps_axi_iic_ioext_0_debounce
-   (scl_rising_edge0,
-    \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 ,
-    scl_rin_d1,
-    scl_i,
-    s_axi_aclk);
-  output scl_rising_edge0;
-  output \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 ;
-  input scl_rin_d1;
-  input scl_i;
-  input s_axi_aclk;
-
-  wire \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 ;
-  wire s_axi_aclk;
-  wire scl_i;
-  wire scl_rin_d1;
-  wire scl_rising_edge0;
-
-  scalp_zynqps_axi_iic_ioext_0_cdc_sync_4 INPUT_DOUBLE_REGS
-       (.\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4_0 (\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 ),
-        .s_axi_aclk(s_axi_aclk),
-        .scl_i(scl_i),
-        .scl_rin_d1(scl_rin_d1),
-        .scl_rising_edge0(scl_rising_edge0));
-endmodule
-
-(* ORIG_REF_NAME = "debounce" *) 
 module scalp_zynqps_axi_iic_ioext_0_debounce_3
-   (\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 ,
-    scndry_out,
-    sda_rin_d1,
+   (Sda_clean,
+    \syncstages_ff_reg[3] ,
     sda_i,
-    s_axi_aclk);
-  output \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 ;
-  output scndry_out;
-  input sda_rin_d1;
+    s_axi_aclk,
+    sda_rin_d1);
+  output Sda_clean;
+  output \syncstages_ff_reg[3] ;
   input sda_i;
   input s_axi_aclk;
+  input sda_rin_d1;
 
-  wire \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 ;
+  wire Sda_clean;
   wire s_axi_aclk;
-  wire scndry_out;
   wire sda_i;
   wire sda_rin_d1;
+  wire \syncstages_ff_reg[3] ;
 
-  scalp_zynqps_axi_iic_ioext_0_cdc_sync INPUT_DOUBLE_REGS
-       (.\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4_0 (\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 ),
-        .s_axi_aclk(s_axi_aclk),
-        .scndry_out(scndry_out),
-        .sda_i(sda_i),
-        .sda_rin_d1(sda_rin_d1));
+  (* DEST_SYNC_FF = "4" *) 
+  (* INIT_SYNC_FF = "0" *) 
+  (* SIM_ASSERT_CHK = "0" *) 
+  (* SRC_INPUT_REG = "0" *) 
+  (* VERSION = "0" *) 
+  (* XPM_CDC = "SINGLE" *) 
+  (* XPM_MODULE = "TRUE" *) 
+  scalp_zynqps_axi_iic_ioext_0_xpm_cdc_single INPUT_DOUBLE_REGS
+       (.dest_clk(s_axi_aclk),
+        .dest_out(Sda_clean),
+        .src_clk(1'b0),
+        .src_in(sda_i));
+  LUT2 #(
+    .INIT(4'h2)) 
+    detect_stop_i_3
+       (.I0(Sda_clean),
+        .I1(sda_rin_d1),
+        .O(\syncstages_ff_reg[3] ));
 endmodule
 
-(* ORIG_REF_NAME = "dynamic_master" *) 
 module scalp_zynqps_axi_iic_ioext_0_dynamic_master
    (callingReadAccess,
     rdCntrFrmTxFifo,
@@ -3941,52 +3638,50 @@ module scalp_zynqps_axi_iic_ioext_0_dynamic_master
         .R(Tx_fifo_rst));
 endmodule
 
-(* ORIG_REF_NAME = "filter" *) 
 module scalp_zynqps_axi_iic_ioext_0_filter
-   (\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 ,
-    scndry_out,
+   (\syncstages_ff_reg[3] ,
+    Sda_clean,
     scl_rising_edge0,
-    \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4_0 ,
+    Scl_clean,
     sda_rin_d1,
     scl_rin_d1,
     scl_i,
     s_axi_aclk,
     sda_i);
-  output \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 ;
-  output scndry_out;
+  output \syncstages_ff_reg[3] ;
+  output Sda_clean;
   output scl_rising_edge0;
-  output \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4_0 ;
+  output Scl_clean;
   input sda_rin_d1;
   input scl_rin_d1;
   input scl_i;
   input s_axi_aclk;
   input sda_i;
 
-  wire \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 ;
-  wire \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4_0 ;
+  wire Scl_clean;
+  wire Sda_clean;
   wire s_axi_aclk;
   wire scl_i;
   wire scl_rin_d1;
   wire scl_rising_edge0;
-  wire scndry_out;
   wire sda_i;
   wire sda_rin_d1;
+  wire \syncstages_ff_reg[3] ;
 
   scalp_zynqps_axi_iic_ioext_0_debounce SCL_DEBOUNCE
-       (.\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 (\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4_0 ),
+       (.Scl_clean(Scl_clean),
         .s_axi_aclk(s_axi_aclk),
         .scl_i(scl_i),
         .scl_rin_d1(scl_rin_d1),
         .scl_rising_edge0(scl_rising_edge0));
   scalp_zynqps_axi_iic_ioext_0_debounce_3 SDA_DEBOUNCE
-       (.\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 (\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 ),
+       (.Sda_clean(Sda_clean),
         .s_axi_aclk(s_axi_aclk),
-        .scndry_out(scndry_out),
         .sda_i(sda_i),
-        .sda_rin_d1(sda_rin_d1));
+        .sda_rin_d1(sda_rin_d1),
+        .\syncstages_ff_reg[3] (\syncstages_ff_reg[3] ));
 endmodule
 
-(* ORIG_REF_NAME = "iic" *) 
 module scalp_zynqps_axi_iic_ioext_0_iic
    (s_axi_bresp,
     s_axi_rdata,
@@ -4249,15 +3944,15 @@ module scalp_zynqps_axi_iic_ioext_0_iic
         .rxCntDone(rxCntDone),
         .s_axi_aclk(s_axi_aclk));
   scalp_zynqps_axi_iic_ioext_0_filter FILTER_I
-       (.\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 (FILTER_I_n_0),
-        .\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4_0 (scl_clean),
+       (.Scl_clean(scl_clean),
+        .Sda_clean(sda_clean),
         .s_axi_aclk(s_axi_aclk),
         .scl_i(scl_i),
         .scl_rin_d1(scl_rin_d1),
         .scl_rising_edge0(scl_rising_edge0),
-        .scndry_out(sda_clean),
         .sda_i(sda_i),
-        .sda_rin_d1(sda_rin_d1));
+        .sda_rin_d1(sda_rin_d1),
+        .\syncstages_ff_reg[3] (FILTER_I_n_0));
   scalp_zynqps_axi_iic_ioext_0_iic_control IIC_CONTROL_I
        (.Aas(Aas),
         .Abgc(Abgc),
@@ -4285,6 +3980,8 @@ module scalp_zynqps_axi_iic_ioext_0_iic
         .Rdy_new_xmt(Rdy_new_xmt),
         .Ro_prev(Ro_prev),
         .S({REG_INTERFACE_I_n_70,REG_INTERFACE_I_n_71,REG_INTERFACE_I_n_72,REG_INTERFACE_I_n_73}),
+        .Scl_clean(scl_clean),
+        .Sda_clean(sda_clean),
         .Tx_data_exists_sgl(Tx_data_exists_sgl),
         .Tx_fifo_data_0(Tx_fifo_data_0[7:1]),
         .Tx_under_prev(Tx_under_prev),
@@ -4314,10 +4011,8 @@ module scalp_zynqps_axi_iic_ioext_0_iic
         .s_axi_wdata(s_axi_wdata[2]),
         .\s_axi_wdata[2] (IIC_CONTROL_I_n_46),
         .scl_rin_d1(scl_rin_d1),
-        .scl_rin_d1_reg_0(scl_clean),
         .scl_rising_edge0(scl_rising_edge0),
         .scl_t(scl_t),
-        .scndry_out(sda_clean),
         .sda_cout_reg_reg_0({REG_INTERFACE_I_n_74,REG_INTERFACE_I_n_75,REG_INTERFACE_I_n_76,REG_INTERFACE_I_n_77}),
         .sda_rin_d1(sda_rin_d1),
         .sda_setup_reg_0({REG_INTERFACE_I_n_134,REG_INTERFACE_I_n_135,REG_INTERFACE_I_n_136,REG_INTERFACE_I_n_137}),
@@ -4366,11 +4061,9 @@ module scalp_zynqps_axi_iic_ioext_0_iic
         .\FIFO_GEN_DTR.Tx_fifo_rd_reg_0 (REG_INTERFACE_I_n_138),
         .\FIFO_GEN_DTR.Tx_fifo_wr_reg_0 (REG_INTERFACE_I_n_155),
         .\FSM_onehot_scl_state_reg[5] (clk_cnt_en2),
-        .\FSM_onehot_scl_state_reg[5]_0 (scl_clean),
-        .\FSM_onehot_scl_state_reg[5]_1 ({IIC_CONTROL_I_n_47,IIC_CONTROL_I_n_48}),
-        .\FSM_onehot_scl_state_reg[5]_2 (IIC_CONTROL_I_n_17),
+        .\FSM_onehot_scl_state_reg[5]_0 ({IIC_CONTROL_I_n_47,IIC_CONTROL_I_n_48}),
+        .\FSM_onehot_scl_state_reg[5]_1 (IIC_CONTROL_I_n_17),
         .\FSM_sequential_state_reg[2] (IIC_CONTROL_I_n_18),
-        .\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 (REG_INTERFACE_I_n_154),
         .\GPO_GEN.gpo_i_reg[31]_0 (X_AXI_IPIF_SSP1_n_27),
         .IIC2Bus_IntrEvent(IIC2Bus_IntrEvent),
         .\IIC2Bus_IntrEvent_reg[0]_0 ({Al,Txer,Tx_under_prev,p_1_in,IIC_CONTROL_I_n_8}),
@@ -4393,6 +4086,7 @@ module scalp_zynqps_axi_iic_ioext_0_iic
         .Rc_fifo_wr_d(Rc_fifo_wr_d),
         .Rdy_new_xmt(Rdy_new_xmt),
         .S({REG_INTERFACE_I_n_70,REG_INTERFACE_I_n_71,REG_INTERFACE_I_n_72,REG_INTERFACE_I_n_73}),
+        .Scl_clean(scl_clean),
         .Tx_fifo_rd(Tx_fifo_rd),
         .Tx_fifo_rd_d(Tx_fifo_rd_d),
         .Tx_fifo_rst(Tx_fifo_rst),
@@ -4432,6 +4126,7 @@ module scalp_zynqps_axi_iic_ioext_0_iic
         .\sr_i_reg[1]_0 ({p_0_out,Rc_fifo_full,Tx_fifo_full,Srw,Bb,Abgc}),
         .stop_scl_reg(stop_scl_reg),
         .stop_scl_reg_reg(REG_INTERFACE_I_n_68),
+        .\syncstages_ff_reg[3] (REG_INTERFACE_I_n_154),
         .\timing_param_tbuf_i_reg[10]_0 ({REG_INTERFACE_I_n_38,REG_INTERFACE_I_n_39,REG_INTERFACE_I_n_40}),
         .\timing_param_tbuf_i_reg[10]_1 (Timing_param_tbuf),
         .\timing_param_tbuf_i_reg[7]_0 ({REG_INTERFACE_I_n_96,REG_INTERFACE_I_n_97,REG_INTERFACE_I_n_98,REG_INTERFACE_I_n_99}),
@@ -4507,6 +4202,7 @@ module scalp_zynqps_axi_iic_ioext_0_iic
         .\FIFO_RAM[7].SRL16E_I_0 (p_2_in__0),
         .\FIFO_RAM[7].SRL16E_I_1 (DYN_MASTER_I_n_7),
         .\FIFO_RAM[7].SRL16E_I_2 (REG_INTERFACE_I_n_155),
+        .Sda_clean(sda_clean),
         .Tx_addr_0(Tx_addr_0),
         .Tx_data_exists_sgl(Tx_data_exists_sgl),
         .Tx_fifo_data_0(Tx_fifo_data_0),
@@ -4523,7 +4219,6 @@ module scalp_zynqps_axi_iic_ioext_0_iic
         .rdCntrFrmTxFifo0(rdCntrFrmTxFifo0),
         .s_axi_aclk(s_axi_aclk),
         .s_axi_wdata(s_axi_wdata[7:0]),
-        .scndry_out(sda_clean),
         .shift_reg_ld(shift_reg_ld));
   scalp_zynqps_axi_iic_ioext_0_axi_ipif_ssp1 X_AXI_IPIF_SSP1
        (.AXI_IP2Bus_RdAck1_reg_0(AXI_IP2Bus_RdAck1_reg),
@@ -4588,7 +4283,6 @@ module scalp_zynqps_axi_iic_ioext_0_iic
         .s_axi_wvalid(s_axi_wvalid));
 endmodule
 
-(* ORIG_REF_NAME = "iic_control" *) 
 module scalp_zynqps_axi_iic_ioext_0_iic_control
    (shift_reg_ld,
     sda_rin_d1,
@@ -4623,8 +4317,8 @@ module scalp_zynqps_axi_iic_ioext_0_iic_control
     \data_i2c_i_reg[7]_0 ,
     \q_int_reg[0]_1 ,
     s_axi_aclk,
-    scndry_out,
-    scl_rin_d1_reg_0,
+    Sda_clean,
+    Scl_clean,
     scl_rising_edge0,
     Ro_prev,
     Q,
@@ -4694,8 +4388,8 @@ module scalp_zynqps_axi_iic_ioext_0_iic_control
   output [7:0]\data_i2c_i_reg[7]_0 ;
   input \q_int_reg[0]_1 ;
   input s_axi_aclk;
-  input scndry_out;
-  input scl_rin_d1_reg_0;
+  input Sda_clean;
+  input Scl_clean;
   input scl_rising_edge0;
   input Ro_prev;
   input [4:0]Q;
@@ -4818,6 +4512,8 @@ module scalp_zynqps_axi_iic_ioext_0_iic_control
   wire Ro_prev;
   wire [3:0]S;
   wire SETUP_CNT_n_0;
+  wire Scl_clean;
+  wire Sda_clean;
   wire Tx_data_exists_sgl;
   wire [6:0]Tx_fifo_data_0;
   wire Tx_under_prev;
@@ -4928,11 +4624,9 @@ module scalp_zynqps_axi_iic_ioext_0_iic_control
   wire scl_falling_edge;
   wire scl_falling_edge0;
   wire scl_rin_d1;
-  wire scl_rin_d1_reg_0;
   wire scl_rising_edge;
   wire scl_rising_edge0;
   wire scl_t;
-  wire scndry_out;
   wire sda_cout;
   wire sda_cout_reg;
   wire sda_cout_reg_i_1_n_0;
@@ -5041,14 +4735,14 @@ module scalp_zynqps_axi_iic_ioext_0_iic_control
         .\FSM_onehot_scl_state_reg[2] (\FSM_onehot_scl_state[2]_i_5_n_0 ),
         .Q(\q_int_reg[0]_0 ),
         .S(CLKCNT_n_11),
+        .Scl_clean(Scl_clean),
         .arb_lost(arb_lost),
         .arb_lost_reg(arb_lost_reg_0),
         .\clk_cnt_en1_inferred__2/i__carry__0 (\clk_cnt_en1_inferred__2/i__carry__0_1 ),
         .\q_int_reg[0]_0 ({\FSM_onehot_scl_state_reg_n_0_[9] ,\FSM_onehot_scl_state_reg_n_0_[8] ,\FSM_onehot_scl_state_reg_n_0_[7] ,\FSM_onehot_scl_state_reg_n_0_[6] ,\FSM_onehot_scl_state_reg[5]_0 ,detect_stop_b,\FSM_onehot_scl_state_reg_n_0_[1] ,\FSM_onehot_scl_state_reg_n_0_[0] }),
         .\q_int_reg[0]_1 (\q_int_reg[0]_2 ),
         .\q_int_reg[0]_2 (\clk_cnt_en1_inferred__2/i__carry__0_n_2 ),
-        .\q_int_reg[0]_3 (scl_rin_d1_reg_0),
-        .\q_int_reg[0]_4 (\timing_param_thddat_i_reg[10] ),
+        .\q_int_reg[0]_3 (\timing_param_thddat_i_reg[10] ),
         .\q_int_reg[10]_0 (\q_int_reg[0]_1 ),
         .\q_int_reg[1]_0 (\q_int_reg[1] ),
         .\q_int_reg[3]_0 ({CLKCNT_n_17,CLKCNT_n_18,CLKCNT_n_19,CLKCNT_n_20}),
@@ -5114,7 +4808,7 @@ module scalp_zynqps_axi_iic_ioext_0_iic_control
     \FSM_onehot_scl_state[2]_i_5 
        (.I0(arb_lost_reg_0),
         .I1(Q[3]),
-        .I2(scndry_out),
+        .I2(Sda_clean),
         .I3(detect_stop_b),
         .I4(\FSM_onehot_scl_state_reg_n_0_[1] ),
         .I5(stop_start_wait1),
@@ -5122,7 +4816,7 @@ module scalp_zynqps_axi_iic_ioext_0_iic_control
   LUT4 #(
     .INIT(16'h4F44)) 
     \FSM_onehot_scl_state[3]_i_1 
-       (.I0(scndry_out),
+       (.I0(Sda_clean),
         .I1(detect_stop_b),
         .I2(\next_scl_state1_inferred__0/i__carry_n_0 ),
         .I3(\FSM_onehot_scl_state_reg[5]_0 [0]),
@@ -5131,7 +4825,7 @@ module scalp_zynqps_axi_iic_ioext_0_iic_control
     .INIT(64'hFFFFFFFFFFD0D0D0)) 
     \FSM_onehot_scl_state[4]_i_1 
        (.I0(\timing_param_thddat_i_reg[10] ),
-        .I1(scl_rin_d1_reg_0),
+        .I1(Scl_clean),
         .I2(\FSM_onehot_scl_state_reg[5]_0 [1]),
         .I3(\FSM_onehot_scl_state_reg[5]_0 [0]),
         .I4(\next_scl_state1_inferred__0/i__carry_n_0 ),
@@ -5151,7 +4845,7 @@ module scalp_zynqps_axi_iic_ioext_0_iic_control
     \FSM_onehot_scl_state[6]_i_1 
        (.I0(\timing_param_tlow_i_reg[10] ),
         .I1(\FSM_onehot_scl_state_reg[5]_0 [2]),
-        .I2(scl_rin_d1_reg_0),
+        .I2(Scl_clean),
         .I3(\FSM_onehot_scl_state_reg_n_0_[6] ),
         .O(\FSM_onehot_scl_state[6]_i_1_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair19" *) 
@@ -5159,7 +4853,7 @@ module scalp_zynqps_axi_iic_ioext_0_iic_control
     .INIT(4'h8)) 
     \FSM_onehot_scl_state[7]_i_1 
        (.I0(\FSM_onehot_scl_state_reg_n_0_[6] ),
-        .I1(scl_rin_d1_reg_0),
+        .I1(Scl_clean),
         .O(\FSM_onehot_scl_state[7]_i_1_n_0 ));
   LUT6 #(
     .INIT(64'h0040FFFF00400040)) 
@@ -5168,7 +4862,7 @@ module scalp_zynqps_axi_iic_ioext_0_iic_control
         .I1(\FSM_onehot_scl_state_reg_n_0_[7] ),
         .I2(stop_scl_reg),
         .I3(Q[3]),
-        .I4(scndry_out),
+        .I4(Sda_clean),
         .I5(\FSM_onehot_scl_state_reg_n_0_[8] ),
         .O(\FSM_onehot_scl_state[8]_i_1_n_0 ));
   LUT6 #(
@@ -5185,7 +4879,7 @@ module scalp_zynqps_axi_iic_ioext_0_iic_control
     .INIT(16'h8F88)) 
     \FSM_onehot_scl_state[9]_i_3 
        (.I0(\FSM_onehot_scl_state_reg_n_0_[8] ),
-        .I1(scndry_out),
+        .I1(Sda_clean),
         .I2(stop_start_wait1),
         .I3(\FSM_onehot_scl_state_reg_n_0_[9] ),
         .O(\FSM_onehot_scl_state[9]_i_3_n_0 ));
@@ -5390,6 +5084,7 @@ module scalp_zynqps_axi_iic_ioext_0_iic_control
         .\FSM_sequential_state_reg[2] (I2CHEADER_REG_n_11),
         .Q({Q[4],Q[2],Q[0]}),
         .Ro_prev(Ro_prev),
+        .Sda_clean(Sda_clean),
         .abgc_i_reg(detect_stop_reg_0),
         .arb_lost(arb_lost),
         .\data_int_reg[0]_0 (I2CHEADER_REG_n_12),
@@ -5401,7 +5096,6 @@ module scalp_zynqps_axi_iic_ioext_0_iic_control
         .master_slave(master_slave),
         .master_slave_reg(I2CHEADER_REG_n_2),
         .s_axi_aclk(s_axi_aclk),
-        .scndry_out(scndry_out),
         .sda_sample(sda_sample),
         .shift_reg_ld0(shift_reg_ld0),
         .shift_reg_ld_reg(Tx_under_prev),
@@ -5432,8 +5126,8 @@ module scalp_zynqps_axi_iic_ioext_0_iic_control
         .I1(new_rcv_dta_d1),
         .O(Rc_fifo_wr0));
   scalp_zynqps_axi_iic_ioext_0_upcnt_n_2 SETUP_CNT
-       (.\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 (SETUP_CNT_n_0),
-        .Q(\q_int_reg[0] ),
+       (.Q(\q_int_reg[0] ),
+        .Sda_clean(Sda_clean),
         .gen_stop(gen_stop),
         .gen_stop_d1(gen_stop_d1),
         .\q_int[0]_i_3_0 (Tx_under_prev),
@@ -5441,9 +5135,9 @@ module scalp_zynqps_axi_iic_ioext_0_iic_control
         .\q_int_reg[0]_0 (\q_int_reg[0]_1 ),
         .rsta_d1(rsta_d1),
         .s_axi_aclk(s_axi_aclk),
-        .scndry_out(scndry_out),
         .sda_rin_d1(sda_rin_d1),
         .sda_setup(sda_setup),
+        .\syncstages_ff_reg[3] (SETUP_CNT_n_0),
         .tx_under_prev_d1(tx_under_prev_d1));
   (* SOFT_HLUTNM = "soft_lutpair15" *) 
   LUT5 #(
@@ -5520,7 +5214,7 @@ module scalp_zynqps_axi_iic_ioext_0_iic_control
        (.I0(arb_lost),
         .I1(master_slave),
         .I2(msms_rst_i_i_2_n_0),
-        .I3(scndry_out),
+        .I3(Sda_clean),
         .I4(sda_cout_reg),
         .I5(msms_rst_i_i_3_n_0),
         .O(arb_lost_i_1_n_0));
@@ -5689,9 +5383,9 @@ module scalp_zynqps_axi_iic_ioext_0_iic_control
   LUT6 #(
     .INIT(64'h00000000FB080000)) 
     detect_start_i_1
-       (.I0(scl_rin_d1_reg_0),
+       (.I0(Scl_clean),
         .I1(sda_rin_d1),
-        .I2(scndry_out),
+        .I2(Sda_clean),
         .I3(detect_start),
         .I4(Q[0]),
         .I5(detect_start_i_2_n_0),
@@ -5716,7 +5410,7 @@ module scalp_zynqps_axi_iic_ioext_0_iic_control
        (.I0(detect_stop_b_reg_n_0),
         .I1(detect_stop_reg_1),
         .I2(detect_stop_b),
-        .I3(scl_rin_d1_reg_0),
+        .I3(Scl_clean),
         .I4(Q[0]),
         .I5(detect_start),
         .O(detect_stop_b_i_1_n_0));
@@ -5732,7 +5426,7 @@ module scalp_zynqps_axi_iic_ioext_0_iic_control
        (.I0(detect_stop_reg_0),
         .I1(detect_stop0),
         .I2(detect_stop_reg_1),
-        .I3(scl_rin_d1_reg_0),
+        .I3(Scl_clean),
         .I4(Q[0]),
         .I5(detect_start),
         .O(detect_stop_i_1_n_0));
@@ -5873,7 +5567,7 @@ module scalp_zynqps_axi_iic_ioext_0_iic_control
     msms_rst_i_i_1
        (.I0(msms_rst_i_i_2_n_0),
         .I1(sda_cout_reg),
-        .I2(scndry_out),
+        .I2(Sda_clean),
         .I3(master_slave),
         .I4(msms_rst_i),
         .I5(msms_rst_i_i_3_n_0),
@@ -6010,7 +5704,7 @@ module scalp_zynqps_axi_iic_ioext_0_iic_control
     .INIT(4'h2)) 
     scl_falling_edge_i_1
        (.I0(scl_rin_d1),
-        .I1(scl_rin_d1_reg_0),
+        .I1(Scl_clean),
         .O(scl_falling_edge0));
   FDRE scl_falling_edge_reg
        (.C(s_axi_aclk),
@@ -6021,7 +5715,7 @@ module scalp_zynqps_axi_iic_ioext_0_iic_control
   FDRE scl_rin_d1_reg
        (.C(s_axi_aclk),
         .CE(1'b1),
-        .D(scl_rin_d1_reg_0),
+        .D(Scl_clean),
         .Q(scl_rin_d1),
         .R(1'b0));
   FDRE scl_rising_edge_reg
@@ -6066,13 +5760,13 @@ module scalp_zynqps_axi_iic_ioext_0_iic_control
   FDRE sda_rin_d1_reg
        (.C(s_axi_aclk),
         .CE(1'b1),
-        .D(scndry_out),
+        .D(Sda_clean),
         .Q(sda_rin_d1),
         .R(1'b0));
   LUT3 #(
     .INIT(8'hB8)) 
     sda_sample_i_1
-       (.I0(scndry_out),
+       (.I0(Sda_clean),
         .I1(scl_rising_edge),
         .I2(sda_sample),
         .O(sda_sample_i_1_n_0));
@@ -6095,7 +5789,7 @@ module scalp_zynqps_axi_iic_ioext_0_iic_control
        (.I0(\sda_setup0_inferred__0/i__carry_n_0 ),
         .I1(Tx_under_prev),
         .I2(SETUP_CNT_n_0),
-        .I3(scl_rin_d1_reg_0),
+        .I3(Scl_clean),
         .I4(sda_setup),
         .O(sda_setup_i_1_n_0));
   FDRE sda_setup_reg
@@ -6322,7 +6016,6 @@ module scalp_zynqps_axi_iic_ioext_0_iic_control
         .R(\q_int_reg[0]_1 ));
 endmodule
 
-(* ORIG_REF_NAME = "interrupt_control" *) 
 module scalp_zynqps_axi_iic_ioext_0_interrupt_control
    (irpt_wrack_d1,
     \GEN_IP_IRPT_STATUS_REG[0].GEN_REG_STATUS.ip_irpt_status_reg_reg[0]_0 ,
@@ -6559,7 +6252,6 @@ module scalp_zynqps_axi_iic_ioext_0_interrupt_control
         .R(SR));
 endmodule
 
-(* ORIG_REF_NAME = "reg_interface" *) 
 module scalp_zynqps_axi_iic_ioext_0_reg_interface
    (IIC2Bus_IntrEvent,
     Q,
@@ -6619,7 +6311,7 @@ module scalp_zynqps_axi_iic_ioext_0_reg_interface
     \timing_param_thigh_i_reg[1]_0 ,
     \timing_param_thigh_i_reg[0]_0 ,
     \timing_param_tsusto_i_reg[0]_0 ,
-    \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 ,
+    \syncstages_ff_reg[3] ,
     \FIFO_GEN_DTR.Tx_fifo_wr_reg_0 ,
     D_1,
     \RD_FIFO_CNTRL.Rc_fifo_rd_reg_0 ,
@@ -6661,9 +6353,9 @@ module scalp_zynqps_axi_iic_ioext_0_reg_interface
     \sda_setup0_inferred__0/i__carry ,
     \s_axi_rdata_i_reg[10] ,
     \FSM_onehot_scl_state_reg[5] ,
+    Scl_clean,
     \FSM_onehot_scl_state_reg[5]_0 ,
     \FSM_onehot_scl_state_reg[5]_1 ,
-    \FSM_onehot_scl_state_reg[5]_2 ,
     Rc_fifo_wr_d,
     Rc_fifo_rd_d,
     Data_Exists_DFF_2,
@@ -6729,7 +6421,7 @@ module scalp_zynqps_axi_iic_ioext_0_reg_interface
   output \timing_param_thigh_i_reg[1]_0 ;
   output \timing_param_thigh_i_reg[0]_0 ;
   output \timing_param_tsusto_i_reg[0]_0 ;
-  output [0:0]\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 ;
+  output [0:0]\syncstages_ff_reg[3] ;
   output \FIFO_GEN_DTR.Tx_fifo_wr_reg_0 ;
   output D_1;
   output \RD_FIFO_CNTRL.Rc_fifo_rd_reg_0 ;
@@ -6771,9 +6463,9 @@ module scalp_zynqps_axi_iic_ioext_0_reg_interface
   input [10:0]\sda_setup0_inferred__0/i__carry ;
   input [1:0]\s_axi_rdata_i_reg[10] ;
   input [0:0]\FSM_onehot_scl_state_reg[5] ;
-  input \FSM_onehot_scl_state_reg[5]_0 ;
-  input [1:0]\FSM_onehot_scl_state_reg[5]_1 ;
-  input [0:0]\FSM_onehot_scl_state_reg[5]_2 ;
+  input Scl_clean;
+  input [1:0]\FSM_onehot_scl_state_reg[5]_0 ;
+  input [0:0]\FSM_onehot_scl_state_reg[5]_1 ;
   input Rc_fifo_wr_d;
   input Rc_fifo_rd_d;
   input Data_Exists_DFF_2;
@@ -6797,11 +6489,9 @@ module scalp_zynqps_axi_iic_ioext_0_reg_interface
   wire \FIFO_GEN_DTR.Tx_fifo_rd_reg_0 ;
   wire \FIFO_GEN_DTR.Tx_fifo_wr_reg_0 ;
   wire [0:0]\FSM_onehot_scl_state_reg[5] ;
-  wire \FSM_onehot_scl_state_reg[5]_0 ;
-  wire [1:0]\FSM_onehot_scl_state_reg[5]_1 ;
-  wire [0:0]\FSM_onehot_scl_state_reg[5]_2 ;
+  wire [1:0]\FSM_onehot_scl_state_reg[5]_0 ;
+  wire [0:0]\FSM_onehot_scl_state_reg[5]_1 ;
   wire \FSM_sequential_state_reg[2] ;
-  wire [0:0]\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 ;
   wire \GPO_GEN.gpo_i_reg[31]_0 ;
   wire [0:7]IIC2Bus_IntrEvent;
   wire [4:0]\IIC2Bus_IntrEvent_reg[0]_0 ;
@@ -6824,6 +6514,7 @@ module scalp_zynqps_axi_iic_ioext_0_reg_interface
   wire Rc_fifo_wr_d;
   wire Rdy_new_xmt;
   wire [3:0]S;
+  wire Scl_clean;
   wire [10:0]Timing_param_thdsta;
   wire [10:0]Timing_param_thigh;
   wire [10:0]Timing_param_tsudat;
@@ -6871,6 +6562,7 @@ module scalp_zynqps_axi_iic_ioext_0_reg_interface
   wire [5:0]\sr_i_reg[1]_0 ;
   wire stop_scl_reg;
   wire stop_scl_reg_reg;
+  wire [0:0]\syncstages_ff_reg[3] ;
   wire [2:0]\timing_param_tbuf_i_reg[10]_0 ;
   wire [10:0]\timing_param_tbuf_i_reg[10]_1 ;
   wire [3:0]\timing_param_tbuf_i_reg[7]_0 ;
@@ -6978,11 +6670,11 @@ module scalp_zynqps_axi_iic_ioext_0_reg_interface
     .INIT(32'h20FF2020)) 
     \FSM_onehot_scl_state[5]_i_1 
        (.I0(\FSM_onehot_scl_state_reg[5] ),
-        .I1(\FSM_onehot_scl_state_reg[5]_0 ),
-        .I2(\FSM_onehot_scl_state_reg[5]_1 [0]),
-        .I3(\FSM_onehot_scl_state_reg[5]_2 ),
-        .I4(\FSM_onehot_scl_state_reg[5]_1 [1]),
-        .O(\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 ));
+        .I1(Scl_clean),
+        .I2(\FSM_onehot_scl_state_reg[5]_0 [0]),
+        .I3(\FSM_onehot_scl_state_reg[5]_1 ),
+        .I4(\FSM_onehot_scl_state_reg[5]_0 [1]),
+        .O(\syncstages_ff_reg[3] ));
   (* SOFT_HLUTNM = "soft_lutpair32" *) 
   LUT1 #(
     .INIT(2'h1)) 
@@ -8345,7 +8037,171 @@ module scalp_zynqps_axi_iic_ioext_0_reg_interface
         .S(Bus2IIC_Reset));
 endmodule
 
-(* ORIG_REF_NAME = "shift8" *) 
+(* CHECK_LICENSE_TYPE = "scalp_zynqps_axi_iic_ioext_0,axi_iic,{}" *) (* downgradeipidentifiedwarnings = "yes" *) (* x_core_info = "axi_iic,Vivado 2025.2" *) 
+(* NotValidForBitStream *)
+module scalp_zynqps_axi_iic_ioext_0
+   (s_axi_aclk,
+    s_axi_aresetn,
+    iic2intc_irpt,
+    s_axi_awaddr,
+    s_axi_awvalid,
+    s_axi_awready,
+    s_axi_wdata,
+    s_axi_wstrb,
+    s_axi_wvalid,
+    s_axi_wready,
+    s_axi_bresp,
+    s_axi_bvalid,
+    s_axi_bready,
+    s_axi_araddr,
+    s_axi_arvalid,
+    s_axi_arready,
+    s_axi_rdata,
+    s_axi_rresp,
+    s_axi_rvalid,
+    s_axi_rready,
+    sda_i,
+    sda_o,
+    sda_t,
+    scl_i,
+    scl_o,
+    scl_t,
+    gpo);
+  (* x_interface_info = "xilinx.com:signal:clock:1.0 S_AXI_ACLK CLK" *) (* x_interface_mode = "slave S_AXI_ACLK" *) (* x_interface_parameter = "XIL_INTERFACENAME S_AXI_ACLK, ASSOCIATED_BUSIF S_AXI, ASSOCIATED_RESET s_axi_aresetn, FREQ_HZ 125000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN /sys_clock_clk_out1, INSERT_VIP 0" *) input s_axi_aclk;
+  (* x_interface_info = "xilinx.com:signal:reset:1.0 S_AXI_ARESETN RST" *) (* x_interface_mode = "slave S_AXI_ARESETN" *) (* x_interface_parameter = "XIL_INTERFACENAME S_AXI_ARESETN, POLARITY ACTIVE_LOW, INSERT_VIP 0" *) input s_axi_aresetn;
+  (* x_interface_info = "xilinx.com:signal:interrupt:1.0 INTERRUPT INTERRUPT" *) (* x_interface_mode = "master INTERRUPT" *) (* x_interface_parameter = "XIL_INTERFACENAME INTERRUPT, SENSITIVITY LEVEL_HIGH, PortWidth 1" *) output iic2intc_irpt;
+  (* x_interface_info = "xilinx.com:interface:aximm:1.0 S_AXI AWADDR" *) (* x_interface_mode = "slave S_AXI" *) (* x_interface_parameter = "XIL_INTERFACENAME S_AXI, DATA_WIDTH 32, PROTOCOL AXI4LITE, FREQ_HZ 125000000, ID_WIDTH 0, ADDR_WIDTH 9, AWUSER_WIDTH 0, ARUSER_WIDTH 0, WUSER_WIDTH 0, RUSER_WIDTH 0, BUSER_WIDTH 0, READ_WRITE_MODE READ_WRITE, HAS_BURST 0, HAS_LOCK 0, HAS_PROT 0, HAS_CACHE 0, HAS_QOS 0, HAS_REGION 0, HAS_WSTRB 1, HAS_BRESP 1, HAS_RRESP 1, SUPPORTS_NARROW_BURST 0, NUM_READ_OUTSTANDING 1, NUM_WRITE_OUTSTANDING 1, MAX_BURST_LENGTH 1, PHASE 0.0, CLK_DOMAIN /sys_clock_clk_out1, NUM_READ_THREADS 1, NUM_WRITE_THREADS 1, RUSER_BITS_PER_BYTE 0, WUSER_BITS_PER_BYTE 0, INSERT_VIP 0" *) input [8:0]s_axi_awaddr;
+  (* x_interface_info = "xilinx.com:interface:aximm:1.0 S_AXI AWVALID" *) input s_axi_awvalid;
+  (* x_interface_info = "xilinx.com:interface:aximm:1.0 S_AXI AWREADY" *) output s_axi_awready;
+  (* x_interface_info = "xilinx.com:interface:aximm:1.0 S_AXI WDATA" *) input [31:0]s_axi_wdata;
+  (* x_interface_info = "xilinx.com:interface:aximm:1.0 S_AXI WSTRB" *) input [3:0]s_axi_wstrb;
+  (* x_interface_info = "xilinx.com:interface:aximm:1.0 S_AXI WVALID" *) input s_axi_wvalid;
+  (* x_interface_info = "xilinx.com:interface:aximm:1.0 S_AXI WREADY" *) output s_axi_wready;
+  (* x_interface_info = "xilinx.com:interface:aximm:1.0 S_AXI BRESP" *) output [1:0]s_axi_bresp;
+  (* x_interface_info = "xilinx.com:interface:aximm:1.0 S_AXI BVALID" *) output s_axi_bvalid;
+  (* x_interface_info = "xilinx.com:interface:aximm:1.0 S_AXI BREADY" *) input s_axi_bready;
+  (* x_interface_info = "xilinx.com:interface:aximm:1.0 S_AXI ARADDR" *) input [8:0]s_axi_araddr;
+  (* x_interface_info = "xilinx.com:interface:aximm:1.0 S_AXI ARVALID" *) input s_axi_arvalid;
+  (* x_interface_info = "xilinx.com:interface:aximm:1.0 S_AXI ARREADY" *) output s_axi_arready;
+  (* x_interface_info = "xilinx.com:interface:aximm:1.0 S_AXI RDATA" *) output [31:0]s_axi_rdata;
+  (* x_interface_info = "xilinx.com:interface:aximm:1.0 S_AXI RRESP" *) output [1:0]s_axi_rresp;
+  (* x_interface_info = "xilinx.com:interface:aximm:1.0 S_AXI RVALID" *) output s_axi_rvalid;
+  (* x_interface_info = "xilinx.com:interface:aximm:1.0 S_AXI RREADY" *) input s_axi_rready;
+  (* x_interface_info = "xilinx.com:interface:iic:1.0 IIC SDA_I" *) (* x_interface_mode = "master IIC" *) (* x_interface_parameter = "XIL_INTERFACENAME IIC, BOARD.ASSOCIATED_PARAM IIC_BOARD_INTERFACE" *) input sda_i;
+  (* x_interface_info = "xilinx.com:interface:iic:1.0 IIC SDA_O" *) output sda_o;
+  (* x_interface_info = "xilinx.com:interface:iic:1.0 IIC SDA_T" *) output sda_t;
+  (* x_interface_info = "xilinx.com:interface:iic:1.0 IIC SCL_I" *) input scl_i;
+  (* x_interface_info = "xilinx.com:interface:iic:1.0 IIC SCL_O" *) output scl_o;
+  (* x_interface_info = "xilinx.com:interface:iic:1.0 IIC SCL_T" *) output scl_t;
+  output [0:0]gpo;
+
+  wire \<const0> ;
+  wire [0:0]gpo;
+  wire iic2intc_irpt;
+  wire s_axi_aclk;
+  wire [8:0]s_axi_araddr;
+  wire s_axi_aresetn;
+  wire s_axi_arready;
+  wire s_axi_arvalid;
+  wire [8:0]s_axi_awaddr;
+  wire s_axi_awready;
+  wire s_axi_awvalid;
+  wire s_axi_bready;
+  wire [1:1]\^s_axi_bresp ;
+  wire s_axi_bvalid;
+  wire [31:0]\^s_axi_rdata ;
+  wire s_axi_rready;
+  wire [1:1]\^s_axi_rresp ;
+  wire s_axi_rvalid;
+  wire [31:0]s_axi_wdata;
+  wire s_axi_wready;
+  wire s_axi_wvalid;
+  wire scl_i;
+  wire scl_t;
+  wire sda_i;
+  wire sda_t;
+  wire NLW_U0_scl_o_UNCONNECTED;
+  wire NLW_U0_sda_o_UNCONNECTED;
+  wire [0:0]NLW_U0_s_axi_bresp_UNCONNECTED;
+  wire [30:11]NLW_U0_s_axi_rdata_UNCONNECTED;
+  wire [0:0]NLW_U0_s_axi_rresp_UNCONNECTED;
+
+  assign s_axi_bresp[1] = \^s_axi_bresp [1];
+  assign s_axi_bresp[0] = \<const0> ;
+  assign s_axi_rdata[31] = \^s_axi_rdata [31];
+  assign s_axi_rdata[30] = \<const0> ;
+  assign s_axi_rdata[29] = \<const0> ;
+  assign s_axi_rdata[28] = \<const0> ;
+  assign s_axi_rdata[27] = \<const0> ;
+  assign s_axi_rdata[26] = \<const0> ;
+  assign s_axi_rdata[25] = \<const0> ;
+  assign s_axi_rdata[24] = \<const0> ;
+  assign s_axi_rdata[23] = \<const0> ;
+  assign s_axi_rdata[22] = \<const0> ;
+  assign s_axi_rdata[21] = \<const0> ;
+  assign s_axi_rdata[20] = \<const0> ;
+  assign s_axi_rdata[19] = \<const0> ;
+  assign s_axi_rdata[18] = \<const0> ;
+  assign s_axi_rdata[17] = \<const0> ;
+  assign s_axi_rdata[16] = \<const0> ;
+  assign s_axi_rdata[15] = \<const0> ;
+  assign s_axi_rdata[14] = \<const0> ;
+  assign s_axi_rdata[13] = \<const0> ;
+  assign s_axi_rdata[12] = \<const0> ;
+  assign s_axi_rdata[11] = \<const0> ;
+  assign s_axi_rdata[10:0] = \^s_axi_rdata [10:0];
+  assign s_axi_rresp[1] = \^s_axi_rresp [1];
+  assign s_axi_rresp[0] = \<const0> ;
+  assign scl_o = \<const0> ;
+  assign sda_o = \<const0> ;
+  GND GND
+       (.G(\<const0> ));
+  (* C_DEFAULT_VALUE = "8'b00000000" *) 
+  (* C_DISABLE_SETUP_VIOLATION_CHECK = "0" *) 
+  (* C_FAMILY = "zynq" *) 
+  (* C_GPO_WIDTH = "1" *) 
+  (* C_IIC_FREQ = "100000" *) 
+  (* C_SCL_INERTIAL_DELAY = "0" *) 
+  (* C_SDA_INERTIAL_DELAY = "0" *) 
+  (* C_SDA_LEVEL = "1" *) 
+  (* C_SMBUS_PMBUS_HOST = "0" *) 
+  (* C_STATIC_TIMING_REG_WIDTH = "0" *) 
+  (* C_S_AXI_ACLK_FREQ_HZ = "125000000" *) 
+  (* C_S_AXI_ADDR_WIDTH = "9" *) 
+  (* C_S_AXI_DATA_WIDTH = "32" *) 
+  (* C_TEN_BIT_ADR = "0" *) 
+  (* C_TIMING_REG_WIDTH = "32" *) 
+  (* downgradeipidentifiedwarnings = "yes" *) 
+  scalp_zynqps_axi_iic_ioext_0_axi_iic U0
+       (.gpo(gpo),
+        .iic2intc_irpt(iic2intc_irpt),
+        .s_axi_aclk(s_axi_aclk),
+        .s_axi_araddr(s_axi_araddr),
+        .s_axi_aresetn(s_axi_aresetn),
+        .s_axi_arready(s_axi_arready),
+        .s_axi_arvalid(s_axi_arvalid),
+        .s_axi_awaddr(s_axi_awaddr),
+        .s_axi_awready(s_axi_awready),
+        .s_axi_awvalid(s_axi_awvalid),
+        .s_axi_bready(s_axi_bready),
+        .s_axi_bresp({\^s_axi_bresp ,NLW_U0_s_axi_bresp_UNCONNECTED[0]}),
+        .s_axi_bvalid(s_axi_bvalid),
+        .s_axi_rdata(\^s_axi_rdata ),
+        .s_axi_rready(s_axi_rready),
+        .s_axi_rresp({\^s_axi_rresp ,NLW_U0_s_axi_rresp_UNCONNECTED[0]}),
+        .s_axi_rvalid(s_axi_rvalid),
+        .s_axi_wdata({s_axi_wdata[31],1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,s_axi_wdata[10:0]}),
+        .s_axi_wready(s_axi_wready),
+        .s_axi_wstrb({1'b0,1'b0,1'b0,1'b0}),
+        .s_axi_wvalid(s_axi_wvalid),
+        .scl_i(scl_i),
+        .scl_o(NLW_U0_scl_o_UNCONNECTED),
+        .scl_t(scl_t),
+        .sda_i(sda_i),
+        .sda_o(NLW_U0_sda_o_UNCONNECTED),
+        .sda_t(sda_t));
+endmodule
+
 module scalp_zynqps_axi_iic_ioext_0_shift8
    (\data_int_reg[7]_0 ,
     Q,
@@ -8551,7 +8407,7 @@ module scalp_zynqps_axi_iic_ioext_0_shift8_1
     \data_int_reg[0]_1 ,
     E,
     s_axi_aclk,
-    scndry_out);
+    Sda_clean);
   output detect_stop_reg;
   output shift_reg_ld0;
   output master_slave_reg;
@@ -8580,7 +8436,7 @@ module scalp_zynqps_axi_iic_ioext_0_shift8_1
   input \data_int_reg[0]_1 ;
   input [0:0]E;
   input s_axi_aclk;
-  input scndry_out;
+  input Sda_clean;
 
   wire Abgc;
   wire [0:0]E;
@@ -8597,6 +8453,7 @@ module scalp_zynqps_axi_iic_ioext_0_shift8_1
   wire \FSM_sequential_state_reg[2] ;
   wire [2:0]Q;
   wire Ro_prev;
+  wire Sda_clean;
   wire abgc_i_i_2_n_0;
   wire abgc_i_i_3_n_0;
   wire abgc_i_reg;
@@ -8611,7 +8468,6 @@ module scalp_zynqps_axi_iic_ioext_0_shift8_1
   wire master_slave;
   wire master_slave_reg;
   wire s_axi_aclk;
-  wire scndry_out;
   wire sda_sample;
   wire shift_reg_ld0;
   wire shift_reg_ld_i_2_n_0;
@@ -8711,7 +8567,7 @@ module scalp_zynqps_axi_iic_ioext_0_shift8_1
   FDRE \data_int_reg[0] 
        (.C(s_axi_aclk),
         .CE(E),
-        .D(scndry_out),
+        .D(Sda_clean),
         .Q(i2c_header),
         .R(\data_int_reg[0]_1 ));
   FDRE \data_int_reg[1] 
@@ -8787,7 +8643,6 @@ module scalp_zynqps_axi_iic_ioext_0_shift8_1
         .O(\data_int_reg[0]_0 ));
 endmodule
 
-(* ORIG_REF_NAME = "slave_attachment" *) 
 module scalp_zynqps_axi_iic_ioext_0_slave_attachment
    (s_axi_rresp,
     s_axi_rvalid_i_reg_0,
@@ -10157,7 +10012,6 @@ module scalp_zynqps_axi_iic_ioext_0_slave_attachment
         .R(rst));
 endmodule
 
-(* ORIG_REF_NAME = "soft_reset" *) 
 module scalp_zynqps_axi_iic_ioext_0_soft_reset
    (sw_rst_cond_d1,
     AXI_Bus2IP_Reset,
@@ -10191,7 +10045,9 @@ module scalp_zynqps_axi_iic_ioext_0_soft_reset
   wire S;
   wire Tx_fifo_rst;
   wire [0:1]ctrlFifoDin;
-  wire [1:3]flop_q_chain;
+  wire flop_q_chain_1;
+  wire flop_q_chain_2;
+  wire flop_q_chain_3;
   wire reset_trig0;
   wire s_axi_aclk;
   wire s_axi_aresetn;
@@ -10235,7 +10091,7 @@ module scalp_zynqps_axi_iic_ioext_0_soft_reset
        (.C(s_axi_aclk),
         .CE(1'b1),
         .D(S),
-        .Q(flop_q_chain[1]),
+        .Q(flop_q_chain_3),
         .R(AXI_Bus2IP_Reset));
   (* IS_CE_INVERTED = "1'b0" *) 
   (* IS_S_INVERTED = "1'b0" *) 
@@ -10249,14 +10105,14 @@ module scalp_zynqps_axi_iic_ioext_0_soft_reset
        (.C(s_axi_aclk),
         .CE(1'b1),
         .D(\RESET_FLOPS[1].RST_FLOPS_i_1_n_0 ),
-        .Q(flop_q_chain[2]),
+        .Q(flop_q_chain_2),
         .R(AXI_Bus2IP_Reset));
   (* SOFT_HLUTNM = "soft_lutpair64" *) 
   LUT2 #(
     .INIT(4'hE)) 
     \RESET_FLOPS[1].RST_FLOPS_i_1 
        (.I0(S),
-        .I1(flop_q_chain[1]),
+        .I1(flop_q_chain_3),
         .O(\RESET_FLOPS[1].RST_FLOPS_i_1_n_0 ));
   (* IS_CE_INVERTED = "1'b0" *) 
   (* IS_S_INVERTED = "1'b0" *) 
@@ -10270,14 +10126,14 @@ module scalp_zynqps_axi_iic_ioext_0_soft_reset
        (.C(s_axi_aclk),
         .CE(1'b1),
         .D(\RESET_FLOPS[2].RST_FLOPS_i_1_n_0 ),
-        .Q(flop_q_chain[3]),
+        .Q(flop_q_chain_1),
         .R(AXI_Bus2IP_Reset));
   (* SOFT_HLUTNM = "soft_lutpair64" *) 
   LUT2 #(
     .INIT(4'hE)) 
     \RESET_FLOPS[2].RST_FLOPS_i_1 
        (.I0(S),
-        .I1(flop_q_chain[2]),
+        .I1(flop_q_chain_2),
         .O(\RESET_FLOPS[2].RST_FLOPS_i_1_n_0 ));
   (* IS_CE_INVERTED = "1'b0" *) 
   (* IS_S_INVERTED = "1'b0" *) 
@@ -10297,7 +10153,7 @@ module scalp_zynqps_axi_iic_ioext_0_soft_reset
     .INIT(4'hE)) 
     \RESET_FLOPS[3].RST_FLOPS_i_1 
        (.I0(S),
-        .I1(flop_q_chain[3]),
+        .I1(flop_q_chain_1),
         .O(\RESET_FLOPS[3].RST_FLOPS_i_1_n_0 ));
   FDRE reset_trig_reg
        (.C(s_axi_aclk),
@@ -10318,7 +10174,6 @@ module scalp_zynqps_axi_iic_ioext_0_soft_reset
         .R(AXI_Bus2IP_Reset));
 endmodule
 
-(* ORIG_REF_NAME = "upcnt_n" *) 
 module scalp_zynqps_axi_iic_ioext_0_upcnt_n
    (Q,
     S,
@@ -10337,8 +10192,8 @@ module scalp_zynqps_axi_iic_ioext_0_upcnt_n
     \FSM_onehot_scl_state_reg[1]_0 ,
     \FSM_onehot_scl_state_reg[2] ,
     \q_int_reg[0]_2 ,
+    Scl_clean,
     \q_int_reg[0]_3 ,
-    \q_int_reg[0]_4 ,
     \q_int_reg[10]_0 ,
     s_axi_aclk);
   output [10:0]Q;
@@ -10358,8 +10213,8 @@ module scalp_zynqps_axi_iic_ioext_0_upcnt_n
   input \FSM_onehot_scl_state_reg[1]_0 ;
   input \FSM_onehot_scl_state_reg[2] ;
   input [0:0]\q_int_reg[0]_2 ;
-  input \q_int_reg[0]_3 ;
-  input [0:0]\q_int_reg[0]_4 ;
+  input Scl_clean;
+  input [0:0]\q_int_reg[0]_3 ;
   input \q_int_reg[10]_0 ;
   input s_axi_aclk;
 
@@ -10373,6 +10228,7 @@ module scalp_zynqps_axi_iic_ioext_0_upcnt_n
   wire \FSM_onehot_scl_state_reg[2] ;
   wire [10:0]Q;
   wire [0:0]S;
+  wire Scl_clean;
   wire arb_lost;
   wire arb_lost_reg;
   wire [10:0]\clk_cnt_en1_inferred__2/i__carry__0 ;
@@ -10391,8 +10247,7 @@ module scalp_zynqps_axi_iic_ioext_0_upcnt_n
   wire [9:0]\q_int_reg[0]_0 ;
   wire \q_int_reg[0]_1 ;
   wire [0:0]\q_int_reg[0]_2 ;
-  wire \q_int_reg[0]_3 ;
-  wire [0:0]\q_int_reg[0]_4 ;
+  wire [0:0]\q_int_reg[0]_3 ;
   wire \q_int_reg[10]_0 ;
   wire \q_int_reg[1]_0 ;
   wire [3:0]\q_int_reg[3]_0 ;
@@ -10522,8 +10377,8 @@ module scalp_zynqps_axi_iic_ioext_0_upcnt_n
        (.I0(\FSM_onehot_scl_state_reg[1] ),
         .I1(\q_int_reg[0]_2 ),
         .I2(\q_int_reg[0]_0 [0]),
-        .I3(\q_int_reg[0]_3 ),
-        .I4(\q_int_reg[0]_4 ),
+        .I3(Scl_clean),
+        .I4(\q_int_reg[0]_3 ),
         .I5(\q_int_reg[0]_0 [4]),
         .O(\q_int[0]_i_4_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair5" *) 
@@ -10779,10 +10634,10 @@ endmodule
 
 (* ORIG_REF_NAME = "upcnt_n" *) 
 module scalp_zynqps_axi_iic_ioext_0_upcnt_n_2
-   (\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 ,
+   (\syncstages_ff_reg[3] ,
     Q,
     sda_setup,
-    scndry_out,
+    Sda_clean,
     sda_rin_d1,
     \q_int[0]_i_3_0 ,
     tx_under_prev_d1,
@@ -10792,10 +10647,10 @@ module scalp_zynqps_axi_iic_ioext_0_upcnt_n_2
     rsta_d1,
     \q_int_reg[0]_0 ,
     s_axi_aclk);
-  output \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 ;
+  output \syncstages_ff_reg[3] ;
   output [10:0]Q;
   input sda_setup;
-  input scndry_out;
+  input Sda_clean;
   input sda_rin_d1;
   input \q_int[0]_i_3_0 ;
   input tx_under_prev_d1;
@@ -10806,8 +10661,8 @@ module scalp_zynqps_axi_iic_ioext_0_upcnt_n_2
   input \q_int_reg[0]_0 ;
   input s_axi_aclk;
 
-  wire \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 ;
   wire [10:0]Q;
+  wire Sda_clean;
   wire gen_stop;
   wire gen_stop_d1;
   wire [10:0]p_0_in__0;
@@ -10826,16 +10681,16 @@ module scalp_zynqps_axi_iic_ioext_0_upcnt_n_2
   wire \q_int_reg[0]_0 ;
   wire rsta_d1;
   wire s_axi_aclk;
-  wire scndry_out;
   wire sda_rin_d1;
   wire sda_setup;
+  wire \syncstages_ff_reg[3] ;
   wire tx_under_prev_d1;
 
   LUT2 #(
     .INIT(4'hE)) 
     \q_int[0]_i_1 
        (.I0(sda_setup),
-        .I1(\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 ),
+        .I1(\syncstages_ff_reg[3] ),
         .O(\q_int[0]_i_1_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair12" *) 
   LUT4 #(
@@ -10844,15 +10699,15 @@ module scalp_zynqps_axi_iic_ioext_0_upcnt_n_2
        (.I0(\q_int[0]_i_4__0_n_0 ),
         .I1(Q[9]),
         .I2(Q[10]),
-        .I3(\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 ),
+        .I3(\syncstages_ff_reg[3] ),
         .O(p_0_in__0[10]));
   LUT3 #(
     .INIT(8'hBE)) 
     \q_int[0]_i_3 
        (.I0(\q_int[0]_i_5_n_0 ),
-        .I1(scndry_out),
+        .I1(Sda_clean),
         .I2(sda_rin_d1),
-        .O(\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 ));
+        .O(\syncstages_ff_reg[3] ));
   (* SOFT_HLUTNM = "soft_lutpair13" *) 
   LUT4 #(
     .INIT(16'h0800)) 
@@ -10877,12 +10732,12 @@ module scalp_zynqps_axi_iic_ioext_0_upcnt_n_2
     .INIT(4'h1)) 
     \q_int[10]_i_1 
        (.I0(Q[0]),
-        .I1(\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 ),
+        .I1(\syncstages_ff_reg[3] ),
         .O(p_0_in__0[0]));
   LUT6 #(
     .INIT(64'h5515555500400000)) 
     \q_int[1]_i_1__1 
-       (.I0(\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 ),
+       (.I0(\syncstages_ff_reg[3] ),
         .I1(Q[8]),
         .I2(Q[7]),
         .I3(\q_int[1]_i_2__0_n_0 ),
@@ -10903,7 +10758,7 @@ module scalp_zynqps_axi_iic_ioext_0_upcnt_n_2
   LUT5 #(
     .INIT(32'h51550400)) 
     \q_int[2]_i_1__1 
-       (.I0(\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 ),
+       (.I0(\syncstages_ff_reg[3] ),
         .I1(Q[6]),
         .I2(\q_int[1]_i_2__0_n_0 ),
         .I3(Q[7]),
@@ -10913,7 +10768,7 @@ module scalp_zynqps_axi_iic_ioext_0_upcnt_n_2
   LUT4 #(
     .INIT(16'h4510)) 
     \q_int[3]_i_1__1 
-       (.I0(\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 ),
+       (.I0(\syncstages_ff_reg[3] ),
         .I1(\q_int[1]_i_2__0_n_0 ),
         .I2(Q[6]),
         .I3(Q[7]),
@@ -10922,7 +10777,7 @@ module scalp_zynqps_axi_iic_ioext_0_upcnt_n_2
   LUT3 #(
     .INIT(8'h41)) 
     \q_int[4]_i_1__0 
-       (.I0(\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 ),
+       (.I0(\syncstages_ff_reg[3] ),
         .I1(\q_int[1]_i_2__0_n_0 ),
         .I2(Q[6]),
         .O(\q_int[4]_i_1__0_n_0 ));
@@ -10930,7 +10785,7 @@ module scalp_zynqps_axi_iic_ioext_0_upcnt_n_2
   LUT3 #(
     .INIT(8'h41)) 
     \q_int[5]_i_1__0 
-       (.I0(\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 ),
+       (.I0(\syncstages_ff_reg[3] ),
         .I1(\q_int[5]_i_2__0_n_0 ),
         .I2(Q[5]),
         .O(\q_int[5]_i_1__0_n_0 ));
@@ -10951,7 +10806,7 @@ module scalp_zynqps_axi_iic_ioext_0_upcnt_n_2
         .I2(Q[0]),
         .I3(Q[3]),
         .I4(Q[4]),
-        .I5(\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 ),
+        .I5(\syncstages_ff_reg[3] ),
         .O(p_0_in__0[4]));
   (* SOFT_HLUTNM = "soft_lutpair11" *) 
   LUT5 #(
@@ -10961,7 +10816,7 @@ module scalp_zynqps_axi_iic_ioext_0_upcnt_n_2
         .I1(Q[1]),
         .I2(Q[2]),
         .I3(Q[3]),
-        .I4(\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 ),
+        .I4(\syncstages_ff_reg[3] ),
         .O(p_0_in__0[3]));
   (* SOFT_HLUTNM = "soft_lutpair11" *) 
   LUT4 #(
@@ -10970,7 +10825,7 @@ module scalp_zynqps_axi_iic_ioext_0_upcnt_n_2
        (.I0(Q[1]),
         .I1(Q[0]),
         .I2(Q[2]),
-        .I3(\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 ),
+        .I3(\syncstages_ff_reg[3] ),
         .O(p_0_in__0[2]));
   (* SOFT_HLUTNM = "soft_lutpair14" *) 
   LUT3 #(
@@ -10978,7 +10833,7 @@ module scalp_zynqps_axi_iic_ioext_0_upcnt_n_2
     \q_int[9]_i_1 
        (.I0(Q[0]),
         .I1(Q[1]),
-        .I2(\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4 ),
+        .I2(\syncstages_ff_reg[3] ),
         .O(p_0_in__0[1]));
   FDRE \q_int_reg[0] 
        (.C(s_axi_aclk),
@@ -11274,6 +11129,118 @@ module scalp_zynqps_axi_iic_ioext_0_upcnt_n__parameterized0
         .D(\q_int[3]_i_1__0_n_0 ),
         .Q(bit_cnt[0]),
         .R(\q_int_reg[0]_0 ));
+endmodule
+
+(* DEST_SYNC_FF = "4" *) (* INIT_SYNC_FF = "0" *) (* SIM_ASSERT_CHK = "0" *) 
+(* SRC_INPUT_REG = "0" *) (* VERSION = "0" *) (* XPM_MODULE = "TRUE" *) 
+(* keep_hierarchy = "soft" *) (* xpm_cdc = "SINGLE" *) 
+module scalp_zynqps_axi_iic_ioext_0_xpm_cdc_single
+   (src_clk,
+    src_in,
+    dest_clk,
+    dest_out);
+  input src_clk;
+  input src_in;
+  input dest_clk;
+  output dest_out;
+
+  wire dest_clk;
+  wire src_in;
+  (* RTL_KEEP = "true" *) (* async_reg = "true" *) (* xpm_cdc = "SINGLE" *) wire [3:0]syncstages_ff;
+
+  assign dest_out = syncstages_ff[3];
+  (* ASYNC_REG *) 
+  (* KEEP = "true" *) 
+  (* XPM_CDC = "SINGLE" *) 
+  FDRE \syncstages_ff_reg[0] 
+       (.C(dest_clk),
+        .CE(1'b1),
+        .D(src_in),
+        .Q(syncstages_ff[0]),
+        .R(1'b0));
+  (* ASYNC_REG *) 
+  (* KEEP = "true" *) 
+  (* XPM_CDC = "SINGLE" *) 
+  FDRE \syncstages_ff_reg[1] 
+       (.C(dest_clk),
+        .CE(1'b1),
+        .D(syncstages_ff[0]),
+        .Q(syncstages_ff[1]),
+        .R(1'b0));
+  (* ASYNC_REG *) 
+  (* KEEP = "true" *) 
+  (* XPM_CDC = "SINGLE" *) 
+  FDRE \syncstages_ff_reg[2] 
+       (.C(dest_clk),
+        .CE(1'b1),
+        .D(syncstages_ff[1]),
+        .Q(syncstages_ff[2]),
+        .R(1'b0));
+  (* ASYNC_REG *) 
+  (* KEEP = "true" *) 
+  (* XPM_CDC = "SINGLE" *) 
+  FDRE \syncstages_ff_reg[3] 
+       (.C(dest_clk),
+        .CE(1'b1),
+        .D(syncstages_ff[2]),
+        .Q(syncstages_ff[3]),
+        .R(1'b0));
+endmodule
+
+(* DEST_SYNC_FF = "4" *) (* INIT_SYNC_FF = "0" *) (* ORIG_REF_NAME = "xpm_cdc_single" *) 
+(* SIM_ASSERT_CHK = "0" *) (* SRC_INPUT_REG = "0" *) (* VERSION = "0" *) 
+(* XPM_MODULE = "TRUE" *) (* keep_hierarchy = "soft" *) (* xpm_cdc = "SINGLE" *) 
+module scalp_zynqps_axi_iic_ioext_0_xpm_cdc_single__1
+   (src_clk,
+    src_in,
+    dest_clk,
+    dest_out);
+  input src_clk;
+  input src_in;
+  input dest_clk;
+  output dest_out;
+
+  wire dest_clk;
+  wire src_in;
+  (* RTL_KEEP = "true" *) (* async_reg = "true" *) (* xpm_cdc = "SINGLE" *) wire [3:0]syncstages_ff;
+
+  assign dest_out = syncstages_ff[3];
+  (* ASYNC_REG *) 
+  (* KEEP = "true" *) 
+  (* XPM_CDC = "SINGLE" *) 
+  FDRE \syncstages_ff_reg[0] 
+       (.C(dest_clk),
+        .CE(1'b1),
+        .D(src_in),
+        .Q(syncstages_ff[0]),
+        .R(1'b0));
+  (* ASYNC_REG *) 
+  (* KEEP = "true" *) 
+  (* XPM_CDC = "SINGLE" *) 
+  FDRE \syncstages_ff_reg[1] 
+       (.C(dest_clk),
+        .CE(1'b1),
+        .D(syncstages_ff[0]),
+        .Q(syncstages_ff[1]),
+        .R(1'b0));
+  (* ASYNC_REG *) 
+  (* KEEP = "true" *) 
+  (* XPM_CDC = "SINGLE" *) 
+  FDRE \syncstages_ff_reg[2] 
+       (.C(dest_clk),
+        .CE(1'b1),
+        .D(syncstages_ff[1]),
+        .Q(syncstages_ff[2]),
+        .R(1'b0));
+  (* ASYNC_REG *) 
+  (* KEEP = "true" *) 
+  (* XPM_CDC = "SINGLE" *) 
+  FDRE \syncstages_ff_reg[3] 
+       (.C(dest_clk),
+        .CE(1'b1),
+        .D(syncstages_ff[2]),
+        .Q(syncstages_ff[3]),
+        .R(1'b0));
 endmodule
 `ifndef GLBL
 `define GLBL

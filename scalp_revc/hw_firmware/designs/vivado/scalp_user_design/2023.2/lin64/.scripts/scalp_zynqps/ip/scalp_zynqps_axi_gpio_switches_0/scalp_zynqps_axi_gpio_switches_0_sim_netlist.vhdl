@@ -2,10 +2,10 @@
 -- Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
--- Date        : Wed Mar  4 14:13:12 2026
+-- Date        : Mon Apr  6 16:54:11 2026
 -- Host        : theodros-ThinkPad-P16s-Gen-2 running 64-bit Ubuntu 24.04.2 LTS
--- Command     : write_vhdl -force -mode funcsim
---               /home/theodros/Documents/Master/LPSC/scalp_board_files/scalp_revc/hw_firmware/designs/vivado/scalp_user_design/2023.2/lin64/.scripts/scalp_zynqps/ip/scalp_zynqps_axi_gpio_switches_0/scalp_zynqps_axi_gpio_switches_0_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top scalp_zynqps_axi_gpio_switches_0 -prefix
+--               scalp_zynqps_axi_gpio_switches_0_ scalp_zynqps_axi_gpio_switches_0_sim_netlist.vhdl
 -- Design      : scalp_zynqps_axi_gpio_switches_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -57,8 +57,6 @@ entity scalp_zynqps_axi_gpio_switches_0_address_decoder is
     ip2bus_wrack_i_D1 : in STD_LOGIC;
     s_axi_awready : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of scalp_zynqps_axi_gpio_switches_0_address_decoder : entity is "address_decoder";
 end scalp_zynqps_axi_gpio_switches_0_address_decoder;
 
 architecture STRUCTURE of scalp_zynqps_axi_gpio_switches_0_address_decoder is
@@ -884,173 +882,6 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity scalp_zynqps_axi_gpio_switches_0_cdc_sync is
-  port (
-    D : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    scndry_vect_out : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    Q : in STD_LOGIC_VECTOR ( 1 downto 0 );
-    gpio_io_i : in STD_LOGIC_VECTOR ( 1 downto 0 );
-    s_axi_aclk : in STD_LOGIC
-  );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of scalp_zynqps_axi_gpio_switches_0_cdc_sync : entity is "cdc_sync";
-end scalp_zynqps_axi_gpio_switches_0_cdc_sync;
-
-architecture STRUCTURE of scalp_zynqps_axi_gpio_switches_0_cdc_sync is
-  signal \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_IN_cdc_to[1].CROSS2_PLEVEL_IN2SCNDRY_IN_cdc_to_n_0\ : STD_LOGIC;
-  signal \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.s_level_out_bus_d2\ : STD_LOGIC_VECTOR ( 1 downto 0 );
-  signal \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.s_level_out_bus_d3\ : STD_LOGIC_VECTOR ( 1 downto 0 );
-  signal Q_0 : STD_LOGIC;
-  signal \^scndry_vect_out\ : STD_LOGIC_VECTOR ( 1 downto 0 );
-  attribute ASYNC_REG : boolean;
-  attribute ASYNC_REG of \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_CROSS_PLEVEL_IN2SCNDRY_bus_d2[0].CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d2\ : label is std.standard.true;
-  attribute XILINX_LEGACY_PRIM : string;
-  attribute XILINX_LEGACY_PRIM of \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_CROSS_PLEVEL_IN2SCNDRY_bus_d2[0].CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d2\ : label is "FDR";
-  attribute XILINX_TRANSFORM_PINMAP : string;
-  attribute XILINX_TRANSFORM_PINMAP of \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_CROSS_PLEVEL_IN2SCNDRY_bus_d2[0].CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d2\ : label is "VCC:CE";
-  attribute box_type : string;
-  attribute box_type of \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_CROSS_PLEVEL_IN2SCNDRY_bus_d2[0].CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d2\ : label is "PRIMITIVE";
-  attribute ASYNC_REG of \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_CROSS_PLEVEL_IN2SCNDRY_bus_d2[1].CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d2\ : label is std.standard.true;
-  attribute XILINX_LEGACY_PRIM of \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_CROSS_PLEVEL_IN2SCNDRY_bus_d2[1].CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d2\ : label is "FDR";
-  attribute XILINX_TRANSFORM_PINMAP of \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_CROSS_PLEVEL_IN2SCNDRY_bus_d2[1].CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d2\ : label is "VCC:CE";
-  attribute box_type of \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_CROSS_PLEVEL_IN2SCNDRY_bus_d2[1].CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d2\ : label is "PRIMITIVE";
-  attribute ASYNC_REG of \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_CROSS_PLEVEL_IN2SCNDRY_bus_d3[0].CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d3\ : label is std.standard.true;
-  attribute XILINX_LEGACY_PRIM of \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_CROSS_PLEVEL_IN2SCNDRY_bus_d3[0].CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d3\ : label is "FDR";
-  attribute XILINX_TRANSFORM_PINMAP of \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_CROSS_PLEVEL_IN2SCNDRY_bus_d3[0].CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d3\ : label is "VCC:CE";
-  attribute box_type of \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_CROSS_PLEVEL_IN2SCNDRY_bus_d3[0].CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d3\ : label is "PRIMITIVE";
-  attribute ASYNC_REG of \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_CROSS_PLEVEL_IN2SCNDRY_bus_d3[1].CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d3\ : label is std.standard.true;
-  attribute XILINX_LEGACY_PRIM of \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_CROSS_PLEVEL_IN2SCNDRY_bus_d3[1].CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d3\ : label is "FDR";
-  attribute XILINX_TRANSFORM_PINMAP of \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_CROSS_PLEVEL_IN2SCNDRY_bus_d3[1].CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d3\ : label is "VCC:CE";
-  attribute box_type of \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_CROSS_PLEVEL_IN2SCNDRY_bus_d3[1].CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d3\ : label is "PRIMITIVE";
-  attribute ASYNC_REG of \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_CROSS_PLEVEL_IN2SCNDRY_bus_d4[0].CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d4\ : label is std.standard.true;
-  attribute XILINX_LEGACY_PRIM of \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_CROSS_PLEVEL_IN2SCNDRY_bus_d4[0].CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d4\ : label is "FDR";
-  attribute XILINX_TRANSFORM_PINMAP of \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_CROSS_PLEVEL_IN2SCNDRY_bus_d4[0].CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d4\ : label is "VCC:CE";
-  attribute box_type of \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_CROSS_PLEVEL_IN2SCNDRY_bus_d4[0].CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d4\ : label is "PRIMITIVE";
-  attribute ASYNC_REG of \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_CROSS_PLEVEL_IN2SCNDRY_bus_d4[1].CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d4\ : label is std.standard.true;
-  attribute XILINX_LEGACY_PRIM of \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_CROSS_PLEVEL_IN2SCNDRY_bus_d4[1].CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d4\ : label is "FDR";
-  attribute XILINX_TRANSFORM_PINMAP of \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_CROSS_PLEVEL_IN2SCNDRY_bus_d4[1].CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d4\ : label is "VCC:CE";
-  attribute box_type of \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_CROSS_PLEVEL_IN2SCNDRY_bus_d4[1].CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d4\ : label is "PRIMITIVE";
-  attribute ASYNC_REG of \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_IN_cdc_to[0].CROSS2_PLEVEL_IN2SCNDRY_IN_cdc_to\ : label is std.standard.true;
-  attribute XILINX_LEGACY_PRIM of \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_IN_cdc_to[0].CROSS2_PLEVEL_IN2SCNDRY_IN_cdc_to\ : label is "FDR";
-  attribute XILINX_TRANSFORM_PINMAP of \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_IN_cdc_to[0].CROSS2_PLEVEL_IN2SCNDRY_IN_cdc_to\ : label is "VCC:CE";
-  attribute box_type of \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_IN_cdc_to[0].CROSS2_PLEVEL_IN2SCNDRY_IN_cdc_to\ : label is "PRIMITIVE";
-  attribute ASYNC_REG of \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_IN_cdc_to[1].CROSS2_PLEVEL_IN2SCNDRY_IN_cdc_to\ : label is std.standard.true;
-  attribute XILINX_LEGACY_PRIM of \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_IN_cdc_to[1].CROSS2_PLEVEL_IN2SCNDRY_IN_cdc_to\ : label is "FDR";
-  attribute XILINX_TRANSFORM_PINMAP of \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_IN_cdc_to[1].CROSS2_PLEVEL_IN2SCNDRY_IN_cdc_to\ : label is "VCC:CE";
-  attribute box_type of \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_IN_cdc_to[1].CROSS2_PLEVEL_IN2SCNDRY_IN_cdc_to\ : label is "PRIMITIVE";
-begin
-  scndry_vect_out(1 downto 0) <= \^scndry_vect_out\(1 downto 0);
-\GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_CROSS_PLEVEL_IN2SCNDRY_bus_d2[0].CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d2\: unisim.vcomponents.FDRE
-    generic map(
-      INIT => '0'
-    )
-        port map (
-      C => s_axi_aclk,
-      CE => '1',
-      D => Q_0,
-      Q => \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.s_level_out_bus_d2\(0),
-      R => '0'
-    );
-\GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_CROSS_PLEVEL_IN2SCNDRY_bus_d2[1].CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d2\: unisim.vcomponents.FDRE
-    generic map(
-      INIT => '0'
-    )
-        port map (
-      C => s_axi_aclk,
-      CE => '1',
-      D => \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_IN_cdc_to[1].CROSS2_PLEVEL_IN2SCNDRY_IN_cdc_to_n_0\,
-      Q => \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.s_level_out_bus_d2\(1),
-      R => '0'
-    );
-\GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_CROSS_PLEVEL_IN2SCNDRY_bus_d3[0].CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d3\: unisim.vcomponents.FDRE
-    generic map(
-      INIT => '0'
-    )
-        port map (
-      C => s_axi_aclk,
-      CE => '1',
-      D => \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.s_level_out_bus_d2\(0),
-      Q => \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.s_level_out_bus_d3\(0),
-      R => '0'
-    );
-\GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_CROSS_PLEVEL_IN2SCNDRY_bus_d3[1].CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d3\: unisim.vcomponents.FDRE
-    generic map(
-      INIT => '0'
-    )
-        port map (
-      C => s_axi_aclk,
-      CE => '1',
-      D => \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.s_level_out_bus_d2\(1),
-      Q => \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.s_level_out_bus_d3\(1),
-      R => '0'
-    );
-\GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_CROSS_PLEVEL_IN2SCNDRY_bus_d4[0].CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d4\: unisim.vcomponents.FDRE
-    generic map(
-      INIT => '0'
-    )
-        port map (
-      C => s_axi_aclk,
-      CE => '1',
-      D => \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.s_level_out_bus_d3\(0),
-      Q => \^scndry_vect_out\(0),
-      R => '0'
-    );
-\GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_CROSS_PLEVEL_IN2SCNDRY_bus_d4[1].CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d4\: unisim.vcomponents.FDRE
-    generic map(
-      INIT => '0'
-    )
-        port map (
-      C => s_axi_aclk,
-      CE => '1',
-      D => \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.s_level_out_bus_d3\(1),
-      Q => \^scndry_vect_out\(1),
-      R => '0'
-    );
-\GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_IN_cdc_to[0].CROSS2_PLEVEL_IN2SCNDRY_IN_cdc_to\: unisim.vcomponents.FDRE
-    generic map(
-      INIT => '0'
-    )
-        port map (
-      C => s_axi_aclk,
-      CE => '1',
-      D => gpio_io_i(0),
-      Q => Q_0,
-      R => '0'
-    );
-\GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_IN_cdc_to[1].CROSS2_PLEVEL_IN2SCNDRY_IN_cdc_to\: unisim.vcomponents.FDRE
-    generic map(
-      INIT => '0'
-    )
-        port map (
-      C => s_axi_aclk,
-      CE => '1',
-      D => gpio_io_i(1),
-      Q => \GENERATE_LEVEL_P_S_CDC.MULTI_BIT.FOR_IN_cdc_to[1].CROSS2_PLEVEL_IN2SCNDRY_IN_cdc_to_n_0\,
-      R => '0'
-    );
-\Not_Dual.GEN_INTERRUPT.gpio_data_in_xor_reg[0]_i_1\: unisim.vcomponents.LUT2
-    generic map(
-      INIT => X"6"
-    )
-        port map (
-      I0 => \^scndry_vect_out\(1),
-      I1 => Q(1),
-      O => D(1)
-    );
-\Not_Dual.GEN_INTERRUPT.gpio_data_in_xor_reg[1]_i_1\: unisim.vcomponents.LUT2
-    generic map(
-      INIT => X"6"
-    )
-        port map (
-      I0 => \^scndry_vect_out\(0),
-      I1 => Q(0),
-      O => D(0)
-    );
-end STRUCTURE;
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-library UNISIM;
-use UNISIM.VCOMPONENTS.ALL;
 entity scalp_zynqps_axi_gpio_switches_0_interrupt_control is
   port (
     irpt_wrack_d1 : out STD_LOGIC;
@@ -1078,8 +909,6 @@ entity scalp_zynqps_axi_gpio_switches_0_interrupt_control is
     GPIO_xferAck_i : in STD_LOGIC;
     ip2Bus_RdAck_intr_reg_hole : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of scalp_zynqps_axi_gpio_switches_0_interrupt_control : entity is "interrupt_control";
 end scalp_zynqps_axi_gpio_switches_0_interrupt_control;
 
 architecture STRUCTURE of scalp_zynqps_axi_gpio_switches_0_interrupt_control is
@@ -1217,24 +1046,167 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
+entity scalp_zynqps_axi_gpio_switches_0_xpm_cdc_array_single is
+  port (
+    src_clk : in STD_LOGIC;
+    src_in : in STD_LOGIC_VECTOR ( 1 downto 0 );
+    dest_clk : in STD_LOGIC;
+    dest_out : out STD_LOGIC_VECTOR ( 1 downto 0 )
+  );
+  attribute DEST_SYNC_FF : integer;
+  attribute DEST_SYNC_FF of scalp_zynqps_axi_gpio_switches_0_xpm_cdc_array_single : entity is 4;
+  attribute INIT_SYNC_FF : integer;
+  attribute INIT_SYNC_FF of scalp_zynqps_axi_gpio_switches_0_xpm_cdc_array_single : entity is 0;
+  attribute SIM_ASSERT_CHK : integer;
+  attribute SIM_ASSERT_CHK of scalp_zynqps_axi_gpio_switches_0_xpm_cdc_array_single : entity is 0;
+  attribute SRC_INPUT_REG : integer;
+  attribute SRC_INPUT_REG of scalp_zynqps_axi_gpio_switches_0_xpm_cdc_array_single : entity is 0;
+  attribute VERSION : integer;
+  attribute VERSION of scalp_zynqps_axi_gpio_switches_0_xpm_cdc_array_single : entity is 0;
+  attribute WIDTH : integer;
+  attribute WIDTH of scalp_zynqps_axi_gpio_switches_0_xpm_cdc_array_single : entity is 2;
+  attribute XPM_MODULE : string;
+  attribute XPM_MODULE of scalp_zynqps_axi_gpio_switches_0_xpm_cdc_array_single : entity is "TRUE";
+  attribute keep_hierarchy : string;
+  attribute keep_hierarchy of scalp_zynqps_axi_gpio_switches_0_xpm_cdc_array_single : entity is "soft";
+  attribute xpm_cdc : string;
+  attribute xpm_cdc of scalp_zynqps_axi_gpio_switches_0_xpm_cdc_array_single : entity is "ARRAY_SINGLE";
+end scalp_zynqps_axi_gpio_switches_0_xpm_cdc_array_single;
+
+architecture STRUCTURE of scalp_zynqps_axi_gpio_switches_0_xpm_cdc_array_single is
+  signal async_path_bit : STD_LOGIC_VECTOR ( 1 downto 0 );
+  signal \syncstages_ff[0]\ : STD_LOGIC_VECTOR ( 1 downto 0 );
+  attribute RTL_KEEP : string;
+  attribute RTL_KEEP of \syncstages_ff[0]\ : signal is "true";
+  attribute async_reg : string;
+  attribute async_reg of \syncstages_ff[0]\ : signal is "true";
+  attribute xpm_cdc of \syncstages_ff[0]\ : signal is "ARRAY_SINGLE";
+  signal \syncstages_ff[1]\ : STD_LOGIC_VECTOR ( 1 downto 0 );
+  attribute RTL_KEEP of \syncstages_ff[1]\ : signal is "true";
+  attribute async_reg of \syncstages_ff[1]\ : signal is "true";
+  attribute xpm_cdc of \syncstages_ff[1]\ : signal is "ARRAY_SINGLE";
+  signal \syncstages_ff[2]\ : STD_LOGIC_VECTOR ( 1 downto 0 );
+  attribute RTL_KEEP of \syncstages_ff[2]\ : signal is "true";
+  attribute async_reg of \syncstages_ff[2]\ : signal is "true";
+  attribute xpm_cdc of \syncstages_ff[2]\ : signal is "ARRAY_SINGLE";
+  signal \syncstages_ff[3]\ : STD_LOGIC_VECTOR ( 1 downto 0 );
+  attribute RTL_KEEP of \syncstages_ff[3]\ : signal is "true";
+  attribute async_reg of \syncstages_ff[3]\ : signal is "true";
+  attribute xpm_cdc of \syncstages_ff[3]\ : signal is "ARRAY_SINGLE";
+  attribute ASYNC_REG_boolean : boolean;
+  attribute ASYNC_REG_boolean of \syncstages_ff_reg[0][0]\ : label is std.standard.true;
+  attribute KEEP : string;
+  attribute KEEP of \syncstages_ff_reg[0][0]\ : label is "true";
+  attribute XPM_CDC of \syncstages_ff_reg[0][0]\ : label is "ARRAY_SINGLE";
+  attribute ASYNC_REG_boolean of \syncstages_ff_reg[0][1]\ : label is std.standard.true;
+  attribute KEEP of \syncstages_ff_reg[0][1]\ : label is "true";
+  attribute XPM_CDC of \syncstages_ff_reg[0][1]\ : label is "ARRAY_SINGLE";
+  attribute ASYNC_REG_boolean of \syncstages_ff_reg[1][0]\ : label is std.standard.true;
+  attribute KEEP of \syncstages_ff_reg[1][0]\ : label is "true";
+  attribute XPM_CDC of \syncstages_ff_reg[1][0]\ : label is "ARRAY_SINGLE";
+  attribute ASYNC_REG_boolean of \syncstages_ff_reg[1][1]\ : label is std.standard.true;
+  attribute KEEP of \syncstages_ff_reg[1][1]\ : label is "true";
+  attribute XPM_CDC of \syncstages_ff_reg[1][1]\ : label is "ARRAY_SINGLE";
+  attribute ASYNC_REG_boolean of \syncstages_ff_reg[2][0]\ : label is std.standard.true;
+  attribute KEEP of \syncstages_ff_reg[2][0]\ : label is "true";
+  attribute XPM_CDC of \syncstages_ff_reg[2][0]\ : label is "ARRAY_SINGLE";
+  attribute ASYNC_REG_boolean of \syncstages_ff_reg[2][1]\ : label is std.standard.true;
+  attribute KEEP of \syncstages_ff_reg[2][1]\ : label is "true";
+  attribute XPM_CDC of \syncstages_ff_reg[2][1]\ : label is "ARRAY_SINGLE";
+  attribute ASYNC_REG_boolean of \syncstages_ff_reg[3][0]\ : label is std.standard.true;
+  attribute KEEP of \syncstages_ff_reg[3][0]\ : label is "true";
+  attribute XPM_CDC of \syncstages_ff_reg[3][0]\ : label is "ARRAY_SINGLE";
+  attribute ASYNC_REG_boolean of \syncstages_ff_reg[3][1]\ : label is std.standard.true;
+  attribute KEEP of \syncstages_ff_reg[3][1]\ : label is "true";
+  attribute XPM_CDC of \syncstages_ff_reg[3][1]\ : label is "ARRAY_SINGLE";
+begin
+  async_path_bit(1 downto 0) <= src_in(1 downto 0);
+  dest_out(1 downto 0) <= \syncstages_ff[3]\(1 downto 0);
+\syncstages_ff_reg[0][0]\: unisim.vcomponents.FDRE
+     port map (
+      C => dest_clk,
+      CE => '1',
+      D => async_path_bit(0),
+      Q => \syncstages_ff[0]\(0),
+      R => '0'
+    );
+\syncstages_ff_reg[0][1]\: unisim.vcomponents.FDRE
+     port map (
+      C => dest_clk,
+      CE => '1',
+      D => async_path_bit(1),
+      Q => \syncstages_ff[0]\(1),
+      R => '0'
+    );
+\syncstages_ff_reg[1][0]\: unisim.vcomponents.FDRE
+     port map (
+      C => dest_clk,
+      CE => '1',
+      D => \syncstages_ff[0]\(0),
+      Q => \syncstages_ff[1]\(0),
+      R => '0'
+    );
+\syncstages_ff_reg[1][1]\: unisim.vcomponents.FDRE
+     port map (
+      C => dest_clk,
+      CE => '1',
+      D => \syncstages_ff[0]\(1),
+      Q => \syncstages_ff[1]\(1),
+      R => '0'
+    );
+\syncstages_ff_reg[2][0]\: unisim.vcomponents.FDRE
+     port map (
+      C => dest_clk,
+      CE => '1',
+      D => \syncstages_ff[1]\(0),
+      Q => \syncstages_ff[2]\(0),
+      R => '0'
+    );
+\syncstages_ff_reg[2][1]\: unisim.vcomponents.FDRE
+     port map (
+      C => dest_clk,
+      CE => '1',
+      D => \syncstages_ff[1]\(1),
+      Q => \syncstages_ff[2]\(1),
+      R => '0'
+    );
+\syncstages_ff_reg[3][0]\: unisim.vcomponents.FDRE
+     port map (
+      C => dest_clk,
+      CE => '1',
+      D => \syncstages_ff[2]\(0),
+      Q => \syncstages_ff[3]\(0),
+      R => '0'
+    );
+\syncstages_ff_reg[3][1]\: unisim.vcomponents.FDRE
+     port map (
+      C => dest_clk,
+      CE => '1',
+      D => \syncstages_ff[2]\(1),
+      Q => \syncstages_ff[3]\(1),
+      R => '0'
+    );
+end STRUCTURE;
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+library UNISIM;
+use UNISIM.VCOMPONENTS.ALL;
 entity scalp_zynqps_axi_gpio_switches_0_GPIO_Core is
   port (
     GPIO_intr : out STD_LOGIC;
     GPIO_xferAck_i : out STD_LOGIC;
     \Not_Dual.ALLIN1_ND.READ_REG_GEN[1].reg1_reg\ : out STD_LOGIC;
     \Not_Dual.ALLIN1_ND.READ_REG_GEN[0].reg1_reg\ : out STD_LOGIC;
-    bus2ip_reset : in STD_LOGIC;
+    gpio_io_i : in STD_LOGIC_VECTOR ( 1 downto 0 );
     s_axi_aclk : in STD_LOGIC;
+    bus2ip_reset : in STD_LOGIC;
     bus2ip_cs : in STD_LOGIC_VECTOR ( 0 to 0 );
     bus2ip_rnw : in STD_LOGIC;
     Q : in STD_LOGIC_VECTOR ( 2 downto 0 );
     \Not_Dual.ALLIN1_ND.READ_REG_GEN[1].reg1_reg[31]_0\ : in STD_LOGIC;
-    gpio_io_i : in STD_LOGIC_VECTOR ( 1 downto 0 );
     s_axi_wdata : in STD_LOGIC_VECTOR ( 3 downto 0 );
     \Not_Dual.gpio_OE_reg[0]_0\ : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of scalp_zynqps_axi_gpio_switches_0_GPIO_Core : entity is "GPIO_Core";
 end scalp_zynqps_axi_gpio_switches_0_GPIO_Core;
 
 architecture STRUCTURE of scalp_zynqps_axi_gpio_switches_0_GPIO_Core is
@@ -1255,6 +1227,22 @@ architecture STRUCTURE of scalp_zynqps_axi_gpio_switches_0_GPIO_Core is
   signal or_reduce : STD_LOGIC;
   attribute SOFT_HLUTNM : string;
   attribute SOFT_HLUTNM of \Not_Dual.ALLIN1_ND.READ_REG_GEN[1].reg1[31]_i_3\ : label is "soft_lutpair21";
+  attribute DEST_SYNC_FF : integer;
+  attribute DEST_SYNC_FF of \Not_Dual.INPUT_DOUBLE_REGS3\ : label is 4;
+  attribute INIT_SYNC_FF : integer;
+  attribute INIT_SYNC_FF of \Not_Dual.INPUT_DOUBLE_REGS3\ : label is 0;
+  attribute SIM_ASSERT_CHK : integer;
+  attribute SIM_ASSERT_CHK of \Not_Dual.INPUT_DOUBLE_REGS3\ : label is 0;
+  attribute SRC_INPUT_REG : integer;
+  attribute SRC_INPUT_REG of \Not_Dual.INPUT_DOUBLE_REGS3\ : label is 0;
+  attribute VERSION : integer;
+  attribute VERSION of \Not_Dual.INPUT_DOUBLE_REGS3\ : label is 0;
+  attribute WIDTH : integer;
+  attribute WIDTH of \Not_Dual.INPUT_DOUBLE_REGS3\ : label is 2;
+  attribute XPM_CDC : string;
+  attribute XPM_CDC of \Not_Dual.INPUT_DOUBLE_REGS3\ : label is "ARRAY_SINGLE";
+  attribute XPM_MODULE : string;
+  attribute XPM_MODULE of \Not_Dual.INPUT_DOUBLE_REGS3\ : label is "TRUE";
   attribute SOFT_HLUTNM of iGPIO_xferAck_i_1 : label is "soft_lutpair21";
 begin
   GPIO_xferAck_i <= \^gpio_xferack_i\;
@@ -1328,6 +1316,24 @@ begin
       Q => GPIO_intr,
       R => bus2ip_reset
     );
+\Not_Dual.GEN_INTERRUPT.gpio_data_in_xor_reg[0]_i_1\: unisim.vcomponents.LUT2
+    generic map(
+      INIT => X"6"
+    )
+        port map (
+      I0 => gpio_io_i_d2(0),
+      I1 => gpio_Data_In(0),
+      O => gpio_data_in_xor(0)
+    );
+\Not_Dual.GEN_INTERRUPT.gpio_data_in_xor_reg[1]_i_1\: unisim.vcomponents.LUT2
+    generic map(
+      INIT => X"6"
+    )
+        port map (
+      I0 => gpio_io_i_d2(1),
+      I1 => gpio_Data_In(1),
+      O => gpio_data_in_xor(1)
+    );
 \Not_Dual.GEN_INTERRUPT.gpio_data_in_xor_reg_reg[0]\: unisim.vcomponents.FDRE
      port map (
       C => s_axi_aclk,
@@ -1344,16 +1350,13 @@ begin
       Q => l(0),
       R => bus2ip_reset
     );
-\Not_Dual.INPUT_DOUBLE_REGS3\: entity work.scalp_zynqps_axi_gpio_switches_0_cdc_sync
+\Not_Dual.INPUT_DOUBLE_REGS3\: entity work.scalp_zynqps_axi_gpio_switches_0_xpm_cdc_array_single
      port map (
-      D(1) => gpio_data_in_xor(0),
-      D(0) => gpio_data_in_xor(1),
-      Q(1) => gpio_Data_In(0),
-      Q(0) => gpio_Data_In(1),
-      gpio_io_i(1 downto 0) => gpio_io_i(1 downto 0),
-      s_axi_aclk => s_axi_aclk,
-      scndry_vect_out(1) => gpio_io_i_d2(0),
-      scndry_vect_out(0) => gpio_io_i_d2(1)
+      dest_clk => s_axi_aclk,
+      dest_out(1) => gpio_io_i_d2(0),
+      dest_out(0) => gpio_io_i_d2(1),
+      src_clk => '0',
+      src_in(1 downto 0) => gpio_io_i(1 downto 0)
     );
 \Not_Dual.gpio_Data_In_reg[0]\: unisim.vcomponents.FDRE
      port map (
@@ -1499,8 +1502,6 @@ entity scalp_zynqps_axi_gpio_switches_0_slave_attachment is
     s_axi_araddr : in STD_LOGIC_VECTOR ( 6 downto 0 );
     s_axi_awaddr : in STD_LOGIC_VECTOR ( 6 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of scalp_zynqps_axi_gpio_switches_0_slave_attachment : entity is "slave_attachment";
 end scalp_zynqps_axi_gpio_switches_0_slave_attachment;
 
 architecture STRUCTURE of scalp_zynqps_axi_gpio_switches_0_slave_attachment is
@@ -2236,8 +2237,6 @@ entity scalp_zynqps_axi_gpio_switches_0_axi_lite_ipif is
     s_axi_araddr : in STD_LOGIC_VECTOR ( 6 downto 0 );
     s_axi_awaddr : in STD_LOGIC_VECTOR ( 6 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of scalp_zynqps_axi_gpio_switches_0_axi_lite_ipif : entity is "axi_lite_ipif";
 end scalp_zynqps_axi_gpio_switches_0_axi_lite_ipif;
 
 architecture STRUCTURE of scalp_zynqps_axi_gpio_switches_0_axi_lite_ipif is
@@ -2357,8 +2356,6 @@ entity scalp_zynqps_axi_gpio_switches_0_axi_gpio is
   attribute C_TRI_DEFAULT of scalp_zynqps_axi_gpio_switches_0_axi_gpio : entity is "32'b11111111111111111111111111111111";
   attribute C_TRI_DEFAULT_2 : string;
   attribute C_TRI_DEFAULT_2 of scalp_zynqps_axi_gpio_switches_0_axi_gpio : entity is "32'b11111111111111111111111111111111";
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of scalp_zynqps_axi_gpio_switches_0_axi_gpio : entity is "axi_gpio";
   attribute downgradeipidentifiedwarnings : string;
   attribute downgradeipidentifiedwarnings of scalp_zynqps_axi_gpio_switches_0_axi_gpio : entity is "yes";
   attribute ip_group : string;
@@ -2753,7 +2750,7 @@ entity scalp_zynqps_axi_gpio_switches_0 is
   attribute downgradeipidentifiedwarnings : string;
   attribute downgradeipidentifiedwarnings of scalp_zynqps_axi_gpio_switches_0 : entity is "yes";
   attribute x_core_info : string;
-  attribute x_core_info of scalp_zynqps_axi_gpio_switches_0 : entity is "axi_gpio,Vivado 2023.2";
+  attribute x_core_info of scalp_zynqps_axi_gpio_switches_0 : entity is "axi_gpio,Vivado 2025.2";
 end scalp_zynqps_axi_gpio_switches_0;
 
 architecture STRUCTURE of scalp_zynqps_axi_gpio_switches_0 is
@@ -2799,11 +2796,15 @@ architecture STRUCTURE of scalp_zynqps_axi_gpio_switches_0 is
   attribute ip_group of U0 : label is "LOGICORE";
   attribute x_interface_info : string;
   attribute x_interface_info of ip2intc_irpt : signal is "xilinx.com:signal:interrupt:1.0 IP2INTC_IRQ INTERRUPT";
+  attribute x_interface_mode : string;
+  attribute x_interface_mode of ip2intc_irpt : signal is "master IP2INTC_IRQ";
   attribute x_interface_parameter : string;
-  attribute x_interface_parameter of ip2intc_irpt : signal is "XIL_INTERFACENAME IP2INTC_IRQ, SENSITIVITY LEVEL_HIGH, PORTWIDTH 1";
+  attribute x_interface_parameter of ip2intc_irpt : signal is "XIL_INTERFACENAME IP2INTC_IRQ, SENSITIVITY LEVEL_HIGH, PortWidth 1";
   attribute x_interface_info of s_axi_aclk : signal is "xilinx.com:signal:clock:1.0 S_AXI_ACLK CLK";
+  attribute x_interface_mode of s_axi_aclk : signal is "slave S_AXI_ACLK";
   attribute x_interface_parameter of s_axi_aclk : signal is "XIL_INTERFACENAME S_AXI_ACLK, ASSOCIATED_BUSIF S_AXI, ASSOCIATED_RESET s_axi_aresetn, FREQ_HZ 125000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN /sys_clock_clk_out1, INSERT_VIP 0";
   attribute x_interface_info of s_axi_aresetn : signal is "xilinx.com:signal:reset:1.0 S_AXI_ARESETN RST";
+  attribute x_interface_mode of s_axi_aresetn : signal is "slave S_AXI_ARESETN";
   attribute x_interface_parameter of s_axi_aresetn : signal is "XIL_INTERFACENAME S_AXI_ARESETN, POLARITY ACTIVE_LOW, INSERT_VIP 0";
   attribute x_interface_info of s_axi_arready : signal is "xilinx.com:interface:aximm:1.0 S_AXI ARREADY";
   attribute x_interface_info of s_axi_arvalid : signal is "xilinx.com:interface:aximm:1.0 S_AXI ARVALID";
@@ -2816,10 +2817,12 @@ architecture STRUCTURE of scalp_zynqps_axi_gpio_switches_0 is
   attribute x_interface_info of s_axi_wready : signal is "xilinx.com:interface:aximm:1.0 S_AXI WREADY";
   attribute x_interface_info of s_axi_wvalid : signal is "xilinx.com:interface:aximm:1.0 S_AXI WVALID";
   attribute x_interface_info of gpio_io_i : signal is "xilinx.com:interface:gpio:1.0 GPIO TRI_I";
+  attribute x_interface_mode of gpio_io_i : signal is "master GPIO";
   attribute x_interface_parameter of gpio_io_i : signal is "XIL_INTERFACENAME GPIO, BOARD.ASSOCIATED_PARAM GPIO_BOARD_INTERFACE";
   attribute x_interface_info of s_axi_araddr : signal is "xilinx.com:interface:aximm:1.0 S_AXI ARADDR";
   attribute x_interface_info of s_axi_awaddr : signal is "xilinx.com:interface:aximm:1.0 S_AXI AWADDR";
-  attribute x_interface_parameter of s_axi_awaddr : signal is "XIL_INTERFACENAME S_AXI, DATA_WIDTH 32, PROTOCOL AXI4LITE, FREQ_HZ 125000000, ID_WIDTH 0, ADDR_WIDTH 9, AWUSER_WIDTH 0, ARUSER_WIDTH 0, WUSER_WIDTH 0, RUSER_WIDTH 0, BUSER_WIDTH 0, READ_WRITE_MODE READ_WRITE, HAS_BURST 0, HAS_LOCK 0, HAS_PROT 0, HAS_CACHE 0, HAS_QOS 0, HAS_REGION 0, HAS_WSTRB 1, HAS_BRESP 1, HAS_RRESP 1, SUPPORTS_NARROW_BURST 0, NUM_READ_OUTSTANDING 2, NUM_WRITE_OUTSTANDING 2, MAX_BURST_LENGTH 1, PHASE 0.0, CLK_DOMAIN /sys_clock_clk_out1, NUM_READ_THREADS 1, NUM_WRITE_THREADS 1, RUSER_BITS_PER_BYTE 0, WUSER_BITS_PER_BYTE 0, INSERT_VIP 0";
+  attribute x_interface_mode of s_axi_awaddr : signal is "slave S_AXI";
+  attribute x_interface_parameter of s_axi_awaddr : signal is "XIL_INTERFACENAME S_AXI, DATA_WIDTH 32, PROTOCOL AXI4LITE, FREQ_HZ 125000000, ID_WIDTH 0, ADDR_WIDTH 9, AWUSER_WIDTH 0, ARUSER_WIDTH 0, WUSER_WIDTH 0, RUSER_WIDTH 0, BUSER_WIDTH 0, READ_WRITE_MODE READ_WRITE, HAS_BURST 0, HAS_LOCK 0, HAS_PROT 0, HAS_CACHE 0, HAS_QOS 0, HAS_REGION 0, HAS_WSTRB 1, HAS_BRESP 1, HAS_RRESP 1, SUPPORTS_NARROW_BURST 0, NUM_READ_OUTSTANDING 1, NUM_WRITE_OUTSTANDING 1, MAX_BURST_LENGTH 1, PHASE 0.0, CLK_DOMAIN /sys_clock_clk_out1, NUM_READ_THREADS 1, NUM_WRITE_THREADS 1, RUSER_BITS_PER_BYTE 0, WUSER_BITS_PER_BYTE 0, INSERT_VIP 0";
   attribute x_interface_info of s_axi_bresp : signal is "xilinx.com:interface:aximm:1.0 S_AXI BRESP";
   attribute x_interface_info of s_axi_rdata : signal is "xilinx.com:interface:aximm:1.0 S_AXI RDATA";
   attribute x_interface_info of s_axi_rresp : signal is "xilinx.com:interface:aximm:1.0 S_AXI RRESP";

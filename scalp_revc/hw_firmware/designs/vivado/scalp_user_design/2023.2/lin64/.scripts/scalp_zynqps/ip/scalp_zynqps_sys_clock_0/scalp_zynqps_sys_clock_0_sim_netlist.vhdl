@@ -2,10 +2,10 @@
 -- Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
--- Date        : Wed Mar  4 14:13:17 2026
+-- Date        : Mon Apr  6 16:54:41 2026
 -- Host        : theodros-ThinkPad-P16s-Gen-2 running 64-bit Ubuntu 24.04.2 LTS
--- Command     : write_vhdl -force -mode funcsim
---               /home/theodros/Documents/Master/LPSC/scalp_board_files/scalp_revc/hw_firmware/designs/vivado/scalp_user_design/2023.2/lin64/.scripts/scalp_zynqps/ip/scalp_zynqps_sys_clock_0/scalp_zynqps_sys_clock_0_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top scalp_zynqps_sys_clock_0 -prefix
+--               scalp_zynqps_sys_clock_0_ scalp_zynqps_sys_clock_0_sim_netlist.vhdl
 -- Design      : scalp_zynqps_sys_clock_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -15,16 +15,16 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity scalp_zynqps_sys_clock_0_clk_wiz is
+entity scalp_zynqps_sys_clock_0_scalp_zynqps_sys_clock_0_clk_wiz is
   port (
     clk_125 : out STD_LOGIC;
     resetn : in STD_LOGIC;
     locked : out STD_LOGIC;
     clk_in1 : in STD_LOGIC
   );
-end scalp_zynqps_sys_clock_0_clk_wiz;
+end scalp_zynqps_sys_clock_0_scalp_zynqps_sys_clock_0_clk_wiz;
 
-architecture STRUCTURE of scalp_zynqps_sys_clock_0_clk_wiz is
+architecture STRUCTURE of scalp_zynqps_sys_clock_0_scalp_zynqps_sys_clock_0_clk_wiz is
   signal clk_125_scalp_zynqps_sys_clock_0 : STD_LOGIC;
   signal clk_in1_scalp_zynqps_sys_clock_0 : STD_LOGIC;
   signal clkfbout_buf_scalp_zynqps_sys_clock_0 : STD_LOGIC;
@@ -179,7 +179,7 @@ end scalp_zynqps_sys_clock_0;
 
 architecture STRUCTURE of scalp_zynqps_sys_clock_0 is
 begin
-inst: entity work.scalp_zynqps_sys_clock_0_clk_wiz
+inst: entity work.scalp_zynqps_sys_clock_0_scalp_zynqps_sys_clock_0_clk_wiz
      port map (
       clk_125 => clk_125,
       clk_in1 => clk_in1,

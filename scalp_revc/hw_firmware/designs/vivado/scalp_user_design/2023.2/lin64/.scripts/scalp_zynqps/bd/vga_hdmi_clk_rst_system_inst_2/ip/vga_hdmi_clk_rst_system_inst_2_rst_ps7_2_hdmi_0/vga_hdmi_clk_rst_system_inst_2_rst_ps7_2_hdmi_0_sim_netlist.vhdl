@@ -2,241 +2,16 @@
 -- Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
--- Date        : Wed Mar  4 14:12:40 2026
+-- Date        : Mon Apr  6 16:54:47 2026
 -- Host        : theodros-ThinkPad-P16s-Gen-2 running 64-bit Ubuntu 24.04.2 LTS
--- Command     : write_vhdl -force -mode funcsim
---               /home/theodros/Documents/Master/LPSC/scalp_board_files/scalp_revc/hw_firmware/designs/vivado/scalp_user_design/2023.2/lin64/.scripts/scalp_zynqps/bd/vga_hdmi_clk_rst_system_inst_2/ip/vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0/vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0 -prefix
+--               vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_
+--               vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_sim_netlist.vhdl
 -- Design      : vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
 -- Device      : xc7z015clg485-2
 -- --------------------------------------------------------------------------------
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-library UNISIM;
-use UNISIM.VCOMPONENTS.ALL;
-entity vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_cdc_sync is
-  port (
-    lpf_asr_reg : out STD_LOGIC;
-    scndry_out : out STD_LOGIC;
-    lpf_asr : in STD_LOGIC;
-    p_1_in : in STD_LOGIC;
-    p_2_in : in STD_LOGIC;
-    lpf_asr_reg_0 : in STD_LOGIC;
-    aux_reset_in : in STD_LOGIC;
-    slowest_sync_clk : in STD_LOGIC
-  );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_cdc_sync : entity is "cdc_sync";
-end vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_cdc_sync;
-
-architecture STRUCTURE of vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_cdc_sync is
-  signal \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.s_level_out_d2\ : STD_LOGIC;
-  signal \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.s_level_out_d3\ : STD_LOGIC;
-  signal Q : STD_LOGIC;
-  signal asr_d1 : STD_LOGIC;
-  signal \^scndry_out\ : STD_LOGIC;
-  attribute ASYNC_REG : boolean;
-  attribute ASYNC_REG of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_IN_cdc_to\ : label is std.standard.true;
-  attribute XILINX_LEGACY_PRIM : string;
-  attribute XILINX_LEGACY_PRIM of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_IN_cdc_to\ : label is "FDR";
-  attribute XILINX_TRANSFORM_PINMAP : string;
-  attribute XILINX_TRANSFORM_PINMAP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_IN_cdc_to\ : label is "VCC:CE";
-  attribute box_type : string;
-  attribute box_type of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_IN_cdc_to\ : label is "PRIMITIVE";
-  attribute ASYNC_REG of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d2\ : label is std.standard.true;
-  attribute XILINX_LEGACY_PRIM of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d2\ : label is "FDR";
-  attribute XILINX_TRANSFORM_PINMAP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d2\ : label is "VCC:CE";
-  attribute box_type of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d2\ : label is "PRIMITIVE";
-  attribute ASYNC_REG of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d3\ : label is std.standard.true;
-  attribute XILINX_LEGACY_PRIM of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d3\ : label is "FDR";
-  attribute XILINX_TRANSFORM_PINMAP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d3\ : label is "VCC:CE";
-  attribute box_type of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d3\ : label is "PRIMITIVE";
-  attribute ASYNC_REG of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4\ : label is std.standard.true;
-  attribute XILINX_LEGACY_PRIM of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4\ : label is "FDR";
-  attribute XILINX_TRANSFORM_PINMAP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4\ : label is "VCC:CE";
-  attribute box_type of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4\ : label is "PRIMITIVE";
-begin
-  scndry_out <= \^scndry_out\;
-\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_IN_cdc_to\: unisim.vcomponents.FDRE
-    generic map(
-      INIT => '0'
-    )
-        port map (
-      C => slowest_sync_clk,
-      CE => '1',
-      D => asr_d1,
-      Q => Q,
-      R => '0'
-    );
-\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_IN_cdc_to_i_1__0\: unisim.vcomponents.LUT1
-    generic map(
-      INIT => X"1"
-    )
-        port map (
-      I0 => aux_reset_in,
-      O => asr_d1
-    );
-\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d2\: unisim.vcomponents.FDRE
-    generic map(
-      INIT => '0'
-    )
-        port map (
-      C => slowest_sync_clk,
-      CE => '1',
-      D => Q,
-      Q => \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.s_level_out_d2\,
-      R => '0'
-    );
-\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d3\: unisim.vcomponents.FDRE
-    generic map(
-      INIT => '0'
-    )
-        port map (
-      C => slowest_sync_clk,
-      CE => '1',
-      D => \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.s_level_out_d2\,
-      Q => \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.s_level_out_d3\,
-      R => '0'
-    );
-\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4\: unisim.vcomponents.FDRE
-    generic map(
-      INIT => '0'
-    )
-        port map (
-      C => slowest_sync_clk,
-      CE => '1',
-      D => \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.s_level_out_d3\,
-      Q => \^scndry_out\,
-      R => '0'
-    );
-lpf_asr_i_1: unisim.vcomponents.LUT5
-    generic map(
-      INIT => X"EAAAAAA8"
-    )
-        port map (
-      I0 => lpf_asr,
-      I1 => p_1_in,
-      I2 => p_2_in,
-      I3 => \^scndry_out\,
-      I4 => lpf_asr_reg_0,
-      O => lpf_asr_reg
-    );
-end STRUCTURE;
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-library UNISIM;
-use UNISIM.VCOMPONENTS.ALL;
-entity vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_cdc_sync_0 is
-  port (
-    lpf_exr_reg : out STD_LOGIC;
-    scndry_out : out STD_LOGIC;
-    lpf_exr : in STD_LOGIC;
-    p_1_in4_in : in STD_LOGIC;
-    p_2_in3_in : in STD_LOGIC;
-    lpf_exr_reg_0 : in STD_LOGIC;
-    mb_debug_sys_rst : in STD_LOGIC;
-    ext_reset_in : in STD_LOGIC;
-    slowest_sync_clk : in STD_LOGIC
-  );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_cdc_sync_0 : entity is "cdc_sync";
-end vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_cdc_sync_0;
-
-architecture STRUCTURE of vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_cdc_sync_0 is
-  signal \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.s_level_out_d2\ : STD_LOGIC;
-  signal \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.s_level_out_d3\ : STD_LOGIC;
-  signal Q : STD_LOGIC;
-  signal exr_d1 : STD_LOGIC;
-  signal \^scndry_out\ : STD_LOGIC;
-  attribute ASYNC_REG : boolean;
-  attribute ASYNC_REG of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_IN_cdc_to\ : label is std.standard.true;
-  attribute XILINX_LEGACY_PRIM : string;
-  attribute XILINX_LEGACY_PRIM of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_IN_cdc_to\ : label is "FDR";
-  attribute XILINX_TRANSFORM_PINMAP : string;
-  attribute XILINX_TRANSFORM_PINMAP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_IN_cdc_to\ : label is "VCC:CE";
-  attribute box_type : string;
-  attribute box_type of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_IN_cdc_to\ : label is "PRIMITIVE";
-  attribute ASYNC_REG of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d2\ : label is std.standard.true;
-  attribute XILINX_LEGACY_PRIM of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d2\ : label is "FDR";
-  attribute XILINX_TRANSFORM_PINMAP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d2\ : label is "VCC:CE";
-  attribute box_type of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d2\ : label is "PRIMITIVE";
-  attribute ASYNC_REG of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d3\ : label is std.standard.true;
-  attribute XILINX_LEGACY_PRIM of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d3\ : label is "FDR";
-  attribute XILINX_TRANSFORM_PINMAP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d3\ : label is "VCC:CE";
-  attribute box_type of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d3\ : label is "PRIMITIVE";
-  attribute ASYNC_REG of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4\ : label is std.standard.true;
-  attribute XILINX_LEGACY_PRIM of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4\ : label is "FDR";
-  attribute XILINX_TRANSFORM_PINMAP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4\ : label is "VCC:CE";
-  attribute box_type of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4\ : label is "PRIMITIVE";
-begin
-  scndry_out <= \^scndry_out\;
-\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_IN_cdc_to\: unisim.vcomponents.FDRE
-    generic map(
-      INIT => '0'
-    )
-        port map (
-      C => slowest_sync_clk,
-      CE => '1',
-      D => exr_d1,
-      Q => Q,
-      R => '0'
-    );
-\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_IN_cdc_to_i_1\: unisim.vcomponents.LUT2
-    generic map(
-      INIT => X"B"
-    )
-        port map (
-      I0 => mb_debug_sys_rst,
-      I1 => ext_reset_in,
-      O => exr_d1
-    );
-\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d2\: unisim.vcomponents.FDRE
-    generic map(
-      INIT => '0'
-    )
-        port map (
-      C => slowest_sync_clk,
-      CE => '1',
-      D => Q,
-      Q => \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.s_level_out_d2\,
-      R => '0'
-    );
-\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d3\: unisim.vcomponents.FDRE
-    generic map(
-      INIT => '0'
-    )
-        port map (
-      C => slowest_sync_clk,
-      CE => '1',
-      D => \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.s_level_out_d2\,
-      Q => \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.s_level_out_d3\,
-      R => '0'
-    );
-\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4\: unisim.vcomponents.FDRE
-    generic map(
-      INIT => '0'
-    )
-        port map (
-      C => slowest_sync_clk,
-      CE => '1',
-      D => \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.s_level_out_d3\,
-      Q => \^scndry_out\,
-      R => '0'
-    );
-lpf_exr_i_1: unisim.vcomponents.LUT5
-    generic map(
-      INIT => X"EAAAAAA8"
-    )
-        port map (
-      I0 => lpf_exr,
-      I1 => p_1_in4_in,
-      I2 => p_2_in3_in,
-      I3 => \^scndry_out\,
-      I4 => lpf_exr_reg_0,
-      O => lpf_exr_reg
-    );
-end STRUCTURE;
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
@@ -248,8 +23,6 @@ entity vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_upcnt_n is
     seq_cnt_en : in STD_LOGIC;
     slowest_sync_clk : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_upcnt_n : entity is "upcnt_n";
 end vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_upcnt_n;
 
 architecture STRUCTURE of vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_upcnt_n is
@@ -405,6 +178,178 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
+entity vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_xpm_cdc_single is
+  port (
+    src_clk : in STD_LOGIC;
+    src_in : in STD_LOGIC;
+    dest_clk : in STD_LOGIC;
+    dest_out : out STD_LOGIC
+  );
+  attribute DEST_SYNC_FF : integer;
+  attribute DEST_SYNC_FF of vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_xpm_cdc_single : entity is 4;
+  attribute INIT_SYNC_FF : integer;
+  attribute INIT_SYNC_FF of vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_xpm_cdc_single : entity is 0;
+  attribute SIM_ASSERT_CHK : integer;
+  attribute SIM_ASSERT_CHK of vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_xpm_cdc_single : entity is 0;
+  attribute SRC_INPUT_REG : integer;
+  attribute SRC_INPUT_REG of vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_xpm_cdc_single : entity is 0;
+  attribute VERSION : integer;
+  attribute VERSION of vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_xpm_cdc_single : entity is 0;
+  attribute XPM_MODULE : string;
+  attribute XPM_MODULE of vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_xpm_cdc_single : entity is "TRUE";
+  attribute keep_hierarchy : string;
+  attribute keep_hierarchy of vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_xpm_cdc_single : entity is "soft";
+  attribute xpm_cdc : string;
+  attribute xpm_cdc of vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_xpm_cdc_single : entity is "SINGLE";
+end vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_xpm_cdc_single;
+
+architecture STRUCTURE of vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_xpm_cdc_single is
+  signal syncstages_ff : STD_LOGIC_VECTOR ( 3 downto 0 );
+  attribute RTL_KEEP : string;
+  attribute RTL_KEEP of syncstages_ff : signal is "true";
+  attribute async_reg : string;
+  attribute async_reg of syncstages_ff : signal is "true";
+  attribute xpm_cdc of syncstages_ff : signal is "SINGLE";
+  attribute ASYNC_REG_boolean : boolean;
+  attribute ASYNC_REG_boolean of \syncstages_ff_reg[0]\ : label is std.standard.true;
+  attribute KEEP : string;
+  attribute KEEP of \syncstages_ff_reg[0]\ : label is "true";
+  attribute XPM_CDC of \syncstages_ff_reg[0]\ : label is "SINGLE";
+  attribute ASYNC_REG_boolean of \syncstages_ff_reg[1]\ : label is std.standard.true;
+  attribute KEEP of \syncstages_ff_reg[1]\ : label is "true";
+  attribute XPM_CDC of \syncstages_ff_reg[1]\ : label is "SINGLE";
+  attribute ASYNC_REG_boolean of \syncstages_ff_reg[2]\ : label is std.standard.true;
+  attribute KEEP of \syncstages_ff_reg[2]\ : label is "true";
+  attribute XPM_CDC of \syncstages_ff_reg[2]\ : label is "SINGLE";
+  attribute ASYNC_REG_boolean of \syncstages_ff_reg[3]\ : label is std.standard.true;
+  attribute KEEP of \syncstages_ff_reg[3]\ : label is "true";
+  attribute XPM_CDC of \syncstages_ff_reg[3]\ : label is "SINGLE";
+begin
+  dest_out <= syncstages_ff(3);
+\syncstages_ff_reg[0]\: unisim.vcomponents.FDRE
+     port map (
+      C => dest_clk,
+      CE => '1',
+      D => src_in,
+      Q => syncstages_ff(0),
+      R => '0'
+    );
+\syncstages_ff_reg[1]\: unisim.vcomponents.FDRE
+     port map (
+      C => dest_clk,
+      CE => '1',
+      D => syncstages_ff(0),
+      Q => syncstages_ff(1),
+      R => '0'
+    );
+\syncstages_ff_reg[2]\: unisim.vcomponents.FDRE
+     port map (
+      C => dest_clk,
+      CE => '1',
+      D => syncstages_ff(1),
+      Q => syncstages_ff(2),
+      R => '0'
+    );
+\syncstages_ff_reg[3]\: unisim.vcomponents.FDRE
+     port map (
+      C => dest_clk,
+      CE => '1',
+      D => syncstages_ff(2),
+      Q => syncstages_ff(3),
+      R => '0'
+    );
+end STRUCTURE;
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+library UNISIM;
+use UNISIM.VCOMPONENTS.ALL;
+entity \vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_xpm_cdc_single__1\ is
+  port (
+    src_clk : in STD_LOGIC;
+    src_in : in STD_LOGIC;
+    dest_clk : in STD_LOGIC;
+    dest_out : out STD_LOGIC
+  );
+  attribute DEST_SYNC_FF : integer;
+  attribute DEST_SYNC_FF of \vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_xpm_cdc_single__1\ : entity is 4;
+  attribute INIT_SYNC_FF : integer;
+  attribute INIT_SYNC_FF of \vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_xpm_cdc_single__1\ : entity is 0;
+  attribute ORIG_REF_NAME : string;
+  attribute ORIG_REF_NAME of \vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_xpm_cdc_single__1\ : entity is "xpm_cdc_single";
+  attribute SIM_ASSERT_CHK : integer;
+  attribute SIM_ASSERT_CHK of \vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_xpm_cdc_single__1\ : entity is 0;
+  attribute SRC_INPUT_REG : integer;
+  attribute SRC_INPUT_REG of \vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_xpm_cdc_single__1\ : entity is 0;
+  attribute VERSION : integer;
+  attribute VERSION of \vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_xpm_cdc_single__1\ : entity is 0;
+  attribute XPM_MODULE : string;
+  attribute XPM_MODULE of \vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_xpm_cdc_single__1\ : entity is "TRUE";
+  attribute keep_hierarchy : string;
+  attribute keep_hierarchy of \vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_xpm_cdc_single__1\ : entity is "soft";
+  attribute xpm_cdc : string;
+  attribute xpm_cdc of \vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_xpm_cdc_single__1\ : entity is "SINGLE";
+end \vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_xpm_cdc_single__1\;
+
+architecture STRUCTURE of \vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_xpm_cdc_single__1\ is
+  signal syncstages_ff : STD_LOGIC_VECTOR ( 3 downto 0 );
+  attribute RTL_KEEP : string;
+  attribute RTL_KEEP of syncstages_ff : signal is "true";
+  attribute async_reg : string;
+  attribute async_reg of syncstages_ff : signal is "true";
+  attribute xpm_cdc of syncstages_ff : signal is "SINGLE";
+  attribute ASYNC_REG_boolean : boolean;
+  attribute ASYNC_REG_boolean of \syncstages_ff_reg[0]\ : label is std.standard.true;
+  attribute KEEP : string;
+  attribute KEEP of \syncstages_ff_reg[0]\ : label is "true";
+  attribute XPM_CDC of \syncstages_ff_reg[0]\ : label is "SINGLE";
+  attribute ASYNC_REG_boolean of \syncstages_ff_reg[1]\ : label is std.standard.true;
+  attribute KEEP of \syncstages_ff_reg[1]\ : label is "true";
+  attribute XPM_CDC of \syncstages_ff_reg[1]\ : label is "SINGLE";
+  attribute ASYNC_REG_boolean of \syncstages_ff_reg[2]\ : label is std.standard.true;
+  attribute KEEP of \syncstages_ff_reg[2]\ : label is "true";
+  attribute XPM_CDC of \syncstages_ff_reg[2]\ : label is "SINGLE";
+  attribute ASYNC_REG_boolean of \syncstages_ff_reg[3]\ : label is std.standard.true;
+  attribute KEEP of \syncstages_ff_reg[3]\ : label is "true";
+  attribute XPM_CDC of \syncstages_ff_reg[3]\ : label is "SINGLE";
+begin
+  dest_out <= syncstages_ff(3);
+\syncstages_ff_reg[0]\: unisim.vcomponents.FDRE
+     port map (
+      C => dest_clk,
+      CE => '1',
+      D => src_in,
+      Q => syncstages_ff(0),
+      R => '0'
+    );
+\syncstages_ff_reg[1]\: unisim.vcomponents.FDRE
+     port map (
+      C => dest_clk,
+      CE => '1',
+      D => syncstages_ff(0),
+      Q => syncstages_ff(1),
+      R => '0'
+    );
+\syncstages_ff_reg[2]\: unisim.vcomponents.FDRE
+     port map (
+      C => dest_clk,
+      CE => '1',
+      D => syncstages_ff(1),
+      Q => syncstages_ff(2),
+      R => '0'
+    );
+\syncstages_ff_reg[3]\: unisim.vcomponents.FDRE
+     port map (
+      C => dest_clk,
+      CE => '1',
+      D => syncstages_ff(2),
+      Q => syncstages_ff(3),
+      R => '0'
+    );
+end STRUCTURE;
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+library UNISIM;
+use UNISIM.VCOMPONENTS.ALL;
 entity vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_lpf is
   port (
     lpf_int : out STD_LOGIC;
@@ -414,56 +359,85 @@ entity vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_lpf is
     ext_reset_in : in STD_LOGIC;
     aux_reset_in : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_lpf : entity is "lpf";
 end vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_lpf;
 
 architecture STRUCTURE of vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_lpf is
-  signal \ACTIVE_LOW_AUX.ACT_LO_AUX_n_0\ : STD_LOGIC;
-  signal \ACTIVE_LOW_EXT.ACT_LO_EXT_n_0\ : STD_LOGIC;
   signal \AUX_LPF[3].asr_lpf_reg_n_0_[3]\ : STD_LOGIC;
   signal \EXT_LPF[3].exr_lpf_reg_n_0_[3]\ : STD_LOGIC;
   signal Q : STD_LOGIC;
+  signal asr_d1 : STD_LOGIC;
+  signal dest_out : STD_LOGIC;
+  signal exr_d1 : STD_LOGIC;
   signal lpf_asr : STD_LOGIC;
+  signal lpf_asr_i_1_n_0 : STD_LOGIC;
   signal lpf_exr : STD_LOGIC;
+  signal lpf_exr_i_1_n_0 : STD_LOGIC;
   signal \lpf_int0__0\ : STD_LOGIC;
   signal p_1_in : STD_LOGIC;
   signal p_1_in4_in : STD_LOGIC;
   signal p_2_in : STD_LOGIC;
   signal p_2_in3_in : STD_LOGIC;
   signal p_3_in1_in : STD_LOGIC;
-  signal p_3_in6_in : STD_LOGIC;
+  attribute DEST_SYNC_FF : integer;
+  attribute DEST_SYNC_FF of \ACTIVE_LOW_AUX.ACT_LO_AUX\ : label is 4;
+  attribute INIT_SYNC_FF : integer;
+  attribute INIT_SYNC_FF of \ACTIVE_LOW_AUX.ACT_LO_AUX\ : label is 0;
+  attribute SIM_ASSERT_CHK : integer;
+  attribute SIM_ASSERT_CHK of \ACTIVE_LOW_AUX.ACT_LO_AUX\ : label is 0;
+  attribute SRC_INPUT_REG : integer;
+  attribute SRC_INPUT_REG of \ACTIVE_LOW_AUX.ACT_LO_AUX\ : label is 0;
+  attribute VERSION : integer;
+  attribute VERSION of \ACTIVE_LOW_AUX.ACT_LO_AUX\ : label is 0;
+  attribute XPM_CDC : string;
+  attribute XPM_CDC of \ACTIVE_LOW_AUX.ACT_LO_AUX\ : label is "SINGLE";
+  attribute XPM_MODULE : string;
+  attribute XPM_MODULE of \ACTIVE_LOW_AUX.ACT_LO_AUX\ : label is "TRUE";
+  attribute DEST_SYNC_FF of \ACTIVE_LOW_EXT.ACT_LO_EXT\ : label is 4;
+  attribute INIT_SYNC_FF of \ACTIVE_LOW_EXT.ACT_LO_EXT\ : label is 0;
+  attribute SIM_ASSERT_CHK of \ACTIVE_LOW_EXT.ACT_LO_EXT\ : label is 0;
+  attribute SRC_INPUT_REG of \ACTIVE_LOW_EXT.ACT_LO_EXT\ : label is 0;
+  attribute VERSION of \ACTIVE_LOW_EXT.ACT_LO_EXT\ : label is 0;
+  attribute XPM_CDC of \ACTIVE_LOW_EXT.ACT_LO_EXT\ : label is "SINGLE";
+  attribute XPM_MODULE of \ACTIVE_LOW_EXT.ACT_LO_EXT\ : label is "TRUE";
+  attribute BOX_TYPE : string;
+  attribute BOX_TYPE of POR_SRL_I : label is "PRIMITIVE";
   attribute XILINX_LEGACY_PRIM : string;
   attribute XILINX_LEGACY_PRIM of POR_SRL_I : label is "SRL16";
   attribute XILINX_TRANSFORM_PINMAP : string;
   attribute XILINX_TRANSFORM_PINMAP of POR_SRL_I : label is "VCC:CE";
-  attribute box_type : string;
-  attribute box_type of POR_SRL_I : label is "PRIMITIVE";
   attribute srl_name : string;
   attribute srl_name of POR_SRL_I : label is "U0/\EXT_LPF/POR_SRL_I ";
 begin
-\ACTIVE_LOW_AUX.ACT_LO_AUX\: entity work.vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_cdc_sync
+\ACTIVE_LOW_AUX.ACT_LO_AUX\: entity work.vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_xpm_cdc_single
      port map (
-      aux_reset_in => aux_reset_in,
-      lpf_asr => lpf_asr,
-      lpf_asr_reg => \ACTIVE_LOW_AUX.ACT_LO_AUX_n_0\,
-      lpf_asr_reg_0 => \AUX_LPF[3].asr_lpf_reg_n_0_[3]\,
-      p_1_in => p_1_in,
-      p_2_in => p_2_in,
-      scndry_out => p_3_in1_in,
-      slowest_sync_clk => slowest_sync_clk
+      dest_clk => slowest_sync_clk,
+      dest_out => p_3_in1_in,
+      src_clk => '1',
+      src_in => asr_d1
     );
-\ACTIVE_LOW_EXT.ACT_LO_EXT\: entity work.vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_cdc_sync_0
+\ACTIVE_LOW_AUX.ACT_LO_AUX_i_1\: unisim.vcomponents.LUT1
+    generic map(
+      INIT => X"1"
+    )
+        port map (
+      I0 => aux_reset_in,
+      O => asr_d1
+    );
+\ACTIVE_LOW_EXT.ACT_LO_EXT\: entity work.\vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_xpm_cdc_single__1\
      port map (
-      ext_reset_in => ext_reset_in,
-      lpf_exr => lpf_exr,
-      lpf_exr_reg => \ACTIVE_LOW_EXT.ACT_LO_EXT_n_0\,
-      lpf_exr_reg_0 => \EXT_LPF[3].exr_lpf_reg_n_0_[3]\,
-      mb_debug_sys_rst => mb_debug_sys_rst,
-      p_1_in4_in => p_1_in4_in,
-      p_2_in3_in => p_2_in3_in,
-      scndry_out => p_3_in6_in,
-      slowest_sync_clk => slowest_sync_clk
+      dest_clk => slowest_sync_clk,
+      dest_out => dest_out,
+      src_clk => '1',
+      src_in => exr_d1
+    );
+\ACTIVE_LOW_EXT.ACT_LO_EXT_i_1\: unisim.vcomponents.LUT2
+    generic map(
+      INIT => X"B"
+    )
+        port map (
+      I0 => mb_debug_sys_rst,
+      I1 => ext_reset_in,
+      O => exr_d1
     );
 \AUX_LPF[1].asr_lpf_reg[1]\: unisim.vcomponents.FDRE
     generic map(
@@ -505,7 +479,7 @@ begin
         port map (
       C => slowest_sync_clk,
       CE => '1',
-      D => p_3_in6_in,
+      D => dest_out,
       Q => p_2_in3_in,
       R => '0'
     );
@@ -545,6 +519,18 @@ POR_SRL_I: unisim.vcomponents.SRL16E
       D => '0',
       Q => Q
     );
+lpf_asr_i_1: unisim.vcomponents.LUT5
+    generic map(
+      INIT => X"EAAAAAA8"
+    )
+        port map (
+      I0 => lpf_asr,
+      I1 => p_1_in,
+      I2 => p_2_in,
+      I3 => p_3_in1_in,
+      I4 => \AUX_LPF[3].asr_lpf_reg_n_0_[3]\,
+      O => lpf_asr_i_1_n_0
+    );
 lpf_asr_reg: unisim.vcomponents.FDRE
     generic map(
       INIT => '0'
@@ -552,9 +538,21 @@ lpf_asr_reg: unisim.vcomponents.FDRE
         port map (
       C => slowest_sync_clk,
       CE => '1',
-      D => \ACTIVE_LOW_AUX.ACT_LO_AUX_n_0\,
+      D => lpf_asr_i_1_n_0,
       Q => lpf_asr,
       R => '0'
+    );
+lpf_exr_i_1: unisim.vcomponents.LUT5
+    generic map(
+      INIT => X"EAAAAAA8"
+    )
+        port map (
+      I0 => lpf_exr,
+      I1 => p_1_in4_in,
+      I2 => p_2_in3_in,
+      I3 => dest_out,
+      I4 => \EXT_LPF[3].exr_lpf_reg_n_0_[3]\,
+      O => lpf_exr_i_1_n_0
     );
 lpf_exr_reg: unisim.vcomponents.FDRE
     generic map(
@@ -563,7 +561,7 @@ lpf_exr_reg: unisim.vcomponents.FDRE
         port map (
       C => slowest_sync_clk,
       CE => '1',
-      D => \ACTIVE_LOW_EXT.ACT_LO_EXT_n_0\,
+      D => lpf_exr_i_1_n_0,
       Q => lpf_exr,
       R => '0'
     );
@@ -604,8 +602,6 @@ entity vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_sequence_psr is
     lpf_int : in STD_LOGIC;
     slowest_sync_clk : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_sequence_psr : entity is "sequence_psr";
 end vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_sequence_psr;
 
 architecture STRUCTURE of vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_sequence_psr is
@@ -944,8 +940,6 @@ entity vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_proc_sys_reset is
   attribute C_NUM_PERP_ARESETN of vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_proc_sys_reset : entity is 1;
   attribute C_NUM_PERP_RST : integer;
   attribute C_NUM_PERP_RST of vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_proc_sys_reset : entity is 1;
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_proc_sys_reset : entity is "proc_sys_reset";
 end vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_proc_sys_reset;
 
 architecture STRUCTURE of vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_proc_sys_reset is
@@ -955,12 +949,12 @@ architecture STRUCTURE of vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_proc_s
   signal SEQ_n_3 : STD_LOGIC;
   signal SEQ_n_4 : STD_LOGIC;
   signal lpf_int : STD_LOGIC;
-  attribute box_type : string;
-  attribute box_type of \ACTIVE_LOW_BSR_OUT_DFF[0].FDRE_BSR_N\ : label is "PRIMITIVE";
-  attribute box_type of \ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N\ : label is "PRIMITIVE";
-  attribute box_type of \BSR_OUT_DFF[0].FDRE_BSR\ : label is "PRIMITIVE";
-  attribute box_type of FDRE_inst : label is "PRIMITIVE";
-  attribute box_type of \PR_OUT_DFF[0].FDRE_PER\ : label is "PRIMITIVE";
+  attribute BOX_TYPE : string;
+  attribute BOX_TYPE of \ACTIVE_LOW_BSR_OUT_DFF[0].FDRE_BSR_N\ : label is "PRIMITIVE";
+  attribute BOX_TYPE of \ACTIVE_LOW_PR_OUT_DFF[0].FDRE_PER_N\ : label is "PRIMITIVE";
+  attribute BOX_TYPE of \BSR_OUT_DFF[0].FDRE_BSR\ : label is "PRIMITIVE";
+  attribute BOX_TYPE of FDRE_inst : label is "PRIMITIVE";
+  attribute BOX_TYPE of \PR_OUT_DFF[0].FDRE_PER\ : label is "PRIMITIVE";
 begin
 \ACTIVE_LOW_BSR_OUT_DFF[0].FDRE_BSR_N\: unisim.vcomponents.FDRE
     generic map(
@@ -1076,7 +1070,7 @@ entity vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0 is
   attribute downgradeipidentifiedwarnings : string;
   attribute downgradeipidentifiedwarnings of vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0 : entity is "yes";
   attribute x_core_info : string;
-  attribute x_core_info of vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0 : entity is "proc_sys_reset,Vivado 2023.2";
+  attribute x_core_info of vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0 : entity is "proc_sys_reset,Vivado 2025.2";
 end vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0;
 
 architecture STRUCTURE of vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0 is
@@ -1100,23 +1094,33 @@ architecture STRUCTURE of vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0 is
   attribute C_NUM_PERP_RST of U0 : label is 1;
   attribute x_interface_info : string;
   attribute x_interface_info of aux_reset_in : signal is "xilinx.com:signal:reset:1.0 aux_reset RST";
+  attribute x_interface_mode : string;
+  attribute x_interface_mode of aux_reset_in : signal is "slave aux_reset";
   attribute x_interface_parameter : string;
   attribute x_interface_parameter of aux_reset_in : signal is "XIL_INTERFACENAME aux_reset, POLARITY ACTIVE_LOW, INSERT_VIP 0";
   attribute x_interface_info of ext_reset_in : signal is "xilinx.com:signal:reset:1.0 ext_reset RST";
+  attribute x_interface_mode of ext_reset_in : signal is "slave ext_reset";
   attribute x_interface_parameter of ext_reset_in : signal is "XIL_INTERFACENAME ext_reset, BOARD.ASSOCIATED_PARAM RESET_BOARD_INTERFACE, POLARITY ACTIVE_LOW, INSERT_VIP 0";
   attribute x_interface_info of mb_debug_sys_rst : signal is "xilinx.com:signal:reset:1.0 dbg_reset RST";
+  attribute x_interface_mode of mb_debug_sys_rst : signal is "slave dbg_reset";
   attribute x_interface_parameter of mb_debug_sys_rst : signal is "XIL_INTERFACENAME dbg_reset, POLARITY ACTIVE_HIGH, INSERT_VIP 0";
   attribute x_interface_info of mb_reset : signal is "xilinx.com:signal:reset:1.0 mb_rst RST";
+  attribute x_interface_mode of mb_reset : signal is "master mb_rst";
   attribute x_interface_parameter of mb_reset : signal is "XIL_INTERFACENAME mb_rst, POLARITY ACTIVE_HIGH, TYPE PROCESSOR, INSERT_VIP 0";
   attribute x_interface_info of slowest_sync_clk : signal is "xilinx.com:signal:clock:1.0 clock CLK";
+  attribute x_interface_mode of slowest_sync_clk : signal is "slave clock";
   attribute x_interface_parameter of slowest_sync_clk : signal is "XIL_INTERFACENAME clock, ASSOCIATED_RESET mb_reset:bus_struct_reset:interconnect_aresetn:peripheral_aresetn:peripheral_reset, FREQ_HZ 240000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN /vga_hdmi_clk_rst_sys_0/vga_hdmi_clock_clk_out1, INSERT_VIP 0";
   attribute x_interface_info of bus_struct_reset : signal is "xilinx.com:signal:reset:1.0 bus_struct_reset RST";
+  attribute x_interface_mode of bus_struct_reset : signal is "master bus_struct_reset";
   attribute x_interface_parameter of bus_struct_reset : signal is "XIL_INTERFACENAME bus_struct_reset, POLARITY ACTIVE_HIGH, TYPE INTERCONNECT, INSERT_VIP 0";
   attribute x_interface_info of interconnect_aresetn : signal is "xilinx.com:signal:reset:1.0 interconnect_low_rst RST";
+  attribute x_interface_mode of interconnect_aresetn : signal is "master interconnect_low_rst";
   attribute x_interface_parameter of interconnect_aresetn : signal is "XIL_INTERFACENAME interconnect_low_rst, POLARITY ACTIVE_LOW, TYPE INTERCONNECT, INSERT_VIP 0";
   attribute x_interface_info of peripheral_aresetn : signal is "xilinx.com:signal:reset:1.0 peripheral_low_rst RST";
+  attribute x_interface_mode of peripheral_aresetn : signal is "master peripheral_low_rst";
   attribute x_interface_parameter of peripheral_aresetn : signal is "XIL_INTERFACENAME peripheral_low_rst, POLARITY ACTIVE_LOW, TYPE PERIPHERAL, INSERT_VIP 0";
   attribute x_interface_info of peripheral_reset : signal is "xilinx.com:signal:reset:1.0 peripheral_high_rst RST";
+  attribute x_interface_mode of peripheral_reset : signal is "master peripheral_high_rst";
   attribute x_interface_parameter of peripheral_reset : signal is "XIL_INTERFACENAME peripheral_high_rst, POLARITY ACTIVE_HIGH, TYPE PERIPHERAL, INSERT_VIP 0";
 begin
 U0: entity work.vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_proc_sys_reset

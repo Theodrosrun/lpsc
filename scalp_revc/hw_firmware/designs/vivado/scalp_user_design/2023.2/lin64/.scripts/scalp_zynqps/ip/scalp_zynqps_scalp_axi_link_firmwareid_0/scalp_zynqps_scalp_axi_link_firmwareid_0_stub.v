@@ -4,8 +4,8 @@
 // Tool Version: Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
 // Date        : Wed Mar  4 14:12:35 2026
 // Host        : theodros-ThinkPad-P16s-Gen-2 running 64-bit Ubuntu 24.04.2 LTS
-// Command     : write_verilog -force -mode synth_stub
-//               /home/theodros/Documents/Master/LPSC/scalp_board_files/scalp_revc/hw_firmware/designs/vivado/scalp_user_design/2023.2/lin64/.scripts/scalp_zynqps/ip/scalp_zynqps_scalp_axi_link_firmwareid_0/scalp_zynqps_scalp_axi_link_firmwareid_0_stub.v
+// Command     : write_verilog -force -mode synth_stub -rename_top scalp_zynqps_scalp_axi_link_firmwareid_0 -prefix
+//               scalp_zynqps_scalp_axi_link_firmwareid_0_ scalp_zynqps_scalp_axi_link_firmwareid_0_stub.v
 // Design      : scalp_zynqps_scalp_axi_link_firmwareid_0
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7z015clg485-2

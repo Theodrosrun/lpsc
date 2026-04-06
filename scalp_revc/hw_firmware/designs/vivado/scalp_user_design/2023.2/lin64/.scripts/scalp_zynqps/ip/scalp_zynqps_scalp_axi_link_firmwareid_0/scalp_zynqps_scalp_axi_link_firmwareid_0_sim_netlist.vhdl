@@ -2,10 +2,10 @@
 -- Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
--- Date        : Wed Mar  4 14:12:36 2026
+-- Date        : Wed Mar  4 14:12:35 2026
 -- Host        : theodros-ThinkPad-P16s-Gen-2 running 64-bit Ubuntu 24.04.2 LTS
--- Command     : write_vhdl -force -mode funcsim
---               /home/theodros/Documents/Master/LPSC/scalp_board_files/scalp_revc/hw_firmware/designs/vivado/scalp_user_design/2023.2/lin64/.scripts/scalp_zynqps/ip/scalp_zynqps_scalp_axi_link_firmwareid_0/scalp_zynqps_scalp_axi_link_firmwareid_0_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top scalp_zynqps_scalp_axi_link_firmwareid_0 -prefix
+--               scalp_zynqps_scalp_axi_link_firmwareid_0_ scalp_zynqps_scalp_axi_link_firmwareid_0_sim_netlist.vhdl
 -- Design      : scalp_zynqps_scalp_axi_link_firmwareid_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.

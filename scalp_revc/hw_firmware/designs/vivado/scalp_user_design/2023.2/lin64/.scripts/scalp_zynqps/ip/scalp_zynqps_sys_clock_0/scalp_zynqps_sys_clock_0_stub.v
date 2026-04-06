@@ -2,10 +2,10 @@
 // Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
-// Date        : Wed Mar  4 14:13:16 2026
+// Date        : Mon Apr  6 16:54:41 2026
 // Host        : theodros-ThinkPad-P16s-Gen-2 running 64-bit Ubuntu 24.04.2 LTS
-// Command     : write_verilog -force -mode synth_stub
-//               /home/theodros/Documents/Master/LPSC/scalp_board_files/scalp_revc/hw_firmware/designs/vivado/scalp_user_design/2023.2/lin64/.scripts/scalp_zynqps/ip/scalp_zynqps_sys_clock_0/scalp_zynqps_sys_clock_0_stub.v
+// Command     : write_verilog -force -mode synth_stub -rename_top scalp_zynqps_sys_clock_0 -prefix
+//               scalp_zynqps_sys_clock_0_ scalp_zynqps_sys_clock_0_stub.v
 // Design      : scalp_zynqps_sys_clock_0
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7z015clg485-2
@@ -14,7 +14,7 @@
 // This empty module with port declaration file causes synthesis tools to infer a black box for IP.
 // The synthesis directives are for Synopsys Synplify support to prevent IO buffer insertion.
 // Please paste the declaration into a Verilog source file or add the file as an additional source.
-(* CORE_GENERATION_INFO = "scalp_zynqps_sys_clock_0,clk_wiz_v6_0_13_0_0,{component_name=scalp_zynqps_sys_clock_0,use_phase_alignment=true,use_min_o_jitter=false,use_max_i_jitter=false,use_dyn_phase_shift=false,use_inclk_switchover=false,use_dyn_reconfig=false,enable_axi=0,feedback_source=FDBK_AUTO,PRIMITIVE=MMCM,num_out_clk=1,clkin1_period=8.000,clkin2_period=10.000,use_power_down=false,use_reset=true,use_locked=true,use_inclk_stopped=false,feedback_type=SINGLE,CLOCK_MGR_TYPE=NA,manual_override=false}" *) 
+(* CORE_GENERATION_INFO = "scalp_zynqps_sys_clock_0,clk_wiz_v6_0_17_0_0,{component_name=scalp_zynqps_sys_clock_0,use_phase_alignment=true,use_min_o_jitter=false,use_max_i_jitter=false,use_dyn_phase_shift=false,use_inclk_switchover=false,use_dyn_reconfig=false,enable_axi=0,feedback_source=FDBK_AUTO,PRIMITIVE=MMCM,num_out_clk=1,clkin1_period=8.000,clkin2_period=10.000,use_power_down=false,use_reset=true,use_locked=true,use_inclk_stopped=false,feedback_type=SINGLE,CLOCK_MGR_TYPE=NA,manual_override=false}" *) 
 module scalp_zynqps_sys_clock_0(clk_125, resetn, locked, clk_in1)
 /* synthesis syn_black_box black_box_pad_pin="resetn,locked,clk_in1" */
 /* synthesis syn_force_seq_prim="clk_125" */;

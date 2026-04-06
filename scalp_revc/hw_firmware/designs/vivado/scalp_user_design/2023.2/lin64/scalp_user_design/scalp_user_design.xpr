@@ -4,7 +4,7 @@
 <!-- Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.                   -->
 <!-- Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.   -->
 
-<Project Product="Vivado" Version="7" Minor="71" Path="/home/theodros/Documents/Master/LPSC/scalp_board_files/scalp_revc/hw_firmware/designs/vivado/scalp_user_design/2023.2/lin64/scalp_user_design/scalp_user_design.xpr">
+<Project Product="Vivado" Version="7" Minor="71" Path="/home/theodros/Documents/Master/LPSC/scalp_revc/hw_firmware/designs/vivado/scalp_user_design/2023.2/lin64/scalp_user_design/scalp_user_design.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="eb14302f71a343418151562f6ecb7fa9"/>
@@ -64,7 +64,7 @@
     <Option Name="EnableBDX" Val="FALSE"/>
     <Option Name="DSABoardId" Val="scalp_ext_pfm"/>
     <Option Name="DSAName" Val="scalp_user_design_platform"/>
-    <Option Name="WTXSimLaunchSim" Val="6"/>
+    <Option Name="WTXSimLaunchSim" Val="7"/>
     <Option Name="WTModelSimLaunchSim" Val="0"/>
     <Option Name="WTQuestaLaunchSim" Val="0"/>
     <Option Name="WTIesLaunchSim" Val="0"/>
@@ -117,9 +117,6 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
-        <CompFileExtendedInfo CompFileName="scalp_zynqps.bd" FileRelPathName="ip/scalp_zynqps_auto_pc_0/scalp_zynqps_auto_pc_0.xci">
-          <Proxy FileSetName="scalp_zynqps_auto_pc_0"/>
-        </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="scalp_zynqps.bd" FileRelPathName="ip/scalp_zynqps_axi_gpio_joystick_0/scalp_zynqps_axi_gpio_joystick_0.xci">
           <Proxy FileSetName="scalp_zynqps_axi_gpio_joystick_0"/>
         </CompFileExtendedInfo>
@@ -138,6 +135,12 @@
         <CompFileExtendedInfo CompFileName="scalp_zynqps.bd" FileRelPathName="ip/scalp_zynqps_processing_system7_0_0/scalp_zynqps_processing_system7_0_0.xci">
           <Proxy FileSetName="scalp_zynqps_processing_system7_0_0"/>
         </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="scalp_zynqps.bd" FileRelPathName="ip/scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_1/scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0.xci">
+          <Proxy FileSetName="scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="scalp_zynqps.bd" FileRelPathName="ip/scalp_zynqps_ps7_0_axi_periph_upgraded_ipi_imp_xbar_0_2/scalp_zynqps_ps7_0_axi_periph_upgraded_ipi_imp_xbar_0.xci">
+          <Proxy FileSetName="scalp_zynqps_ps7_0_axi_periph_upgraded_ipi_imp_xbar_0"/>
+        </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="scalp_zynqps.bd" FileRelPathName="ip/scalp_zynqps_rst_ps7_0_125M_0/scalp_zynqps_rst_ps7_0_125M_0.xci">
           <Proxy FileSetName="scalp_zynqps_rst_ps7_0_125M_0"/>
         </CompFileExtendedInfo>
@@ -152,9 +155,6 @@
         </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="scalp_zynqps.bd" FileRelPathName="ip/scalp_zynqps_system_ila_0_0/scalp_zynqps_system_ila_0_0.xci">
           <Proxy FileSetName="scalp_zynqps_system_ila_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="scalp_zynqps.bd" FileRelPathName="ip/scalp_zynqps_xbar_0/scalp_zynqps_xbar_0.xci">
-          <Proxy FileSetName="scalp_zynqps_xbar_0"/>
         </CompFileExtendedInfo>
       </File>
       <File Path="$PPRDIR/../../../../../../packages/hw/scalp_axi_pkg/src/hdl/scalp_axi_pkg.vhd">
@@ -303,7 +303,6 @@
         <Option Name="TransportPathDelay" Val="0"/>
         <Option Name="TransportIntDelay" Val="0"/>
         <Option Name="SelectedSimModel" Val="rtl"/>
-        <Option Name="SimMode" Val="post-synthesis"/>
         <Option Name="PamDesignTestbench" Val=""/>
         <Option Name="PamDutBypassFile" Val="xil_dut_bypass"/>
         <Option Name="PamSignalDriverFile" Val="xil_bypass_driver"/>
@@ -361,15 +360,15 @@
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
-    <FileSet Name="scalp_zynqps_axi_iic_ioext_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/scalp_zynqps_axi_iic_ioext_0" RelGenDir="$PGENDIR/scalp_zynqps_axi_iic_ioext_0">
+    <FileSet Name="scalp_zynqps_scalp_axi_link_firmwareid_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/scalp_zynqps_scalp_axi_link_firmwareid_0" RelGenDir="$PGENDIR/scalp_zynqps_scalp_axi_link_firmwareid_0">
       <Config>
-        <Option Name="TopModule" Val="scalp_zynqps_axi_iic_ioext_0"/>
+        <Option Name="TopModule" Val="scalp_zynqps_scalp_axi_link_firmwareid_0"/>
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
-    <FileSet Name="scalp_zynqps_axi_gpio_joystick_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/scalp_zynqps_axi_gpio_joystick_0" RelGenDir="$PGENDIR/scalp_zynqps_axi_gpio_joystick_0">
+    <FileSet Name="scalp_zynqps_scalp_axi_link_cplx_num_regs_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/scalp_zynqps_scalp_axi_link_cplx_num_regs_0" RelGenDir="$PGENDIR/scalp_zynqps_scalp_axi_link_cplx_num_regs_0">
       <Config>
-        <Option Name="TopModule" Val="scalp_zynqps_axi_gpio_joystick_0"/>
+        <Option Name="TopModule" Val="scalp_zynqps_scalp_axi_link_cplx_num_regs_0"/>
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
@@ -397,24 +396,6 @@
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
-    <FileSet Name="scalp_zynqps_scalp_axi_link_firmwareid_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/scalp_zynqps_scalp_axi_link_firmwareid_0" RelGenDir="$PGENDIR/scalp_zynqps_scalp_axi_link_firmwareid_0">
-      <Config>
-        <Option Name="TopModule" Val="scalp_zynqps_scalp_axi_link_firmwareid_0"/>
-        <Option Name="UseBlackboxStub" Val="1"/>
-      </Config>
-    </FileSet>
-    <FileSet Name="scalp_zynqps_xbar_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/scalp_zynqps_xbar_0" RelGenDir="$PGENDIR/scalp_zynqps_xbar_0">
-      <Config>
-        <Option Name="TopModule" Val="scalp_zynqps_xbar_0"/>
-        <Option Name="UseBlackboxStub" Val="1"/>
-      </Config>
-    </FileSet>
-    <FileSet Name="scalp_zynqps_auto_pc_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/scalp_zynqps_auto_pc_0" RelGenDir="$PGENDIR/scalp_zynqps_auto_pc_0">
-      <Config>
-        <Option Name="TopModule" Val="scalp_zynqps_auto_pc_0"/>
-        <Option Name="UseBlackboxStub" Val="1"/>
-      </Config>
-    </FileSet>
     <FileSet Name="scalp_zynqps_axi_gpio_switches_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/scalp_zynqps_axi_gpio_switches_0" RelGenDir="$PGENDIR/scalp_zynqps_axi_gpio_switches_0">
       <Config>
         <Option Name="TopModule" Val="scalp_zynqps_axi_gpio_switches_0"/>
@@ -439,12 +420,6 @@
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
-    <FileSet Name="scalp_zynqps_scalp_axi_link_cplx_num_regs_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/scalp_zynqps_scalp_axi_link_cplx_num_regs_0" RelGenDir="$PGENDIR/scalp_zynqps_scalp_axi_link_cplx_num_regs_0">
-      <Config>
-        <Option Name="TopModule" Val="scalp_zynqps_scalp_axi_link_cplx_num_regs_0"/>
-        <Option Name="UseBlackboxStub" Val="1"/>
-      </Config>
-    </FileSet>
     <FileSet Name="scalp_zynqps_rst_ps7_0_125M_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/scalp_zynqps_rst_ps7_0_125M_0" RelGenDir="$PGENDIR/scalp_zynqps_rst_ps7_0_125M_0">
       <Config>
         <Option Name="TopModule" Val="scalp_zynqps_rst_ps7_0_125M_0"/>
@@ -454,6 +429,30 @@
     <FileSet Name="scalp_zynqps_sys_clock_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/scalp_zynqps_sys_clock_0" RelGenDir="$PGENDIR/scalp_zynqps_sys_clock_0">
       <Config>
         <Option Name="TopModule" Val="scalp_zynqps_sys_clock_0"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="scalp_zynqps_axi_iic_ioext_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/scalp_zynqps_axi_iic_ioext_0" RelGenDir="$PGENDIR/scalp_zynqps_axi_iic_ioext_0">
+      <Config>
+        <Option Name="TopModule" Val="scalp_zynqps_axi_iic_ioext_0"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="scalp_zynqps_axi_gpio_joystick_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/scalp_zynqps_axi_gpio_joystick_0" RelGenDir="$PGENDIR/scalp_zynqps_axi_gpio_joystick_0">
+      <Config>
+        <Option Name="TopModule" Val="scalp_zynqps_axi_gpio_joystick_0"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="scalp_zynqps_ps7_0_axi_periph_upgraded_ipi_imp_xbar_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/scalp_zynqps_ps7_0_axi_periph_upgraded_ipi_imp_xbar_0" RelGenDir="$PGENDIR/scalp_zynqps_ps7_0_axi_periph_upgraded_ipi_imp_xbar_0">
+      <Config>
+        <Option Name="TopModule" Val="scalp_zynqps_ps7_0_axi_periph_upgraded_ipi_imp_xbar_0"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0" RelGenDir="$PGENDIR/scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0">
+      <Config>
+        <Option Name="TopModule" Val="scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0"/>
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
@@ -490,127 +489,7 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="scalp_zynqps_axi_iic_ioext_0_synth_1" Type="Ft3:Synth" SrcSet="scalp_zynqps_axi_iic_ioext_0" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_axi_iic_ioext_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/scalp_zynqps_axi_iic_ioext_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_iic_ioext_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_iic_ioext_0_synth_1" ParallelReportGen="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
-        <Step Id="synth_design"/>
-      </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
-      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-      <RQSFiles/>
-    </Run>
-    <Run Id="scalp_zynqps_axi_gpio_joystick_0_synth_1" Type="Ft3:Synth" SrcSet="scalp_zynqps_axi_gpio_joystick_0" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_axi_gpio_joystick_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/scalp_zynqps_axi_gpio_joystick_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_gpio_joystick_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_gpio_joystick_0_synth_1" ParallelReportGen="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
-        <Step Id="synth_design"/>
-      </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
-      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-      <RQSFiles/>
-    </Run>
-    <Run Id="vga_hdmi_clk_rst_system_inst_2_vga_hdmi_clock_0_synth_1" Type="Ft3:Synth" SrcSet="vga_hdmi_clk_rst_system_inst_2_vga_hdmi_clock_0" Part="xc7z015clg485-2" ConstrsSet="vga_hdmi_clk_rst_system_inst_2_vga_hdmi_clock_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/vga_hdmi_clk_rst_system_inst_2_vga_hdmi_clock_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/vga_hdmi_clk_rst_system_inst_2_vga_hdmi_clock_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/vga_hdmi_clk_rst_system_inst_2_vga_hdmi_clock_0_synth_1" ParallelReportGen="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
-        <Step Id="synth_design"/>
-      </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
-      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-      <RQSFiles/>
-    </Run>
-    <Run Id="vga_hdmi_clk_rst_system_inst_2_rst_ps7_1_vga_0_synth_1" Type="Ft3:Synth" SrcSet="vga_hdmi_clk_rst_system_inst_2_rst_ps7_1_vga_0" Part="xc7z015clg485-2" ConstrsSet="vga_hdmi_clk_rst_system_inst_2_rst_ps7_1_vga_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/vga_hdmi_clk_rst_system_inst_2_rst_ps7_1_vga_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/vga_hdmi_clk_rst_system_inst_2_rst_ps7_1_vga_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/vga_hdmi_clk_rst_system_inst_2_rst_ps7_1_vga_0_synth_1" ParallelReportGen="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
-        <Step Id="synth_design"/>
-      </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
-      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-      <RQSFiles/>
-    </Run>
-    <Run Id="vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_synth_1" Type="Ft3:Synth" SrcSet="vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0" Part="xc7z015clg485-2" ConstrsSet="vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_synth_1" ParallelReportGen="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
-        <Step Id="synth_design"/>
-      </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
-      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-      <RQSFiles/>
-    </Run>
-    <Run Id="scalp_zynqps_processing_system7_0_0_synth_1" Type="Ft3:Synth" SrcSet="scalp_zynqps_processing_system7_0_0" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_processing_system7_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/scalp_zynqps_processing_system7_0_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_processing_system7_0_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_processing_system7_0_0_synth_1" ParallelReportGen="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
-        <Step Id="synth_design"/>
-      </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
-      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-      <RQSFiles/>
-    </Run>
     <Run Id="scalp_zynqps_scalp_axi_link_firmwareid_0_synth_1" Type="Ft3:Synth" SrcSet="scalp_zynqps_scalp_axi_link_firmwareid_0" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_scalp_axi_link_firmwareid_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/scalp_zynqps_scalp_axi_link_firmwareid_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_scalp_axi_link_firmwareid_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_scalp_axi_link_firmwareid_0_synth_1" ParallelReportGen="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
-        <Step Id="synth_design"/>
-      </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
-      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-      <RQSFiles/>
-    </Run>
-    <Run Id="scalp_zynqps_xbar_0_synth_1" Type="Ft3:Synth" SrcSet="scalp_zynqps_xbar_0" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_xbar_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/scalp_zynqps_xbar_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_xbar_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_xbar_0_synth_1" ParallelReportGen="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
-        <Step Id="synth_design"/>
-      </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
-      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-      <RQSFiles/>
-    </Run>
-    <Run Id="scalp_zynqps_auto_pc_0_synth_1" Type="Ft3:Synth" SrcSet="scalp_zynqps_auto_pc_0" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_auto_pc_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/scalp_zynqps_auto_pc_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_auto_pc_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_auto_pc_0_synth_1" ParallelReportGen="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
-        <Step Id="synth_design"/>
-      </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
-      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-      <RQSFiles/>
-    </Run>
-    <Run Id="scalp_zynqps_axi_gpio_switches_0_synth_1" Type="Ft3:Synth" SrcSet="scalp_zynqps_axi_gpio_switches_0" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_axi_gpio_switches_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/scalp_zynqps_axi_gpio_switches_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_gpio_switches_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_gpio_switches_0_synth_1" ParallelReportGen="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
-        <Step Id="synth_design"/>
-      </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
-      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-      <RQSFiles/>
-    </Run>
-    <Run Id="scalp_zynqps_axi_intc_0_0_synth_1" Type="Ft3:Synth" SrcSet="scalp_zynqps_axi_intc_0_0" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_axi_intc_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/scalp_zynqps_axi_intc_0_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_intc_0_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_intc_0_0_synth_1" ParallelReportGen="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
-        <Step Id="synth_design"/>
-      </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
-      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-      <RQSFiles/>
-    </Run>
-    <Run Id="scalp_zynqps_axi_gpio_reset_btn_0_synth_1" Type="Ft3:Synth" SrcSet="scalp_zynqps_axi_gpio_reset_btn_0" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_axi_gpio_reset_btn_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/scalp_zynqps_axi_gpio_reset_btn_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_gpio_reset_btn_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_gpio_reset_btn_0_synth_1" ParallelReportGen="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
-        <Step Id="synth_design"/>
-      </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
-      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-      <RQSFiles/>
-    </Run>
-    <Run Id="scalp_zynqps_system_ila_0_0_synth_1" Type="Ft3:Synth" SrcSet="scalp_zynqps_system_ila_0_0" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_system_ila_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/scalp_zynqps_system_ila_0_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_system_ila_0_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_system_ila_0_0_synth_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
         <Step Id="synth_design"/>
@@ -630,23 +509,171 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="scalp_zynqps_rst_ps7_0_125M_0_synth_1" Type="Ft3:Synth" SrcSet="scalp_zynqps_rst_ps7_0_125M_0" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_rst_ps7_0_125M_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/scalp_zynqps_rst_ps7_0_125M_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_rst_ps7_0_125M_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_rst_ps7_0_125M_0_synth_1" ParallelReportGen="true">
+    <Run Id="vga_hdmi_clk_rst_system_inst_2_vga_hdmi_clock_0_synth_1" Type="Ft3:Synth" SrcSet="vga_hdmi_clk_rst_system_inst_2_vga_hdmi_clock_0" Part="xc7z015clg485-2" ConstrsSet="vga_hdmi_clk_rst_system_inst_2_vga_hdmi_clock_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/vga_hdmi_clk_rst_system_inst_2_vga_hdmi_clock_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/vga_hdmi_clk_rst_system_inst_2_vga_hdmi_clock_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/vga_hdmi_clk_rst_system_inst_2_vga_hdmi_clock_0_synth_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
         <Step Id="synth_design"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
-      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2025"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="vga_hdmi_clk_rst_system_inst_2_rst_ps7_1_vga_0_synth_1" Type="Ft3:Synth" SrcSet="vga_hdmi_clk_rst_system_inst_2_rst_ps7_1_vga_0" Part="xc7z015clg485-2" ConstrsSet="vga_hdmi_clk_rst_system_inst_2_rst_ps7_1_vga_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/vga_hdmi_clk_rst_system_inst_2_rst_ps7_1_vga_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/vga_hdmi_clk_rst_system_inst_2_rst_ps7_1_vga_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/vga_hdmi_clk_rst_system_inst_2_rst_ps7_1_vga_0_synth_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2025"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_synth_1" Type="Ft3:Synth" SrcSet="vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0" Part="xc7z015clg485-2" ConstrsSet="vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_synth_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2025"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="scalp_zynqps_processing_system7_0_0_synth_1" Type="Ft3:Synth" SrcSet="scalp_zynqps_processing_system7_0_0" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_processing_system7_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/scalp_zynqps_processing_system7_0_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_processing_system7_0_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_processing_system7_0_0_synth_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2025"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="scalp_zynqps_axi_gpio_switches_0_synth_1" Type="Ft3:Synth" SrcSet="scalp_zynqps_axi_gpio_switches_0" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_axi_gpio_switches_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/scalp_zynqps_axi_gpio_switches_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_gpio_switches_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_gpio_switches_0_synth_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2025"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="scalp_zynqps_axi_intc_0_0_synth_1" Type="Ft3:Synth" SrcSet="scalp_zynqps_axi_intc_0_0" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_axi_intc_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/scalp_zynqps_axi_intc_0_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_intc_0_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_intc_0_0_synth_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2025"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="scalp_zynqps_axi_gpio_reset_btn_0_synth_1" Type="Ft3:Synth" SrcSet="scalp_zynqps_axi_gpio_reset_btn_0" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_axi_gpio_reset_btn_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/scalp_zynqps_axi_gpio_reset_btn_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_gpio_reset_btn_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_gpio_reset_btn_0_synth_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2025"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="scalp_zynqps_system_ila_0_0_synth_1" Type="Ft3:Synth" SrcSet="scalp_zynqps_system_ila_0_0" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_system_ila_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/scalp_zynqps_system_ila_0_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_system_ila_0_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_system_ila_0_0_synth_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2025"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="scalp_zynqps_rst_ps7_0_125M_0_synth_1" Type="Ft3:Synth" SrcSet="scalp_zynqps_rst_ps7_0_125M_0" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_rst_ps7_0_125M_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/scalp_zynqps_rst_ps7_0_125M_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_rst_ps7_0_125M_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_rst_ps7_0_125M_0_synth_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2025"/>
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
     <Run Id="scalp_zynqps_sys_clock_0_synth_1" Type="Ft3:Synth" SrcSet="scalp_zynqps_sys_clock_0" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_sys_clock_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/scalp_zynqps_sys_clock_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_sys_clock_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_sys_clock_0_synth_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
         <Step Id="synth_design"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
-      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2025"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="scalp_zynqps_axi_iic_ioext_0_synth_1" Type="Ft3:Synth" SrcSet="scalp_zynqps_axi_iic_ioext_0" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_axi_iic_ioext_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/scalp_zynqps_axi_iic_ioext_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_iic_ioext_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_iic_ioext_0_synth_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2025"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="scalp_zynqps_axi_gpio_joystick_0_synth_1" Type="Ft3:Synth" SrcSet="scalp_zynqps_axi_gpio_joystick_0" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_axi_gpio_joystick_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/scalp_zynqps_axi_gpio_joystick_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_gpio_joystick_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_gpio_joystick_0_synth_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2025"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="scalp_zynqps_ps7_0_axi_periph_upgraded_ipi_imp_xbar_0_synth_1" Type="Ft3:Synth" SrcSet="scalp_zynqps_ps7_0_axi_periph_upgraded_ipi_imp_xbar_0" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_ps7_0_axi_periph_upgraded_ipi_imp_xbar_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/scalp_zynqps_ps7_0_axi_periph_upgraded_ipi_imp_xbar_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_ps7_0_axi_periph_upgraded_ipi_imp_xbar_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_ps7_0_axi_periph_upgraded_ipi_imp_xbar_0_synth_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2025"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_synth_1" Type="Ft3:Synth" SrcSet="scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_synth_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2025"/>
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
@@ -668,211 +695,7 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="scalp_zynqps_axi_iic_ioext_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_axi_iic_ioext_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="scalp_zynqps_axi_iic_ioext_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_iic_ioext_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_iic_ioext_0_impl_1" ParallelReportGen="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
-        <Step Id="init_design"/>
-        <Step Id="opt_design"/>
-        <Step Id="power_opt_design"/>
-        <Step Id="place_design"/>
-        <Step Id="post_place_power_opt_design"/>
-        <Step Id="phys_opt_design"/>
-        <Step Id="route_design"/>
-        <Step Id="post_route_phys_opt_design"/>
-        <Step Id="write_bitstream"/>
-      </Strategy>
-      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-      <RQSFiles/>
-    </Run>
-    <Run Id="scalp_zynqps_axi_gpio_joystick_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_axi_gpio_joystick_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="scalp_zynqps_axi_gpio_joystick_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_gpio_joystick_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_gpio_joystick_0_impl_1" ParallelReportGen="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
-        <Step Id="init_design"/>
-        <Step Id="opt_design"/>
-        <Step Id="power_opt_design"/>
-        <Step Id="place_design"/>
-        <Step Id="post_place_power_opt_design"/>
-        <Step Id="phys_opt_design"/>
-        <Step Id="route_design"/>
-        <Step Id="post_route_phys_opt_design"/>
-        <Step Id="write_bitstream"/>
-      </Strategy>
-      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-      <RQSFiles/>
-    </Run>
-    <Run Id="vga_hdmi_clk_rst_system_inst_2_vga_hdmi_clock_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z015clg485-2" ConstrsSet="vga_hdmi_clk_rst_system_inst_2_vga_hdmi_clock_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="vga_hdmi_clk_rst_system_inst_2_vga_hdmi_clock_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/vga_hdmi_clk_rst_system_inst_2_vga_hdmi_clock_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/vga_hdmi_clk_rst_system_inst_2_vga_hdmi_clock_0_impl_1" ParallelReportGen="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
-        <Step Id="init_design"/>
-        <Step Id="opt_design"/>
-        <Step Id="power_opt_design"/>
-        <Step Id="place_design"/>
-        <Step Id="post_place_power_opt_design"/>
-        <Step Id="phys_opt_design"/>
-        <Step Id="route_design"/>
-        <Step Id="post_route_phys_opt_design"/>
-        <Step Id="write_bitstream"/>
-      </Strategy>
-      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-      <RQSFiles/>
-    </Run>
-    <Run Id="vga_hdmi_clk_rst_system_inst_2_rst_ps7_1_vga_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z015clg485-2" ConstrsSet="vga_hdmi_clk_rst_system_inst_2_rst_ps7_1_vga_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="vga_hdmi_clk_rst_system_inst_2_rst_ps7_1_vga_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/vga_hdmi_clk_rst_system_inst_2_rst_ps7_1_vga_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/vga_hdmi_clk_rst_system_inst_2_rst_ps7_1_vga_0_impl_1" ParallelReportGen="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
-        <Step Id="init_design"/>
-        <Step Id="opt_design"/>
-        <Step Id="power_opt_design"/>
-        <Step Id="place_design"/>
-        <Step Id="post_place_power_opt_design"/>
-        <Step Id="phys_opt_design"/>
-        <Step Id="route_design"/>
-        <Step Id="post_route_phys_opt_design"/>
-        <Step Id="write_bitstream"/>
-      </Strategy>
-      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-      <RQSFiles/>
-    </Run>
-    <Run Id="vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z015clg485-2" ConstrsSet="vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_impl_1" ParallelReportGen="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
-        <Step Id="init_design"/>
-        <Step Id="opt_design"/>
-        <Step Id="power_opt_design"/>
-        <Step Id="place_design"/>
-        <Step Id="post_place_power_opt_design"/>
-        <Step Id="phys_opt_design"/>
-        <Step Id="route_design"/>
-        <Step Id="post_route_phys_opt_design"/>
-        <Step Id="write_bitstream"/>
-      </Strategy>
-      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-      <RQSFiles/>
-    </Run>
-    <Run Id="scalp_zynqps_processing_system7_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_processing_system7_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="scalp_zynqps_processing_system7_0_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_processing_system7_0_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_processing_system7_0_0_impl_1" ParallelReportGen="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
-        <Step Id="init_design"/>
-        <Step Id="opt_design"/>
-        <Step Id="power_opt_design"/>
-        <Step Id="place_design"/>
-        <Step Id="post_place_power_opt_design"/>
-        <Step Id="phys_opt_design"/>
-        <Step Id="route_design"/>
-        <Step Id="post_route_phys_opt_design"/>
-        <Step Id="write_bitstream"/>
-      </Strategy>
-      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-      <RQSFiles/>
-    </Run>
     <Run Id="scalp_zynqps_scalp_axi_link_firmwareid_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_scalp_axi_link_firmwareid_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="scalp_zynqps_scalp_axi_link_firmwareid_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_scalp_axi_link_firmwareid_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_scalp_axi_link_firmwareid_0_impl_1" ParallelReportGen="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
-        <Step Id="init_design"/>
-        <Step Id="opt_design"/>
-        <Step Id="power_opt_design"/>
-        <Step Id="place_design"/>
-        <Step Id="post_place_power_opt_design"/>
-        <Step Id="phys_opt_design"/>
-        <Step Id="route_design"/>
-        <Step Id="post_route_phys_opt_design"/>
-        <Step Id="write_bitstream"/>
-      </Strategy>
-      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-      <RQSFiles/>
-    </Run>
-    <Run Id="scalp_zynqps_xbar_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_xbar_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="scalp_zynqps_xbar_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_xbar_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_xbar_0_impl_1" ParallelReportGen="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
-        <Step Id="init_design"/>
-        <Step Id="opt_design"/>
-        <Step Id="power_opt_design"/>
-        <Step Id="place_design"/>
-        <Step Id="post_place_power_opt_design"/>
-        <Step Id="phys_opt_design"/>
-        <Step Id="route_design"/>
-        <Step Id="post_route_phys_opt_design"/>
-        <Step Id="write_bitstream"/>
-      </Strategy>
-      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-      <RQSFiles/>
-    </Run>
-    <Run Id="scalp_zynqps_auto_pc_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_auto_pc_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="scalp_zynqps_auto_pc_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_auto_pc_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_auto_pc_0_impl_1" ParallelReportGen="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
-        <Step Id="init_design"/>
-        <Step Id="opt_design"/>
-        <Step Id="power_opt_design"/>
-        <Step Id="place_design"/>
-        <Step Id="post_place_power_opt_design"/>
-        <Step Id="phys_opt_design"/>
-        <Step Id="route_design"/>
-        <Step Id="post_route_phys_opt_design"/>
-        <Step Id="write_bitstream"/>
-      </Strategy>
-      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-      <RQSFiles/>
-    </Run>
-    <Run Id="scalp_zynqps_axi_gpio_switches_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_axi_gpio_switches_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="scalp_zynqps_axi_gpio_switches_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_gpio_switches_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_gpio_switches_0_impl_1" ParallelReportGen="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
-        <Step Id="init_design"/>
-        <Step Id="opt_design"/>
-        <Step Id="power_opt_design"/>
-        <Step Id="place_design"/>
-        <Step Id="post_place_power_opt_design"/>
-        <Step Id="phys_opt_design"/>
-        <Step Id="route_design"/>
-        <Step Id="post_route_phys_opt_design"/>
-        <Step Id="write_bitstream"/>
-      </Strategy>
-      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-      <RQSFiles/>
-    </Run>
-    <Run Id="scalp_zynqps_axi_intc_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_axi_intc_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="scalp_zynqps_axi_intc_0_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_intc_0_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_intc_0_0_impl_1" ParallelReportGen="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
-        <Step Id="init_design"/>
-        <Step Id="opt_design"/>
-        <Step Id="power_opt_design"/>
-        <Step Id="place_design"/>
-        <Step Id="post_place_power_opt_design"/>
-        <Step Id="phys_opt_design"/>
-        <Step Id="route_design"/>
-        <Step Id="post_route_phys_opt_design"/>
-        <Step Id="write_bitstream"/>
-      </Strategy>
-      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-      <RQSFiles/>
-    </Run>
-    <Run Id="scalp_zynqps_axi_gpio_reset_btn_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_axi_gpio_reset_btn_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="scalp_zynqps_axi_gpio_reset_btn_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_gpio_reset_btn_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_gpio_reset_btn_0_impl_1" ParallelReportGen="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
-        <Step Id="init_design"/>
-        <Step Id="opt_design"/>
-        <Step Id="power_opt_design"/>
-        <Step Id="place_design"/>
-        <Step Id="post_place_power_opt_design"/>
-        <Step Id="phys_opt_design"/>
-        <Step Id="route_design"/>
-        <Step Id="post_route_phys_opt_design"/>
-        <Step Id="write_bitstream"/>
-      </Strategy>
-      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-      <RQSFiles/>
-    </Run>
-    <Run Id="scalp_zynqps_system_ila_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_system_ila_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="scalp_zynqps_system_ila_0_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_system_ila_0_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_system_ila_0_0_impl_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
         <Step Id="init_design"/>
@@ -906,9 +729,11 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="scalp_zynqps_rst_ps7_0_125M_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_rst_ps7_0_125M_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="scalp_zynqps_rst_ps7_0_125M_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_rst_ps7_0_125M_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_rst_ps7_0_125M_0_impl_1" ParallelReportGen="true">
+    <Run Id="vga_hdmi_clk_rst_system_inst_2_vga_hdmi_clock_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z015clg485-2" ConstrsSet="vga_hdmi_clk_rst_system_inst_2_vga_hdmi_clock_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="vga_hdmi_clk_rst_system_inst_2_vga_hdmi_clock_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/vga_hdmi_clk_rst_system_inst_2_vga_hdmi_clock_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/vga_hdmi_clk_rst_system_inst_2_vga_hdmi_clock_0_impl_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>
@@ -919,13 +744,167 @@
         <Step Id="post_route_phys_opt_design"/>
         <Step Id="write_bitstream"/>
       </Strategy>
-      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2025"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="vga_hdmi_clk_rst_system_inst_2_rst_ps7_1_vga_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z015clg485-2" ConstrsSet="vga_hdmi_clk_rst_system_inst_2_rst_ps7_1_vga_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="vga_hdmi_clk_rst_system_inst_2_rst_ps7_1_vga_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/vga_hdmi_clk_rst_system_inst_2_rst_ps7_1_vga_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/vga_hdmi_clk_rst_system_inst_2_rst_ps7_1_vga_0_impl_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2025"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z015clg485-2" ConstrsSet="vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0_impl_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2025"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="scalp_zynqps_processing_system7_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_processing_system7_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="scalp_zynqps_processing_system7_0_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_processing_system7_0_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_processing_system7_0_0_impl_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2025"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="scalp_zynqps_axi_gpio_switches_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_axi_gpio_switches_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="scalp_zynqps_axi_gpio_switches_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_gpio_switches_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_gpio_switches_0_impl_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2025"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="scalp_zynqps_axi_intc_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_axi_intc_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="scalp_zynqps_axi_intc_0_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_intc_0_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_intc_0_0_impl_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2025"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="scalp_zynqps_axi_gpio_reset_btn_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_axi_gpio_reset_btn_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="scalp_zynqps_axi_gpio_reset_btn_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_gpio_reset_btn_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_gpio_reset_btn_0_impl_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2025"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="scalp_zynqps_system_ila_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_system_ila_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="scalp_zynqps_system_ila_0_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_system_ila_0_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_system_ila_0_0_impl_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2025"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="scalp_zynqps_rst_ps7_0_125M_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_rst_ps7_0_125M_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="scalp_zynqps_rst_ps7_0_125M_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_rst_ps7_0_125M_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_rst_ps7_0_125M_0_impl_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2025"/>
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
     <Run Id="scalp_zynqps_sys_clock_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_sys_clock_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="scalp_zynqps_sys_clock_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_sys_clock_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_sys_clock_0_impl_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>
@@ -936,7 +915,83 @@
         <Step Id="post_route_phys_opt_design"/>
         <Step Id="write_bitstream"/>
       </Strategy>
-      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2025"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="scalp_zynqps_axi_iic_ioext_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_axi_iic_ioext_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="scalp_zynqps_axi_iic_ioext_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_iic_ioext_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_iic_ioext_0_impl_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2025"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="scalp_zynqps_axi_gpio_joystick_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_axi_gpio_joystick_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="scalp_zynqps_axi_gpio_joystick_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_gpio_joystick_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_axi_gpio_joystick_0_impl_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2025"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="scalp_zynqps_ps7_0_axi_periph_upgraded_ipi_imp_xbar_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_ps7_0_axi_periph_upgraded_ipi_imp_xbar_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="scalp_zynqps_ps7_0_axi_periph_upgraded_ipi_imp_xbar_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_ps7_0_axi_periph_upgraded_ipi_imp_xbar_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_ps7_0_axi_periph_upgraded_ipi_imp_xbar_0_impl_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2025"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z015clg485-2" ConstrsSet="scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_impl_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2025"/>
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>

@@ -889,29 +889,31 @@ begin
             SwissFlagxP : process (HdmiVgaClocksxC.PllLockedxS,
                                    HdmiVgaClocksxC.VgaResetxRNA,
                                    HdmiVgaClocksxC.VgaxC) is
-            begin  -- process SwissFlagxP
+            variable HxPixelxD : integer := 0;
+            variable VxPixelxD : integer := 0;
+            
+        begin  -- process SwissFlagxP
                 if (HdmiVgaClocksxC.PllLockedxS = '0') or (HdmiVgaClocksxC.VgaResetxRNA = '0') then
                     PixelxD <= C_HDMI_VGA_PIX_IDLE;
                 elsif rising_edge(HdmiVgaClocksxC.VgaxC) then
+                    HxPixelxD := to_integer(unsigned(VgaPixCountersxD.HxD));
+                    VxPixelxD := to_integer(unsigned(VgaPixCountersxD.VxD));
+                    
                     if VgaPixCountersxD.VidOnxS = '1' then
                         PixelxD.RxD <= CDCPatternPortsxD(0).RegxD((C_VGA_PIXELS_SIZE - 1) downto (C_VGA_PIXEL_SIZE * 2));
                         PixelxD.GxD <= CDCPatternPortsxD(0).RegxD(((C_VGA_PIXEL_SIZE * 2) - 1) downto (C_VGA_PIXEL_SIZE));
                         PixelxD.BxD <= CDCPatternPortsxD(0).RegxD((C_VGA_PIXEL_SIZE - 1) downto 0);
 
-                        if (to_integer(unsigned(VgaPixCountersxD.HxD)) >= 288) and
-                            (to_integer(unsigned(VgaPixCountersxD.HxD)) < 432) then
-                            if (to_integer(unsigned(VgaPixCountersxD.VxD)) >= 144) and
-                                (to_integer(unsigned(VgaPixCountersxD.VxD)) < 576) then
+                        if (HxPixelxD >= 288) and (HxPixelxD < 432) then
+                            if (VxPixelxD >= 144) and (VxPixelxD < 576) then
                                 PixelxD.RxD <= CDCPatternPortsxD(1).RegxD((C_VGA_PIXELS_SIZE - 1) downto (C_VGA_PIXEL_SIZE * 2));
                                 PixelxD.GxD <= CDCPatternPortsxD(1).RegxD(((C_VGA_PIXEL_SIZE * 2) - 1) downto (C_VGA_PIXEL_SIZE));
                                 PixelxD.BxD <= CDCPatternPortsxD(1).RegxD((C_VGA_PIXEL_SIZE - 1) downto 0);
                             end if;
                         end if;
 
-                        if (to_integer(unsigned(VgaPixCountersxD.HxD)) >= 144) and
-                            (to_integer(unsigned(VgaPixCountersxD.HxD)) < 576) then
-                            if (to_integer(unsigned(VgaPixCountersxD.VxD)) >= 288) and
-                                (to_integer(unsigned(VgaPixCountersxD.VxD)) < 432) then
+                        if (HxPixelxD >= 144) and (HxPixelxD < 576) then
+                            if (VxPixelxD >= 288) and (VxPixelxD < 432) then
                                 PixelxD.RxD <= CDCPatternPortsxD(1).RegxD((C_VGA_PIXELS_SIZE - 1) downto (C_VGA_PIXEL_SIZE * 2));
                                 PixelxD.GxD <= CDCPatternPortsxD(1).RegxD(((C_VGA_PIXEL_SIZE * 2) - 1) downto (C_VGA_PIXEL_SIZE));
                                 PixelxD.BxD <= CDCPatternPortsxD(1).RegxD((C_VGA_PIXEL_SIZE - 1) downto 0);
