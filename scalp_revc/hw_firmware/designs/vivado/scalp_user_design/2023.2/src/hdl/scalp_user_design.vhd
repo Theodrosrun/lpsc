@@ -830,124 +830,260 @@ begin
 
         ImGenxB : block is
 
+            --------------------------------------------------------------------
             -- Constants
-            constant C_CDC_TYPE     : integer range 0 to 2  := 1;
-            constant C_RESET_STATE  : integer range 0 to 1  := 1;
-            constant C_SINGLE_BIT   : integer range 0 to 1  := 0;
-            constant C_FLOP_INPUT   : integer range 0 to 1  := 1;
-            constant C_VECTOR_WIDTH : integer range 0 to 32 := 32;
-            constant C_MTBF_STAGES  : integer range 0 to 6  := 2;
+            --------------------------------------------------------------------
+            constant C_FB_WIDTH              : integer := 32;
+            constant C_FB_HEIGHT             : integer := 32;
+            constant C_FB_HALF_HEIGHT        : integer := 16;
+            constant C_FB_LOCAL_ADDR_SIZE    : integer := 512;
+            constant C_BRAM_ADDR_BIT_SIZE    : integer := 11;
+            constant C_VGA_ACTIVE_SIZE       : integer := 720;
 
-            constant C_AXI_CROSS_REGISTER : t_axi_register := (RegxD => x"00ffffff");
-            constant C_AXI_BG_REGISTER    : t_axi_register := (RegxD => x"00ff0000");
+            -- Pixel codes stored in BRAM
+            -- 0 => white
+            -- 1 => red
+            constant C_PIXEL_WHITExD         : std_logic_vector(8 downto 0) := "000000000";
+            constant C_PIXEL_REDxD           : std_logic_vector(8 downto 0) := "000000001";
 
-            -- Signals
-            signal CDCPatternPortsxD : t_axi_bunch_of_registers(1 downto 0) := (0 =>       C_AXI_BG_REGISTER,
-                                                                                1 => C_AXI_CROSS_REGISTER);
-            signal BramAddrxD : std_logic_vector(8 downto 0) := (others => '0');
-            signal BramWexD   : std_logic_vector(3 downto 0) := (others => '1');
+            --------------------------------------------------------------------
+            -- Video memory interface
+            --------------------------------------------------------------------
+            signal BramWrAddrxD              : std_logic_vector((C_BRAM_ADDR_BIT_SIZE - 1) downto 0) := (others => '0');
+            signal BramRdAddrxD              : std_logic_vector((C_BRAM_ADDR_BIT_SIZE - 1) downto 0) := (others => '0');
+            signal BramWrDataxD              : std_logic_vector(8 downto 0) := (others => '0');
+            signal BramRdData1xD             : std_logic_vector(8 downto 0) := (others => '0');
+            signal BramRdData2xD             : std_logic_vector(8 downto 0) := (others => '0');
+            signal BramWe1xD                 : std_logic_vector(0 downto 0) := "0";
+            signal BramWe2xD                 : std_logic_vector(0 downto 0) := "0";
+
+            --------------------------------------------------------------------
+            -- Swiss flag generator
+            --------------------------------------------------------------------
+            signal GenDonexS                 : std_logic := '0';
+            signal GenHxCntxD                : integer range 0 to (C_FB_WIDTH - 1) := 0;
+            signal GenVxCntxD                : integer range 0 to (C_FB_HEIGHT - 1) := 0;
+
+            --------------------------------------------------------------------
+            -- VGA interface
+            --------------------------------------------------------------------
+            signal BramRdBankSelxS           : std_logic := '0';
+            signal VgaVidOnDlyxS             : std_logic := '0';
 
             -- Attributes
             attribute mark_debug : string;
             attribute keep       : string;
 
-            -- attribute mark_debug of CDCPatternPortsxD : signal is "true";
-            -- attribute keep of CDCPatternPortsxD       : signal is "true";
-            -- attribute mark_debug of BramAddrxD        : signal is "true";
-            -- attribute keep of BramAddrxD              : signal is "true";
-            -- attribute mark_debug of BramWexD          : signal is "true";
-            -- attribute keep of BramWexD                : signal is "true";
-
         begin  -- block ImGenxB
 
+            --------------------------------------------------------------------
+            -- Video memory
+            -- BRAM 1 stores rows 0..15
+            --------------------------------------------------------------------
             BramSDPMacro1xI : BRAM_SDP_MACRO
                 generic map (
                     BRAM_SIZE           => "18Kb",
                     DEVICE              => "7SERIES",
-                    WRITE_WIDTH         => 32,
-                    READ_WIDTH          => 32,
+                    WRITE_WIDTH         => 9,
+                    READ_WIDTH          => 9,
                     DO_REG              => 0,
                     INIT_FILE           => "NONE",
                     SIM_COLLISION_CHECK => "ALL",
-                    SRVAL               => X"000000000000000000",
+                    SRVAL               => X"00000",
                     write_mode          => "WRITE_FIRST",
-                    INIT                => X"000000000000000000")
+                    INIT                => X"00000")
                 port map (
-                    DO     => CDCPatternPortsxD(0).RegxD,
-                    DI     => PatternPortsxD(0).RegxD,
-                    RDADDR => BramAddrxD,
+                    DO     => BramRdData1xD,
+                    DI     => BramWrDataxD,
+                    RDADDR => BramRdAddrxD,
                     RDCLK  => HdmiVgaClocksxC.VgaxC,
                     RDEN   => '1',
-                    REGCE  => '0',
+                    REGCE  => '1',
                     RST    => '0',
-                    WE     => BramWexD,
-                    WRADDR => BramAddrxD,
-                    WRCLK  => ClpxNumRegsAxixD.ClockxC.ClkxC,
+                    WE     => BramWe1xD,
+                    WRADDR => BramWrAddrxD,
+                    WRCLK  => ClkUserxC,
                     WREN   => '1');
 
+            --------------------------------------------------------------------
+            -- Video memory
+            -- BRAM 2 stores rows 16..31
+            --------------------------------------------------------------------
             BramSDPMacro2xI : BRAM_SDP_MACRO
                 generic map (
                     BRAM_SIZE           => "18Kb",
                     DEVICE              => "7SERIES",
-                    WRITE_WIDTH         => 32,
-                    READ_WIDTH          => 32,
+                    WRITE_WIDTH         => 9,
+                    READ_WIDTH          => 9,
                     DO_REG              => 0,
                     INIT_FILE           => "NONE",
                     SIM_COLLISION_CHECK => "ALL",
-                    SRVAL               => X"000000000000000000",
+                    SRVAL               => X"00000",
                     write_mode          => "WRITE_FIRST",
-                    INIT                => X"000000000000000000")
+                    INIT                => X"00000")
                 port map (
-                    DO     => CDCPatternPortsxD(1).RegxD,
-                    DI     => PatternPortsxD(1).RegxD,
-                    RDADDR => BramAddrxD,
+                    DO     => BramRdData2xD,
+                    DI     => BramWrDataxD,
+                    RDADDR => BramRdAddrxD,
                     RDCLK  => HdmiVgaClocksxC.VgaxC,
                     RDEN   => '1',
-                    REGCE  => '0',
+                    REGCE  => '1',
                     RST    => '0',
-                    WE     => BramWexD,
-                    WRADDR => BramAddrxD,
-                    WRCLK  => ClpxNumRegsAxixD.ClockxC.ClkxC,
+                    WE     => BramWe2xD,
+                    WRADDR => BramWrAddrxD,
+                    WRCLK  => ClkUserxC,
                     WREN   => '1');
 
-            SwissFlagxP : process (HdmiVgaClocksxC.PllLockedxS,
-                                   HdmiVgaClocksxC.VgaResetxRNA,
-                                   HdmiVgaClocksxC.VgaxC) is
-            variable HxPixelxD : integer := 0;
-            variable VxPixelxD : integer := 0;
-            
-        begin  -- process SwissFlagxP
-                if (HdmiVgaClocksxC.PllLockedxS = '0') or (HdmiVgaClocksxC.VgaResetxRNA = '0') then
-                    PixelxD <= C_HDMI_VGA_PIX_IDLE;
-                elsif rising_edge(HdmiVgaClocksxC.VgaxC) then
-                    HxPixelxD := to_integer(unsigned(VgaPixCountersxD.HxD));
-                    VxPixelxD := to_integer(unsigned(VgaPixCountersxD.VxD));
-                    
-                    if VgaPixCountersxD.VidOnxS = '1' then
-                        PixelxD.RxD <= CDCPatternPortsxD(0).RegxD((C_VGA_PIXELS_SIZE - 1) downto (C_VGA_PIXEL_SIZE * 2));
-                        PixelxD.GxD <= CDCPatternPortsxD(0).RegxD(((C_VGA_PIXEL_SIZE * 2) - 1) downto (C_VGA_PIXEL_SIZE));
-                        PixelxD.BxD <= CDCPatternPortsxD(0).RegxD((C_VGA_PIXEL_SIZE - 1) downto 0);
+            --------------------------------------------------------------------
+            -- Swiss flag generator
+            -- Runs on ClkUserxC and writes the image ONCE into the video memory
+            --------------------------------------------------------------------
+            SwissFlagGenxP : process (ClkUserxC, ClkUserRstxRNA) is
+                variable LocalAddrxD : integer range 0 to (C_FB_LOCAL_ADDR_SIZE - 1) := 0;
+            begin
+                if ClkUserRstxRNA = '0' then
+                    GenDonexS    <= '0';
+                    GenHxCntxD   <= 0;
+                    GenVxCntxD   <= 0;
+                    BramWrAddrxD <= (others => '0');
+                    BramWrDataxD <= (others => '0');
+                    BramWe1xD    <= "0";
+                    BramWe2xD    <= "0";
 
-                        if (HxPixelxD >= 288) and (HxPixelxD < 432) then
-                            if (VxPixelxD >= 144) and (VxPixelxD < 576) then
-                                PixelxD.RxD <= CDCPatternPortsxD(1).RegxD((C_VGA_PIXELS_SIZE - 1) downto (C_VGA_PIXEL_SIZE * 2));
-                                PixelxD.GxD <= CDCPatternPortsxD(1).RegxD(((C_VGA_PIXEL_SIZE * 2) - 1) downto (C_VGA_PIXEL_SIZE));
-                                PixelxD.BxD <= CDCPatternPortsxD(1).RegxD((C_VGA_PIXEL_SIZE - 1) downto 0);
-                            end if;
+                elsif rising_edge(ClkUserxC) then
+                    BramWe1xD <= "0";
+                    BramWe2xD <= "0";
+
+                    if GenDonexS = '0' then
+                        -- Default data: red
+                        BramWrDataxD <= C_PIXEL_REDxD;
+
+                        -- White cross
+                        if (((GenHxCntxD >= 13) and (GenHxCntxD < 19)) and
+                            ((GenVxCntxD >=  6) and (GenVxCntxD < 26))) or
+                        (((GenHxCntxD >=  6) and (GenHxCntxD < 26)) and
+                            ((GenVxCntxD >= 13) and (GenVxCntxD < 19))) then
+                            BramWrDataxD <= C_PIXEL_WHITExD;
                         end if;
 
-                        if (HxPixelxD >= 144) and (HxPixelxD < 576) then
-                            if (VxPixelxD >= 288) and (VxPixelxD < 432) then
-                                PixelxD.RxD <= CDCPatternPortsxD(1).RegxD((C_VGA_PIXELS_SIZE - 1) downto (C_VGA_PIXEL_SIZE * 2));
-                                PixelxD.GxD <= CDCPatternPortsxD(1).RegxD(((C_VGA_PIXEL_SIZE * 2) - 1) downto (C_VGA_PIXEL_SIZE));
-                                PixelxD.BxD <= CDCPatternPortsxD(1).RegxD((C_VGA_PIXEL_SIZE - 1) downto 0);
+                        -- Local address in BRAM and bank selection
+                        if GenVxCntxD < C_FB_HALF_HEIGHT then
+                            LocalAddrxD := (GenVxCntxD * C_FB_WIDTH) + GenHxCntxD;
+                            BramWe1xD   <= "1";
+                        else
+                            LocalAddrxD := ((GenVxCntxD - C_FB_HALF_HEIGHT) * C_FB_WIDTH) + GenHxCntxD;
+                            BramWe2xD   <= "1";
+                        end if;
+
+                        BramWrAddrxD <= std_logic_vector(to_unsigned(LocalAddrxD, C_BRAM_ADDR_BIT_SIZE));
+
+                        -- Increase counter
+                        if GenHxCntxD = (C_FB_WIDTH - 1) then
+                            GenHxCntxD <= 0;
+
+                            if GenVxCntxD = (C_FB_HEIGHT - 1) then
+                                GenVxCntxD <= 0;
+                                GenDonexS  <= '1';
+                            else
+                                GenVxCntxD <= GenVxCntxD + 1;
                             end if;
+                        else
+                            GenHxCntxD <= GenHxCntxD + 1;
+                        end if;
+                    end if;
+                end if;
+            end process SwissFlagGenxP;
+
+            --------------------------------------------------------------------
+            -- VGA interface
+            -- Computes the BRAM read address from current VGA pixel counters
+            --------------------------------------------------------------------
+            VgaIfAddrxP : process (HdmiVgaClocksxC.PllLockedxS,
+                                   HdmiVgaClocksxC.VgaResetxRNA,
+                                   HdmiVgaClocksxC.VgaxC) is
+                variable HxPixelxD   : integer := 0;
+                variable VxPixelxD   : integer := 0;
+                variable HxScaledxD  : integer range 0 to (C_FB_WIDTH - 1) := 0;
+                variable VxScaledxD  : integer range 0 to (C_FB_HEIGHT - 1) := 0;
+                variable LocalAddrxD : integer range 0 to (C_FB_LOCAL_ADDR_SIZE - 1) := 0;
+            begin
+                if (HdmiVgaClocksxC.PllLockedxS = '0') or
+                   (HdmiVgaClocksxC.VgaResetxRNA = '0') then
+                    BramRdAddrxD    <= (others => '0');
+                    BramRdBankSelxS <= '0';
+                    VgaVidOnDlyxS   <= '0';
+
+                elsif rising_edge(HdmiVgaClocksxC.VgaxC) then
+                    VgaVidOnDlyxS <= VgaPixCountersxD.VidOnxS;
+
+                    if VgaPixCountersxD.VidOnxS = '1' then
+                        HxPixelxD := to_integer(unsigned(VgaPixCountersxD.HxD));
+                        VxPixelxD := to_integer(unsigned(VgaPixCountersxD.VxD));
+
+                        HxScaledxD := (HxPixelxD * C_FB_WIDTH) / C_VGA_ACTIVE_SIZE;
+                        VxScaledxD := (VxPixelxD * C_FB_HEIGHT) / C_VGA_ACTIVE_SIZE;
+
+                        if HxScaledxD > (C_FB_WIDTH - 1) then
+                            HxScaledxD := C_FB_WIDTH - 1;
+                        end if;
+
+                        if VxScaledxD > (C_FB_HEIGHT - 1) then
+                            VxScaledxD := C_FB_HEIGHT - 1;
+                        end if;
+
+                        if VxScaledxD < C_FB_HALF_HEIGHT then
+                            LocalAddrxD := (VxScaledxD * C_FB_WIDTH) + HxScaledxD;
+                            BramRdAddrxD <= std_logic_vector(to_unsigned(LocalAddrxD, C_BRAM_ADDR_BIT_SIZE));
+                            BramRdBankSelxS <= '0';
+                        else
+                            LocalAddrxD := ((VxScaledxD - C_FB_HALF_HEIGHT) * C_FB_WIDTH) + HxScaledxD;
+                            BramRdAddrxD <= std_logic_vector(to_unsigned(LocalAddrxD, C_BRAM_ADDR_BIT_SIZE));
+                            BramRdBankSelxS <= '1';
+                        end if;
+                    else
+                        BramRdAddrxD    <= (others => '0');
+                        BramRdBankSelxS <= '0';
+                    end if;
+                end if;
+            end process VgaIfAddrxP;
+
+            --------------------------------------------------------------------
+            -- VGA interface
+            -- Converts BRAM data into RGB pixel
+            --------------------------------------------------------------------
+            VgaIfPixxP : process (HdmiVgaClocksxC.PllLockedxS,
+                                  HdmiVgaClocksxC.VgaResetxRNA,
+                                  HdmiVgaClocksxC.VgaxC) is
+                variable PixelCodexD : std_logic_vector(8 downto 0) := (others => '0');
+            begin
+                if (HdmiVgaClocksxC.PllLockedxS = '0') or
+                   (HdmiVgaClocksxC.VgaResetxRNA = '0') then
+                    PixelxD <= C_HDMI_VGA_PIX_IDLE;
+
+                elsif rising_edge(HdmiVgaClocksxC.VgaxC) then
+                    if VgaVidOnDlyxS = '1' then
+                        if BramRdBankSelxS = '0' then
+                            PixelCodexD := BramRdData1xD;
+                        else
+                            PixelCodexD := BramRdData2xD;
+                        end if;
+
+                        if PixelCodexD(0) = '1' then
+                            -- red
+                            PixelxD.RxD <= (others => '1');
+                            PixelxD.GxD <= (others => '0');
+                            PixelxD.BxD <= (others => '0');
+                        else
+                            -- white
+                            PixelxD.RxD <= (others => '1');
+                            PixelxD.GxD <= (others => '1');
+                            PixelxD.BxD <= (others => '1');
                         end if;
                     else
                         PixelxD <= C_HDMI_VGA_PIX_IDLE;
                     end if;
                 end if;
-            end process SwissFlagxP;
+            end process VgaIfPixxP;
 
         end block ImGenxB;
 
