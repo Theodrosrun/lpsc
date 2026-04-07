@@ -999,16 +999,13 @@ begin
             -- Computes the BRAM read address from current VGA pixel counters
             --------------------------------------------------------------------
             VgaIfAddrxP : process (HdmiVgaClocksxC.PllLockedxS,
-                                   HdmiVgaClocksxC.VgaResetxRNA,
-                                   HdmiVgaClocksxC.VgaxC) is
-                variable HxPixelxD   : integer := 0;
-                variable VxPixelxD   : integer := 0;
+                                HdmiVgaClocksxC.VgaResetxRNA,
+                                HdmiVgaClocksxC.VgaxC) is
                 variable HxScaledxD  : integer range 0 to (C_FB_WIDTH - 1) := 0;
                 variable VxScaledxD  : integer range 0 to (C_FB_HEIGHT - 1) := 0;
                 variable LocalAddrxD : integer range 0 to (C_FB_LOCAL_ADDR_SIZE - 1) := 0;
             begin
-                if (HdmiVgaClocksxC.PllLockedxS = '0') or
-                   (HdmiVgaClocksxC.VgaResetxRNA = '0') then
+                if (HdmiVgaClocksxC.PllLockedxS = '0') or (HdmiVgaClocksxC.VgaResetxRNA = '0') then
                     BramRdAddrxD    <= (others => '0');
                     BramRdBankSelxS <= '0';
                     VgaVidOnDlyxS   <= '0';
@@ -1017,29 +1014,18 @@ begin
                     VgaVidOnDlyxS <= VgaPixCountersxD.VidOnxS;
 
                     if VgaPixCountersxD.VidOnxS = '1' then
-                        HxPixelxD := to_integer(unsigned(VgaPixCountersxD.HxD));
-                        VxPixelxD := to_integer(unsigned(VgaPixCountersxD.VxD));
-
-                        HxScaledxD := (HxPixelxD * C_FB_WIDTH) / C_VGA_ACTIVE_SIZE;
-                        VxScaledxD := (VxPixelxD * C_FB_HEIGHT) / C_VGA_ACTIVE_SIZE;
-
-                        if HxScaledxD > (C_FB_WIDTH - 1) then
-                            HxScaledxD := C_FB_WIDTH - 1;
-                        end if;
-
-                        if VxScaledxD > (C_FB_HEIGHT - 1) then
-                            VxScaledxD := C_FB_HEIGHT - 1;
-                        end if;
+                        HxScaledxD := (to_integer(unsigned(VgaPixCountersxD.HxD)) * C_FB_WIDTH) / C_VGA_ACTIVE_SIZE;
+                        VxScaledxD := (to_integer(unsigned(VgaPixCountersxD.VxD)) * C_FB_HEIGHT) / C_VGA_ACTIVE_SIZE;
 
                         if VxScaledxD < C_FB_HALF_HEIGHT then
                             LocalAddrxD := (VxScaledxD * C_FB_WIDTH) + HxScaledxD;
-                            BramRdAddrxD <= std_logic_vector(to_unsigned(LocalAddrxD, C_BRAM_ADDR_BIT_SIZE));
                             BramRdBankSelxS <= '0';
                         else
                             LocalAddrxD := ((VxScaledxD - C_FB_HALF_HEIGHT) * C_FB_WIDTH) + HxScaledxD;
-                            BramRdAddrxD <= std_logic_vector(to_unsigned(LocalAddrxD, C_BRAM_ADDR_BIT_SIZE));
                             BramRdBankSelxS <= '1';
                         end if;
+
+                        BramRdAddrxD <= std_logic_vector(to_unsigned(LocalAddrxD, C_BRAM_ADDR_BIT_SIZE));
                     else
                         BramRdAddrxD    <= (others => '0');
                         BramRdBankSelxS <= '0';
