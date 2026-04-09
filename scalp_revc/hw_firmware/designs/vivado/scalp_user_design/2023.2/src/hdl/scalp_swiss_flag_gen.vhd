@@ -13,7 +13,6 @@ entity scalp_swiss_flag_gen is
     port (
         ClkxCI       : in  std_logic;
         RstxRANI     : in  std_logic;
-        GenDonexSO   : out std_logic;
         BramWrAddrxDO : out std_logic_vector((C_BRAM_ADDR_BIT_SIZE - 1) downto 0);
         BramWrDataxDO : out std_logic_vector(8 downto 0);
         BramWe1xDO    : out std_logic_vector(0 downto 0);
@@ -29,8 +28,6 @@ architecture rtl of scalp_swiss_flag_gen is
     signal GenHxCntxD : integer range 0 to (C_FB_WIDTH - 1) := 0;
     signal GenVxCntxD : integer range 0 to (C_FB_HEIGHT - 1) := 0;
 begin
-
-    GenDonexSO <= GenDonexS;
 
     process (ClkxCI, RstxRANI) is
         variable LocalAddrxD : integer range 0 to (C_FB_LOCAL_ADDR_SIZE - 1) := 0;

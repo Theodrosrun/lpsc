@@ -577,7 +577,6 @@ begin
         constant C_BRAM_ADDR_BIT_SIZE : integer := 11;
         constant C_VGA_ACTIVE_SIZE    : integer := 720;
 
-        signal GenDonexS       : std_logic := '0';
         signal BramWrAddrxD    : std_logic_vector((C_BRAM_ADDR_BIT_SIZE - 1) downto 0) := (others => '0');
         signal BramRdAddrxD    : std_logic_vector((C_BRAM_ADDR_BIT_SIZE - 1) downto 0) := (others => '0');
         signal BramWrDataxD    : std_logic_vector(8 downto 0) := (others => '0');
@@ -860,7 +859,6 @@ begin
                 port map (
                     ClkxCI        => ClkUserxC,
                     RstxRANI      => ClkUserRstxRNA,
-                    GenDonexSO    => GenDonexS,
                     BramWrAddrxDO => BramWrAddrxD,
                     BramWrDataxDO => BramWrDataxD,
                     BramWe1xDO    => BramWe1xD,
