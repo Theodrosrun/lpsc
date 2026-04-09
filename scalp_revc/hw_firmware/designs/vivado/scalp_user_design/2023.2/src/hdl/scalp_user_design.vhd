@@ -584,8 +584,6 @@ begin
         signal BramRdData2xD   : std_logic_vector(8 downto 0) := (others => '0');
         signal BramWe1xD       : std_logic_vector(0 downto 0) := "0";
         signal BramWe2xD       : std_logic_vector(0 downto 0) := "0";
-        signal BramRdBankSelxS : std_logic := '0';
-        signal VgaVidOnDlyxS   : std_logic := '0';
 
     begin  -- block PLxB
 
@@ -925,7 +923,7 @@ begin
         VgaxB : block is
         begin
 
-            VgaIfAddrxI : entity work.scalp_vga_if_addr
+            VgaIfxI : entity work.scalp_vga_if
                 generic map (
                     C_FB_WIDTH           => C_FB_WIDTH,
                     C_FB_HEIGHT          => C_FB_HEIGHT,
@@ -936,27 +934,16 @@ begin
                     C_CNT_WIDTH          => VgaPixCountersxD.HxD'length
                 )
                 port map (
-                    ClkxCI           => HdmiVgaClocksxC.VgaxC,
-                    PllLockedxSI     => HdmiVgaClocksxC.PllLockedxS,
-                    RstxRANI         => HdmiVgaClocksxC.VgaResetxRNA,
-                    VidOnxSI         => VgaPixCountersxD.VidOnxS,
-                    HxCntxDI         => VgaPixCountersxD.HxD,
-                    VxCntxDI         => VgaPixCountersxD.VxD,
-                    BramRdAddrxDO    => BramRdAddrxD,
-                    BramRdBankSelxSO => BramRdBankSelxS,
-                    VgaVidOnDlyxSO   => VgaVidOnDlyxS
-                );
-
-            VgaIfPixxI : entity work.scalp_vga_if_pix
-                port map (
-                    ClkxCI           => HdmiVgaClocksxC.VgaxC,
-                    PllLockedxSI     => HdmiVgaClocksxC.PllLockedxS,
-                    RstxRANI         => HdmiVgaClocksxC.VgaResetxRNA,
-                    VgaVidOnDlyxSI   => VgaVidOnDlyxS,
-                    BramRdBankSelxSI => BramRdBankSelxS,
-                    BramRdData1xDI   => BramRdData1xD,
-                    BramRdData2xDI   => BramRdData2xD,
-                    PixelxDO         => PixelxD
+                    ClkxCI         => HdmiVgaClocksxC.VgaxC,
+                    PllLockedxSI   => HdmiVgaClocksxC.PllLockedxS,
+                    RstxRANI       => HdmiVgaClocksxC.VgaResetxRNA,
+                    VidOnxSI       => VgaPixCountersxD.VidOnxS,
+                    HxCntxDI       => VgaPixCountersxD.HxD,
+                    VxCntxDI       => VgaPixCountersxD.VxD,
+                    BramRdData1xDI => BramRdData1xD,
+                    BramRdData2xDI => BramRdData2xD,
+                    BramRdAddrxDO  => BramRdAddrxD,
+                    PixelxDO       => PixelxD
                 );
 
         end block VgaxB;
