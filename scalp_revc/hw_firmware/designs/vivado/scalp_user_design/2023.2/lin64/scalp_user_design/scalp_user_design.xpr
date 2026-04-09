@@ -157,6 +157,31 @@
           <Proxy FileSetName="scalp_zynqps_system_ila_0_0"/>
         </CompFileExtendedInfo>
       </File>
+      <File Path="$PPRDIR/../../src/hdl/scalp_swiss_flag_gen.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../src/hdl/scalp_vga_if_addr.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../../../../../packages/hw/scalp_hdmi_pkg/src/hdl/scalp_hdmi_pkg.vhd">
+        <FileInfo SFType="VHDL2008">
+          <Attr Name="Library" Val="scalp_lib"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../src/hdl/scalp_vga_if_pix.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <File Path="$PPRDIR/../../../../../../packages/hw/scalp_axi_pkg/src/hdl/scalp_axi_pkg.vhd">
         <FileInfo SFType="VHDL2008">
           <Attr Name="Library" Val="scalp_lib"/>
@@ -172,13 +197,6 @@
       </File>
       <File Path="$PPRDIR/../../../../../../ips/hw/scalp_firmwareid/src/hdl/scalp_firmwareid.vhd">
         <FileInfo SFType="VHDL2008">
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PPRDIR/../../../../../../packages/hw/scalp_hdmi_pkg/src/hdl/scalp_hdmi_pkg.vhd">
-        <FileInfo SFType="VHDL2008">
-          <Attr Name="Library" Val="scalp_lib"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
