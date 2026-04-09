@@ -570,14 +570,21 @@ begin
     end block PSxB;
 
     PLxB : block is
-        signal GenDonexS      : std_logic := '0';
-        signal BramWrAddrxD   : std_logic_vector(10 downto 0) := (others => '0');
-        signal BramRdAddrxD   : std_logic_vector(10 downto 0) := (others => '0');
-        signal BramWrDataxD   : std_logic_vector(8 downto 0) := (others => '0');
-        signal BramRdData1xD  : std_logic_vector(8 downto 0) := (others => '0');
-        signal BramRdData2xD  : std_logic_vector(8 downto 0) := (others => '0');
-        signal BramWe1xD      : std_logic_vector(0 downto 0) := "0";
-        signal BramWe2xD      : std_logic_vector(0 downto 0) := "0";
+        constant C_FB_WIDTH           : integer := 32;
+        constant C_FB_HEIGHT          : integer := 32;
+        constant C_FB_HALF_HEIGHT     : integer := 16;
+        constant C_FB_LOCAL_ADDR_SIZE : integer := 512;
+        constant C_BRAM_ADDR_BIT_SIZE : integer := 11;
+        constant C_VGA_ACTIVE_SIZE    : integer := 720;
+
+        signal GenDonexS       : std_logic := '0';
+        signal BramWrAddrxD    : std_logic_vector((C_BRAM_ADDR_BIT_SIZE - 1) downto 0) := (others => '0');
+        signal BramRdAddrxD    : std_logic_vector((C_BRAM_ADDR_BIT_SIZE - 1) downto 0) := (others => '0');
+        signal BramWrDataxD    : std_logic_vector(8 downto 0) := (others => '0');
+        signal BramRdData1xD   : std_logic_vector(8 downto 0) := (others => '0');
+        signal BramRdData2xD   : std_logic_vector(8 downto 0) := (others => '0');
+        signal BramWe1xD       : std_logic_vector(0 downto 0) := "0";
+        signal BramWe2xD       : std_logic_vector(0 downto 0) := "0";
         signal BramRdBankSelxS : std_logic := '0';
         signal VgaVidOnDlyxS   : std_logic := '0';
 
@@ -840,12 +847,6 @@ begin
         end block ClkUserPllxB;
 
         ImGenxB : block is
-
-            constant C_FB_WIDTH           : integer := 32;
-            constant C_FB_HEIGHT          : integer := 32;
-            constant C_FB_HALF_HEIGHT     : integer := 16;
-            constant C_FB_LOCAL_ADDR_SIZE : integer := 512;
-            constant C_BRAM_ADDR_BIT_SIZE : integer := 11;
         begin
 
             SwissFlagGenxI : entity work.scalp_swiss_flag_gen
@@ -924,12 +925,6 @@ begin
         end block VideoMemxB;
 
         VgaxB : block is
-            constant C_FB_WIDTH           : integer := 32;
-            constant C_FB_HEIGHT          : integer := 32;
-            constant C_FB_HALF_HEIGHT     : integer := 16;
-            constant C_FB_LOCAL_ADDR_SIZE : integer := 512;
-            constant C_BRAM_ADDR_BIT_SIZE : integer := 11;
-            constant C_VGA_ACTIVE_SIZE    : integer := 720;
         begin
 
             VgaIfAddrxI : entity work.scalp_vga_if_addr
