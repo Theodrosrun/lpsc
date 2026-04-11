@@ -65,17 +65,17 @@ begin
 
                 BramWrAddrxDO <= std_logic_vector(to_unsigned(LocalAddrxD, C_BRAM_ADDR_BIT_SIZE));
 
-                if GenHxCntxD = (C_FB_WIDTH - 1) then
-                    GenHxCntxD <= 0;
-
-                    if GenVxCntxD = (C_FB_HEIGHT - 1) then
+                if GenHxCntxD < (C_FB_WIDTH - 1) then
+                    GenHxCntxD <= GenHxCntxD + 1;
+                else
+                    if GenVxCntxD < (C_FB_HEIGHT - 1) then
+                        GenVxCntxD <= GenVxCntxD + 1;
+                    else
                         GenVxCntxD <= 0;
                         GenDonexS  <= '1';
-                    else
-                        GenVxCntxD <= GenVxCntxD + 1;
                     end if;
-                else
-                    GenHxCntxD <= GenHxCntxD + 1;
+
+                    GenHxCntxD <= 0;
                 end if;
             end if;
         end if;
