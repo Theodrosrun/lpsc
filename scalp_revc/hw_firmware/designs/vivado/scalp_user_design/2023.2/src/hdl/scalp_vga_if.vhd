@@ -9,7 +9,6 @@ entity scalp_vga_if is
     generic (
         C_FB_WIDTH           : integer;
         C_FB_HEIGHT          : integer;
-        C_FB_LOCAL_ADDR_SIZE : integer;
         C_BRAM_ADDR_BIT_SIZE : integer;
         C_VGA_ACTIVE_SIZE    : integer;
         C_CNT_WIDTH          : integer
@@ -36,7 +35,7 @@ begin
     process (PllLockedxSI, RstxRANI, ClkxCI) is
         variable HxScaledxD  : integer range 0 to (C_FB_WIDTH - 1) := 0;
         variable VxScaledxD  : integer range 0 to (C_FB_HEIGHT - 1) := 0;
-        variable LocalAddrxD : integer range 0 to (C_FB_LOCAL_ADDR_SIZE - 1) := 0;
+        variable LocalAddrxD : integer := 0;
         variable PixelCodexD : std_logic_vector(8 downto 0) := (others => '0');
     begin
         if (PllLockedxSI = '0') or (RstxRANI = '0') then

@@ -6,7 +6,6 @@ entity scalp_swiss_flag_gen is
     generic (
         C_FB_WIDTH           : integer;
         C_FB_HEIGHT          : integer;
-        C_FB_LOCAL_ADDR_SIZE : integer;
         C_BRAM_ADDR_BIT_SIZE : integer
     );
     port (
@@ -29,7 +28,7 @@ architecture rtl of scalp_swiss_flag_gen is
 begin
 
     process (ClkxCI, RstxRANI) is
-        variable PixelAddrxD : integer range 0 to (C_FB_LOCAL_ADDR_SIZE - 1) := 0;
+        variable PixelAddrxD : integer := 0;
     begin
         if RstxRANI = '0' then
             GenDonexS     <= '0';
