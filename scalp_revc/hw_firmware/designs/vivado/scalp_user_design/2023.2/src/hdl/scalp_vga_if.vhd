@@ -33,8 +33,8 @@ begin
 
     process (PllLockedxSI, RstxRANI, ClkxCI) is
         variable PixelCodexD  : std_logic_vector(8 downto 0) := (others => '0');
-        variable HxScaledxD   : integer range 0 to (C_BUFFER_WIDTH - 1) := 0;
-        variable VxScaledxD   : integer range 0 to (C_BUFFER_HEIGHT - 1) := 0;
+        variable HxScaledxD   : integer := 0;
+        variable VxScaledxD   : integer := 0;
         variable BramRdAddrxD : integer := 0;
     begin
         if (PllLockedxSI = '0') or (RstxRANI = '0') then
