@@ -924,8 +924,7 @@ begin
                     C_BUFFER_WIDTH       => C_BUFFER_WIDTH,
                     C_BUFFER_HEIGHT      => C_BUFFER_HEIGHT,
                     C_BRAM_ADDR_BIT_SIZE => C_BRAM_ADDR_BIT_SIZE,
-                    C_VGA_ACTIVE_SIZE    => C_VGA_ACTIVE_SIZE,
-                    C_CNT_WIDTH          => VgaPixCountersxD.HxD'length
+                    C_VGA_ACTIVE_SIZE    => C_VGA_ACTIVE_SIZE
                 )
                 port map (
                     ClkxCI         => HdmiVgaClocksxC.VgaxC,

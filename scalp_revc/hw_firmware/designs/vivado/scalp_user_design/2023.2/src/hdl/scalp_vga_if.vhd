@@ -10,16 +10,15 @@ entity scalp_vga_if is
         C_BUFFER_WIDTH       : integer;
         C_BUFFER_HEIGHT      : integer;
         C_BRAM_ADDR_BIT_SIZE : integer;
-        C_VGA_ACTIVE_SIZE    : integer;
-        C_CNT_WIDTH          : integer
+        C_VGA_ACTIVE_SIZE    : integer
     );
     port (
         ClkxCI         : in  std_logic;
         PllLockedxSI   : in  std_logic;
         RstxRANI       : in  std_logic;
         VidOnxSI       : in  std_logic;
-        HxCntxDI       : in  std_logic_vector((C_CNT_WIDTH - 1) downto 0);
-        VxCntxDI       : in  std_logic_vector((C_CNT_WIDTH - 1) downto 0);
+        HxCntxDI       : in  std_logic_vector(15 downto 0);
+        VxCntxDI       : in  std_logic_vector(15 downto 0);
         BramRdData1xDI : in  std_logic_vector(8 downto 0);
         BramRdData2xDI : in  std_logic_vector(8 downto 0);
         BramRdAddrxDO  : out std_logic_vector((C_BRAM_ADDR_BIT_SIZE - 1) downto 0);
