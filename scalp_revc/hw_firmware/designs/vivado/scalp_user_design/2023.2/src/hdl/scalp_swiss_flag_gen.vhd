@@ -4,10 +4,10 @@ use ieee.numeric_std.all;
 
 entity scalp_swiss_flag_gen is
     generic (
-        C_FB_WIDTH           : integer := 32;
-        C_FB_HEIGHT          : integer := 32;
-        C_FB_LOCAL_ADDR_SIZE : integer := 512;
-        C_BRAM_ADDR_BIT_SIZE : integer := 11
+        C_FB_WIDTH           : integer;
+        C_FB_HEIGHT          : integer;
+        C_FB_LOCAL_ADDR_SIZE : integer;
+        C_BRAM_ADDR_BIT_SIZE : integer
     );
     port (
         ClkxCI       : in  std_logic;

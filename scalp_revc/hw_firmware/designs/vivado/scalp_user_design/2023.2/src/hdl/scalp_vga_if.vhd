@@ -7,12 +7,12 @@ use scalp_lib.scalp_hdmi_pkg.all;
 
 entity scalp_vga_if is
     generic (
-        C_FB_WIDTH           : integer := 32;
-        C_FB_HEIGHT          : integer := 32;
-        C_FB_LOCAL_ADDR_SIZE : integer := 512;
-        C_BRAM_ADDR_BIT_SIZE : integer := 11;
-        C_VGA_ACTIVE_SIZE    : integer := 720;
-        C_CNT_WIDTH          : integer := 16
+        C_FB_WIDTH           : integer;
+        C_FB_HEIGHT          : integer;
+        C_FB_LOCAL_ADDR_SIZE : integer;
+        C_BRAM_ADDR_BIT_SIZE : integer;
+        C_VGA_ACTIVE_SIZE    : integer;
+        C_CNT_WIDTH          : integer
     );
     port (
         ClkxCI        : in  std_logic;
