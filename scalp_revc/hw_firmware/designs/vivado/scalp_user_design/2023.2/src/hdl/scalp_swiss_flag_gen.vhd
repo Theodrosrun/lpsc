@@ -30,7 +30,7 @@ architecture rtl of scalp_swiss_flag_gen is
 begin
 
     process (ClkxCI, RstxRANI) is
-        variable LocalAddrxD : integer range 0 to (C_FB_LOCAL_ADDR_SIZE - 1) := 0;
+        variable PixelAddrxD : integer range 0 to (C_FB_LOCAL_ADDR_SIZE - 1) := 0;
     begin
         if RstxRANI = '0' then
             GenDonexS     <= '0';
@@ -56,14 +56,14 @@ begin
                 end if;
 
                 if GenVxCntxD < C_FB_HALF_HEIGHT then
-                    LocalAddrxD := (GenVxCntxD * C_FB_WIDTH) + GenHxCntxD;
+                    PixelAddrxD := (GenVxCntxD * C_FB_WIDTH) + GenHxCntxD;
                     BramWe1xDO  <= "1";
                 else
-                    LocalAddrxD := ((GenVxCntxD - C_FB_HALF_HEIGHT) * C_FB_WIDTH) + GenHxCntxD;
+                    PixelAddrxD := ((GenVxCntxD - C_FB_HALF_HEIGHT) * C_FB_WIDTH) + GenHxCntxD;
                     BramWe2xDO  <= "1";
                 end if;
 
-                BramWrAddrxDO <= std_logic_vector(to_unsigned(LocalAddrxD, C_BRAM_ADDR_BIT_SIZE));
+                BramWrAddrxDO <= std_logic_vector(to_unsigned(PixelAddrxD, C_BRAM_ADDR_BIT_SIZE));
 
                 if GenHxCntxD < (C_FB_WIDTH - 1) then
                     GenHxCntxD <= GenHxCntxD + 1;
