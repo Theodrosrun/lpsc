@@ -6,7 +6,6 @@ entity scalp_swiss_flag_gen is
     generic (
         C_FB_WIDTH           : integer := 32;
         C_FB_HEIGHT          : integer := 32;
-        C_FB_HALF_HEIGHT     : integer := 16;
         C_FB_LOCAL_ADDR_SIZE : integer := 512;
         C_BRAM_ADDR_BIT_SIZE : integer := 11
     );
@@ -55,11 +54,11 @@ begin
                     BramWrDataxDO <= C_PIXEL_WHITExD;
                 end if;
 
-                if GenVxCntxD < C_FB_HALF_HEIGHT then
+                if GenVxCntxD < (C_FB_HEIGHT / 2) then
                     PixelAddrxD := (GenVxCntxD * C_FB_WIDTH) + GenHxCntxD;
                     BramWe1xDO  <= "1";
                 else
-                    PixelAddrxD := ((GenVxCntxD - C_FB_HALF_HEIGHT) * C_FB_WIDTH) + GenHxCntxD;
+                    PixelAddrxD := ((GenVxCntxD - (C_FB_HEIGHT / 2)) * C_FB_WIDTH) + GenHxCntxD;
                     BramWe2xDO  <= "1";
                 end if;
 

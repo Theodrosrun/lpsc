@@ -9,7 +9,6 @@ entity scalp_vga_if is
     generic (
         C_FB_WIDTH           : integer := 32;
         C_FB_HEIGHT          : integer := 32;
-        C_FB_HALF_HEIGHT     : integer := 16;
         C_FB_LOCAL_ADDR_SIZE : integer := 512;
         C_BRAM_ADDR_BIT_SIZE : integer := 11;
         C_VGA_ACTIVE_SIZE    : integer := 720;
@@ -82,11 +81,11 @@ begin
                 HxScaledxD := (to_integer(unsigned(HxCntxDI)) * C_FB_WIDTH) / C_VGA_ACTIVE_SIZE;
                 VxScaledxD := (to_integer(unsigned(VxCntxDI)) * C_FB_HEIGHT) / C_VGA_ACTIVE_SIZE;
 
-                if VxScaledxD < C_FB_HALF_HEIGHT then
+                if VxScaledxD < (C_FB_HEIGHT / 2) then
                     LocalAddrxD := (VxScaledxD * C_FB_WIDTH) + HxScaledxD;
                     BramRdBankSelxS <= '0';
                 else
-                    LocalAddrxD := ((VxScaledxD - C_FB_HALF_HEIGHT) * C_FB_WIDTH) + HxScaledxD;
+                    LocalAddrxD := ((VxScaledxD - (C_FB_HEIGHT / 2)) * C_FB_WIDTH) + HxScaledxD;
                     BramRdBankSelxS <= '1';
                 end if;
 

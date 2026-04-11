@@ -572,7 +572,6 @@ begin
     PLxB : block is
         constant C_FB_WIDTH           : integer := 32;
         constant C_FB_HEIGHT          : integer := 32;
-        constant C_FB_HALF_HEIGHT     : integer := 16;
         constant C_FB_LOCAL_ADDR_SIZE : integer := 512;
         constant C_BRAM_ADDR_BIT_SIZE : integer := 11;
         constant C_VGA_ACTIVE_SIZE    : integer := 720;
@@ -850,7 +849,6 @@ begin
                 generic map (
                     C_FB_WIDTH           => C_FB_WIDTH,
                     C_FB_HEIGHT          => C_FB_HEIGHT,
-                    C_FB_HALF_HEIGHT     => C_FB_HALF_HEIGHT,
                     C_FB_LOCAL_ADDR_SIZE => C_FB_LOCAL_ADDR_SIZE,
                     C_BRAM_ADDR_BIT_SIZE => C_BRAM_ADDR_BIT_SIZE
                 )
@@ -927,7 +925,6 @@ begin
                 generic map (
                     C_FB_WIDTH           => C_FB_WIDTH,
                     C_FB_HEIGHT          => C_FB_HEIGHT,
-                    C_FB_HALF_HEIGHT     => C_FB_HALF_HEIGHT,
                     C_FB_LOCAL_ADDR_SIZE => C_FB_LOCAL_ADDR_SIZE,
                     C_BRAM_ADDR_BIT_SIZE => C_BRAM_ADDR_BIT_SIZE,
                     C_VGA_ACTIVE_SIZE    => C_VGA_ACTIVE_SIZE,
