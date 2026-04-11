@@ -4,13 +4,13 @@ use ieee.numeric_std.all;
 
 entity scalp_swiss_flag_gen is
     generic (
-        C_FB_WIDTH           : integer;
-        C_FB_HEIGHT          : integer;
+        C_BUFFER_WIDTH       : integer;
+        C_BUFFER_HEIGHT      : integer;
         C_BRAM_ADDR_BIT_SIZE : integer
     );
     port (
-        ClkxCI       : in  std_logic;
-        RstxRANI     : in  std_logic;
+        ClkxCI        : in  std_logic;
+        RstxRANI      : in  std_logic;
         BramWrAddrxDO : out std_logic_vector((C_BRAM_ADDR_BIT_SIZE - 1) downto 0);
         BramWrDataxDO : out std_logic_vector(8 downto 0);
         BramWe1xDO    : out std_logic_vector(0 downto 0);
@@ -19,21 +19,34 @@ entity scalp_swiss_flag_gen is
 end scalp_swiss_flag_gen;
 
 architecture rtl of scalp_swiss_flag_gen is
+    constant C_CROSS_THICKNESSxD : integer := C_BUFFER_WIDTH / 5;
+    constant C_CROSS_MARGINxD    : integer := C_BUFFER_WIDTH / 5;
+
+    constant C_CROSS_V_X_MINxD : integer := (C_BUFFER_WIDTH / 2) - (C_CROSS_THICKNESSxD / 2);
+    constant C_CROSS_V_X_MAXxD : integer := (C_BUFFER_WIDTH / 2) + (C_CROSS_THICKNESSxD / 2);
+    constant C_CROSS_V_Y_MINxD : integer := C_CROSS_MARGINxD;
+    constant C_CROSS_V_Y_MAXxD : integer := C_BUFFER_HEIGHT - C_CROSS_MARGINxD;
+
+    constant C_CROSS_H_X_MINxD : integer := C_CROSS_MARGINxD;
+    constant C_CROSS_H_X_MAXxD : integer := C_BUFFER_WIDTH - C_CROSS_MARGINxD;
+    constant C_CROSS_H_Y_MINxD : integer := (C_BUFFER_HEIGHT / 2) - (C_CROSS_THICKNESSxD / 2);
+    constant C_CROSS_H_Y_MAXxD : integer := (C_BUFFER_HEIGHT / 2) + (C_CROSS_THICKNESSxD / 2);
+
     constant C_PIXEL_WHITExD : std_logic_vector(8 downto 0) := "000000000";
     constant C_PIXEL_REDxD   : std_logic_vector(8 downto 0) := "000000001";
 
-    signal GenDonexS  : std_logic := '0';
-    signal GenHxCntxD : integer range 0 to (C_FB_WIDTH - 1) := 0;
-    signal GenVxCntxD : integer range 0 to (C_FB_HEIGHT - 1) := 0;
+    signal DonexS  : std_logic := '0';
+    signal HxCntxD : integer range 0 to (C_BUFFER_WIDTH - 1) := 0;
+    signal VxCntxD : integer range 0 to (C_BUFFER_HEIGHT - 1) := 0;
 begin
 
     process (ClkxCI, RstxRANI) is
-        variable PixelAddrxD : integer := 0;
+        variable BramWrAddrxD : integer := 0;
     begin
         if RstxRANI = '0' then
-            GenDonexS     <= '0';
-            GenHxCntxD    <= 0;
-            GenVxCntxD    <= 0;
+            DonexS        <= '0';
+            HxCntxD       <= 0;
+            VxCntxD       <= 0;
             BramWrAddrxDO <= (others => '0');
             BramWrDataxDO <= (others => '0');
             BramWe1xDO    <= "0";
@@ -43,37 +56,37 @@ begin
             BramWe1xDO <= "0";
             BramWe2xDO <= "0";
 
-            if GenDonexS = '0' then
+            if DonexS = '0' then
                 BramWrDataxDO <= C_PIXEL_REDxD;
 
-                if (((GenHxCntxD >= 13) and (GenHxCntxD < 19)) and
-                    ((GenVxCntxD >=  6) and (GenVxCntxD < 26))) or
-                   (((GenHxCntxD >=  6) and (GenHxCntxD < 26)) and
-                    ((GenVxCntxD >= 13) and (GenVxCntxD < 19))) then
+                if (((HxCntxD >= C_CROSS_V_X_MINxD) and (HxCntxD < C_CROSS_V_X_MAXxD)) and
+                    ((VxCntxD >= C_CROSS_V_Y_MINxD) and (VxCntxD < C_CROSS_V_Y_MAXxD))) or
+                   (((HxCntxD >= C_CROSS_H_X_MINxD) and (HxCntxD < C_CROSS_H_X_MAXxD)) and
+                    ((VxCntxD >= C_CROSS_H_Y_MINxD) and (VxCntxD < C_CROSS_H_Y_MAXxD))) then
                     BramWrDataxDO <= C_PIXEL_WHITExD;
                 end if;
 
-                if GenVxCntxD < (C_FB_HEIGHT / 2) then
-                    PixelAddrxD := (GenVxCntxD * C_FB_WIDTH) + GenHxCntxD;
-                    BramWe1xDO  <= "1";
+                if VxCntxD < (C_BUFFER_HEIGHT / 2) then
+                    BramWrAddrxD := (VxCntxD * C_BUFFER_WIDTH) + HxCntxD;
+                    BramWe1xDO   <= "1";
                 else
-                    PixelAddrxD := ((GenVxCntxD - (C_FB_HEIGHT / 2)) * C_FB_WIDTH) + GenHxCntxD;
-                    BramWe2xDO  <= "1";
+                    BramWrAddrxD := ((VxCntxD - (C_BUFFER_HEIGHT / 2)) * C_BUFFER_WIDTH) + HxCntxD;
+                    BramWe2xDO   <= "1";
                 end if;
 
-                BramWrAddrxDO <= std_logic_vector(to_unsigned(PixelAddrxD, C_BRAM_ADDR_BIT_SIZE));
+                BramWrAddrxDO <= std_logic_vector(to_unsigned(BramWrAddrxD, C_BRAM_ADDR_BIT_SIZE));
 
-                if GenHxCntxD < (C_FB_WIDTH - 1) then
-                    GenHxCntxD <= GenHxCntxD + 1;
+                if HxCntxD < (C_BUFFER_WIDTH - 1) then
+                    HxCntxD <= HxCntxD + 1;
                 else
-                    if GenVxCntxD < (C_FB_HEIGHT - 1) then
-                        GenVxCntxD <= GenVxCntxD + 1;
+                    if VxCntxD < (C_BUFFER_HEIGHT - 1) then
+                        VxCntxD <= VxCntxD + 1;
                     else
-                        GenVxCntxD <= 0;
-                        GenDonexS  <= '1';
+                        VxCntxD <= 0;
+                        DonexS  <= '1';
                     end if;
 
-                    GenHxCntxD <= 0;
+                    HxCntxD <= 0;
                 end if;
             end if;
         end if;

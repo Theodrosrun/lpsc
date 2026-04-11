@@ -7,23 +7,23 @@ use scalp_lib.scalp_hdmi_pkg.all;
 
 entity scalp_vga_if is
     generic (
-        C_FB_WIDTH           : integer;
-        C_FB_HEIGHT          : integer;
+        C_BUFFER_WIDTH       : integer;
+        C_BUFFER_HEIGHT      : integer;
         C_BRAM_ADDR_BIT_SIZE : integer;
         C_VGA_ACTIVE_SIZE    : integer;
         C_CNT_WIDTH          : integer
     );
     port (
-        ClkxCI        : in  std_logic;
-        PllLockedxSI  : in  std_logic;
-        RstxRANI      : in  std_logic;
-        VidOnxSI      : in  std_logic;
-        HxCntxDI      : in  std_logic_vector((C_CNT_WIDTH - 1) downto 0);
-        VxCntxDI      : in  std_logic_vector((C_CNT_WIDTH - 1) downto 0);
+        ClkxCI         : in  std_logic;
+        PllLockedxSI   : in  std_logic;
+        RstxRANI       : in  std_logic;
+        VidOnxSI       : in  std_logic;
+        HxCntxDI       : in  std_logic_vector((C_CNT_WIDTH - 1) downto 0);
+        VxCntxDI       : in  std_logic_vector((C_CNT_WIDTH - 1) downto 0);
         BramRdData1xDI : in  std_logic_vector(8 downto 0);
         BramRdData2xDI : in  std_logic_vector(8 downto 0);
-        BramRdAddrxDO : out std_logic_vector((C_BRAM_ADDR_BIT_SIZE - 1) downto 0);
-        PixelxDO      : out t_hdmi_vga_pix
+        BramRdAddrxDO  : out std_logic_vector((C_BRAM_ADDR_BIT_SIZE - 1) downto 0);
+        PixelxDO       : out t_hdmi_vga_pix
     );
 end scalp_vga_if;
 
@@ -33,10 +33,10 @@ architecture rtl of scalp_vga_if is
 begin
 
     process (PllLockedxSI, RstxRANI, ClkxCI) is
-        variable HxScaledxD  : integer range 0 to (C_FB_WIDTH - 1) := 0;
-        variable VxScaledxD  : integer range 0 to (C_FB_HEIGHT - 1) := 0;
-        variable LocalAddrxD : integer := 0;
-        variable PixelCodexD : std_logic_vector(8 downto 0) := (others => '0');
+        variable PixelCodexD  : std_logic_vector(8 downto 0) := (others => '0');
+        variable HxScaledxD   : integer range 0 to (C_BUFFER_WIDTH - 1) := 0;
+        variable VxScaledxD   : integer range 0 to (C_BUFFER_HEIGHT - 1) := 0;
+        variable BramRdAddrxD : integer := 0;
     begin
         if (PllLockedxSI = '0') or (RstxRANI = '0') then
             BramRdAddrxDO   <= (others => '0');
@@ -77,18 +77,18 @@ begin
             BramRdBankSelxS <= '0';
 
             if VidOnxSI = '1' then
-                HxScaledxD := (to_integer(unsigned(HxCntxDI)) * C_FB_WIDTH) / C_VGA_ACTIVE_SIZE;
-                VxScaledxD := (to_integer(unsigned(VxCntxDI)) * C_FB_HEIGHT) / C_VGA_ACTIVE_SIZE;
+                HxScaledxD := (to_integer(unsigned(HxCntxDI)) * C_BUFFER_WIDTH) / C_VGA_ACTIVE_SIZE;
+                VxScaledxD := (to_integer(unsigned(VxCntxDI)) * C_BUFFER_HEIGHT) / C_VGA_ACTIVE_SIZE;
 
-                if VxScaledxD < (C_FB_HEIGHT / 2) then
-                    LocalAddrxD := (VxScaledxD * C_FB_WIDTH) + HxScaledxD;
+                if VxScaledxD < (C_BUFFER_HEIGHT / 2) then
+                    BramRdAddrxD := (VxScaledxD * C_BUFFER_WIDTH) + HxScaledxD;
                     BramRdBankSelxS <= '0';
                 else
-                    LocalAddrxD := ((VxScaledxD - (C_FB_HEIGHT / 2)) * C_FB_WIDTH) + HxScaledxD;
+                    BramRdAddrxD := ((VxScaledxD - (C_BUFFER_HEIGHT / 2)) * C_BUFFER_WIDTH) + HxScaledxD;
                     BramRdBankSelxS <= '1';
                 end if;
 
-                BramRdAddrxDO <= std_logic_vector(to_unsigned(LocalAddrxD, C_BRAM_ADDR_BIT_SIZE));
+                BramRdAddrxDO <= std_logic_vector(to_unsigned(BramRdAddrxD, C_BRAM_ADDR_BIT_SIZE));
             end if;
         end if;
     end process;

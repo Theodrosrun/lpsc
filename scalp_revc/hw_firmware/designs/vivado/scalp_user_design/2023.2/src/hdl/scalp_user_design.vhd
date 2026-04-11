@@ -570,8 +570,8 @@ begin
     end block PSxB;
 
     PLxB : block is
-        constant C_FB_WIDTH           : integer := 32;
-        constant C_FB_HEIGHT          : integer := 32;
+        constant C_BUFFER_WIDTH       : integer := 32;
+        constant C_BUFFER_HEIGHT      : integer := 32;
         constant C_BRAM_ADDR_BIT_SIZE : integer := 11;
         constant C_VGA_ACTIVE_SIZE    : integer := 720;
 
@@ -846,8 +846,8 @@ begin
 
             SwissFlagGenxI : entity work.scalp_swiss_flag_gen
                 generic map (
-                    C_FB_WIDTH           => C_FB_WIDTH,
-                    C_FB_HEIGHT          => C_FB_HEIGHT,
+                    C_BUFFER_WIDTH       => C_BUFFER_WIDTH,
+                    C_BUFFER_HEIGHT      => C_BUFFER_HEIGHT,
                     C_BRAM_ADDR_BIT_SIZE => C_BRAM_ADDR_BIT_SIZE
                 )
                 port map (
@@ -921,8 +921,8 @@ begin
 
             VgaIfxI : entity work.scalp_vga_if
                 generic map (
-                    C_FB_WIDTH           => C_FB_WIDTH,
-                    C_FB_HEIGHT          => C_FB_HEIGHT,
+                    C_BUFFER_WIDTH       => C_BUFFER_WIDTH,
+                    C_BUFFER_HEIGHT      => C_BUFFER_HEIGHT,
                     C_BRAM_ADDR_BIT_SIZE => C_BRAM_ADDR_BIT_SIZE,
                     C_VGA_ACTIVE_SIZE    => C_VGA_ACTIVE_SIZE,
                     C_CNT_WIDTH          => VgaPixCountersxD.HxD'length
