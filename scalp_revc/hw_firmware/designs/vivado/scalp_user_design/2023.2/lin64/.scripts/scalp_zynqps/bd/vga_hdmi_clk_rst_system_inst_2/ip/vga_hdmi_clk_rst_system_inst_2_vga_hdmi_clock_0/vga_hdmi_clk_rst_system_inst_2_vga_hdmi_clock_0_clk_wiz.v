@@ -77,7 +77,6 @@ module vga_hdmi_clk_rst_system_inst_2_vga_hdmi_clock_0_clk_wiz
   // Input buffering
   //------------------------------------
 wire clk_in1_vga_hdmi_clk_rst_system_inst_2_vga_hdmi_clock_0;
-wire clk_in1_vga_hdmi_clk_rst_system_inst_2_vga_hdmi_clock_0_buf;
 wire clk_in2_vga_hdmi_clk_rst_system_inst_2_vga_hdmi_clock_0;
   BUFG clkin1_bufg
    (.O (clk_in1_vga_hdmi_clk_rst_system_inst_2_vga_hdmi_clock_0),

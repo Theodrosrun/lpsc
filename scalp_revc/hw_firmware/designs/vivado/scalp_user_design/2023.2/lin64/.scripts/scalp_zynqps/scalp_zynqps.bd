@@ -1,13 +1,13 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0xFE3D591FE748C4CA",
+      "boundary_crc": "0xFE3D591F49CBC685",
       "device": "xc7z015clg485-2",
       "name": "scalp_zynqps",
       "pfm_name": "hepia:scalp:scalp_zynq_user_pltfm:1.0",
       "rev_ctrl_bd_flag": "RevCtrlBdOff",
       "synth_flow_mode": "Hierarchical",
-      "tool_version": "2025.2",
+      "tool_version": "2023.2",
       "validated": "true"
     },
     "design_tree": {
@@ -976,11 +976,10 @@
     "components": {
       "gnd_constant": {
         "vlnv": "xilinx.com:ip:xlconstant:1.1",
-        "ip_revision": "10",
+        "ip_revision": "8",
         "xci_name": "scalp_zynqps_gnd_constant_0",
         "xci_path": "ip/scalp_zynqps_gnd_constant_0/scalp_zynqps_gnd_constant_0.xci",
         "inst_hier_path": "gnd_constant",
-        "has_run_ip_tcl": "true",
         "parameters": {
           "CONST_VAL": {
             "value": "0"
@@ -989,11 +988,10 @@
       },
       "processing_system7_0": {
         "vlnv": "xilinx.com:ip:processing_system7:5.5",
-        "ip_revision": "8",
+        "ip_revision": "6",
         "xci_name": "scalp_zynqps_processing_system7_0_0",
         "xci_path": "ip/scalp_zynqps_processing_system7_0_0/scalp_zynqps_processing_system7_0_0.xci",
         "inst_hier_path": "processing_system7_0",
-        "has_run_ip_tcl": "true",
         "parameters": {
           "PCW_ACT_APU_PERIPHERAL_FREQMHZ": {
             "value": "750.000000"
@@ -2726,12 +2724,6 @@
         },
         "interface_ports": {
           "M_AXI_GP0": {
-            "bd_attributes": {
-              "TYPE": {
-                "value": "END_POINT",
-                "value_src": "auto"
-              }
-            },
             "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
             "mode": "Master",
             "address_space_ref": "Data",
@@ -2869,8 +2861,7 @@
         "ip_revision": "2",
         "xci_name": "scalp_zynqps_scalp_axi_link_firmwareid_0",
         "xci_path": "ip/scalp_zynqps_scalp_axi_link_firmwareid_0/scalp_zynqps_scalp_axi_link_firmwareid_0.xci",
-        "inst_hier_path": "scalp_axi_link_firmwareid",
-        "has_run_ip_tcl": "true"
+        "inst_hier_path": "scalp_axi_link_firmwareid"
       },
       "ps7_0_axi_periph": {
         "vlnv": "xilinx.com:ip:axi_interconnect:2.1",
@@ -2886,90 +2877,42 @@
           "S00_AXI": {
             "mode": "Slave",
             "vlnv_bus_definition": "xilinx.com:interface:aximm:1.0",
-            "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
-            "hdl_attributes": {
-              "LOCKED": {
-                "value": "FALSE",
-                "value_src": "default"
-              }
-            }
+            "vlnv": "xilinx.com:interface:aximm_rtl:1.0"
           },
           "M00_AXI": {
             "mode": "Master",
             "vlnv_bus_definition": "xilinx.com:interface:aximm:1.0",
-            "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
-            "hdl_attributes": {
-              "LOCKED": {
-                "value": "FALSE",
-                "value_src": "default"
-              }
-            }
+            "vlnv": "xilinx.com:interface:aximm_rtl:1.0"
           },
           "M01_AXI": {
             "mode": "Master",
             "vlnv_bus_definition": "xilinx.com:interface:aximm:1.0",
-            "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
-            "hdl_attributes": {
-              "LOCKED": {
-                "value": "FALSE",
-                "value_src": "default"
-              }
-            }
+            "vlnv": "xilinx.com:interface:aximm_rtl:1.0"
           },
           "M02_AXI": {
             "mode": "Master",
             "vlnv_bus_definition": "xilinx.com:interface:aximm:1.0",
-            "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
-            "hdl_attributes": {
-              "LOCKED": {
-                "value": "FALSE",
-                "value_src": "default"
-              }
-            }
+            "vlnv": "xilinx.com:interface:aximm_rtl:1.0"
           },
           "M03_AXI": {
             "mode": "Master",
             "vlnv_bus_definition": "xilinx.com:interface:aximm:1.0",
-            "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
-            "hdl_attributes": {
-              "LOCKED": {
-                "value": "FALSE",
-                "value_src": "default"
-              }
-            }
+            "vlnv": "xilinx.com:interface:aximm_rtl:1.0"
           },
           "M04_AXI": {
             "mode": "Master",
             "vlnv_bus_definition": "xilinx.com:interface:aximm:1.0",
-            "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
-            "hdl_attributes": {
-              "LOCKED": {
-                "value": "FALSE",
-                "value_src": "default"
-              }
-            }
+            "vlnv": "xilinx.com:interface:aximm_rtl:1.0"
           },
           "M05_AXI": {
             "mode": "Master",
             "vlnv_bus_definition": "xilinx.com:interface:aximm:1.0",
-            "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
-            "hdl_attributes": {
-              "LOCKED": {
-                "value": "FALSE",
-                "value_src": "default"
-              }
-            }
+            "vlnv": "xilinx.com:interface:aximm_rtl:1.0"
           },
           "M06_AXI": {
             "mode": "Master",
             "vlnv_bus_definition": "xilinx.com:interface:aximm:1.0",
-            "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
-            "hdl_attributes": {
-              "LOCKED": {
-                "value": "FALSE",
-                "value_src": "default"
-              }
-            }
+            "vlnv": "xilinx.com:interface:aximm_rtl:1.0"
           }
         },
         "ports": {
@@ -3118,11 +3061,10 @@
         "components": {
           "xbar": {
             "vlnv": "xilinx.com:ip:axi_crossbar:2.1",
-            "ip_revision": "38",
-            "xci_name": "scalp_zynqps_ps7_0_axi_periph_upgraded_ipi_imp_xbar_0",
-            "xci_path": "ip/scalp_zynqps_ps7_0_axi_periph_upgraded_ipi_imp_xbar_0_2/scalp_zynqps_ps7_0_axi_periph_upgraded_ipi_imp_xbar_0.xci",
+            "ip_revision": "30",
+            "xci_name": "scalp_zynqps_xbar_0",
+            "xci_path": "ip/scalp_zynqps_xbar_0/scalp_zynqps_xbar_0.xci",
             "inst_hier_path": "ps7_0_axi_periph/xbar",
-            "has_run_ip_tcl": "true",
             "parameters": {
               "NUM_MI": {
                 "value": "7"
@@ -3136,16 +3078,6 @@
             },
             "interface_ports": {
               "S00_AXI": {
-                "bd_attributes": {
-                  "BRIDGES": {
-                    "value": "M00_AXI:M01_AXI:M02_AXI:M03_AXI:M04_AXI:M05_AXI:M06_AXI",
-                    "value_src": "auto"
-                  },
-                  "TYPE": {
-                    "value": "interior",
-                    "value_src": "default"
-                  }
-                },
                 "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
                 "mode": "Slave",
                 "bridges": [
@@ -3157,62 +3089,6 @@
                   "M05_AXI",
                   "M06_AXI"
                 ]
-              },
-              "M00_AXI": {
-                "bd_attributes": {
-                  "TYPE": {
-                    "value": "interior",
-                    "value_src": "default"
-                  }
-                }
-              },
-              "M01_AXI": {
-                "bd_attributes": {
-                  "TYPE": {
-                    "value": "interior",
-                    "value_src": "default"
-                  }
-                }
-              },
-              "M02_AXI": {
-                "bd_attributes": {
-                  "TYPE": {
-                    "value": "interior",
-                    "value_src": "default"
-                  }
-                }
-              },
-              "M03_AXI": {
-                "bd_attributes": {
-                  "TYPE": {
-                    "value": "interior",
-                    "value_src": "default"
-                  }
-                }
-              },
-              "M04_AXI": {
-                "bd_attributes": {
-                  "TYPE": {
-                    "value": "interior",
-                    "value_src": "default"
-                  }
-                }
-              },
-              "M05_AXI": {
-                "bd_attributes": {
-                  "TYPE": {
-                    "value": "interior",
-                    "value_src": "default"
-                  }
-                }
-              },
-              "M06_AXI": {
-                "bd_attributes": {
-                  "TYPE": {
-                    "value": "interior",
-                    "value_src": "default"
-                  }
-                }
               }
             }
           },
@@ -3221,24 +3097,12 @@
               "M_AXI": {
                 "mode": "Master",
                 "vlnv_bus_definition": "xilinx.com:interface:aximm:1.0",
-                "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
-                "hdl_attributes": {
-                  "LOCKED": {
-                    "value": "FALSE",
-                    "value_src": "default"
-                  }
-                }
+                "vlnv": "xilinx.com:interface:aximm_rtl:1.0"
               },
               "S_AXI": {
                 "mode": "Slave",
                 "vlnv_bus_definition": "xilinx.com:interface:aximm:1.0",
-                "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
-                "hdl_attributes": {
-                  "LOCKED": {
-                    "value": "FALSE",
-                    "value_src": "default"
-                  }
-                }
+                "vlnv": "xilinx.com:interface:aximm_rtl:1.0"
               }
             },
             "ports": {
@@ -3278,11 +3142,10 @@
             "components": {
               "auto_pc": {
                 "vlnv": "xilinx.com:ip:axi_protocol_converter:2.1",
-                "ip_revision": "37",
-                "xci_name": "scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0",
-                "xci_path": "ip/scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_1/scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0.xci",
+                "ip_revision": "29",
+                "xci_name": "scalp_zynqps_auto_pc_0",
+                "xci_path": "ip/scalp_zynqps_auto_pc_0/scalp_zynqps_auto_pc_0.xci",
                 "inst_hier_path": "ps7_0_axi_periph/s00_couplers/auto_pc",
-                "has_run_ip_tcl": "true",
                 "parameters": {
                   "MI_PROTOCOL": {
                     "value": "AXI4LITE"
@@ -3293,29 +3156,11 @@
                 },
                 "interface_ports": {
                   "S_AXI": {
-                    "bd_attributes": {
-                      "BRIDGES": {
-                        "value": "M_AXI",
-                        "value_src": "auto"
-                      },
-                      "TYPE": {
-                        "value": "interior",
-                        "value_src": "default"
-                      }
-                    },
                     "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
                     "mode": "Slave",
                     "bridges": [
                       "M_AXI"
                     ]
-                  },
-                  "M_AXI": {
-                    "bd_attributes": {
-                      "TYPE": {
-                        "value": "interior",
-                        "value_src": "default"
-                      }
-                    }
                   }
                 }
               }
@@ -3354,24 +3199,12 @@
               "M_AXI": {
                 "mode": "Master",
                 "vlnv_bus_definition": "xilinx.com:interface:aximm:1.0",
-                "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
-                "hdl_attributes": {
-                  "LOCKED": {
-                    "value": "FALSE",
-                    "value_src": "default"
-                  }
-                }
+                "vlnv": "xilinx.com:interface:aximm_rtl:1.0"
               },
               "S_AXI": {
                 "mode": "Slave",
                 "vlnv_bus_definition": "xilinx.com:interface:aximm:1.0",
-                "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
-                "hdl_attributes": {
-                  "LOCKED": {
-                    "value": "FALSE",
-                    "value_src": "default"
-                  }
-                }
+                "vlnv": "xilinx.com:interface:aximm_rtl:1.0"
               }
             },
             "ports": {
@@ -3422,24 +3255,12 @@
               "M_AXI": {
                 "mode": "Master",
                 "vlnv_bus_definition": "xilinx.com:interface:aximm:1.0",
-                "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
-                "hdl_attributes": {
-                  "LOCKED": {
-                    "value": "FALSE",
-                    "value_src": "default"
-                  }
-                }
+                "vlnv": "xilinx.com:interface:aximm_rtl:1.0"
               },
               "S_AXI": {
                 "mode": "Slave",
                 "vlnv_bus_definition": "xilinx.com:interface:aximm:1.0",
-                "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
-                "hdl_attributes": {
-                  "LOCKED": {
-                    "value": "FALSE",
-                    "value_src": "default"
-                  }
-                }
+                "vlnv": "xilinx.com:interface:aximm_rtl:1.0"
               }
             },
             "ports": {
@@ -3490,24 +3311,12 @@
               "M_AXI": {
                 "mode": "Master",
                 "vlnv_bus_definition": "xilinx.com:interface:aximm:1.0",
-                "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
-                "hdl_attributes": {
-                  "LOCKED": {
-                    "value": "FALSE",
-                    "value_src": "default"
-                  }
-                }
+                "vlnv": "xilinx.com:interface:aximm_rtl:1.0"
               },
               "S_AXI": {
                 "mode": "Slave",
                 "vlnv_bus_definition": "xilinx.com:interface:aximm:1.0",
-                "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
-                "hdl_attributes": {
-                  "LOCKED": {
-                    "value": "FALSE",
-                    "value_src": "default"
-                  }
-                }
+                "vlnv": "xilinx.com:interface:aximm_rtl:1.0"
               }
             },
             "ports": {
@@ -3558,24 +3367,12 @@
               "M_AXI": {
                 "mode": "Master",
                 "vlnv_bus_definition": "xilinx.com:interface:aximm:1.0",
-                "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
-                "hdl_attributes": {
-                  "LOCKED": {
-                    "value": "FALSE",
-                    "value_src": "default"
-                  }
-                }
+                "vlnv": "xilinx.com:interface:aximm_rtl:1.0"
               },
               "S_AXI": {
                 "mode": "Slave",
                 "vlnv_bus_definition": "xilinx.com:interface:aximm:1.0",
-                "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
-                "hdl_attributes": {
-                  "LOCKED": {
-                    "value": "FALSE",
-                    "value_src": "default"
-                  }
-                }
+                "vlnv": "xilinx.com:interface:aximm_rtl:1.0"
               }
             },
             "ports": {
@@ -3626,24 +3423,12 @@
               "M_AXI": {
                 "mode": "Master",
                 "vlnv_bus_definition": "xilinx.com:interface:aximm:1.0",
-                "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
-                "hdl_attributes": {
-                  "LOCKED": {
-                    "value": "FALSE",
-                    "value_src": "default"
-                  }
-                }
+                "vlnv": "xilinx.com:interface:aximm_rtl:1.0"
               },
               "S_AXI": {
                 "mode": "Slave",
                 "vlnv_bus_definition": "xilinx.com:interface:aximm:1.0",
-                "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
-                "hdl_attributes": {
-                  "LOCKED": {
-                    "value": "FALSE",
-                    "value_src": "default"
-                  }
-                }
+                "vlnv": "xilinx.com:interface:aximm_rtl:1.0"
               }
             },
             "ports": {
@@ -3694,24 +3479,12 @@
               "M_AXI": {
                 "mode": "Master",
                 "vlnv_bus_definition": "xilinx.com:interface:aximm:1.0",
-                "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
-                "hdl_attributes": {
-                  "LOCKED": {
-                    "value": "FALSE",
-                    "value_src": "default"
-                  }
-                }
+                "vlnv": "xilinx.com:interface:aximm_rtl:1.0"
               },
               "S_AXI": {
                 "mode": "Slave",
                 "vlnv_bus_definition": "xilinx.com:interface:aximm:1.0",
-                "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
-                "hdl_attributes": {
-                  "LOCKED": {
-                    "value": "FALSE",
-                    "value_src": "default"
-                  }
-                }
+                "vlnv": "xilinx.com:interface:aximm_rtl:1.0"
               }
             },
             "ports": {
@@ -3762,24 +3535,12 @@
               "M_AXI": {
                 "mode": "Master",
                 "vlnv_bus_definition": "xilinx.com:interface:aximm:1.0",
-                "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
-                "hdl_attributes": {
-                  "LOCKED": {
-                    "value": "FALSE",
-                    "value_src": "default"
-                  }
-                }
+                "vlnv": "xilinx.com:interface:aximm_rtl:1.0"
               },
               "S_AXI": {
                 "mode": "Slave",
                 "vlnv_bus_definition": "xilinx.com:interface:aximm:1.0",
-                "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
-                "hdl_attributes": {
-                  "LOCKED": {
-                    "value": "FALSE",
-                    "value_src": "default"
-                  }
-                }
+                "vlnv": "xilinx.com:interface:aximm_rtl:1.0"
               }
             },
             "ports": {
@@ -4056,11 +3817,10 @@
       },
       "axi_gpio_switches": {
         "vlnv": "xilinx.com:ip:axi_gpio:2.0",
-        "ip_revision": "37",
+        "ip_revision": "31",
         "xci_name": "scalp_zynqps_axi_gpio_switches_0",
         "xci_path": "ip/scalp_zynqps_axi_gpio_switches_0/scalp_zynqps_axi_gpio_switches_0.xci",
         "inst_hier_path": "axi_gpio_switches",
-        "has_run_ip_tcl": "true",
         "parameters": {
           "C_ALL_INPUTS": {
             "value": "1"
@@ -4075,50 +3835,34 @@
       },
       "axi_intc_0": {
         "vlnv": "xilinx.com:ip:axi_intc:4.1",
-        "ip_revision": "22",
+        "ip_revision": "18",
         "xci_name": "scalp_zynqps_axi_intc_0_0",
         "xci_path": "ip/scalp_zynqps_axi_intc_0_0/scalp_zynqps_axi_intc_0_0.xci",
         "inst_hier_path": "axi_intc_0",
-        "has_run_ip_tcl": "true",
         "parameters": {
           "C_IRQ_CONNECTION": {
             "value": "1"
-          }
-        },
-        "ports": {
-          "irq": {
-            "bd_attributes": {
-              "FUNCTION": {
-                "value": "INTR_CTRL",
-                "value_src": "default"
-              }
-            }
           }
         }
       },
       "xlconcat_0": {
         "vlnv": "xilinx.com:ip:xlconcat:2.1",
-        "ip_revision": "7",
+        "ip_revision": "5",
         "xci_name": "scalp_zynqps_xlconcat_0_0",
         "xci_path": "ip/scalp_zynqps_xlconcat_0_0/scalp_zynqps_xlconcat_0_0.xci",
         "inst_hier_path": "xlconcat_0",
-        "has_run_ip_tcl": "true",
         "parameters": {
           "NUM_PORTS": {
-            "value": "3"
-          },
-          "dout_width": {
             "value": "3"
           }
         }
       },
       "axi_gpio_reset_btn": {
         "vlnv": "xilinx.com:ip:axi_gpio:2.0",
-        "ip_revision": "37",
+        "ip_revision": "31",
         "xci_name": "scalp_zynqps_axi_gpio_reset_btn_0",
         "xci_path": "ip/scalp_zynqps_axi_gpio_reset_btn_0/scalp_zynqps_axi_gpio_reset_btn_0.xci",
         "inst_hier_path": "axi_gpio_reset_btn",
-        "has_run_ip_tcl": "true",
         "parameters": {
           "C_ALL_INPUTS": {
             "value": "0"
@@ -4136,11 +3880,10 @@
       },
       "system_ila_0": {
         "vlnv": "xilinx.com:ip:system_ila:1.1",
-        "ip_revision": "22",
+        "ip_revision": "15",
         "xci_name": "scalp_zynqps_system_ila_0_0",
         "xci_path": "ip/scalp_zynqps_system_ila_0_0/scalp_zynqps_system_ila_0_0.xci",
         "inst_hier_path": "system_ila_0",
-        "has_run_ip_tcl": "true",
         "parameters": {
           "C_MON_TYPE": {
             "value": "NATIVE"
@@ -4161,8 +3904,7 @@
         "ip_revision": "2",
         "xci_name": "scalp_zynqps_scalp_axi_link_cplx_num_regs_0",
         "xci_path": "ip/scalp_zynqps_scalp_axi_link_cplx_num_regs_0/scalp_zynqps_scalp_axi_link_cplx_num_regs_0.xci",
-        "inst_hier_path": "scalp_axi_link_cplx_num_regs",
-        "has_run_ip_tcl": "true"
+        "inst_hier_path": "scalp_axi_link_cplx_num_regs"
       },
       "vga_hdmi_clk_rst_sys_0": {
         "parameters": {
@@ -4183,10 +3925,6 @@
           },
           "LOCK_PROPAGATE": {
             "value": "0"
-          },
-          "TRAINING_MODULE": {
-            "value": "vga_hdmi_clk_rst_system.bd",
-            "value_src": "auto"
           }
         },
         "ports": {
@@ -4203,6 +3941,10 @@
               "POLARITY": {
                 "value": "ACTIVE_LOW",
                 "value_src": "const_prop"
+              },
+              "TYPE": {
+                "value": "PERIPHERAL",
+                "value_src": "strong"
               }
             }
           },
@@ -4219,6 +3961,10 @@
               "POLARITY": {
                 "value": "ACTIVE_HIGH",
                 "value_src": "const_prop"
+              },
+              "TYPE": {
+                "value": "PERIPHERAL",
+                "value_src": "strong"
               }
             }
           },
@@ -4227,7 +3973,7 @@
             "direction": "O",
             "parameters": {
               "ASSOCIATED_RESET": {
-                "value": "ClkHdmiRstxRO:ClkHdmiRstxRNAO",
+                "value": "ClkHdmiRstxRNAO:ClkHdmiRstxRO",
                 "value_src": "strong"
               },
               "CLK_DOMAIN": {
@@ -4265,6 +4011,10 @@
               "POLARITY": {
                 "value": "ACTIVE_LOW",
                 "value_src": "const_prop"
+              },
+              "TYPE": {
+                "value": "PERIPHERAL",
+                "value_src": "strong"
               }
             }
           },
@@ -4281,6 +4031,10 @@
               "POLARITY": {
                 "value": "ACTIVE_HIGH",
                 "value_src": "const_prop"
+              },
+              "TYPE": {
+                "value": "PERIPHERAL",
+                "value_src": "strong"
               }
             }
           },
@@ -4289,7 +4043,7 @@
             "direction": "O",
             "parameters": {
               "ASSOCIATED_RESET": {
-                "value": "ClkVgaRstxRO:ClkVgaRstxRNAO",
+                "value": "ClkVgaRstxRNAO:ClkVgaRstxRO",
                 "value_src": "strong"
               },
               "CLK_DOMAIN": {
@@ -4367,7 +4121,7 @@
         "variant_info": {
           "vga_hdmi_clk_rst_system.bd": {
             "scoped_diagram": "vga_hdmi_clk_rst_system_inst_2.bd",
-            "design_checksum": "0x203699CF89C8C51B",
+            "design_checksum": "0x9B0CDA0C",
             "ref_name": "vga_hdmi_clk_rst_system",
             "ref_subinst_path": "scalp_zynqps_vga_hdmi_clk_rst_system_0",
             "ref_type": "Block Design",
@@ -4378,19 +4132,17 @@
       },
       "rst_ps7_0_125M": {
         "vlnv": "xilinx.com:ip:proc_sys_reset:5.0",
-        "ip_revision": "17",
+        "ip_revision": "14",
         "xci_name": "scalp_zynqps_rst_ps7_0_125M_0",
         "xci_path": "ip/scalp_zynqps_rst_ps7_0_125M_0/scalp_zynqps_rst_ps7_0_125M_0.xci",
-        "inst_hier_path": "rst_ps7_0_125M",
-        "has_run_ip_tcl": "true"
+        "inst_hier_path": "rst_ps7_0_125M"
       },
       "sys_clock": {
         "vlnv": "xilinx.com:ip:clk_wiz:6.0",
-        "ip_revision": "17",
+        "ip_revision": "13",
         "xci_name": "scalp_zynqps_sys_clock_0",
         "xci_path": "ip/scalp_zynqps_sys_clock_0/scalp_zynqps_sys_clock_0.xci",
         "inst_hier_path": "sys_clock",
-        "has_run_ip_tcl": "true",
         "parameters": {
           "CLKIN1_JITTER_PS": {
             "value": "80.0"
@@ -4495,19 +4247,17 @@
       },
       "axi_iic_ioext": {
         "vlnv": "xilinx.com:ip:axi_iic:2.1",
-        "ip_revision": "11",
+        "ip_revision": "5",
         "xci_name": "scalp_zynqps_axi_iic_ioext_0",
         "xci_path": "ip/scalp_zynqps_axi_iic_ioext_0/scalp_zynqps_axi_iic_ioext_0.xci",
-        "inst_hier_path": "axi_iic_ioext",
-        "has_run_ip_tcl": "true"
+        "inst_hier_path": "axi_iic_ioext"
       },
       "axi_gpio_joystick": {
         "vlnv": "xilinx.com:ip:axi_gpio:2.0",
-        "ip_revision": "37",
+        "ip_revision": "31",
         "xci_name": "scalp_zynqps_axi_gpio_joystick_0",
         "xci_path": "ip/scalp_zynqps_axi_gpio_joystick_0/scalp_zynqps_axi_gpio_joystick_0.xci",
         "inst_hier_path": "axi_gpio_joystick",
-        "has_run_ip_tcl": "true",
         "parameters": {
           "C_ALL_INPUTS": {
             "value": "1"
@@ -4629,8 +4379,8 @@
       "axi_gpio_0_ip2intc_irpt": {
         "ports": [
           "axi_gpio_switches/ip2intc_irpt",
-          "system_ila_0/probe0",
-          "xlconcat_0/In0"
+          "xlconcat_0/In0",
+          "system_ila_0/probe0"
         ],
         "hdl_attributes": {
           "DEBUG": {
@@ -4721,19 +4471,19 @@
           "rst_ps7_0_125M/peripheral_aresetn",
           "Clk125RstxRNAO",
           "scalp_axi_link_firmwareid/SAxiSlvRstxRANI",
-          "scalp_axi_link_cplx_num_regs/SAxiSlvRstxRANI",
-          "axi_gpio_joystick/s_axi_aresetn",
-          "axi_gpio_reset_btn/s_axi_aresetn",
           "axi_gpio_switches/s_axi_aresetn",
-          "axi_iic_ioext/s_axi_aresetn",
           "axi_intc_0/s_axi_aresetn",
-          "ps7_0_axi_periph/S00_ARESETN",
-          "ps7_0_axi_periph/M00_ARESETN",
-          "ps7_0_axi_periph/M01_ARESETN",
-          "ps7_0_axi_periph/M02_ARESETN",
+          "axi_gpio_reset_btn/s_axi_aresetn",
           "ps7_0_axi_periph/M03_ARESETN",
+          "ps7_0_axi_periph/M02_ARESETN",
+          "ps7_0_axi_periph/M01_ARESETN",
+          "ps7_0_axi_periph/M00_ARESETN",
+          "ps7_0_axi_periph/S00_ARESETN",
+          "scalp_axi_link_cplx_num_regs/SAxiSlvRstxRANI",
           "ps7_0_axi_periph/M04_ARESETN",
+          "axi_iic_ioext/s_axi_aresetn",
           "ps7_0_axi_periph/M05_ARESETN",
+          "axi_gpio_joystick/s_axi_aresetn",
           "ps7_0_axi_periph/M06_ARESETN"
         ]
       },
@@ -4770,33 +4520,33 @@
       "sys_clock_clk_126": {
         "ports": [
           "sys_clock/clk_125",
-          "scalp_axi_link_firmwareid/SAxiSlvClkxCI",
-          "Clk125xCO",
-          "scalp_axi_link_cplx_num_regs/SAxiSlvClkxCI",
-          "axi_gpio_joystick/s_axi_aclk",
-          "axi_gpio_reset_btn/s_axi_aclk",
-          "axi_gpio_switches/s_axi_aclk",
-          "axi_iic_ioext/s_axi_aclk",
-          "axi_intc_0/s_axi_aclk",
-          "processing_system7_0/M_AXI_GP0_ACLK",
+          "rst_ps7_0_125M/slowest_sync_clk",
           "ps7_0_axi_periph/ACLK",
+          "processing_system7_0/M_AXI_GP0_ACLK",
           "ps7_0_axi_periph/S00_ACLK",
           "ps7_0_axi_periph/M00_ACLK",
+          "scalp_axi_link_firmwareid/SAxiSlvClkxCI",
+          "axi_gpio_switches/s_axi_aclk",
+          "axi_intc_0/s_axi_aclk",
           "ps7_0_axi_periph/M01_ACLK",
           "ps7_0_axi_periph/M02_ACLK",
           "ps7_0_axi_periph/M03_ACLK",
+          "axi_gpio_reset_btn/s_axi_aclk",
+          "system_ila_0/clk",
+          "Clk125xCO",
+          "scalp_axi_link_cplx_num_regs/SAxiSlvClkxCI",
           "ps7_0_axi_periph/M04_ACLK",
+          "axi_iic_ioext/s_axi_aclk",
           "ps7_0_axi_periph/M05_ACLK",
-          "ps7_0_axi_periph/M06_ACLK",
-          "rst_ps7_0_125M/slowest_sync_clk",
-          "system_ila_0/clk"
+          "axi_gpio_joystick/s_axi_aclk",
+          "ps7_0_axi_periph/M06_ACLK"
         ]
       },
       "sys_clock_locked": {
         "ports": [
           "sys_clock/locked",
-          "Clk125PllLockedxS",
-          "rst_ps7_0_125M/dcm_locked"
+          "rst_ps7_0_125M/dcm_locked",
+          "Clk125PllLockedxS"
         ]
       },
       "vga_hdmi_clk_rst_sys_0_ClkHdmiRstxRNAO": {

@@ -5,71 +5,68 @@
 ##  License    : MIT                                                                   ##
 #########################################################################################
 
-# Logs / reports
+## log files
 *.log
 *.jou
 *.rpt
-*.str
 *.vdi
-webtalk.*
-hs_err_pid*
-vivado_pid*.str
 
-# Bitstreams / images
+## bitstream
 *.bit
 *.bin
 *.mcs
 *.svf
 *.image
 
-# Netlists / generated outputs
+## netlist
 *.edf
 *.edif
 *.vn
 *.vm
-*.sdf
-*.dcp
 
-# Simulation / dumps
+## SDF
+*.sdf
+
+## sim dump
 *.vcd
-*.wdb
 *.saif
 *.tcf
+*.wdb
+
+## others
+unisims
+
+## C-files
+*.elf
+*.a
+*.sa
+*.so
+*.lib
+
+## dirs
+vivado.cache/
+vivado.hw/
+vivado.ip_user_files/
+vivado.runs/
+vivado.sim/
+
+###### for Xilinx Vivado|ISE
+.Xil/
+.cache/
+fsm_encoding.os
+tab_*/
+webtalk.*
+vivado_pid*.str
+hs_err_pid*
 xelab.*
 xsim.*
 xvlog.*
-
-# Xilinx runtime / cache
-.Xil/
-.cache/
 *.cache
-*.runs
 *.sim
+*.runs
 *.hw
-
-# Vivado generated directories anywhere in repo
-**/.Xil/
-**/ip_user_files/
-**/*.ip_user_files/
-**/cache/
-**/runs/
-**/sim/
-**/hw/
-
-# Vivado project generated folders
-**/*.cache/
-**/*.runs/
-**/*.sim/
-**/*.hw/
-
-# Temporary / backup / debug
-fsm_encoding.os
-tab_*/
 *.backup.*
 *.debug
 
-# Optional generated stubs / netlists
-*_sim_netlist.v
-*_sim_netlist.vhdl
-*_stub.v
-*_stub.vhdl
+## checkpoint files
+*.dcp

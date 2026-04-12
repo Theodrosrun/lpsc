@@ -75,7 +75,6 @@ module scalp_zynqps_sys_clock_0_clk_wiz
   // Input buffering
   //------------------------------------
 wire clk_in1_scalp_zynqps_sys_clock_0;
-wire clk_in1_scalp_zynqps_sys_clock_0_buf;
 wire clk_in2_scalp_zynqps_sys_clock_0;
   BUFG clkin1_bufg
    (.O (clk_in1_scalp_zynqps_sys_clock_0),
