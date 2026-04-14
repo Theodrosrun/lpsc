@@ -69,15 +69,11 @@ use UNISIM.VCOMPONENTS.ALL;
 entity aurora_8b10b_0_CLOCK_MODULE is
 
     port (
-            INIT_CLK_P             : in std_logic;
-            INIT_CLK_N             : in std_logic;
-            INIT_CLK_O             : out std_logic;
             GT_CLK                 : in std_logic;
             GT_CLK_LOCKED          : in std_logic;
             USER_CLK               : out std_logic;
             SYNC_CLK               : out std_logic;
             PLL_NOT_LOCKED         : out std_logic
-
          );
 
 end aurora_8b10b_0_CLOCK_MODULE;
@@ -219,7 +215,6 @@ end component;
   -- Unused status signals
   signal clkfbstopped_unused : std_logic;
   signal clkinstopped_unused : std_logic;
-  signal INIT_CLK_I       : std_logic;
   --***************************** Parameter Declarations ************************
 constant MULT         : real    :=  8.0;
 constant DIVIDE       : integer :=  2;
@@ -329,18 +324,5 @@ begin
   -- The PLL_NOT_LOCKED signal is created by inverting the PLL's locked signal.
   PLL_NOT_LOCKED  <=   not locked_w;
 
-      init_clk_ibufg_i :  IBUFDS
-      port map (
-           I  => INIT_CLK_P,
-           IB => INIT_CLK_N,
-           O  => INIT_CLK_I
-               );
-
-      init_clk_buf_i : BUFG
-      port map 
-        (
-          I  => INIT_CLK_I,
-          O  => INIT_CLK_O
-        );
 
 end MAPPED;
