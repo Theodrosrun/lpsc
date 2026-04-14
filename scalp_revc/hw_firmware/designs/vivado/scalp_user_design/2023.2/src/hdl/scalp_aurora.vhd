@@ -75,15 +75,15 @@ port (
     m_axi_rx_tlast         : out std_logic;
 
     -- Native Flow Control TX Interface
-    s_axi_nfc_req          : in std_logic;
+    s_axi_nfc_tx_tvalid          : in std_logic;
  
-    s_axi_nfc_nb           : in std_logic_vector(0 to 3);
-    s_axi_nfc_ack          : out std_logic;
+    s_axi_nfc_tx_tdata           : in std_logic_vector(0 to 3);
+    s_axi_nfc_tx_tready          : out std_logic;
 
     -- Native Flow Control RX Interface
-    m_axi_rx_snf           : out std_logic;
+    m_axi_nfc_rx_tvalid           : out std_logic;
  
-    m_axi_rx_fc_nb         : out std_logic_vector(0 to 3);
+    m_axi_nfc_rx_tdata         : out std_logic_vector(0 to 3);
 
 
  
@@ -118,9 +118,7 @@ port (
     power_down             : in  std_logic;
     loopback               : in  std_logic_vector(2 downto 0);
     tx_lock                : out std_logic;
-init_clk_i: in std_logic;
-    init_clk_p             : in  std_logic;
-    init_clk_n             : in  std_logic;
+    init_clk_i	           : in std_logic;
     init_clk_out           : out std_logic;
     tx_resetdone_out       : out std_logic;
     rx_resetdone_out       : out std_logic;
@@ -128,13 +126,13 @@ init_clk_i: in std_logic;
 
 
     --DRP Ports
-    drpclk_in                         : in   std_logic;
-    drpaddr_in             : in   std_logic_vector(8 downto 0);
-    drpdi_in               : in   std_logic_vector(15 downto 0);
-    drpdo_out              : out  std_logic_vector(15 downto 0);
-    drpen_in               : in   std_logic;
-    drprdy_out             : out  std_logic;
-    drpwe_in               : in   std_logic;
+    -- drpclk_in              : in   std_logic;
+    -- drpaddr_in             : in   std_logic_vector(8 downto 0);
+    -- drpdi_in               : in   std_logic_vector(15 downto 0);
+    -- drpdo_out              : out  std_logic_vector(15 downto 0);
+    -- drpen_in               : in   std_logic;
+    -- drprdy_out             : out  std_logic;
+    -- drpwe_in               : in   std_logic;
    
 
     pll_not_locked_out      : out  std_logic
@@ -453,13 +451,13 @@ port map
         m_axi_rx_tvalid              => m_axi_rx_tvalid,
         m_axi_rx_tlast               => m_axi_rx_tlast,
         -- Native Flow Control TX Interface
-        s_axi_nfc_tx_tvalid          => s_axi_nfc_req,
-        s_axi_nfc_tx_tdata           => s_axi_nfc_nb,
-        s_axi_nfc_tx_tready          => s_axi_nfc_ack,
+        s_axi_nfc_tx_tvalid          => s_axi_nfc_tx_tvalid,
+        s_axi_nfc_tx_tdata           => s_axi_nfc_tx_tdata,
+        s_axi_nfc_tx_tready          => s_axi_nfc_tx_tready,
 
         -- Native Flow Control RX Interface
-	     m_axi_nfc_rx_tvalid          => m_axi_rx_snf,
-        m_axi_nfc_rx_tdata           => m_axi_rx_fc_nb,
+	m_axi_nfc_rx_tvalid          => m_axi_nfc_rx_tvalid,
+        m_axi_nfc_rx_tdata           => m_axi_nfc_rx_tdata,
 
 
         -- GT Serial I/O
@@ -500,13 +498,13 @@ port map
         link_reset_out               => link_reset_i,
 
 
-        drpclk_in                            => drpclk_i,
-        drpaddr_in                   => drpaddr_in,
-        drpen_in                     => drpen_in,
-        drpdi_in                     => drpdi_in,
-        drprdy_out                   => drprdy_out, 
-        drpdo_out                    => drpdo_out,
-        drpwe_in                     => drpwe_in,
+        -- drpclk_in                    => drpclk_i,
+        -- drpaddr_in                   => drpaddr_in,
+        -- drpen_in                     => drpen_in,
+        -- drpdi_in                     => drpdi_in,
+        -- drprdy_out                   => drprdy_out, 
+        -- drpdo_out                    => drpdo_out,
+        -- drpwe_in                     => drpwe_in,
 --------------------{
   gt_common_reset_out          => common_reset_i,
 --____________________________COMMON PORTS_______________________________{

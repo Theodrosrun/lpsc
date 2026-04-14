@@ -90,15 +90,15 @@ entity scalp_user_design is
         Pll2V5ClkIn1LOSxSI : in    std_logic;  -- External oscillator Loss of Sync
         -- GTP interfaces
         -- Clocks
-        -- GTPRefClk0PxCI     : in    std_logic;
-        -- GTPRefClk0NxCI     : in    std_logic;
+        GTPRefClk0PxCI     : in    std_logic;
+        GTPRefClk0NxCI     : in    std_logic;
         -- GTPRefClk1PxCI     : in    std_logic;
         -- GTPRefClk1NxCI     : in    std_logic;
         -- North
-        -- GTPFromNorthPxSI   : in    std_logic;
-        -- GTPFromNorthNxSI   : in    std_logic;
-        -- GTPToNorthPxSO     : out   std_logic;
-        -- GTPToNorthNxSO     : out   std_logic;
+        GTPFromNorthPxSI   : in    std_logic;
+        GTPFromNorthNxSI   : in    std_logic;
+        GTPToNorthPxSO     : out   std_logic;
+        GTPToNorthNxSO     : out   std_logic;
         -- East
         -- GTPFromEastPxSI    : in    std_logic;
         -- GTPFromEastNxSI    : in    std_logic;
@@ -405,6 +405,77 @@ architecture arch of scalp_user_design is
             -- RegPortsxDI : in    t_axi_bunch_of_registers((C_NB_REGS_IN - 1) downto 0);
             RegPortsxDO : out   t_axi_bunch_of_registers((C_NB_REGS_OUT - 1) downto 0));
     end component scalp_firmwareid;
+
+    component  aurora_8b10b_0_support is
+	port (
+    		-- AXI TX Interface
+    		s_axi_tx_tdata         : in  std_logic_vector(0 to 31);
+    		s_axi_tx_tkeep         : in std_logic_vector(0 to 3);
+    		s_axi_tx_tvalid        : in  std_logic;
+    		s_axi_tx_tready        : out std_logic;
+    		s_axi_tx_tlast         : in  std_logic;
+
+    		-- AXI RX Interface
+    		m_axi_rx_tdata         : out std_logic_vector(0 to 31);
+    		m_axi_rx_tkeep         : out std_logic_vector(0 to 3);
+    		m_axi_rx_tvalid        : out std_logic;
+    		m_axi_rx_tlast         : out std_logic;
+
+    		-- Native Flow Control TX Interface
+    		s_axi_nfc_req          : in std_logic;
+    		s_axi_nfc_nb           : in std_logic_vector(0 to 3);
+    		s_axi_nfc_ack          : out std_logic;
+
+    		-- Native Flow Control RX Interface
+    		m_axi_rx_snf           : out std_logic;
+    		m_axi_rx_fc_nb         : out std_logic_vector(0 to 3);
+    		-- GT Serial I/O
+    		rxp                    : in std_logic_vector(0 downto 0);
+    		rxn                    : in std_logic_vector(0 downto 0);
+
+    		txp                    : out std_logic_vector(0 downto 0);
+    		txn                    : out std_logic_vector(0 downto 0);
+
+    		-- GT Reference Clock Interface
+    		gt_refclk1_p             : in  std_logic;
+    		gt_refclk1_n             : in  std_logic;
+
+    		-- Error Detection Interface
+    		frame_err              : out std_logic;
+    		hard_err               : out std_logic;
+    		soft_err               : out std_logic;
+    		channel_up             : out std_logic;
+    		lane_up                : out std_logic_vector(0 downto 0);
+
+    		-- System Interface
+    		user_clk_out           : out std_logic;
+    		reset                  : in  std_logic;
+    		gt_reset               : in  std_logic;
+    		sys_reset_out          : out std_logic;
+
+    		power_down             : in  std_logic;
+    		loopback               : in  std_logic_vector(2 downto 0);
+    		tx_lock                : out std_logic;
+    		init_clk_i	           : in std_logic;
+    		init_clk_out           : out std_logic;
+    		tx_resetdone_out       : out std_logic;
+    		rx_resetdone_out       : out std_logic;
+    		link_reset_out         : out std_logic;
+
+    		--DRP Ports
+    		drpclk_in                         : in   std_logic;
+    		drpaddr_in             : in   std_logic_vector(8 downto 0);
+    		drpdi_in               : in   std_logic_vector(15 downto 0);
+    		drpdo_out              : out  std_logic_vector(15 downto 0);
+    		drpen_in               : in   std_logic;
+    		drprdy_out             : out  std_logic;
+    		drpwe_in               : in   std_logic;
+
+    		pll_not_locked_out      : out  std_logic
+	);
+
+    end component aurora_8b10b_0_support;
+
 
     component scalp_cplx_num_regs is
         generic (
@@ -918,5 +989,68 @@ begin
         end block VgaxB;
 
     end block PLxB;
+
+    Aurora : block is
+    begin
+	    entity work.aurora_8b10b_0_support
+		port map (
+	    		-- AXI TX Interface
+	    		s_axi_tx_tdata       => , 
+	    		s_axi_tx_tkeep       => , 
+	    		s_axi_tx_tvalid      => , 
+	    		s_axi_tx_tready      => , 
+	    		s_axi_tx_tlast       => , 
+	    		-- AXI RX Interface
+	    		m_axi_rx_tdata       => , 
+	    		m_axi_rx_tkeep       => , 
+	    		m_axi_rx_tvalid      => , 
+	    		m_axi_rx_tlast       => , 
+	    		-- Native Flow Control
+	    		s_axi_nfc_req        => , 
+	    		s_axi_nfc_nb         => , 
+	    		s_axi_nfc_ack        => , 
+	    		-- Native Flow Control
+	    		m_axi_rx_snf         => , 
+	    		m_axi_rx_fc_nb       => , 
+	    		-- GT Serial I/O
+	    		rxp                  => GTPFromNorthPxSI, 
+	    		rxn                  => GTPFromNorthNxSI, 
+	    		txp                  => GTPToNorthPxSO, 
+	    		txn                  => GTPToNorthNxSO, 
+	    		-- GT Reference Clock
+	    		gt_refclk1_p         => GTPRefClk0PxCI, 
+	    		gt_refclk1_n         => GTPRefClk0NxCI, 
+	    		-- Error Detection In
+	    		frame_err            => , 
+	    		hard_err             => , 
+	    		soft_err             => , 
+	    		channel_up           => , 
+	    		lane_up              => , 
+	    		-- System Interface
+	    		user_clk_out         => , 
+	    		reset                => , 
+	    		gt_reset             => , 
+	    		sys_reset_out        => , 
+	    		power_down           => , 
+	    		loopback             => , 
+	    		tx_lock              => , 
+	    		init_clk_i	     => , 
+	    		init_clk_out         => , 
+	    		tx_resetdone_out     => , 
+	    		rx_resetdone_out     => , 
+	    		link_reset_out       => , 
+	    		--DRP Ports
+	    		drpclk_in            => , 
+	    		drpaddr_in           => , 
+	    		drpdi_in             => , 
+	    		drpdo_out            => , 
+	    		drpen_in             => , 
+	    		drprdy_out           => , 
+	    		drpwe_in             => , 
+	    		pll_not_locked_out   =>
+		);
+	    end component aurora_8b10b_0_support;
+
+    end block Aurora;
 
 end arch;
