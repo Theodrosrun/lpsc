@@ -4,7 +4,7 @@
     "xci_name": "aurora_8b10b_0",
     "component_reference": "xilinx.com:ip:aurora_8b10b:11.1",
     "ip_revision": "25",
-    "gen_directory": "../../../../scalp_user_design.gen/sources_1/ip/aurora_8b10b_0",
+    "gen_directory": "../../../../aurora_8b10b_0_ex.gen/sources_1/ip/aurora_8b10b_0",
     "parameters": {
       "component_parameters": {
         "Component_Name": [ { "value": "aurora_8b10b_0", "resolve_type": "user", "usage": "all" } ],
@@ -247,7 +247,7 @@
         "IPCONTEXT": [ { "value": "IP_Flow" } ],
         "IPREVISION": [ { "value": "25" } ],
         "MANAGED": [ { "value": "TRUE" } ],
-        "OUTPUTDIR": [ { "value": "../../../../scalp_user_design.gen/sources_1/ip/aurora_8b10b_0" } ],
+        "OUTPUTDIR": [ { "value": "../../../../aurora_8b10b_0_ex.gen/sources_1/ip/aurora_8b10b_0" } ],
         "SELECTEDSIMMODEL": [ { "value": "" } ],
         "SHAREDDIR": [ { "value": "." } ],
         "SWVERSION": [ { "value": "2025.2" } ],
@@ -645,5 +645,5 @@
       }
     }
   },
-  "checksum": "68fa1eee"
+  "checksum": "8d228f2e"
 }

@@ -2,10 +2,10 @@
 -- Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
--- Date        : Tue Apr 14 18:32:21 2026
+-- Date        : Tue Apr 14 18:32:20 2026
 -- Host        : andre running 64-bit Fedora Linux 42 (Workstation Edition)
--- Command     : write_vhdl -force -mode synth_stub
---               /home/andre/dev/mse/ma-lpsc/lpsc/scalp_revc/hw_firmware/designs/vivado/scalp_user_design/2023.2/lin64/scalp_user_design/scalp_user_design.gen/sources_1/ip/aurora_8b10b_0/aurora_8b10b_0_stub.vhdl
+-- Command     : write_vhdl -force -mode synth_stub -rename_top aurora_8b10b_0 -prefix
+--               aurora_8b10b_0_ aurora_8b10b_0_stub.vhdl
 -- Design      : aurora_8b10b_0
 -- Purpose     : Stub declaration of top-level module interface
 -- Device      : xc7z015clg485-2
