@@ -477,14 +477,6 @@ architecture arch of scalp_user_design is
     signal GPIOSwitchesxD   : std_logic_vector((C_GPIO_SWITCHES_SIZE - 1) downto 0) := (others => '0');
     signal GPIOJoystickxD   : std_logic_vector((C_GPIO_JOYSTICK_SIZE - 1) downto 0) := (others => '0');
 
-    ---------------------------------------------------------------------------
-    -- Clock user
-    ---------------------------------------------------------------------------
-    signal ClkUserxC          : std_logic := '0';
-    signal ClkUserRstxR       : std_logic := '1';
-    signal ClkUserRstxRNA     : std_logic := '0';
-    signal ClkUserPllLockedxS : std_logic := '0';
-
     -- Attributes
     attribute mark_debug       : string;
     attribute keep             : string;
@@ -825,22 +817,6 @@ begin
 
         end block HdmixB;
 
-        ClkUserPllxB : block is
-        begin
-
-            ScalpUserPllxI : entity work.clk_wiz_0
-                port map (
-                    clk_in1  => Clk125xC,
-                    reset    => Clk125RstxR,
-                    clk_out1 => ClkUserxC,
-                    locked   => ClkUserPllLockedxS
-                );
-
-            ClkUserRstxR   <= not (Clk125PllLockedxS and ClkUserPllLockedxS);
-            ClkUserRstxRNA <=      Clk125PllLockedxS and ClkUserPllLockedxS;
-
-        end block ClkUserPllxB;
-
         ImGenxB : block is
         begin
 
@@ -851,8 +827,8 @@ begin
                     C_BRAM_ADDR_BIT_SIZE => C_BRAM_ADDR_BIT_SIZE
                 )
                 port map (
-                    ClkxCI        => ClkUserxC,
-                    RstxRANI      => ClkUserRstxRNA,
+                    ClkxCI        => Clk125xC,
+                    RstxRANI      => Clk125RstxRNA,
                     BramWrAddrxDO => BramWrAddrxD,
                     BramWrDataxDO => BramWrDataxD,
                     BramWe1xDO    => BramWe1xD,
@@ -886,7 +862,7 @@ begin
                     RST    => '0',
                     WE     => BramWe1xD,
                     WRADDR => BramWrAddrxD,
-                    WRCLK  => ClkUserxC,
+                    WRCLK  => Clk125xC,
                     WREN   => '1');
 
             BramSDPMacro2xI : BRAM_SDP_MACRO
@@ -911,7 +887,7 @@ begin
                     RST    => '0',
                     WE     => BramWe2xD,
                     WRADDR => BramWrAddrxD,
-                    WRCLK  => ClkUserxC,
+                    WRCLK  => Clk125xC,
                     WREN   => '1');
 
         end block VideoMemxB;
