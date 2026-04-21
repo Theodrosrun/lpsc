@@ -67,25 +67,54 @@ architecture arch of scalp_communication is
 		reset_out : std_logic;
 	end record;
 
+	type aurora_clk_t is record
+		init_clk_i : std_logic;
+		usr_clk_out : std_logic;
+	end record;
+
 	signal axis_tx: axis_tx_t;
 	signal axis_rx: axis_rx_t;
 
 	signal axis_nfc_tx: axis_nfc_tx_t;
 	signal axis_nfc_rx: axis_nfc_rx_t;
 
+	signal aurora_clk: aurora_clk_t;
 	signal aurora_error: aurora_error_t;
 	signal aurora_reset: aurora_reset_t;
-	signal usr_clk : std_logic;
-	signal init_clk : std_logic;
+
 	signal tx_lock : std_logic;
 	signal tx_resetdone_out : std_logic; 
 	signal rx_resetdone_out : std_logic; 
 	signal link_reset_out : std_logic; 
 	signal pll_not_locked_out: std_logic; 
+
+	attribute mark_debug       : string;
+	attribute keep             : string;
+
+	attribute mark_debug of axis_tx  : signal is "true";
+	attribute keep of axis_tx        : signal is "true";
+
+	attribute mark_debug of axis_rx  : signal is "true";
+	attribute keep of axis_rx        : signal is "true";
+
+	attribute mark_debug of aurora_error  : signal is "true";
+	attribute keep of aurora_error        : signal is "true";
+
+	attribute mark_debug of aurora_reset  : signal is "true";
+	attribute keep of aurora_reset        : signal is "true";
+
+
 begin
     -- 32bit mode
     axis_tx.tkeep <= (others => '1');
     axis_rx.tkeep <= (others => '1');
+    aurora_clk.init_clk_i <= clk;
+
+
+    -- debug
+    axis_tx.tready <= '1';
+    axis_tx.tlast <= '1';
+
 
     Aurora : block is
     begin
@@ -134,11 +163,9 @@ begin
 	    		tx_lock              => tx_lock,
 			power_down           => '0',
 
-			user_clk_out         => usr_clk, 
+			user_clk_out         => aurora_clk.usr_clk_out, 
+			init_clk_i	     => aurora_clk.init_clk_i,
 			init_clk_out         => open,
-		
-
-	    		init_clk_i	     => clk,
 
 	    		tx_resetdone_out     => tx_resetdone_out,
 	    		rx_resetdone_out     => rx_resetdone_out,  
