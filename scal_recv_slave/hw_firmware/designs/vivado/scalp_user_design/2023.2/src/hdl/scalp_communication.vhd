@@ -33,6 +33,12 @@ architecture arch of scalp_communication is
 			signal_out : out std_logic
 		);
 	end component;
+	component vio_0
+	    port (
+	        clk        : in  std_logic;
+	        probe_out0 : out std_logic_vector(0 downto 0)
+	    );
+	end component;
 
 	-- Standard AXI4-Stream TX (master to Aurora)
 	type axis_tx_t is record
@@ -100,6 +106,8 @@ architecture arch of scalp_communication is
 
 	-- Delayed versions of the master reset
 	signal reset_delayed_256  : std_logic;
+	signal vio_reset          : std_logic_vector(0 downto 0);
+	signal combined_reset     : std_logic;
 
 	attribute mark_debug       : string;
 	attribute keep             : string;
@@ -116,6 +124,11 @@ architecture arch of scalp_communication is
 	attribute mark_debug of aurora_reset  : signal is "true";
 	attribute keep of aurora_reset        : signal is "true";
 
+	attribute mark_debug of combined_reset  : signal is "true";
+	attribute keep of combined_reset        : signal is "true";
+
+	attribute mark_debug of vio_reset  : signal is "true";
+	attribute keep of vio_reset        : signal is "true";
 
 begin
     -- 32bit mode
@@ -123,13 +136,19 @@ begin
     axis_rx.tkeep <= (others => '1');
     aurora_clk.init_clk_i <= clk;
 
+    vio_inst : vio_0
+        port map (
+            clk          => clk,
+            probe_out0   => vio_reset
+        );
+
     reset_delay : signal_delay
     generic map (
 		delay => 256
     )
     port map (
 		clk        => clk,
-		signal_in  => reset,
+		signal_in  => combined_reset,
 		signal_out => reset_delayed_256
 	);
 
@@ -137,6 +156,7 @@ begin
     -- debug
     axis_tx.tready <= '1';
     axis_tx.tlast <= '1';
+    combined_reset <= reset or vio_reset(0);
 
     aurora_reset.usr_reset <= reset_delayed_256;
     aurora_reset.gt_reset <= reset;

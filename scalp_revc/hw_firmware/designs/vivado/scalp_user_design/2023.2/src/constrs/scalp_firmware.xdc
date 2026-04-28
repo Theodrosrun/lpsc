@@ -304,3 +304,4 @@ set_operating_conditions -grade extended -process maximum
 # 4'' by 4'' PCB, no heatsink, no air flow
 set_operating_conditions -airflow 0 -heatsink none -board small
 
+
