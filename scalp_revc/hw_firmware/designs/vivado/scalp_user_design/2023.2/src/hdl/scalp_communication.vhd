@@ -23,6 +23,16 @@ end entity;
 
 
 architecture arch of scalp_communication is
+	component signal_delay is
+		generic (
+			delay : natural
+		);
+		port (
+			clk        : in  std_logic;
+			signal_in  : in  std_logic;
+			signal_out : out std_logic
+		);
+	end component;
 
 	-- Standard AXI4-Stream TX (master to Aurora)
 	type axis_tx_t is record
@@ -88,6 +98,9 @@ architecture arch of scalp_communication is
 	signal link_reset_out : std_logic; 
 	signal pll_not_locked_out: std_logic; 
 
+	-- Delayed versions of the master reset
+	signal reset_delayed_256  : std_logic;
+
 	attribute mark_debug       : string;
 	attribute keep             : string;
 
@@ -110,11 +123,23 @@ begin
     axis_rx.tkeep <= (others => '1');
     aurora_clk.init_clk_i <= clk;
 
+    reset_delay : signal_delay
+    generic map (
+		delay => 256
+    )
+    port map (
+		clk        => clk,
+		signal_in  => reset,
+		signal_out => reset_delayed_256
+	);
+
 
     -- debug
     axis_tx.tready <= '1';
     axis_tx.tlast <= '1';
 
+    aurora_reset.usr_reset <= reset_delayed_256;
+    aurora_reset.gt_reset <= reset;
 
     Aurora : block is
     begin
