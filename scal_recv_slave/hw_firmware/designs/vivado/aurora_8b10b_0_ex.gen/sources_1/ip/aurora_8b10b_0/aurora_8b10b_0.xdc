@@ -63,5 +63,5 @@ set_false_path -to [get_pins -filter {REF_PIN_NAME=~*D} -of_objects [get_cells -
 # set_property LOC U5 [get_ports GTPQ0_P]
 
 ############################### GT LOC (For use in top level design) ###################################
-# set_property LOC GTPE2_CHANNEL_X0Y0 [get_cells aurora_module_i/aurora_8b10b_0_i/U0/gt_wrapper_i/aurora_8b10b_0_multi_gt_i/gt0_aurora_8b10b_0_i/gtpe2_i]
+# set_property LOC GTPE2_CHANNEL_X0Y1 [get_cells aurora_module_i/aurora_8b10b_0_i/U0/gt_wrapper_i/aurora_8b10b_0_multi_gt_i/gt0_aurora_8b10b_0_i/gtpe2_i]
 

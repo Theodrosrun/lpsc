@@ -2,10 +2,10 @@
 -- Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
--- Date        : Tue Apr 14 18:32:20 2026
+-- Date        : Tue Apr 28 17:44:19 2026
 -- Host        : andre running 64-bit Fedora Linux 42 (Workstation Edition)
--- Command     : write_vhdl -force -mode funcsim -rename_top aurora_8b10b_0 -prefix
---               aurora_8b10b_0_ aurora_8b10b_0_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim
+--               /home/andre/dev/mse/ma-lpsc/lpsc/scal_recv_slave/hw_firmware/designs/vivado/aurora_8b10b_0_ex.gen/sources_1/ip/aurora_8b10b_0/aurora_8b10b_0_sim_netlist.vhdl
 -- Design      : aurora_8b10b_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -15,15 +15,15 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_AXI_TO_LL is
+entity aurora_8b10b_0_AXI_TO_LL is
   port (
     new_pkt_r_reg_0 : out STD_LOGIC;
     new_pkt_r : in STD_LOGIC;
     user_clk : in STD_LOGIC
   );
-end aurora_8b10b_0_aurora_8b10b_0_AXI_TO_LL;
+end aurora_8b10b_0_AXI_TO_LL;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_AXI_TO_LL is
+architecture STRUCTURE of aurora_8b10b_0_AXI_TO_LL is
 begin
 new_pkt_r_reg: unisim.vcomponents.FDRE
      port map (
@@ -38,7 +38,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_CHANNEL_ERR_DETECT is
+entity aurora_8b10b_0_CHANNEL_ERR_DETECT is
   port (
     SOFT_ERR : out STD_LOGIC;
     HARD_ERR : out STD_LOGIC;
@@ -51,9 +51,9 @@ entity aurora_8b10b_0_aurora_8b10b_0_CHANNEL_ERR_DETECT is
     POWER_DOWN : in STD_LOGIC;
     D : in STD_LOGIC_VECTOR ( 1 downto 0 )
   );
-end aurora_8b10b_0_aurora_8b10b_0_CHANNEL_ERR_DETECT;
+end aurora_8b10b_0_CHANNEL_ERR_DETECT;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_CHANNEL_ERR_DETECT is
+architecture STRUCTURE of aurora_8b10b_0_CHANNEL_ERR_DETECT is
   signal RESET_CHANNEL_Buffer0 : STD_LOGIC;
   signal channel_soft_err_c : STD_LOGIC;
   signal hard_err_r : STD_LOGIC;
@@ -159,7 +159,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_CHANNEL_INIT_SM is
+entity aurora_8b10b_0_CHANNEL_INIT_SM is
   port (
     SR : out STD_LOGIC_VECTOR ( 0 to 0 );
     gen_ver_i : out STD_LOGIC;
@@ -175,9 +175,9 @@ entity aurora_8b10b_0_aurora_8b10b_0_CHANNEL_INIT_SM is
     txver_count_r0 : in STD_LOGIC;
     reset_channel_i : in STD_LOGIC
   );
-end aurora_8b10b_0_aurora_8b10b_0_CHANNEL_INIT_SM;
+end aurora_8b10b_0_CHANNEL_INIT_SM;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_CHANNEL_INIT_SM is
+architecture STRUCTURE of aurora_8b10b_0_CHANNEL_INIT_SM is
   signal \^channel_up\ : STD_LOGIC;
   signal D : STD_LOGIC;
   signal GTRXRESET_OUT_i_1_n_0 : STD_LOGIC;
@@ -1030,7 +1030,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_ERR_DETECT_4BYTE is
+entity aurora_8b10b_0_ERR_DETECT_4BYTE is
   port (
     begin_r0 : out STD_LOGIC;
     hard_err_i : out STD_LOGIC;
@@ -1042,9 +1042,9 @@ entity aurora_8b10b_0_aurora_8b10b_0_ERR_DETECT_4BYTE is
     enable_err_detect_i : in STD_LOGIC;
     \soft_err_r_reg[0]_0\ : in STD_LOGIC_VECTOR ( 3 downto 0 )
   );
-end aurora_8b10b_0_aurora_8b10b_0_ERR_DETECT_4BYTE;
+end aurora_8b10b_0_ERR_DETECT_4BYTE;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_ERR_DETECT_4BYTE is
+architecture STRUCTURE of aurora_8b10b_0_ERR_DETECT_4BYTE is
   signal cnt_good_code_r : STD_LOGIC;
   signal cnt_good_code_r_i_3_n_0 : STD_LOGIC;
   signal cnt_good_code_r_i_4_n_0 : STD_LOGIC;
@@ -1424,7 +1424,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_IDLE_AND_VER_GEN is
+entity aurora_8b10b_0_IDLE_AND_VER_GEN is
   port (
     gen_v_flop_1_i_0 : out STD_LOGIC_VECTOR ( 2 downto 0 );
     gen_a_i : out STD_LOGIC;
@@ -1435,9 +1435,9 @@ entity aurora_8b10b_0_aurora_8b10b_0_IDLE_AND_VER_GEN is
     gen_ver_i : in STD_LOGIC;
     \downcounter_r_reg[2]_0\ : in STD_LOGIC
   );
-end aurora_8b10b_0_aurora_8b10b_0_IDLE_AND_VER_GEN;
+end aurora_8b10b_0_IDLE_AND_VER_GEN;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_IDLE_AND_VER_GEN is
+architecture STRUCTURE of aurora_8b10b_0_IDLE_AND_VER_GEN is
   signal D : STD_LOGIC;
   signal D0_out : STD_LOGIC;
   signal D1_out : STD_LOGIC;
@@ -1948,7 +1948,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_LANE_INIT_SM_4BYTE is
+entity aurora_8b10b_0_LANE_INIT_SM_4BYTE is
   port (
     LANE_UP : out STD_LOGIC;
     D_0 : out STD_LOGIC;
@@ -1975,9 +1975,9 @@ entity aurora_8b10b_0_aurora_8b10b_0_LANE_INIT_SM_4BYTE is
     first_v_received_r : in STD_LOGIC;
     D : in STD_LOGIC_VECTOR ( 3 downto 0 )
   );
-end aurora_8b10b_0_aurora_8b10b_0_LANE_INIT_SM_4BYTE;
+end aurora_8b10b_0_LANE_INIT_SM_4BYTE;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_LANE_INIT_SM_4BYTE is
+architecture STRUCTURE of aurora_8b10b_0_LANE_INIT_SM_4BYTE is
   signal \^d_0\ : STD_LOGIC;
   signal ENABLE_ERR_DETECT_Buffer0 : STD_LOGIC;
   signal \RX_CHAR_IS_COMMA_R_reg_n_0_[0]\ : STD_LOGIC;
@@ -2681,15 +2681,15 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_LEFT_ALIGN_CONTROL is
+entity aurora_8b10b_0_LEFT_ALIGN_CONTROL is
   port (
     MUX_SELECT : out STD_LOGIC_VECTOR ( 0 to 0 );
     mux_select_c : in STD_LOGIC_VECTOR ( 0 to 0 );
     user_clk : in STD_LOGIC
   );
-end aurora_8b10b_0_aurora_8b10b_0_LEFT_ALIGN_CONTROL;
+end aurora_8b10b_0_LEFT_ALIGN_CONTROL;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_LEFT_ALIGN_CONTROL is
+architecture STRUCTURE of aurora_8b10b_0_LEFT_ALIGN_CONTROL is
 begin
 \MUX_SELECT_Buffer_reg[2]\: unisim.vcomponents.FDRE
      port map (
@@ -2704,16 +2704,16 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_LEFT_ALIGN_MUX is
+entity aurora_8b10b_0_LEFT_ALIGN_MUX is
   port (
     Q : out STD_LOGIC_VECTOR ( 31 downto 0 );
     stage_2_data_r : in STD_LOGIC_VECTOR ( 0 to 31 );
     MUX_SELECT : in STD_LOGIC_VECTOR ( 0 to 0 );
     user_clk : in STD_LOGIC
   );
-end aurora_8b10b_0_aurora_8b10b_0_LEFT_ALIGN_MUX;
+end aurora_8b10b_0_LEFT_ALIGN_MUX;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_LEFT_ALIGN_MUX is
+architecture STRUCTURE of aurora_8b10b_0_LEFT_ALIGN_MUX is
   signal muxed_data_c : STD_LOGIC_VECTOR ( 0 to 15 );
   attribute SOFT_HLUTNM : string;
   attribute SOFT_HLUTNM of \MUXED_DATA_Buffer[0]_i_1\ : label is "soft_lutpair77";
@@ -3154,15 +3154,15 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_LL_TO_AXI is
+entity aurora_8b10b_0_LL_TO_AXI is
   port (
     M_AXI_RX_TKEEP : out STD_LOGIC_VECTOR ( 2 downto 0 );
     rx_eof : in STD_LOGIC;
     \m_axi_rx_tkeep[1]\ : in STD_LOGIC_VECTOR ( 1 downto 0 )
   );
-end aurora_8b10b_0_aurora_8b10b_0_LL_TO_AXI;
+end aurora_8b10b_0_LL_TO_AXI;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_LL_TO_AXI is
+architecture STRUCTURE of aurora_8b10b_0_LL_TO_AXI is
   attribute SOFT_HLUTNM : string;
   attribute SOFT_HLUTNM of \M_AXI_RX_TKEEP[1]_INST_0\ : label is "soft_lutpair151";
   attribute SOFT_HLUTNM of \M_AXI_RX_TKEEP[3]_INST_0\ : label is "soft_lutpair151";
@@ -3201,7 +3201,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_OUTPUT_MUX is
+entity aurora_8b10b_0_OUTPUT_MUX is
   port (
     M_AXI_RX_TDATA : out STD_LOGIC_VECTOR ( 0 to 31 );
     Q : in STD_LOGIC_VECTOR ( 31 downto 0 );
@@ -3209,9 +3209,9 @@ entity aurora_8b10b_0_aurora_8b10b_0_OUTPUT_MUX is
     \OUTPUT_DATA_Buffer_reg[16]_0\ : in STD_LOGIC_VECTOR ( 15 downto 0 );
     OUTPUT_SELECT_Buffer : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-end aurora_8b10b_0_aurora_8b10b_0_OUTPUT_MUX;
+end aurora_8b10b_0_OUTPUT_MUX;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_OUTPUT_MUX is
+architecture STRUCTURE of aurora_8b10b_0_OUTPUT_MUX is
   signal output_data_c : STD_LOGIC_VECTOR ( 16 to 31 );
   attribute SOFT_HLUTNM : string;
   attribute SOFT_HLUTNM of \OUTPUT_DATA_Buffer[16]_i_1\ : label is "soft_lutpair65";
@@ -3652,15 +3652,15 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_OUTPUT_SWITCH_CONTROL is
+entity aurora_8b10b_0_OUTPUT_SWITCH_CONTROL is
   port (
     OUTPUT_SELECT_Buffer : out STD_LOGIC_VECTOR ( 0 to 0 );
     output_select_c : in STD_LOGIC_VECTOR ( 0 to 0 );
     user_clk : in STD_LOGIC
   );
-end aurora_8b10b_0_aurora_8b10b_0_OUTPUT_SWITCH_CONTROL;
+end aurora_8b10b_0_OUTPUT_SWITCH_CONTROL;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_OUTPUT_SWITCH_CONTROL is
+architecture STRUCTURE of aurora_8b10b_0_OUTPUT_SWITCH_CONTROL is
 begin
 \OUTPUT_SELECT_Buffer_reg[9]\: unisim.vcomponents.FDRE
      port map (
@@ -3675,7 +3675,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_RX_LL_DEFRAMER is
+entity aurora_8b10b_0_RX_LL_DEFRAMER is
   port (
     mux_select_c : out STD_LOGIC_VECTOR ( 0 to 0 );
     \AFTER_SCP_Buffer_reg[1]_0\ : out STD_LOGIC;
@@ -3694,9 +3694,9 @@ entity aurora_8b10b_0_aurora_8b10b_0_RX_LL_DEFRAMER is
     stage_2_frame_err_r_reg : in STD_LOGIC_VECTOR ( 1 downto 0 );
     \DEFRAMED_DATA_V_Buffer_reg[0]_1\ : in STD_LOGIC_VECTOR ( 1 downto 0 )
   );
-end aurora_8b10b_0_aurora_8b10b_0_RX_LL_DEFRAMER;
+end aurora_8b10b_0_RX_LL_DEFRAMER;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_RX_LL_DEFRAMER is
+architecture STRUCTURE of aurora_8b10b_0_RX_LL_DEFRAMER is
   signal CI : STD_LOGIC;
   signal \DEFRAMED_DATA_V_Buffer[0]_i_1_n_0\ : STD_LOGIC;
   signal \DEFRAMED_DATA_V_Buffer[1]_i_1_n_0\ : STD_LOGIC;
@@ -3913,7 +3913,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_RX_LL_NFC is
+entity aurora_8b10b_0_RX_LL_NFC is
   port (
     Q : out STD_LOGIC_VECTOR ( 0 to 0 );
     std_bool : in STD_LOGIC;
@@ -3924,9 +3924,9 @@ entity aurora_8b10b_0_aurora_8b10b_0_RX_LL_NFC is
     D_0 : in STD_LOGIC;
     D : in STD_LOGIC_VECTOR ( 7 downto 0 )
   );
-end aurora_8b10b_0_aurora_8b10b_0_RX_LL_NFC;
+end aurora_8b10b_0_RX_LL_NFC;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_RX_LL_NFC is
+architecture STRUCTURE of aurora_8b10b_0_RX_LL_NFC is
   signal \^q\ : STD_LOGIC_VECTOR ( 0 to 0 );
   signal fcnb_r : STD_LOGIC_VECTOR ( 0 to 3 );
   signal \fcnb_r[0]_i_1_n_0\ : STD_LOGIC;
@@ -4399,7 +4399,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_SIDEBAND_OUTPUT is
+entity aurora_8b10b_0_SIDEBAND_OUTPUT is
   port (
     stage_3_end_storage_r : out STD_LOGIC;
     stage_2_frame_err_r_reg : out STD_LOGIC;
@@ -4421,9 +4421,9 @@ entity aurora_8b10b_0_aurora_8b10b_0_SIDEBAND_OUTPUT is
     stage_2_end_before_start_r : in STD_LOGIC;
     pad_storage_r_reg_0 : in STD_LOGIC
   );
-end aurora_8b10b_0_aurora_8b10b_0_SIDEBAND_OUTPUT;
+end aurora_8b10b_0_SIDEBAND_OUTPUT;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_SIDEBAND_OUTPUT is
+architecture STRUCTURE of aurora_8b10b_0_SIDEBAND_OUTPUT is
   signal SRC_RDY_N_Buffer_i_1_n_0 : STD_LOGIC;
   signal pad_storage_r : STD_LOGIC;
   signal pad_storage_r_i_1_n_0 : STD_LOGIC;
@@ -4551,7 +4551,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_STANDARD_CC_MODULE is
+entity aurora_8b10b_0_STANDARD_CC_MODULE is
   port (
     DO_CC_I : out STD_LOGIC;
     WARN_CC_reg_0 : out STD_LOGIC;
@@ -4562,9 +4562,9 @@ entity aurora_8b10b_0_aurora_8b10b_0_STANDARD_CC_MODULE is
     S_AXI_NFC_ACK : in STD_LOGIC;
     Q : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-end aurora_8b10b_0_aurora_8b10b_0_STANDARD_CC_MODULE;
+end aurora_8b10b_0_STANDARD_CC_MODULE;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_STANDARD_CC_MODULE is
+architecture STRUCTURE of aurora_8b10b_0_STANDARD_CC_MODULE is
   signal \^do_cc_i\ : STD_LOGIC;
   signal DO_CC_i_1_n_0 : STD_LOGIC;
   signal WARN_CC : STD_LOGIC;
@@ -5195,16 +5195,16 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_STORAGE_CE_CONTROL is
+entity aurora_8b10b_0_STORAGE_CE_CONTROL is
   port (
     Q : out STD_LOGIC_VECTOR ( 1 downto 0 );
     SS : in STD_LOGIC_VECTOR ( 0 to 0 );
     D : in STD_LOGIC_VECTOR ( 1 downto 0 );
     user_clk : in STD_LOGIC
   );
-end aurora_8b10b_0_aurora_8b10b_0_STORAGE_CE_CONTROL;
+end aurora_8b10b_0_STORAGE_CE_CONTROL;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_STORAGE_CE_CONTROL is
+architecture STRUCTURE of aurora_8b10b_0_STORAGE_CE_CONTROL is
 begin
 \STORAGE_CE_Buffer_reg[0]\: unisim.vcomponents.FDRE
      port map (
@@ -5227,7 +5227,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_STORAGE_COUNT_CONTROL is
+entity aurora_8b10b_0_STORAGE_COUNT_CONTROL is
   port (
     Q : out STD_LOGIC_VECTOR ( 1 downto 0 );
     D : out STD_LOGIC_VECTOR ( 1 downto 0 );
@@ -5241,9 +5241,9 @@ entity aurora_8b10b_0_aurora_8b10b_0_STORAGE_COUNT_CONTROL is
     SR : in STD_LOGIC_VECTOR ( 0 to 0 );
     user_clk : in STD_LOGIC
   );
-end aurora_8b10b_0_aurora_8b10b_0_STORAGE_COUNT_CONTROL;
+end aurora_8b10b_0_STORAGE_COUNT_CONTROL;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_STORAGE_COUNT_CONTROL is
+architecture STRUCTURE of aurora_8b10b_0_STORAGE_COUNT_CONTROL is
   signal \^q\ : STD_LOGIC_VECTOR ( 1 downto 0 );
   signal storage_count_c : STD_LOGIC_VECTOR ( 0 to 1 );
   attribute SOFT_HLUTNM : string;
@@ -5354,16 +5354,16 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_STORAGE_MUX is
+entity aurora_8b10b_0_STORAGE_MUX is
   port (
     Q : out STD_LOGIC_VECTOR ( 31 downto 0 );
     E : in STD_LOGIC_VECTOR ( 1 downto 0 );
     \STORAGE_DATA_Buffer_reg[0]_0\ : in STD_LOGIC_VECTOR ( 31 downto 0 );
     user_clk : in STD_LOGIC
   );
-end aurora_8b10b_0_aurora_8b10b_0_STORAGE_MUX;
+end aurora_8b10b_0_STORAGE_MUX;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_STORAGE_MUX is
+architecture STRUCTURE of aurora_8b10b_0_STORAGE_MUX is
 begin
 \STORAGE_DATA_Buffer_reg[0]\: unisim.vcomponents.FDRE
      port map (
@@ -5626,7 +5626,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_STORAGE_SWITCH_CONTROL is
+entity aurora_8b10b_0_STORAGE_SWITCH_CONTROL is
   port (
     STORAGE_SELECT_Buffer : out STD_LOGIC_VECTOR ( 1 downto 0 );
     Q : in STD_LOGIC_VECTOR ( 0 to 0 );
@@ -5634,9 +5634,9 @@ entity aurora_8b10b_0_aurora_8b10b_0_STORAGE_SWITCH_CONTROL is
     stage_3_end_storage_r : in STD_LOGIC;
     user_clk : in STD_LOGIC
   );
-end aurora_8b10b_0_aurora_8b10b_0_STORAGE_SWITCH_CONTROL;
+end aurora_8b10b_0_STORAGE_SWITCH_CONTROL;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_STORAGE_SWITCH_CONTROL is
+architecture STRUCTURE of aurora_8b10b_0_STORAGE_SWITCH_CONTROL is
   signal \STORAGE_SELECT_Buffer[4]_i_1_n_0\ : STD_LOGIC;
   signal \STORAGE_SELECT_Buffer[9]_i_1_n_0\ : STD_LOGIC;
   attribute SOFT_HLUTNM : string;
@@ -5684,7 +5684,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_SYM_DEC_4BYTE is
+entity aurora_8b10b_0_SYM_DEC_4BYTE is
   port (
     RX_NEG_Buffer : out STD_LOGIC;
     \left_align_select_r_reg[0]_0\ : out STD_LOGIC;
@@ -5729,9 +5729,9 @@ entity aurora_8b10b_0_aurora_8b10b_0_SYM_DEC_4BYTE is
     \word_aligned_data_r_reg[24]_1\ : in STD_LOGIC_VECTOR ( 7 downto 0 );
     \word_aligned_data_r_reg[16]_1\ : in STD_LOGIC_VECTOR ( 5 downto 0 )
   );
-end aurora_8b10b_0_aurora_8b10b_0_SYM_DEC_4BYTE;
+end aurora_8b10b_0_SYM_DEC_4BYTE;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_SYM_DEC_4BYTE is
+architecture STRUCTURE of aurora_8b10b_0_SYM_DEC_4BYTE is
   signal \EXP_IN_inferred__0/i__n_0\ : STD_LOGIC;
   signal \EXP_IN_inferred__1/i__n_0\ : STD_LOGIC;
   signal \EXP_IN_inferred__10/i__n_0\ : STD_LOGIC;
@@ -8166,7 +8166,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_SYM_GEN_4BYTE is
+entity aurora_8b10b_0_SYM_GEN_4BYTE is
   port (
     TXCHARISK : out STD_LOGIC_VECTOR ( 3 downto 0 );
     TXDATA : out STD_LOGIC_VECTOR ( 31 downto 0 );
@@ -8186,9 +8186,9 @@ entity aurora_8b10b_0_aurora_8b10b_0_SYM_GEN_4BYTE is
     \fc_nb_r_reg[0]_0\ : in STD_LOGIC_VECTOR ( 3 downto 0 );
     \TX_CHAR_IS_K_Buffer_reg[1]_0\ : in STD_LOGIC
   );
-end aurora_8b10b_0_aurora_8b10b_0_SYM_GEN_4BYTE;
+end aurora_8b10b_0_SYM_GEN_4BYTE;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_SYM_GEN_4BYTE is
+architecture STRUCTURE of aurora_8b10b_0_SYM_GEN_4BYTE is
   signal \^txdata\ : STD_LOGIC_VECTOR ( 31 downto 0 );
   signal \TX_CHAR_IS_K_Buffer[2]_i_2_n_0\ : STD_LOGIC;
   signal \TX_CHAR_IS_K_Buffer[3]_i_1_n_0\ : STD_LOGIC;
@@ -9893,7 +9893,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_TX_LL_CONTROL is
+entity aurora_8b10b_0_TX_LL_CONTROL is
   port (
     gen_cc_i : out STD_LOGIC;
     do_cc_r_reg_0 : out STD_LOGIC;
@@ -9922,9 +9922,9 @@ entity aurora_8b10b_0_aurora_8b10b_0_TX_LL_CONTROL is
     idle_r_reg_0 : in STD_LOGIC;
     S_AXI_NFC_NB : in STD_LOGIC_VECTOR ( 0 to 3 )
   );
-end aurora_8b10b_0_aurora_8b10b_0_TX_LL_CONTROL;
+end aurora_8b10b_0_TX_LL_CONTROL;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_TX_LL_CONTROL is
+architecture STRUCTURE of aurora_8b10b_0_TX_LL_CONTROL is
   signal GEN_ECP_Buffer0 : STD_LOGIC;
   signal GEN_SCP_Buffer0 : STD_LOGIC;
   signal TX_DST_RDY_N_Buffer_i_2_n_0 : STD_LOGIC;
@@ -10316,7 +10316,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_TX_LL_DATAPATH is
+entity aurora_8b10b_0_TX_LL_DATAPATH is
   port (
     in_frame_r_reg_0 : out STD_LOGIC;
     \TX_PE_DATA_V_Buffer_reg[0]_0\ : out STD_LOGIC_VECTOR ( 1 downto 0 );
@@ -10334,9 +10334,9 @@ entity aurora_8b10b_0_aurora_8b10b_0_TX_LL_DATAPATH is
     \gen_pad_r_reg[1]_0\ : in STD_LOGIC_VECTOR ( 0 to 0 );
     S_AXI_TX_TDATA : in STD_LOGIC_VECTOR ( 0 to 31 )
   );
-end aurora_8b10b_0_aurora_8b10b_0_TX_LL_DATAPATH;
+end aurora_8b10b_0_TX_LL_DATAPATH;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_TX_LL_DATAPATH is
+architecture STRUCTURE of aurora_8b10b_0_TX_LL_DATAPATH is
   signal \TX_PE_DATA_V_Buffer[0]_i_1_n_0\ : STD_LOGIC;
   signal \gen_pad_r_reg_n_0_[0]\ : STD_LOGIC;
   signal \gen_pad_r_reg_n_0_[1]\ : STD_LOGIC;
@@ -11089,7 +11089,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_VALID_DATA_COUNTER is
+entity aurora_8b10b_0_VALID_DATA_COUNTER is
   port (
     D : out STD_LOGIC_VECTOR ( 0 to 0 );
     Q : out STD_LOGIC_VECTOR ( 1 downto 0 );
@@ -11106,9 +11106,9 @@ entity aurora_8b10b_0_aurora_8b10b_0_VALID_DATA_COUNTER is
     \COUNT_Buffer_reg[0]_0\ : in STD_LOGIC_VECTOR ( 1 downto 0 );
     user_clk : in STD_LOGIC
   );
-end aurora_8b10b_0_aurora_8b10b_0_VALID_DATA_COUNTER;
+end aurora_8b10b_0_VALID_DATA_COUNTER;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_VALID_DATA_COUNTER is
+architecture STRUCTURE of aurora_8b10b_0_VALID_DATA_COUNTER is
   signal \^q\ : STD_LOGIC_VECTOR ( 1 downto 0 );
   signal end_storage_r_i_2_n_0 : STD_LOGIC;
 begin
@@ -11180,15 +11180,15 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_cdc_sync is
+entity aurora_8b10b_0_cdc_sync is
   port (
     \out\ : out STD_LOGIC;
     RESET : in STD_LOGIC;
     user_clk : in STD_LOGIC
   );
-end aurora_8b10b_0_aurora_8b10b_0_cdc_sync;
+end aurora_8b10b_0_cdc_sync;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_cdc_sync is
+architecture STRUCTURE of aurora_8b10b_0_cdc_sync is
   signal \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : STD_LOGIC;
   attribute RTL_KEEP : string;
   attribute RTL_KEEP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : signal is "true";
@@ -11315,16 +11315,16 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_cdc_sync_16 is
+entity aurora_8b10b_0_cdc_sync_16 is
   port (
     \out\ : out STD_LOGIC;
     user_clk : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of aurora_8b10b_0_aurora_8b10b_0_cdc_sync_16 : entity is "aurora_8b10b_0_cdc_sync";
-end aurora_8b10b_0_aurora_8b10b_0_cdc_sync_16;
+  attribute ORIG_REF_NAME of aurora_8b10b_0_cdc_sync_16 : entity is "aurora_8b10b_0_cdc_sync";
+end aurora_8b10b_0_cdc_sync_16;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_cdc_sync_16 is
+architecture STRUCTURE of aurora_8b10b_0_cdc_sync_16 is
   signal \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : STD_LOGIC;
   attribute RTL_KEEP : string;
   attribute RTL_KEEP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : signal is "true";
@@ -11458,17 +11458,17 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_cdc_sync_23 is
+entity aurora_8b10b_0_cdc_sync_23 is
   port (
     \out\ : out STD_LOGIC;
     PLL_NOT_LOCKED : in STD_LOGIC;
     user_clk : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of aurora_8b10b_0_aurora_8b10b_0_cdc_sync_23 : entity is "aurora_8b10b_0_cdc_sync";
-end aurora_8b10b_0_aurora_8b10b_0_cdc_sync_23;
+  attribute ORIG_REF_NAME of aurora_8b10b_0_cdc_sync_23 : entity is "aurora_8b10b_0_cdc_sync";
+end aurora_8b10b_0_cdc_sync_23;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_cdc_sync_23 is
+architecture STRUCTURE of aurora_8b10b_0_cdc_sync_23 is
   signal \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : STD_LOGIC;
   attribute RTL_KEEP : string;
   attribute RTL_KEEP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : signal is "true";
@@ -11595,7 +11595,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1\ is
+entity \aurora_8b10b_0_cdc_sync__parameterized1\ is
   port (
     AR : out STD_LOGIC_VECTOR ( 0 to 0 );
     HPCNT_RESET : out STD_LOGIC;
@@ -11604,10 +11604,10 @@ entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1\ is
     \out\ : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1\ : entity is "aurora_8b10b_0_cdc_sync";
-end \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1\;
+  attribute ORIG_REF_NAME of \aurora_8b10b_0_cdc_sync__parameterized1\ : entity is "aurora_8b10b_0_cdc_sync";
+end \aurora_8b10b_0_cdc_sync__parameterized1\;
 
-architecture STRUCTURE of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1\ is
+architecture STRUCTURE of \aurora_8b10b_0_cdc_sync__parameterized1\ is
   signal \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : STD_LOGIC;
   attribute RTL_KEEP : string;
   attribute RTL_KEEP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : signal is "true";
@@ -11743,17 +11743,17 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_0\ is
+entity \aurora_8b10b_0_cdc_sync__parameterized1_0\ is
   port (
     \out\ : out STD_LOGIC;
     RESET : in STD_LOGIC;
     init_clk_in : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_0\ : entity is "aurora_8b10b_0_cdc_sync";
-end \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_0\;
+  attribute ORIG_REF_NAME of \aurora_8b10b_0_cdc_sync__parameterized1_0\ : entity is "aurora_8b10b_0_cdc_sync";
+end \aurora_8b10b_0_cdc_sync__parameterized1_0\;
 
-architecture STRUCTURE of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_0\ is
+architecture STRUCTURE of \aurora_8b10b_0_cdc_sync__parameterized1_0\ is
   signal \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : STD_LOGIC;
   attribute RTL_KEEP : string;
   attribute RTL_KEEP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : signal is "true";
@@ -11880,7 +11880,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_1\ is
+entity \aurora_8b10b_0_cdc_sync__parameterized1_1\ is
   port (
     E : out STD_LOGIC_VECTOR ( 0 to 0 );
     reset_time_out_reg : out STD_LOGIC;
@@ -11899,10 +11899,10 @@ entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_1\ is
     reset_time_out : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_1\ : entity is "aurora_8b10b_0_cdc_sync";
-end \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_1\;
+  attribute ORIG_REF_NAME of \aurora_8b10b_0_cdc_sync__parameterized1_1\ : entity is "aurora_8b10b_0_cdc_sync";
+end \aurora_8b10b_0_cdc_sync__parameterized1_1\;
 
-architecture STRUCTURE of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_1\ is
+architecture STRUCTURE of \aurora_8b10b_0_cdc_sync__parameterized1_1\ is
   signal \FSM_sequential_tx_state[3]_i_3_n_0\ : STD_LOGIC;
   signal \FSM_sequential_tx_state[3]_i_5_n_0\ : STD_LOGIC;
   signal \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : STD_LOGIC;
@@ -12106,17 +12106,17 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_11\ is
+entity \aurora_8b10b_0_cdc_sync__parameterized1_11\ is
   port (
     \out\ : out STD_LOGIC;
     SR : out STD_LOGIC_VECTOR ( 0 to 0 );
     init_clk_in : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_11\ : entity is "aurora_8b10b_0_cdc_sync";
-end \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_11\;
+  attribute ORIG_REF_NAME of \aurora_8b10b_0_cdc_sync__parameterized1_11\ : entity is "aurora_8b10b_0_cdc_sync";
+end \aurora_8b10b_0_cdc_sync__parameterized1_11\;
 
-architecture STRUCTURE of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_11\ is
+architecture STRUCTURE of \aurora_8b10b_0_cdc_sync__parameterized1_11\ is
   signal \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : STD_LOGIC;
   attribute RTL_KEEP : string;
   attribute RTL_KEEP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : signal is "true";
@@ -12258,15 +12258,15 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_2\ is
+entity \aurora_8b10b_0_cdc_sync__parameterized1_2\ is
   port (
     init_clk_in : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_2\ : entity is "aurora_8b10b_0_cdc_sync";
-end \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_2\;
+  attribute ORIG_REF_NAME of \aurora_8b10b_0_cdc_sync__parameterized1_2\ : entity is "aurora_8b10b_0_cdc_sync";
+end \aurora_8b10b_0_cdc_sync__parameterized1_2\;
 
-architecture STRUCTURE of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_2\ is
+architecture STRUCTURE of \aurora_8b10b_0_cdc_sync__parameterized1_2\ is
   signal \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : STD_LOGIC;
   attribute RTL_KEEP : string;
   attribute RTL_KEEP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : signal is "true";
@@ -12399,17 +12399,17 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_21\ is
+entity \aurora_8b10b_0_cdc_sync__parameterized1_21\ is
   port (
     \out\ : out STD_LOGIC;
     in0 : in STD_LOGIC;
     drpclk_in : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_21\ : entity is "aurora_8b10b_0_cdc_sync";
-end \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_21\;
+  attribute ORIG_REF_NAME of \aurora_8b10b_0_cdc_sync__parameterized1_21\ : entity is "aurora_8b10b_0_cdc_sync";
+end \aurora_8b10b_0_cdc_sync__parameterized1_21\;
 
-architecture STRUCTURE of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_21\ is
+architecture STRUCTURE of \aurora_8b10b_0_cdc_sync__parameterized1_21\ is
   signal \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : STD_LOGIC;
   attribute RTL_KEEP : string;
   attribute RTL_KEEP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : signal is "true";
@@ -12536,7 +12536,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_4\ is
+entity \aurora_8b10b_0_cdc_sync__parameterized1_4\ is
   port (
     \out\ : out STD_LOGIC;
     SR : out STD_LOGIC_VECTOR ( 0 to 0 );
@@ -12544,10 +12544,10 @@ entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_4\ is
     PLL_NOT_LOCKED : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_4\ : entity is "aurora_8b10b_0_cdc_sync";
-end \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_4\;
+  attribute ORIG_REF_NAME of \aurora_8b10b_0_cdc_sync__parameterized1_4\ : entity is "aurora_8b10b_0_cdc_sync";
+end \aurora_8b10b_0_cdc_sync__parameterized1_4\;
 
-architecture STRUCTURE of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_4\ is
+architecture STRUCTURE of \aurora_8b10b_0_cdc_sync__parameterized1_4\ is
   signal \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : STD_LOGIC;
   attribute RTL_KEEP : string;
   attribute RTL_KEEP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : signal is "true";
@@ -12689,7 +12689,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_8\ is
+entity \aurora_8b10b_0_cdc_sync__parameterized1_8\ is
   port (
     E : out STD_LOGIC_VECTOR ( 0 to 0 );
     \FSM_sequential_rx_state_reg[1]\ : out STD_LOGIC;
@@ -12710,10 +12710,10 @@ entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_8\ is
     reset_time_out_reg_2 : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_8\ : entity is "aurora_8b10b_0_cdc_sync";
-end \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_8\;
+  attribute ORIG_REF_NAME of \aurora_8b10b_0_cdc_sync__parameterized1_8\ : entity is "aurora_8b10b_0_cdc_sync";
+end \aurora_8b10b_0_cdc_sync__parameterized1_8\;
 
-architecture STRUCTURE of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_8\ is
+architecture STRUCTURE of \aurora_8b10b_0_cdc_sync__parameterized1_8\ is
   signal \FSM_sequential_rx_state[3]_i_8_n_0\ : STD_LOGIC;
   signal \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : STD_LOGIC;
   attribute RTL_KEEP : string;
@@ -12892,15 +12892,15 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_9\ is
+entity \aurora_8b10b_0_cdc_sync__parameterized1_9\ is
   port (
     init_clk_in : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_9\ : entity is "aurora_8b10b_0_cdc_sync";
-end \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_9\;
+  attribute ORIG_REF_NAME of \aurora_8b10b_0_cdc_sync__parameterized1_9\ : entity is "aurora_8b10b_0_cdc_sync";
+end \aurora_8b10b_0_cdc_sync__parameterized1_9\;
 
-architecture STRUCTURE of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_9\ is
+architecture STRUCTURE of \aurora_8b10b_0_cdc_sync__parameterized1_9\ is
   signal \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : STD_LOGIC;
   attribute RTL_KEEP : string;
   attribute RTL_KEEP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : signal is "true";
@@ -13033,7 +13033,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3\ is
+entity \aurora_8b10b_0_cdc_sync__parameterized3\ is
   port (
     \out\ : out STD_LOGIC;
     run_phase_alignment_int : in STD_LOGIC;
@@ -13041,10 +13041,10 @@ entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3\ is
     user_clk : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3\ : entity is "aurora_8b10b_0_cdc_sync";
-end \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3\;
+  attribute ORIG_REF_NAME of \aurora_8b10b_0_cdc_sync__parameterized3\ : entity is "aurora_8b10b_0_cdc_sync";
+end \aurora_8b10b_0_cdc_sync__parameterized3\;
 
-architecture STRUCTURE of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3\ is
+architecture STRUCTURE of \aurora_8b10b_0_cdc_sync__parameterized3\ is
   signal \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : STD_LOGIC;
   attribute RTL_KEEP : string;
   attribute RTL_KEEP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : signal is "true";
@@ -13184,16 +13184,16 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_12\ is
+entity \aurora_8b10b_0_cdc_sync__parameterized3_12\ is
   port (
     init_clk_in : in STD_LOGIC;
     user_clk : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_12\ : entity is "aurora_8b10b_0_cdc_sync";
-end \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_12\;
+  attribute ORIG_REF_NAME of \aurora_8b10b_0_cdc_sync__parameterized3_12\ : entity is "aurora_8b10b_0_cdc_sync";
+end \aurora_8b10b_0_cdc_sync__parameterized3_12\;
 
-architecture STRUCTURE of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_12\ is
+architecture STRUCTURE of \aurora_8b10b_0_cdc_sync__parameterized3_12\ is
   signal \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : STD_LOGIC;
   attribute RTL_KEEP : string;
   attribute RTL_KEEP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : signal is "true";
@@ -13332,7 +13332,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_13\ is
+entity \aurora_8b10b_0_cdc_sync__parameterized3_13\ is
   port (
     \out\ : out STD_LOGIC;
     \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.INPUT_FLOP.p_level_in_d1_cdc_from_reg_0\ : in STD_LOGIC;
@@ -13340,10 +13340,10 @@ entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_13\ is
     user_clk : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_13\ : entity is "aurora_8b10b_0_cdc_sync";
-end \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_13\;
+  attribute ORIG_REF_NAME of \aurora_8b10b_0_cdc_sync__parameterized3_13\ : entity is "aurora_8b10b_0_cdc_sync";
+end \aurora_8b10b_0_cdc_sync__parameterized3_13\;
 
-architecture STRUCTURE of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_13\ is
+architecture STRUCTURE of \aurora_8b10b_0_cdc_sync__parameterized3_13\ is
   signal \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : STD_LOGIC;
   attribute RTL_KEEP : string;
   attribute RTL_KEEP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : signal is "true";
@@ -13483,7 +13483,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_14\ is
+entity \aurora_8b10b_0_cdc_sync__parameterized3_14\ is
   port (
     \out\ : out STD_LOGIC;
     rx_fsm_reset_done_int : in STD_LOGIC;
@@ -13491,10 +13491,10 @@ entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_14\ is
     user_clk : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_14\ : entity is "aurora_8b10b_0_cdc_sync";
-end \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_14\;
+  attribute ORIG_REF_NAME of \aurora_8b10b_0_cdc_sync__parameterized3_14\ : entity is "aurora_8b10b_0_cdc_sync";
+end \aurora_8b10b_0_cdc_sync__parameterized3_14\;
 
-architecture STRUCTURE of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_14\ is
+architecture STRUCTURE of \aurora_8b10b_0_cdc_sync__parameterized3_14\ is
   signal \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : STD_LOGIC;
   attribute RTL_KEEP : string;
   attribute RTL_KEEP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : signal is "true";
@@ -13634,7 +13634,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_22\ is
+entity \aurora_8b10b_0_cdc_sync__parameterized3_22\ is
   port (
     \out\ : out STD_LOGIC;
     link_reset_comb_r : in STD_LOGIC;
@@ -13642,10 +13642,10 @@ entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_22\ is
     user_clk : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_22\ : entity is "aurora_8b10b_0_cdc_sync";
-end \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_22\;
+  attribute ORIG_REF_NAME of \aurora_8b10b_0_cdc_sync__parameterized3_22\ : entity is "aurora_8b10b_0_cdc_sync";
+end \aurora_8b10b_0_cdc_sync__parameterized3_22\;
 
-architecture STRUCTURE of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_22\ is
+architecture STRUCTURE of \aurora_8b10b_0_cdc_sync__parameterized3_22\ is
   signal \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : STD_LOGIC;
   attribute RTL_KEEP : string;
   attribute RTL_KEEP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : signal is "true";
@@ -13785,7 +13785,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_24\ is
+entity \aurora_8b10b_0_cdc_sync__parameterized3_24\ is
   port (
     \out\ : out STD_LOGIC;
     tx_lock_comb_r : in STD_LOGIC;
@@ -13793,10 +13793,10 @@ entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_24\ is
     user_clk : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_24\ : entity is "aurora_8b10b_0_cdc_sync";
-end \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_24\;
+  attribute ORIG_REF_NAME of \aurora_8b10b_0_cdc_sync__parameterized3_24\ : entity is "aurora_8b10b_0_cdc_sync";
+end \aurora_8b10b_0_cdc_sync__parameterized3_24\;
 
-architecture STRUCTURE of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_24\ is
+architecture STRUCTURE of \aurora_8b10b_0_cdc_sync__parameterized3_24\ is
   signal \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : STD_LOGIC;
   attribute RTL_KEEP : string;
   attribute RTL_KEEP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : signal is "true";
@@ -13936,7 +13936,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_6\ is
+entity \aurora_8b10b_0_cdc_sync__parameterized3_6\ is
   port (
     \out\ : out STD_LOGIC;
     \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.s_level_out_d5_reg_0\ : out STD_LOGIC;
@@ -13945,10 +13945,10 @@ entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_6\ is
     user_clk : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_6\ : entity is "aurora_8b10b_0_cdc_sync";
-end \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_6\;
+  attribute ORIG_REF_NAME of \aurora_8b10b_0_cdc_sync__parameterized3_6\ : entity is "aurora_8b10b_0_cdc_sync";
+end \aurora_8b10b_0_cdc_sync__parameterized3_6\;
 
-architecture STRUCTURE of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_6\ is
+architecture STRUCTURE of \aurora_8b10b_0_cdc_sync__parameterized3_6\ is
   signal \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : STD_LOGIC;
   attribute RTL_KEEP : string;
   attribute RTL_KEEP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : signal is "true";
@@ -14096,7 +14096,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_7\ is
+entity \aurora_8b10b_0_cdc_sync__parameterized3_7\ is
   port (
     \out\ : out STD_LOGIC;
     gtrxreset_i_0 : in STD_LOGIC;
@@ -14104,10 +14104,10 @@ entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_7\ is
     user_clk : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_7\ : entity is "aurora_8b10b_0_cdc_sync";
-end \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_7\;
+  attribute ORIG_REF_NAME of \aurora_8b10b_0_cdc_sync__parameterized3_7\ : entity is "aurora_8b10b_0_cdc_sync";
+end \aurora_8b10b_0_cdc_sync__parameterized3_7\;
 
-architecture STRUCTURE of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_7\ is
+architecture STRUCTURE of \aurora_8b10b_0_cdc_sync__parameterized3_7\ is
   signal \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : STD_LOGIC;
   attribute RTL_KEEP : string;
   attribute RTL_KEEP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : signal is "true";
@@ -14247,7 +14247,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6\ is
+entity \aurora_8b10b_0_cdc_sync__parameterized6\ is
   port (
     \out\ : out STD_LOGIC;
     gtrxreset_i : in STD_LOGIC;
@@ -14255,10 +14255,10 @@ entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6\ is
     init_clk_in : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6\ : entity is "aurora_8b10b_0_cdc_sync";
-end \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6\;
+  attribute ORIG_REF_NAME of \aurora_8b10b_0_cdc_sync__parameterized6\ : entity is "aurora_8b10b_0_cdc_sync";
+end \aurora_8b10b_0_cdc_sync__parameterized6\;
 
-architecture STRUCTURE of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6\ is
+architecture STRUCTURE of \aurora_8b10b_0_cdc_sync__parameterized6\ is
   signal \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : STD_LOGIC;
   attribute RTL_KEEP : string;
   attribute RTL_KEEP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : signal is "true";
@@ -14398,7 +14398,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_10\ is
+entity \aurora_8b10b_0_cdc_sync__parameterized6_10\ is
   port (
     \out\ : out STD_LOGIC;
     rxfsm_rxresetdone_r : in STD_LOGIC;
@@ -14406,10 +14406,10 @@ entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_10\ is
     init_clk_in : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_10\ : entity is "aurora_8b10b_0_cdc_sync";
-end \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_10\;
+  attribute ORIG_REF_NAME of \aurora_8b10b_0_cdc_sync__parameterized6_10\ : entity is "aurora_8b10b_0_cdc_sync";
+end \aurora_8b10b_0_cdc_sync__parameterized6_10\;
 
-architecture STRUCTURE of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_10\ is
+architecture STRUCTURE of \aurora_8b10b_0_cdc_sync__parameterized6_10\ is
   signal \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : STD_LOGIC;
   attribute RTL_KEEP : string;
   attribute RTL_KEEP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : signal is "true";
@@ -14549,17 +14549,17 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_15\ is
+entity \aurora_8b10b_0_cdc_sync__parameterized6_15\ is
   port (
     rxpmaresetdone_i : in STD_LOGIC;
     user_clk : in STD_LOGIC;
     init_clk_in : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_15\ : entity is "aurora_8b10b_0_cdc_sync";
-end \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_15\;
+  attribute ORIG_REF_NAME of \aurora_8b10b_0_cdc_sync__parameterized6_15\ : entity is "aurora_8b10b_0_cdc_sync";
+end \aurora_8b10b_0_cdc_sync__parameterized6_15\;
 
-architecture STRUCTURE of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_15\ is
+architecture STRUCTURE of \aurora_8b10b_0_cdc_sync__parameterized6_15\ is
   signal \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : STD_LOGIC;
   attribute RTL_KEEP : string;
   attribute RTL_KEEP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : signal is "true";
@@ -14698,7 +14698,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_17\ is
+entity \aurora_8b10b_0_cdc_sync__parameterized6_17\ is
   port (
     \out\ : out STD_LOGIC;
     \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.INPUT_FLOP.p_level_in_d1_cdc_from_reg_0\ : in STD_LOGIC;
@@ -14706,10 +14706,10 @@ entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_17\ is
     init_clk_in : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_17\ : entity is "aurora_8b10b_0_cdc_sync";
-end \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_17\;
+  attribute ORIG_REF_NAME of \aurora_8b10b_0_cdc_sync__parameterized6_17\ : entity is "aurora_8b10b_0_cdc_sync";
+end \aurora_8b10b_0_cdc_sync__parameterized6_17\;
 
-architecture STRUCTURE of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_17\ is
+architecture STRUCTURE of \aurora_8b10b_0_cdc_sync__parameterized6_17\ is
   signal \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : STD_LOGIC;
   attribute RTL_KEEP : string;
   attribute RTL_KEEP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : signal is "true";
@@ -14849,17 +14849,17 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_18\ is
+entity \aurora_8b10b_0_cdc_sync__parameterized6_18\ is
   port (
     txpmaresetdone_i : in STD_LOGIC;
     user_clk : in STD_LOGIC;
     init_clk_in : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_18\ : entity is "aurora_8b10b_0_cdc_sync";
-end \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_18\;
+  attribute ORIG_REF_NAME of \aurora_8b10b_0_cdc_sync__parameterized6_18\ : entity is "aurora_8b10b_0_cdc_sync";
+end \aurora_8b10b_0_cdc_sync__parameterized6_18\;
 
-architecture STRUCTURE of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_18\ is
+architecture STRUCTURE of \aurora_8b10b_0_cdc_sync__parameterized6_18\ is
   signal \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : STD_LOGIC;
   attribute RTL_KEEP : string;
   attribute RTL_KEEP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : signal is "true";
@@ -14998,7 +14998,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_19\ is
+entity \aurora_8b10b_0_cdc_sync__parameterized6_19\ is
   port (
     \out\ : out STD_LOGIC;
     SR : in STD_LOGIC_VECTOR ( 0 to 0 );
@@ -15006,10 +15006,10 @@ entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_19\ is
     drpclk_in : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_19\ : entity is "aurora_8b10b_0_cdc_sync";
-end \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_19\;
+  attribute ORIG_REF_NAME of \aurora_8b10b_0_cdc_sync__parameterized6_19\ : entity is "aurora_8b10b_0_cdc_sync";
+end \aurora_8b10b_0_cdc_sync__parameterized6_19\;
 
-architecture STRUCTURE of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_19\ is
+architecture STRUCTURE of \aurora_8b10b_0_cdc_sync__parameterized6_19\ is
   signal \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : STD_LOGIC;
   attribute RTL_KEEP : string;
   attribute RTL_KEEP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : signal is "true";
@@ -15149,7 +15149,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_20\ is
+entity \aurora_8b10b_0_cdc_sync__parameterized6_20\ is
   port (
     AR : out STD_LOGIC_VECTOR ( 0 to 0 );
     gt_common_reset_out : in STD_LOGIC;
@@ -15157,10 +15157,10 @@ entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_20\ is
     drpclk_in : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_20\ : entity is "aurora_8b10b_0_cdc_sync";
-end \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_20\;
+  attribute ORIG_REF_NAME of \aurora_8b10b_0_cdc_sync__parameterized6_20\ : entity is "aurora_8b10b_0_cdc_sync";
+end \aurora_8b10b_0_cdc_sync__parameterized6_20\;
 
-architecture STRUCTURE of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_20\ is
+architecture STRUCTURE of \aurora_8b10b_0_cdc_sync__parameterized6_20\ is
   signal \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : STD_LOGIC;
   attribute RTL_KEEP : string;
   attribute RTL_KEEP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : signal is "true";
@@ -15300,7 +15300,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_25\ is
+entity \aurora_8b10b_0_cdc_sync__parameterized6_25\ is
   port (
     O : out STD_LOGIC_VECTOR ( 3 downto 0 );
     \hotplug_count_synth.count_for_reset_r_reg[7]\ : out STD_LOGIC_VECTOR ( 3 downto 0 );
@@ -15314,10 +15314,10 @@ entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_25\ is
     \hotplug_count_synth.count_for_reset_r_reg\ : in STD_LOGIC_VECTOR ( 21 downto 0 )
   );
   attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_25\ : entity is "aurora_8b10b_0_cdc_sync";
-end \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_25\;
+  attribute ORIG_REF_NAME of \aurora_8b10b_0_cdc_sync__parameterized6_25\ : entity is "aurora_8b10b_0_cdc_sync";
+end \aurora_8b10b_0_cdc_sync__parameterized6_25\;
 
-architecture STRUCTURE of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_25\ is
+architecture STRUCTURE of \aurora_8b10b_0_cdc_sync__parameterized6_25\ is
   signal \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : STD_LOGIC;
   attribute RTL_KEEP : string;
   attribute RTL_KEEP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : signal is "true";
@@ -15804,7 +15804,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_3\ is
+entity \aurora_8b10b_0_cdc_sync__parameterized6_3\ is
   port (
     \out\ : out STD_LOGIC;
     txfsm_txresetdone_r : in STD_LOGIC;
@@ -15812,10 +15812,10 @@ entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_3\ is
     init_clk_in : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_3\ : entity is "aurora_8b10b_0_cdc_sync";
-end \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_3\;
+  attribute ORIG_REF_NAME of \aurora_8b10b_0_cdc_sync__parameterized6_3\ : entity is "aurora_8b10b_0_cdc_sync";
+end \aurora_8b10b_0_cdc_sync__parameterized6_3\;
 
-architecture STRUCTURE of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_3\ is
+architecture STRUCTURE of \aurora_8b10b_0_cdc_sync__parameterized6_3\ is
   signal \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : STD_LOGIC;
   attribute RTL_KEEP : string;
   attribute RTL_KEEP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : signal is "true";
@@ -15955,7 +15955,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_5\ is
+entity \aurora_8b10b_0_cdc_sync__parameterized6_5\ is
   port (
     \out\ : out STD_LOGIC;
     time_out_wait_bypass : in STD_LOGIC;
@@ -15963,10 +15963,10 @@ entity \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_5\ is
     init_clk_in : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_5\ : entity is "aurora_8b10b_0_cdc_sync";
-end \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_5\;
+  attribute ORIG_REF_NAME of \aurora_8b10b_0_cdc_sync__parameterized6_5\ : entity is "aurora_8b10b_0_cdc_sync";
+end \aurora_8b10b_0_cdc_sync__parameterized6_5\;
 
-architecture STRUCTURE of \aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_5\ is
+architecture STRUCTURE of \aurora_8b10b_0_cdc_sync__parameterized6_5\ is
   signal \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : STD_LOGIC;
   attribute RTL_KEEP : string;
   attribute RTL_KEEP of \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.p_level_in_d1_cdc_from\ : signal is "true";
@@ -16106,7 +16106,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_GLOBAL_LOGIC is
+entity aurora_8b10b_0_GLOBAL_LOGIC is
   port (
     SR : out STD_LOGIC_VECTOR ( 0 to 0 );
     gen_v_flop_1_i : out STD_LOGIC_VECTOR ( 2 downto 0 );
@@ -16128,15 +16128,15 @@ entity aurora_8b10b_0_aurora_8b10b_0_GLOBAL_LOGIC is
     POWER_DOWN : in STD_LOGIC;
     D : in STD_LOGIC_VECTOR ( 1 downto 0 )
   );
-end aurora_8b10b_0_aurora_8b10b_0_GLOBAL_LOGIC;
+end aurora_8b10b_0_GLOBAL_LOGIC;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_GLOBAL_LOGIC is
+architecture STRUCTURE of aurora_8b10b_0_GLOBAL_LOGIC is
   signal gen_ver_i : STD_LOGIC;
   signal reset_channel_i : STD_LOGIC;
   signal txver_count_r0 : STD_LOGIC;
   signal wait_for_lane_up_r0 : STD_LOGIC;
 begin
-channel_err_detect_i: entity work.aurora_8b10b_0_aurora_8b10b_0_CHANNEL_ERR_DETECT
+channel_err_detect_i: entity work.aurora_8b10b_0_CHANNEL_ERR_DETECT
      port map (
       D(1 downto 0) => D(1 downto 0),
       HARD_ERR => HARD_ERR,
@@ -16149,7 +16149,7 @@ channel_err_detect_i: entity work.aurora_8b10b_0_aurora_8b10b_0_CHANNEL_ERR_DETE
       verify_r_reg => \downcounter_r_reg[2]\,
       wait_for_lane_up_r0 => wait_for_lane_up_r0
     );
-channel_init_sm_i: entity work.aurora_8b10b_0_aurora_8b10b_0_CHANNEL_INIT_SM
+channel_init_sm_i: entity work.aurora_8b10b_0_CHANNEL_INIT_SM
      port map (
       CHANNEL_UP => CHANNEL_UP,
       SR(0) => SR(0),
@@ -16165,7 +16165,7 @@ channel_init_sm_i: entity work.aurora_8b10b_0_aurora_8b10b_0_CHANNEL_INIT_SM
       user_clk => user_clk,
       wait_for_lane_up_r0 => wait_for_lane_up_r0
     );
-idle_and_ver_gen_i: entity work.aurora_8b10b_0_aurora_8b10b_0_IDLE_AND_VER_GEN
+idle_and_ver_gen_i: entity work.aurora_8b10b_0_IDLE_AND_VER_GEN
      port map (
       \downcounter_r_reg[2]_0\ => \downcounter_r_reg[2]\,
       gen_a_i => gen_a_i,
@@ -16181,7 +16181,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_HOTPLUG is
+entity aurora_8b10b_0_HOTPLUG is
   port (
     LINK_RESET_OUT : out STD_LOGIC;
     user_clk : in STD_LOGIC;
@@ -16190,9 +16190,9 @@ entity aurora_8b10b_0_aurora_8b10b_0_HOTPLUG is
     SR : in STD_LOGIC_VECTOR ( 0 to 0 );
     D : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-end aurora_8b10b_0_aurora_8b10b_0_HOTPLUG;
+end aurora_8b10b_0_HOTPLUG;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_HOTPLUG is
+architecture STRUCTURE of aurora_8b10b_0_HOTPLUG is
   signal \hotplug_count_synth.count_for_reset_r_reg\ : STD_LOGIC_VECTOR ( 21 downto 0 );
   signal link_reset_0 : STD_LOGIC;
   signal link_reset_r : STD_LOGIC;
@@ -16549,7 +16549,7 @@ link_reset_r_reg: unisim.vcomponents.FDRE
       Q => link_reset_r,
       R => '0'
     );
-rx_cc_cdc_sync: entity work.\aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_25\
+rx_cc_cdc_sync: entity work.\aurora_8b10b_0_cdc_sync__parameterized6_25\
      port map (
       O(3) => rx_cc_cdc_sync_n_0,
       O(2) => rx_cc_cdc_sync_n_1,
@@ -16702,7 +16702,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_RESET_LOGIC is
+entity aurora_8b10b_0_RESET_LOGIC is
   port (
     link_reset_comb_r : out STD_LOGIC;
     SYSTEM_RESET_reg_0 : out STD_LOGIC;
@@ -16721,9 +16721,9 @@ entity aurora_8b10b_0_aurora_8b10b_0_RESET_LOGIC is
     tx_dst_rdy : in STD_LOGIC;
     new_pkt_r_reg : in STD_LOGIC
   );
-end aurora_8b10b_0_aurora_8b10b_0_RESET_LOGIC;
+end aurora_8b10b_0_RESET_LOGIC;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_RESET_LOGIC is
+architecture STRUCTURE of aurora_8b10b_0_RESET_LOGIC is
   signal SYSTEM_RESET0_n_0 : STD_LOGIC;
   signal \^system_reset_reg_0\ : STD_LOGIC;
   signal gt_rxresetdone_r : STD_LOGIC;
@@ -16809,7 +16809,7 @@ gt_txresetdone_r_reg: unisim.vcomponents.FDCE
       D => '1',
       Q => gt_txresetdone_r
     );
-link_reset_cdc_sync: entity work.\aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_22\
+link_reset_cdc_sync: entity work.\aurora_8b10b_0_cdc_sync__parameterized3_22\
      port map (
       init_clk_in => init_clk_in,
       link_reset_comb_r => \^link_reset_comb_r\,
@@ -16837,13 +16837,13 @@ new_pkt_r_i_1: unisim.vcomponents.LUT6
       I5 => new_pkt_r_reg,
       O => new_pkt_r
     );
-pll_not_locked_cdc_sync: entity work.aurora_8b10b_0_aurora_8b10b_0_cdc_sync_23
+pll_not_locked_cdc_sync: entity work.aurora_8b10b_0_cdc_sync_23
      port map (
       PLL_NOT_LOCKED => PLL_NOT_LOCKED,
       \out\ => pll_not_locked_sync,
       user_clk => user_clk
     );
-tx_lock_cdc_sync: entity work.\aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_24\
+tx_lock_cdc_sync: entity work.\aurora_8b10b_0_cdc_sync__parameterized3_24\
      port map (
       init_clk_in => init_clk_in,
       \out\ => tx_lock_sync,
@@ -16863,7 +16863,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_RX_LL_PDU_DATAPATH is
+entity aurora_8b10b_0_RX_LL_PDU_DATAPATH is
   port (
     rx_eof : out STD_LOGIC;
     FRAME_ERR : out STD_LOGIC;
@@ -16896,9 +16896,9 @@ entity aurora_8b10b_0_aurora_8b10b_0_RX_LL_PDU_DATAPATH is
     \stage_1_ecp_r_reg[0]_0\ : in STD_LOGIC_VECTOR ( 1 downto 0 );
     \STORAGE_DATA_Buffer_reg[0]\ : in STD_LOGIC_VECTOR ( 31 downto 0 )
   );
-end aurora_8b10b_0_aurora_8b10b_0_RX_LL_PDU_DATAPATH;
+end aurora_8b10b_0_RX_LL_PDU_DATAPATH;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_RX_LL_PDU_DATAPATH is
+architecture STRUCTURE of aurora_8b10b_0_RX_LL_PDU_DATAPATH is
   signal EOF_N_Buffer : STD_LOGIC;
   signal FRAME_ERR_RESULT_Buffer : STD_LOGIC;
   signal FRAME_ERR_RESULT_Buffer0 : STD_LOGIC;
@@ -17073,7 +17073,7 @@ RX_SRC_RDY_N_Buffer_reg: unisim.vcomponents.FDSE
       Q => rx_src_rdy,
       S => SS(0)
     );
-output_mux_i: entity work.aurora_8b10b_0_aurora_8b10b_0_OUTPUT_MUX
+output_mux_i: entity work.aurora_8b10b_0_OUTPUT_MUX
      port map (
       M_AXI_RX_TDATA(0 to 31) => M_AXI_RX_TDATA(0 to 31),
       \OUTPUT_DATA_Buffer_reg[16]_0\(15 downto 0) => \^q\(31 downto 16),
@@ -17112,7 +17112,7 @@ output_mux_i: entity work.aurora_8b10b_0_aurora_8b10b_0_OUTPUT_MUX
       Q(0) => STORAGE_DATA(31),
       user_clk => user_clk
     );
-sideband_output_i: entity work.aurora_8b10b_0_aurora_8b10b_0_SIDEBAND_OUTPUT
+sideband_output_i: entity work.aurora_8b10b_0_SIDEBAND_OUTPUT
      port map (
       D(0) => rx_rem_c(1),
       EOF_N_Buffer => EOF_N_Buffer,
@@ -17487,7 +17487,7 @@ stage_1_pad_r_reg: unisim.vcomponents.FDRE
       Q => stage_1_pad_r,
       R => '0'
     );
-stage_1_rx_ll_deframer_i: entity work.aurora_8b10b_0_aurora_8b10b_0_RX_LL_DEFRAMER
+stage_1_rx_ll_deframer_i: entity work.aurora_8b10b_0_RX_LL_DEFRAMER
      port map (
       \AFTER_SCP_Buffer_reg[1]_0\ => stage_1_rx_ll_deframer_i_n_1,
       \AFTER_SCP_Buffer_reg[1]_1\ => stage_1_rx_ll_deframer_i_n_2,
@@ -17804,7 +17804,7 @@ stage_2_frame_err_r_reg: unisim.vcomponents.FDRE
       Q => stage_2_frame_err_r,
       R => SS(0)
     );
-stage_2_left_align_control_i: entity work.aurora_8b10b_0_aurora_8b10b_0_LEFT_ALIGN_CONTROL
+stage_2_left_align_control_i: entity work.aurora_8b10b_0_LEFT_ALIGN_CONTROL
      port map (
       MUX_SELECT(0) => MUX_SELECT(2),
       mux_select_c(0) => mux_select_c(2),
@@ -17826,7 +17826,7 @@ stage_2_start_with_data_r_reg: unisim.vcomponents.FDRE
       Q => stage_2_start_with_data_r,
       R => SS(0)
     );
-stage_2_valid_data_counter_i: entity work.aurora_8b10b_0_aurora_8b10b_0_VALID_DATA_COUNTER
+stage_2_valid_data_counter_i: entity work.aurora_8b10b_0_VALID_DATA_COUNTER
      port map (
       \COUNT_Buffer_reg[0]_0\(1 downto 0) => plusOp(1 downto 0),
       D(0) => rx_rem_c(1),
@@ -17845,20 +17845,20 @@ stage_2_valid_data_counter_i: entity work.aurora_8b10b_0_aurora_8b10b_0_VALID_DA
       stage_3_end_storage_r => stage_3_end_storage_r,
       user_clk => user_clk
     );
-stage_3_left_align_datapath_mux_i: entity work.aurora_8b10b_0_aurora_8b10b_0_LEFT_ALIGN_MUX
+stage_3_left_align_datapath_mux_i: entity work.aurora_8b10b_0_LEFT_ALIGN_MUX
      port map (
       MUX_SELECT(0) => MUX_SELECT(2),
       Q(31 downto 0) => \^q\(31 downto 0),
       stage_2_data_r(0 to 31) => stage_2_data_r(0 to 31),
       user_clk => user_clk
     );
-stage_3_output_switch_control_i: entity work.aurora_8b10b_0_aurora_8b10b_0_OUTPUT_SWITCH_CONTROL
+stage_3_output_switch_control_i: entity work.aurora_8b10b_0_OUTPUT_SWITCH_CONTROL
      port map (
       OUTPUT_SELECT_Buffer(0) => OUTPUT_SELECT_Buffer(0),
       output_select_c(0) => output_select_c(9),
       user_clk => user_clk
     );
-stage_3_storage_ce_control_i: entity work.aurora_8b10b_0_aurora_8b10b_0_STORAGE_CE_CONTROL
+stage_3_storage_ce_control_i: entity work.aurora_8b10b_0_STORAGE_CE_CONTROL
      port map (
       D(1) => ce_command_c(0),
       D(0) => ce_command_c(1),
@@ -17867,7 +17867,7 @@ stage_3_storage_ce_control_i: entity work.aurora_8b10b_0_aurora_8b10b_0_STORAGE_
       SS(0) => SS(0),
       user_clk => user_clk
     );
-stage_3_storage_count_control_i: entity work.aurora_8b10b_0_aurora_8b10b_0_STORAGE_COUNT_CONTROL
+stage_3_storage_count_control_i: entity work.aurora_8b10b_0_STORAGE_COUNT_CONTROL
      port map (
       D(1) => ce_command_c(0),
       D(0) => ce_command_c(1),
@@ -17884,7 +17884,7 @@ stage_3_storage_count_control_i: entity work.aurora_8b10b_0_aurora_8b10b_0_STORA
       \storage_count_r_reg[1]_0\ => stage_3_storage_count_control_i_n_5,
       user_clk => user_clk
     );
-stage_3_storage_switch_control_i: entity work.aurora_8b10b_0_aurora_8b10b_0_STORAGE_SWITCH_CONTROL
+stage_3_storage_switch_control_i: entity work.aurora_8b10b_0_STORAGE_SWITCH_CONTROL
      port map (
       Q(0) => stage_3_storage_count_r(1),
       STORAGE_SELECT_Buffer(1 downto 0) => STORAGE_SELECT_Buffer(1 downto 0),
@@ -17892,7 +17892,7 @@ stage_3_storage_switch_control_i: entity work.aurora_8b10b_0_aurora_8b10b_0_STOR
       stage_3_end_storage_r => stage_3_end_storage_r,
       user_clk => user_clk
     );
-stage_4_storage_mux_i: entity work.aurora_8b10b_0_aurora_8b10b_0_STORAGE_MUX
+stage_4_storage_mux_i: entity work.aurora_8b10b_0_STORAGE_MUX
      port map (
       E(1) => p_0_in0,
       E(0) => stage_3_storage_ce_control_i_n_1,
@@ -17936,7 +17936,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_TX_LL is
+entity aurora_8b10b_0_TX_LL is
   port (
     gen_cc_i : out STD_LOGIC;
     D : out STD_LOGIC;
@@ -17962,9 +17962,9 @@ entity aurora_8b10b_0_aurora_8b10b_0_TX_LL is
     S_AXI_TX_TDATA : in STD_LOGIC_VECTOR ( 0 to 31 );
     S_AXI_NFC_NB : in STD_LOGIC_VECTOR ( 0 to 3 )
   );
-end aurora_8b10b_0_aurora_8b10b_0_TX_LL;
+end aurora_8b10b_0_TX_LL;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_TX_LL is
+architecture STRUCTURE of aurora_8b10b_0_TX_LL is
   signal \^d\ : STD_LOGIC;
   signal \^do_nfc_r_reg\ : STD_LOGIC;
   signal p_12_in : STD_LOGIC;
@@ -17977,7 +17977,7 @@ architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_TX_LL is
 begin
   D <= \^d\;
   do_nfc_r_reg <= \^do_nfc_r_reg\;
-tx_ll_control_i: entity work.aurora_8b10b_0_aurora_8b10b_0_TX_LL_CONTROL
+tx_ll_control_i: entity work.aurora_8b10b_0_TX_LL_CONTROL
      port map (
       D(0) => tx_ll_control_i_n_12,
       DO_CC_I => DO_CC_I,
@@ -18006,7 +18006,7 @@ tx_ll_control_i: entity work.aurora_8b10b_0_aurora_8b10b_0_TX_LL_CONTROL
       storage_v_r0 => storage_v_r0,
       user_clk => user_clk
     );
-tx_ll_datapath_i: entity work.aurora_8b10b_0_aurora_8b10b_0_TX_LL_DATAPATH
+tx_ll_datapath_i: entity work.aurora_8b10b_0_TX_LL_DATAPATH
      port map (
       D(0) => p_12_in,
       E(0) => pdu_ok_c,
@@ -18029,7 +18029,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_gtrxreset_seq is
+entity aurora_8b10b_0_gtrxreset_seq is
   port (
     GTRXRESET : out STD_LOGIC;
     drp_op_done : out STD_LOGIC;
@@ -18049,9 +18049,9 @@ entity aurora_8b10b_0_aurora_8b10b_0_gtrxreset_seq is
     DRPEN_IN : in STD_LOGIC;
     DRPDO_OUT : in STD_LOGIC_VECTOR ( 15 downto 0 )
   );
-end aurora_8b10b_0_aurora_8b10b_0_gtrxreset_seq;
+end aurora_8b10b_0_gtrxreset_seq;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_gtrxreset_seq is
+architecture STRUCTURE of aurora_8b10b_0_gtrxreset_seq is
   signal \FSM_onehot_state[0]_i_1_n_0\ : STD_LOGIC;
   signal \FSM_onehot_state[1]_i_1_n_0\ : STD_LOGIC;
   signal \FSM_onehot_state[2]_i_1_n_0\ : STD_LOGIC;
@@ -18450,7 +18450,7 @@ gtrxreset_i: unisim.vcomponents.LUT6
       I5 => \^q\(1),
       O => \gtrxreset_i__0\
     );
-gtrxreset_in_cdc_sync: entity work.\aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_19\
+gtrxreset_in_cdc_sync: entity work.\aurora_8b10b_0_cdc_sync__parameterized6_19\
      port map (
       SR(0) => SR(0),
       drpclk_in => drpclk_in,
@@ -18916,14 +18916,14 @@ gtrxreset_ss_reg: unisim.vcomponents.FDCE
       D => \rd_data[9]_i_1_n_0\,
       Q => \rd_data_reg[15]_0\(9)
     );
-rst_cdc_sync: entity work.\aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_20\
+rst_cdc_sync: entity work.\aurora_8b10b_0_cdc_sync__parameterized6_20\
      port map (
       AR(0) => rst_ss,
       drpclk_in => drpclk_in,
       gt_common_reset_out => gt_common_reset_out,
       init_clk_in => init_clk_in
     );
-rxpmaresetdone_cdc_sync: entity work.\aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_21\
+rxpmaresetdone_cdc_sync: entity work.\aurora_8b10b_0_cdc_sync__parameterized1_21\
      port map (
       drpclk_in => drpclk_in,
       in0 => in0,
@@ -18942,7 +18942,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_rx_startup_fsm is
+entity aurora_8b10b_0_rx_startup_fsm is
   port (
     gtrxreset_i_0 : out STD_LOGIC;
     gt_rxuserrdy_i : out STD_LOGIC;
@@ -18954,9 +18954,9 @@ entity aurora_8b10b_0_aurora_8b10b_0_rx_startup_fsm is
     reset_time_out_reg_0 : in STD_LOGIC;
     gt_txuserrdy_i : in STD_LOGIC
   );
-end aurora_8b10b_0_aurora_8b10b_0_rx_startup_fsm;
+end aurora_8b10b_0_rx_startup_fsm;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_rx_startup_fsm is
+architecture STRUCTURE of aurora_8b10b_0_rx_startup_fsm is
   signal \FSM_sequential_rx_state[0]_i_2_n_0\ : STD_LOGIC;
   signal \FSM_sequential_rx_state[0]_i_3_n_0\ : STD_LOGIC;
   signal \FSM_sequential_rx_state[1]_i_2_n_0\ : STD_LOGIC;
@@ -19507,7 +19507,7 @@ check_tlock_max_reg: unisim.vcomponents.FDRE
       Q => check_tlock_max_reg_n_0,
       R => AR(0)
     );
-gtrxreset_cdc_sync: entity work.\aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_7\
+gtrxreset_cdc_sync: entity work.\aurora_8b10b_0_cdc_sync__parameterized3_7\
      port map (
       gtrxreset_i_0 => \^gtrxreset_i_0\,
       init_clk_in => init_clk_in,
@@ -20157,7 +20157,7 @@ rxresetdone_s3_reg: unisim.vcomponents.FDRE
       Q => rxresetdone_s3,
       R => '0'
     );
-sync_PLL0LOCK_cdc_sync: entity work.\aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_8\
+sync_PLL0LOCK_cdc_sync: entity work.\aurora_8b10b_0_cdc_sync__parameterized1_8\
      port map (
       E(0) => sync_PLL0LOCK_cdc_sync_n_0,
       \FSM_sequential_rx_state_reg[0]\ => \FSM_sequential_rx_state[3]_i_4_n_0\,
@@ -20177,61 +20177,61 @@ sync_PLL0LOCK_cdc_sync: entity work.\aurora_8b10b_0_aurora_8b10b_0_cdc_sync__par
       rxresetdone_s3 => rxresetdone_s3,
       time_tlock_max => time_tlock_max
     );
-sync_PLL1LOCK_cdc_sync: entity work.\aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_9\
+sync_PLL1LOCK_cdc_sync: entity work.\aurora_8b10b_0_cdc_sync__parameterized1_9\
      port map (
       init_clk_in => init_clk_in
     );
-sync_RXRESETDONE_cdc_sync: entity work.\aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_10\
+sync_RXRESETDONE_cdc_sync: entity work.\aurora_8b10b_0_cdc_sync__parameterized6_10\
      port map (
       init_clk_in => init_clk_in,
       \out\ => rxresetdone_s2,
       rxfsm_rxresetdone_r => rxfsm_rxresetdone_r,
       user_clk => user_clk
     );
-sync_mmcm_lock_reclocked_cdc_sync: entity work.\aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_11\
+sync_mmcm_lock_reclocked_cdc_sync: entity work.\aurora_8b10b_0_cdc_sync__parameterized1_11\
      port map (
       SR(0) => sync_mmcm_lock_reclocked_cdc_sync_n_1,
       init_clk_in => init_clk_in,
       \out\ => mmcm_lock_i
     );
-sync_pmaresetdone_fallingedge_detect_cdc_sync: entity work.\aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_12\
+sync_pmaresetdone_fallingedge_detect_cdc_sync: entity work.\aurora_8b10b_0_cdc_sync__parameterized3_12\
      port map (
       init_clk_in => init_clk_in,
       user_clk => user_clk
     );
-sync_run_phase_alignment_int_cdc_sync: entity work.\aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_13\
+sync_run_phase_alignment_int_cdc_sync: entity work.\aurora_8b10b_0_cdc_sync__parameterized3_13\
      port map (
       \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.INPUT_FLOP.p_level_in_d1_cdc_from_reg_0\ => run_phase_alignment_int_reg_n_0,
       init_clk_in => init_clk_in,
       \out\ => run_phase_alignment_int_s2,
       user_clk => user_clk
     );
-sync_rx_fsm_reset_done_int_cdc_sync: entity work.\aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_14\
+sync_rx_fsm_reset_done_int_cdc_sync: entity work.\aurora_8b10b_0_cdc_sync__parameterized3_14\
      port map (
       init_clk_in => init_clk_in,
       \out\ => sync_rx_fsm_reset_done_int_cdc_sync_n_0,
       rx_fsm_reset_done_int => rx_fsm_reset_done_int,
       user_clk => user_clk
     );
-sync_rxpmaresetdone_cdc_sync: entity work.\aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_15\
+sync_rxpmaresetdone_cdc_sync: entity work.\aurora_8b10b_0_cdc_sync__parameterized6_15\
      port map (
       init_clk_in => init_clk_in,
       rxpmaresetdone_i => rxpmaresetdone_i,
       user_clk => user_clk
     );
-sync_rxpmaresetdone_rx_s_cdc_sync: entity work.aurora_8b10b_0_aurora_8b10b_0_cdc_sync_16
+sync_rxpmaresetdone_rx_s_cdc_sync: entity work.aurora_8b10b_0_cdc_sync_16
      port map (
       \out\ => rxpmaresetdone_rx_s,
       user_clk => user_clk
     );
-sync_time_out_wait_bypass_cdc_sync: entity work.\aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_17\
+sync_time_out_wait_bypass_cdc_sync: entity work.\aurora_8b10b_0_cdc_sync__parameterized6_17\
      port map (
       \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.INPUT_FLOP.p_level_in_d1_cdc_from_reg_0\ => time_out_wait_bypass_reg_n_0,
       init_clk_in => init_clk_in,
       \out\ => time_out_wait_bypass_s2,
       user_clk => user_clk
     );
-sync_txpmaresetdone_cdc_sync: entity work.\aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_18\
+sync_txpmaresetdone_cdc_sync: entity work.\aurora_8b10b_0_cdc_sync__parameterized6_18\
      port map (
       init_clk_in => init_clk_in,
       txpmaresetdone_i => txpmaresetdone_i,
@@ -21415,7 +21415,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_tx_startup_fsm is
+entity aurora_8b10b_0_tx_startup_fsm is
   port (
     \out\ : out STD_LOGIC;
     gt_tx_reset_i : out STD_LOGIC;
@@ -21430,9 +21430,9 @@ entity aurora_8b10b_0_aurora_8b10b_0_tx_startup_fsm is
     AR : in STD_LOGIC_VECTOR ( 0 to 0 );
     PLL_NOT_LOCKED : in STD_LOGIC
   );
-end aurora_8b10b_0_aurora_8b10b_0_tx_startup_fsm;
+end aurora_8b10b_0_tx_startup_fsm;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_tx_startup_fsm is
+architecture STRUCTURE of aurora_8b10b_0_tx_startup_fsm is
   signal \FSM_sequential_tx_state[0]_i_2_n_0\ : STD_LOGIC;
   signal \FSM_sequential_tx_state[0]_i_3_n_0\ : STD_LOGIC;
   signal \FSM_sequential_tx_state[0]_i_4_n_0\ : STD_LOGIC;
@@ -22439,7 +22439,7 @@ run_phase_alignment_int_s3_reg: unisim.vcomponents.FDRE
       Q => run_phase_alignment_int_s3,
       R => '0'
     );
-sync_PLL0LOCK_cdc_sync: entity work.\aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_1\
+sync_PLL0LOCK_cdc_sync: entity work.\aurora_8b10b_0_cdc_sync__parameterized1_1\
      port map (
       E(0) => sync_PLL0LOCK_cdc_sync_n_0,
       \FSM_sequential_tx_state_reg[0]\ => \FSM_sequential_tx_state[3]_i_4_n_0\,
@@ -22457,39 +22457,39 @@ sync_PLL0LOCK_cdc_sync: entity work.\aurora_8b10b_0_aurora_8b10b_0_cdc_sync__par
       reset_time_out_reg_0 => init_wait_done_reg_n_0,
       txresetdone_s3 => txresetdone_s3
     );
-sync_PLL1LOCK_cdc_sync: entity work.\aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_2\
+sync_PLL1LOCK_cdc_sync: entity work.\aurora_8b10b_0_cdc_sync__parameterized1_2\
      port map (
       init_clk_in => init_clk_in
     );
-sync_TXRESETDONE_cdc_sync: entity work.\aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_3\
+sync_TXRESETDONE_cdc_sync: entity work.\aurora_8b10b_0_cdc_sync__parameterized6_3\
      port map (
       init_clk_in => init_clk_in,
       \out\ => txresetdone_s2,
       txfsm_txresetdone_r => txfsm_txresetdone_r,
       user_clk => user_clk
     );
-sync_mmcm_lock_reclocked_cdc_sync: entity work.\aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_4\
+sync_mmcm_lock_reclocked_cdc_sync: entity work.\aurora_8b10b_0_cdc_sync__parameterized1_4\
      port map (
       PLL_NOT_LOCKED => PLL_NOT_LOCKED,
       SR(0) => sync_mmcm_lock_reclocked_cdc_sync_n_1,
       init_clk_in => init_clk_in,
       \out\ => mmcm_lock_i
     );
-sync_run_phase_alignment_int_cdc_sync: entity work.\aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3\
+sync_run_phase_alignment_int_cdc_sync: entity work.\aurora_8b10b_0_cdc_sync__parameterized3\
      port map (
       init_clk_in => init_clk_in,
       \out\ => scndry_out,
       run_phase_alignment_int => run_phase_alignment_int,
       user_clk => user_clk
     );
-sync_time_out_wait_bypass_cdc_sync: entity work.\aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_5\
+sync_time_out_wait_bypass_cdc_sync: entity work.\aurora_8b10b_0_cdc_sync__parameterized6_5\
      port map (
       init_clk_in => init_clk_in,
       \out\ => time_out_wait_bypass_s2,
       time_out_wait_bypass => time_out_wait_bypass,
       user_clk => user_clk
     );
-sync_tx_fsm_reset_done_int_cdc_sync: entity work.\aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_6\
+sync_tx_fsm_reset_done_int_cdc_sync: entity work.\aurora_8b10b_0_cdc_sync__parameterized3_6\
      port map (
       \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.s_level_out_d5_reg_0\ => \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.s_level_out_d5_reg\,
       init_clk_in => init_clk_in,
@@ -23531,7 +23531,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_AURORA_LANE_4BYTE is
+entity aurora_8b10b_0_AURORA_LANE_4BYTE is
   port (
     LANE_UP : out STD_LOGIC;
     ena_comma_align_i : out STD_LOGIC;
@@ -23601,9 +23601,9 @@ entity aurora_8b10b_0_aurora_8b10b_0_AURORA_LANE_4BYTE is
     \word_aligned_data_r_reg[16]_0\ : in STD_LOGIC_VECTOR ( 5 downto 0 );
     \soft_err_r_reg[0]\ : in STD_LOGIC_VECTOR ( 3 downto 0 )
   );
-end aurora_8b10b_0_aurora_8b10b_0_AURORA_LANE_4BYTE;
+end aurora_8b10b_0_AURORA_LANE_4BYTE;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_AURORA_LANE_4BYTE is
+architecture STRUCTURE of aurora_8b10b_0_AURORA_LANE_4BYTE is
   signal D_0 : STD_LOGIC;
   signal GEN_SP : STD_LOGIC;
   signal \^lane_up\ : STD_LOGIC;
@@ -23620,7 +23620,7 @@ architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_AURORA_LANE_4BYTE is
 begin
   LANE_UP <= \^lane_up\;
   enable_err_detect_i <= \^enable_err_detect_i\;
-aurora_8b10b_0_err_detect_4byte_i: entity work.aurora_8b10b_0_aurora_8b10b_0_ERR_DETECT_4BYTE
+aurora_8b10b_0_err_detect_4byte_i: entity work.aurora_8b10b_0_ERR_DETECT_4BYTE
      port map (
       \SOFT_ERR_Buffer_reg[0]_0\(1 downto 0) => \SOFT_ERR_Buffer_reg[0]\(1 downto 0),
       SR(0) => SR(0),
@@ -23632,7 +23632,7 @@ aurora_8b10b_0_err_detect_4byte_i: entity work.aurora_8b10b_0_aurora_8b10b_0_ERR
       \soft_err_r_reg[0]_0\(3 downto 0) => \soft_err_r_reg[0]\(3 downto 0),
       user_clk => user_clk
     );
-aurora_8b10b_0_hotplug_i: entity work.aurora_8b10b_0_aurora_8b10b_0_HOTPLUG
+aurora_8b10b_0_hotplug_i: entity work.aurora_8b10b_0_HOTPLUG
      port map (
       D(0) => RX_CC_Buffer,
       HPCNT_RESET => HPCNT_RESET,
@@ -23641,7 +23641,7 @@ aurora_8b10b_0_hotplug_i: entity work.aurora_8b10b_0_aurora_8b10b_0_HOTPLUG
       init_clk_in => init_clk_in,
       user_clk => user_clk
     );
-aurora_8b10b_0_lane_init_sm_4byte_i: entity work.aurora_8b10b_0_aurora_8b10b_0_LANE_INIT_SM_4BYTE
+aurora_8b10b_0_lane_init_sm_4byte_i: entity work.aurora_8b10b_0_LANE_INIT_SM_4BYTE
      port map (
       D(3 downto 0) => D(3 downto 0),
       D_0 => D_0,
@@ -23668,7 +23668,7 @@ aurora_8b10b_0_lane_init_sm_4byte_i: entity work.aurora_8b10b_0_aurora_8b10b_0_L
       rx_realign_i => rx_realign_i,
       user_clk => user_clk
     );
-aurora_8b10b_0_sym_dec_4byte_i: entity work.aurora_8b10b_0_aurora_8b10b_0_SYM_DEC_4BYTE
+aurora_8b10b_0_sym_dec_4byte_i: entity work.aurora_8b10b_0_SYM_DEC_4BYTE
      port map (
       D(0) => RX_CC_Buffer,
       D_0 => D_0,
@@ -23713,7 +23713,7 @@ aurora_8b10b_0_sym_dec_4byte_i: entity work.aurora_8b10b_0_aurora_8b10b_0_SYM_DE
       \word_aligned_data_r_reg[27]_0\ => \word_aligned_data_r_reg[27]\,
       \word_aligned_data_r_reg[28]_0\(3 downto 0) => \word_aligned_data_r_reg[28]\(3 downto 0)
     );
-aurora_8b10b_0_sym_gen_4byte_i: entity work.aurora_8b10b_0_aurora_8b10b_0_SYM_GEN_4BYTE
+aurora_8b10b_0_sym_gen_4byte_i: entity work.aurora_8b10b_0_SYM_GEN_4BYTE
      port map (
       GEN_SCP => GEN_SCP,
       GEN_SNF => GEN_SNF,
@@ -23738,7 +23738,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_RX_LL is
+entity aurora_8b10b_0_RX_LL is
   port (
     rx_eof : out STD_LOGIC;
     FRAME_ERR : out STD_LOGIC;
@@ -23772,9 +23772,9 @@ entity aurora_8b10b_0_aurora_8b10b_0_RX_LL is
     \DEFRAMED_DATA_V_Buffer_reg[0]\ : in STD_LOGIC_VECTOR ( 1 downto 0 );
     \stage_1_ecp_r_reg[0]\ : in STD_LOGIC_VECTOR ( 1 downto 0 )
   );
-end aurora_8b10b_0_aurora_8b10b_0_RX_LL;
+end aurora_8b10b_0_RX_LL;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_RX_LL is
+architecture STRUCTURE of aurora_8b10b_0_RX_LL is
   signal \STORAGE_DATA_Buffer[0]_i_1_n_0\ : STD_LOGIC;
   signal \STORAGE_DATA_Buffer[10]_i_1_n_0\ : STD_LOGIC;
   signal \STORAGE_DATA_Buffer[11]_i_1_n_0\ : STD_LOGIC;
@@ -24180,7 +24180,7 @@ begin
       I2 => p_1_in(6),
       O => \STORAGE_DATA_Buffer[9]_i_1_n_0\
     );
-nfc_module_i: entity work.aurora_8b10b_0_aurora_8b10b_0_RX_LL_NFC
+nfc_module_i: entity work.aurora_8b10b_0_RX_LL_NFC
      port map (
       D(7) => stage_1_data_r(8),
       D(6) => stage_1_data_r(9),
@@ -24198,7 +24198,7 @@ nfc_module_i: entity work.aurora_8b10b_0_aurora_8b10b_0_RX_LL_NFC
       tx_dst_rdy => tx_dst_rdy,
       user_clk => user_clk
     );
-rx_ll_pdu_datapath_i: entity work.aurora_8b10b_0_aurora_8b10b_0_RX_LL_PDU_DATAPATH
+rx_ll_pdu_datapath_i: entity work.aurora_8b10b_0_RX_LL_PDU_DATAPATH
      port map (
       D(1 downto 0) => D(1 downto 0),
       \DEFRAMED_DATA_V_Buffer_reg[0]\(1 downto 0) => \DEFRAMED_DATA_V_Buffer_reg[0]\(1 downto 0),
@@ -24291,7 +24291,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_gt is
+entity aurora_8b10b_0_gt is
   port (
     gtpe2_i_0 : out STD_LOGIC;
     TXN : out STD_LOGIC;
@@ -24348,9 +24348,9 @@ entity aurora_8b10b_0_aurora_8b10b_0_gt is
     DRPWE_IN : in STD_LOGIC;
     DRPEN_IN : in STD_LOGIC
   );
-end aurora_8b10b_0_aurora_8b10b_0_gt;
+end aurora_8b10b_0_gt;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_gt is
+architecture STRUCTURE of aurora_8b10b_0_gt is
   signal DRPADDR : STD_LOGIC_VECTOR ( 4 downto 0 );
   signal DRPDI : STD_LOGIC_VECTOR ( 15 downto 0 );
   signal \^drpdo_out\ : STD_LOGIC_VECTOR ( 15 downto 0 );
@@ -25198,7 +25198,7 @@ gtpe2_i_i_9: unisim.vcomponents.LUT5
       I4 => drp_op_done,
       O => DRPDI(9)
     );
-gtrxreset_seq_i: entity work.aurora_8b10b_0_aurora_8b10b_0_gtrxreset_seq
+gtrxreset_seq_i: entity work.aurora_8b10b_0_gtrxreset_seq
      port map (
       DRPADDR(6) => gtrxreset_seq_i_n_4,
       DRPADDR(5) => gtrxreset_seq_i_n_5,
@@ -25515,7 +25515,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_multi_gt is
+entity aurora_8b10b_0_multi_gt is
   port (
     gtpe2_i : out STD_LOGIC;
     TXN : out STD_LOGIC;
@@ -25572,11 +25572,11 @@ entity aurora_8b10b_0_aurora_8b10b_0_multi_gt is
     DRPWE_IN : in STD_LOGIC;
     DRPEN_IN : in STD_LOGIC
   );
-end aurora_8b10b_0_aurora_8b10b_0_multi_gt;
+end aurora_8b10b_0_multi_gt;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_multi_gt is
+architecture STRUCTURE of aurora_8b10b_0_multi_gt is
 begin
-gt0_aurora_8b10b_0_i: entity work.aurora_8b10b_0_aurora_8b10b_0_gt
+gt0_aurora_8b10b_0_i: entity work.aurora_8b10b_0_gt
      port map (
       D(3 downto 0) => D(3 downto 0),
       DRPADDR_IN(8 downto 0) => DRPADDR_IN(8 downto 0),
@@ -25638,7 +25638,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_GT_WRAPPER is
+entity aurora_8b10b_0_GT_WRAPPER is
   port (
     TX_RESETDONE_OUT : out STD_LOGIC;
     gtpe2_i : out STD_LOGIC;
@@ -25699,9 +25699,9 @@ entity aurora_8b10b_0_aurora_8b10b_0_GT_WRAPPER is
     DRPWE_IN : in STD_LOGIC;
     DRPEN_IN : in STD_LOGIC
   );
-end aurora_8b10b_0_aurora_8b10b_0_GT_WRAPPER;
+end aurora_8b10b_0_GT_WRAPPER;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_GT_WRAPPER is
+architecture STRUCTURE of aurora_8b10b_0_GT_WRAPPER is
   signal \^rx_resetdone_out\ : STD_LOGIC;
   signal aurora_8b10b_0_multi_gt_i_n_4 : STD_LOGIC;
   signal aurora_8b10b_0_multi_gt_i_n_6 : STD_LOGIC;
@@ -25758,7 +25758,7 @@ architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_GT_WRAPPER is
 begin
   RX_RESETDONE_OUT <= \^rx_resetdone_out\;
   gt_common_reset_out <= \^gt_common_reset_out\;
-aurora_8b10b_0_multi_gt_i: entity work.aurora_8b10b_0_aurora_8b10b_0_multi_gt
+aurora_8b10b_0_multi_gt_i: entity work.aurora_8b10b_0_multi_gt
      port map (
       D(3 downto 0) => D(3 downto 0),
       DRPADDR_IN(8 downto 0) => DRPADDR_IN(8 downto 0),
@@ -25853,7 +25853,7 @@ gt_rxresetdone_r_i_1: unisim.vcomponents.LUT1
       I0 => \^rx_resetdone_out\,
       O => rxfsm_rxresetdone_r3_reg_0
     );
-gt_rxresetfsm_i: entity work.aurora_8b10b_0_aurora_8b10b_0_rx_startup_fsm
+gt_rxresetfsm_i: entity work.aurora_8b10b_0_rx_startup_fsm
      port map (
       AR(0) => rxfsm_soft_reset_r,
       gt_rxuserrdy_i => gt_rxuserrdy_i,
@@ -25865,7 +25865,7 @@ gt_rxresetfsm_i: entity work.aurora_8b10b_0_aurora_8b10b_0_rx_startup_fsm
       rxfsm_rxresetdone_r => rxfsm_rxresetdone_r,
       user_clk => user_clk
     );
-gt_txresetfsm_i: entity work.aurora_8b10b_0_aurora_8b10b_0_tx_startup_fsm
+gt_txresetfsm_i: entity work.aurora_8b10b_0_tx_startup_fsm
      port map (
       AR(0) => AR(0),
       \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.s_level_out_d5_reg\ => \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.s_level_out_d5_reg\,
@@ -25880,7 +25880,7 @@ gt_txresetfsm_i: entity work.aurora_8b10b_0_aurora_8b10b_0_tx_startup_fsm
       txfsm_txresetdone_r => txfsm_txresetdone_r,
       user_clk => user_clk
     );
-gtrxreset_cdc_sync: entity work.\aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6\
+gtrxreset_cdc_sync: entity work.\aurora_8b10b_0_cdc_sync__parameterized6\
      port map (
       gtrxreset_i => gtrxreset_i,
       init_clk_in => init_clk_in,
@@ -26246,7 +26246,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity aurora_8b10b_0_aurora_8b10b_0_core is
+entity aurora_8b10b_0_core is
   port (
     S_AXI_TX_TDATA : in STD_LOGIC_VECTOR ( 0 to 31 );
     S_AXI_TX_TKEEP : in STD_LOGIC_VECTOR ( 0 to 3 );
@@ -26302,14 +26302,14 @@ entity aurora_8b10b_0_aurora_8b10b_0_core is
     tx_lock : out STD_LOGIC
   );
   attribute CC_FREQ_FACTOR : integer;
-  attribute CC_FREQ_FACTOR of aurora_8b10b_0_aurora_8b10b_0_core : entity is 12;
+  attribute CC_FREQ_FACTOR of aurora_8b10b_0_core : entity is 12;
   attribute EXAMPLE_SIMULATION : integer;
-  attribute EXAMPLE_SIMULATION of aurora_8b10b_0_aurora_8b10b_0_core : entity is 0;
+  attribute EXAMPLE_SIMULATION of aurora_8b10b_0_core : entity is 0;
   attribute SIM_GTRESET_SPEEDUP : string;
-  attribute SIM_GTRESET_SPEEDUP of aurora_8b10b_0_aurora_8b10b_0_core : entity is "FALSE";
-end aurora_8b10b_0_aurora_8b10b_0_core;
+  attribute SIM_GTRESET_SPEEDUP of aurora_8b10b_0_core : entity is "FALSE";
+end aurora_8b10b_0_core;
 
-architecture STRUCTURE of aurora_8b10b_0_aurora_8b10b_0_core is
+architecture STRUCTURE of aurora_8b10b_0_core is
   signal \<const0>\ : STD_LOGIC;
   signal \^channel_up\ : STD_LOGIC;
   signal DO_CC_I : STD_LOGIC;
@@ -26452,7 +26452,7 @@ GND: unisim.vcomponents.GND
      port map (
       G => \<const0>\
     );
-aurora_8b10b_0_aurora_lane_4byte_0_i: entity work.aurora_8b10b_0_aurora_8b10b_0_AURORA_LANE_4BYTE
+aurora_8b10b_0_aurora_lane_4byte_0_i: entity work.aurora_8b10b_0_AURORA_LANE_4BYTE
      port map (
       D(3 downto 0) => rx_char_is_comma_i(3 downto 0),
       GEN_SCP => GEN_SCP,
@@ -26609,7 +26609,7 @@ aurora_8b10b_0_aurora_lane_4byte_0_i: entity work.aurora_8b10b_0_aurora_8b10b_0_
       \word_aligned_data_r_reg[28]\(1) => aurora_8b10b_0_aurora_lane_4byte_0_i_n_83,
       \word_aligned_data_r_reg[28]\(0) => aurora_8b10b_0_aurora_lane_4byte_0_i_n_84
     );
-aurora_8b10b_0_global_logic_i: entity work.aurora_8b10b_0_aurora_8b10b_0_GLOBAL_LOGIC
+aurora_8b10b_0_global_logic_i: entity work.aurora_8b10b_0_GLOBAL_LOGIC
      port map (
       CHANNEL_UP => \^channel_up\,
       D(1) => soft_err_i(0),
@@ -26640,7 +26640,7 @@ aurora_8b10b_0_global_logic_i: entity work.aurora_8b10b_0_aurora_8b10b_0_GLOBAL_
       start_rx_i => start_rx_i,
       user_clk => user_clk
     );
-aurora_8b10b_0_rx_ll_i: entity work.aurora_8b10b_0_aurora_8b10b_0_RX_LL
+aurora_8b10b_0_rx_ll_i: entity work.aurora_8b10b_0_RX_LL
      port map (
       D(1) => rx_scp_striped_i(0),
       D(0) => rx_scp_striped_i(1),
@@ -26698,7 +26698,7 @@ aurora_8b10b_0_rx_ll_i: entity work.aurora_8b10b_0_aurora_8b10b_0_RX_LL
       tx_dst_rdy => tx_dst_rdy,
       user_clk => user_clk
     );
-aurora_8b10b_0_tx_ll_i: entity work.aurora_8b10b_0_aurora_8b10b_0_TX_LL
+aurora_8b10b_0_tx_ll_i: entity work.aurora_8b10b_0_TX_LL
      port map (
       D => \tx_ll_control_i/D\,
       DO_CC_I => DO_CC_I,
@@ -26760,13 +26760,13 @@ aurora_8b10b_0_tx_ll_i: entity work.aurora_8b10b_0_aurora_8b10b_0_TX_LL
       tx_dst_rdy => tx_dst_rdy,
       user_clk => user_clk
     );
-axi_to_ll_pdu_i: entity work.aurora_8b10b_0_aurora_8b10b_0_AXI_TO_LL
+axi_to_ll_pdu_i: entity work.aurora_8b10b_0_AXI_TO_LL
      port map (
       new_pkt_r => new_pkt_r,
       new_pkt_r_reg_0 => axi_to_ll_pdu_i_n_0,
       user_clk => user_clk
     );
-core_reset_logic_i: entity work.aurora_8b10b_0_aurora_8b10b_0_RESET_LOGIC
+core_reset_logic_i: entity work.aurora_8b10b_0_RESET_LOGIC
      port map (
       CHANNEL_UP => \^channel_up\,
       LINK_RESET_OUT => \^link_reset_out\,
@@ -26785,7 +26785,7 @@ core_reset_logic_i: entity work.aurora_8b10b_0_aurora_8b10b_0_RESET_LOGIC
       tx_lock => \^tx_lock\,
       user_clk => user_clk
     );
-gt_reset_cdc_sync: entity work.\aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1\
+gt_reset_cdc_sync: entity work.\aurora_8b10b_0_cdc_sync__parameterized1\
      port map (
       AR(0) => gt_reset_sync_init_clk,
       GT_RESET => GT_RESET,
@@ -26793,7 +26793,7 @@ gt_reset_cdc_sync: entity work.\aurora_8b10b_0_aurora_8b10b_0_cdc_sync__paramete
       init_clk_in => init_clk_in,
       \out\ => reset_sync_init_clk
     );
-gt_wrapper_i: entity work.aurora_8b10b_0_aurora_8b10b_0_GT_WRAPPER
+gt_wrapper_i: entity work.aurora_8b10b_0_GT_WRAPPER
      port map (
       AR(0) => gt_reset_sync_init_clk,
       D(3 downto 0) => rx_char_is_comma_i(3 downto 0),
@@ -26873,13 +26873,13 @@ gt_wrapper_i: entity work.aurora_8b10b_0_aurora_8b10b_0_GT_WRAPPER
       user_clk => user_clk,
       \word_aligned_control_bits_r_reg[2]\(0) => \aurora_8b10b_0_sym_dec_4byte_i/previous_cycle_control_r\(0)
     );
-hpcnt_reset_cdc_sync: entity work.\aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_0\
+hpcnt_reset_cdc_sync: entity work.\aurora_8b10b_0_cdc_sync__parameterized1_0\
      port map (
       RESET => RESET,
       init_clk_in => init_clk_in,
       \out\ => reset_sync_init_clk
     );
-ll_to_axi_pdu_i: entity work.aurora_8b10b_0_aurora_8b10b_0_LL_TO_AXI
+ll_to_axi_pdu_i: entity work.aurora_8b10b_0_LL_TO_AXI
      port map (
       M_AXI_RX_TKEEP(2) => \^m_axi_rx_tkeep\(1),
       M_AXI_RX_TKEEP(1) => \^m_axi_rx_tkeep\(2),
@@ -26888,13 +26888,13 @@ ll_to_axi_pdu_i: entity work.aurora_8b10b_0_aurora_8b10b_0_LL_TO_AXI
       \m_axi_rx_tkeep[1]\(0) => rx_rem(1),
       rx_eof => rx_eof
     );
-reset_sync_user_clk_cdc_sync: entity work.aurora_8b10b_0_aurora_8b10b_0_cdc_sync
+reset_sync_user_clk_cdc_sync: entity work.aurora_8b10b_0_cdc_sync
      port map (
       RESET => RESET,
       \out\ => reset_sync_user_clk,
       user_clk => user_clk
     );
-standard_cc_module_i: entity work.aurora_8b10b_0_aurora_8b10b_0_STANDARD_CC_MODULE
+standard_cc_module_i: entity work.aurora_8b10b_0_STANDARD_CC_MODULE
      port map (
       DO_CC_I => DO_CC_I,
       Q(0) => \nfc_module_i/nfc_counter_r_reg\(0),
@@ -26982,7 +26982,7 @@ architecture STRUCTURE of aurora_8b10b_0 is
 begin
   m_axi_rx_tkeep(0) <= \<const1>\;
   m_axi_rx_tkeep(1 to 3) <= \^m_axi_rx_tkeep\(1 to 3);
-U0: entity work.aurora_8b10b_0_aurora_8b10b_0_core
+U0: entity work.aurora_8b10b_0_core
      port map (
       CHANNEL_UP => channel_up,
       DRPADDR_IN(8 downto 0) => drpaddr_in(8 downto 0),

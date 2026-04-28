@@ -2,10 +2,10 @@
 // Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
-// Date        : Tue Apr 14 18:32:20 2026
+// Date        : Tue Apr 28 17:44:19 2026
 // Host        : andre running 64-bit Fedora Linux 42 (Workstation Edition)
-// Command     : write_verilog -force -mode funcsim -rename_top aurora_8b10b_0 -prefix
-//               aurora_8b10b_0_ aurora_8b10b_0_sim_netlist.v
+// Command     : write_verilog -force -mode funcsim
+//               /home/andre/dev/mse/ma-lpsc/lpsc/scal_recv_slave/hw_firmware/designs/vivado/aurora_8b10b_0_ex.gen/sources_1/ip/aurora_8b10b_0/aurora_8b10b_0_sim_netlist.v
 // Design      : aurora_8b10b_0
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -178,7 +178,7 @@ module aurora_8b10b_0
   (* CC_FREQ_FACTOR = "12" *) 
   (* EXAMPLE_SIMULATION = "0" *) 
   (* SIM_GTRESET_SPEEDUP = "FALSE" *) 
-  aurora_8b10b_0_aurora_8b10b_0_core U0
+  aurora_8b10b_0_core U0
        (.CHANNEL_UP(channel_up),
         .DRPADDR_IN(drpaddr_in),
         .DRPDI_IN(drpdi_in),
@@ -235,7 +235,7 @@ module aurora_8b10b_0
        (.P(\<const1> ));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_AURORA_LANE_4BYTE
+module aurora_8b10b_0_AURORA_LANE_4BYTE
    (LANE_UP,
     ena_comma_align_i,
     consecutive_commas_r,
@@ -450,7 +450,7 @@ module aurora_8b10b_0_aurora_8b10b_0_AURORA_LANE_4BYTE
   wire \word_aligned_data_r_reg[27] ;
   wire [3:0]\word_aligned_data_r_reg[28] ;
 
-  aurora_8b10b_0_aurora_8b10b_0_ERR_DETECT_4BYTE aurora_8b10b_0_err_detect_4byte_i
+  aurora_8b10b_0_ERR_DETECT_4BYTE aurora_8b10b_0_err_detect_4byte_i
        (.\SOFT_ERR_Buffer_reg[0]_0 (\SOFT_ERR_Buffer_reg[0] ),
         .SR(SR),
         .begin_r0(begin_r0),
@@ -460,14 +460,14 @@ module aurora_8b10b_0_aurora_8b10b_0_AURORA_LANE_4BYTE
         .hard_err_i(hard_err_i),
         .\soft_err_r_reg[0]_0 (\soft_err_r_reg[0] ),
         .user_clk(user_clk));
-  aurora_8b10b_0_aurora_8b10b_0_HOTPLUG aurora_8b10b_0_hotplug_i
+  aurora_8b10b_0_HOTPLUG aurora_8b10b_0_hotplug_i
        (.D(RX_CC_Buffer),
         .HPCNT_RESET(HPCNT_RESET),
         .LINK_RESET_OUT(LINK_RESET_OUT),
         .SR(SR),
         .init_clk_in(init_clk_in),
         .user_clk(user_clk));
-  aurora_8b10b_0_aurora_8b10b_0_LANE_INIT_SM_4BYTE aurora_8b10b_0_lane_init_sm_4byte_i
+  aurora_8b10b_0_LANE_INIT_SM_4BYTE aurora_8b10b_0_lane_init_sm_4byte_i
        (.D(D),
         .D_0(D_0),
         .GEN_SP(GEN_SP),
@@ -492,7 +492,7 @@ module aurora_8b10b_0_aurora_8b10b_0_AURORA_LANE_4BYTE
         .rx_polarity_i(rx_polarity_i),
         .rx_realign_i(rx_realign_i),
         .user_clk(user_clk));
-  aurora_8b10b_0_aurora_8b10b_0_SYM_DEC_4BYTE aurora_8b10b_0_sym_dec_4byte_i
+  aurora_8b10b_0_SYM_DEC_4BYTE aurora_8b10b_0_sym_dec_4byte_i
        (.D(RX_CC_Buffer),
         .D_0(D_0),
         .LANE_UP(LANE_UP),
@@ -535,7 +535,7 @@ module aurora_8b10b_0_aurora_8b10b_0_AURORA_LANE_4BYTE
         .\word_aligned_data_r_reg[26]_0 (\word_aligned_data_r_reg[26] ),
         .\word_aligned_data_r_reg[27]_0 (\word_aligned_data_r_reg[27] ),
         .\word_aligned_data_r_reg[28]_0 (\word_aligned_data_r_reg[28] ));
-  aurora_8b10b_0_aurora_8b10b_0_SYM_GEN_4BYTE aurora_8b10b_0_sym_gen_4byte_i
+  aurora_8b10b_0_SYM_GEN_4BYTE aurora_8b10b_0_sym_gen_4byte_i
        (.GEN_SCP(GEN_SCP),
         .GEN_SNF(GEN_SNF),
         .GEN_SP(GEN_SP),
@@ -555,7 +555,7 @@ module aurora_8b10b_0_aurora_8b10b_0_AURORA_LANE_4BYTE
         .user_clk(user_clk));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_AXI_TO_LL
+module aurora_8b10b_0_AXI_TO_LL
    (new_pkt_r_reg_0,
     new_pkt_r,
     user_clk);
@@ -575,7 +575,7 @@ module aurora_8b10b_0_aurora_8b10b_0_AXI_TO_LL
         .R(1'b0));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_CHANNEL_ERR_DETECT
+module aurora_8b10b_0_CHANNEL_ERR_DETECT
    (SOFT_ERR,
     HARD_ERR,
     reset_channel_i,
@@ -681,7 +681,7 @@ module aurora_8b10b_0_aurora_8b10b_0_CHANNEL_ERR_DETECT
         .O(wait_for_lane_up_r0));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_CHANNEL_INIT_SM
+module aurora_8b10b_0_CHANNEL_INIT_SM
    (SR,
     gen_ver_i,
     CHANNEL_UP,
@@ -1331,7 +1331,7 @@ module aurora_8b10b_0_aurora_8b10b_0_CHANNEL_INIT_SM
         .R(1'b0));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_ERR_DETECT_4BYTE
+module aurora_8b10b_0_ERR_DETECT_4BYTE
    (begin_r0,
     hard_err_i,
     \SOFT_ERR_Buffer_reg[0]_0 ,
@@ -1645,7 +1645,7 @@ module aurora_8b10b_0_aurora_8b10b_0_ERR_DETECT_4BYTE
         .S(good_cnt_r3));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_GLOBAL_LOGIC
+module aurora_8b10b_0_GLOBAL_LOGIC
    (SR,
     gen_v_flop_1_i,
     gen_a_i,
@@ -1709,7 +1709,7 @@ module aurora_8b10b_0_aurora_8b10b_0_GLOBAL_LOGIC
   wire user_clk;
   wire wait_for_lane_up_r0;
 
-  aurora_8b10b_0_aurora_8b10b_0_CHANNEL_ERR_DETECT channel_err_detect_i
+  aurora_8b10b_0_CHANNEL_ERR_DETECT channel_err_detect_i
        (.D(D),
         .HARD_ERR(HARD_ERR),
         .LANE_UP(LANE_UP),
@@ -1720,7 +1720,7 @@ module aurora_8b10b_0_aurora_8b10b_0_GLOBAL_LOGIC
         .user_clk(user_clk),
         .verify_r_reg(\downcounter_r_reg[2] ),
         .wait_for_lane_up_r0(wait_for_lane_up_r0));
-  aurora_8b10b_0_aurora_8b10b_0_CHANNEL_INIT_SM channel_init_sm_i
+  aurora_8b10b_0_CHANNEL_INIT_SM channel_init_sm_i
        (.CHANNEL_UP(CHANNEL_UP),
         .SR(SR),
         .SS(SS),
@@ -1734,7 +1734,7 @@ module aurora_8b10b_0_aurora_8b10b_0_GLOBAL_LOGIC
         .txver_count_r0(txver_count_r0),
         .user_clk(user_clk),
         .wait_for_lane_up_r0(wait_for_lane_up_r0));
-  aurora_8b10b_0_aurora_8b10b_0_IDLE_AND_VER_GEN idle_and_ver_gen_i
+  aurora_8b10b_0_IDLE_AND_VER_GEN idle_and_ver_gen_i
        (.\downcounter_r_reg[2]_0 (\downcounter_r_reg[2] ),
         .gen_a_i(gen_a_i),
         .gen_k_flop_0_i_0(gen_k_flop_0_i),
@@ -1745,7 +1745,7 @@ module aurora_8b10b_0_aurora_8b10b_0_GLOBAL_LOGIC
         .user_clk(user_clk));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_GT_WRAPPER
+module aurora_8b10b_0_GT_WRAPPER
    (TX_RESETDONE_OUT,
     gtpe2_i,
     TXN,
@@ -1958,7 +1958,7 @@ module aurora_8b10b_0_aurora_8b10b_0_GT_WRAPPER
   wire user_clk;
   wire [0:0]\word_aligned_control_bits_r_reg[2] ;
 
-  aurora_8b10b_0_aurora_8b10b_0_multi_gt aurora_8b10b_0_multi_gt_i
+  aurora_8b10b_0_multi_gt aurora_8b10b_0_multi_gt_i
        (.D(D),
         .DRPADDR_IN(DRPADDR_IN),
         .DRPDI_IN(DRPDI_IN),
@@ -2045,7 +2045,7 @@ module aurora_8b10b_0_aurora_8b10b_0_GT_WRAPPER
     gt_rxresetdone_r_i_1
        (.I0(RX_RESETDONE_OUT),
         .O(rxfsm_rxresetdone_r3_reg_0));
-  aurora_8b10b_0_aurora_8b10b_0_rx_startup_fsm gt_rxresetfsm_i
+  aurora_8b10b_0_rx_startup_fsm gt_rxresetfsm_i
        (.AR(rxfsm_soft_reset_r),
         .gt_rxuserrdy_i(gt_rxuserrdy_i),
         .gt_txuserrdy_i(gt_txuserrdy_i),
@@ -2055,7 +2055,7 @@ module aurora_8b10b_0_aurora_8b10b_0_GT_WRAPPER
         .reset_time_out_reg_0(rx_cdrlocked_reg_n_0),
         .rxfsm_rxresetdone_r(rxfsm_rxresetdone_r),
         .user_clk(user_clk));
-  aurora_8b10b_0_aurora_8b10b_0_tx_startup_fsm gt_txresetfsm_i
+  aurora_8b10b_0_tx_startup_fsm gt_txresetfsm_i
        (.AR(AR),
         .\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.s_level_out_d5_reg (\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.s_level_out_d5_reg ),
         .PLL_NOT_LOCKED(PLL_NOT_LOCKED),
@@ -2068,7 +2068,7 @@ module aurora_8b10b_0_aurora_8b10b_0_GT_WRAPPER
         .tx_lock(tx_lock),
         .txfsm_txresetdone_r(txfsm_txresetdone_r),
         .user_clk(user_clk));
-  aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6 gtrxreset_cdc_sync
+  aurora_8b10b_0_cdc_sync__parameterized6 gtrxreset_cdc_sync
        (.gtrxreset_i(gtrxreset_i),
         .init_clk_in(init_clk_in),
         .out(gtrxreset_sync),
@@ -2344,7 +2344,7 @@ module aurora_8b10b_0_aurora_8b10b_0_GT_WRAPPER
         .R(1'b0));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_HOTPLUG
+module aurora_8b10b_0_HOTPLUG
    (LINK_RESET_OUT,
     user_clk,
     init_clk_in,
@@ -2634,7 +2634,7 @@ module aurora_8b10b_0_aurora_8b10b_0_HOTPLUG
         .D(link_reset_0),
         .Q(link_reset_r),
         .R(1'b0));
-  aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_25 rx_cc_cdc_sync
+  aurora_8b10b_0_cdc_sync__parameterized6_25 rx_cc_cdc_sync
        (.O({rx_cc_cdc_sync_n_0,rx_cc_cdc_sync_n_1,rx_cc_cdc_sync_n_2,rx_cc_cdc_sync_n_3}),
         .\hotplug_count_synth.count_for_reset_r_reg (\hotplug_count_synth.count_for_reset_r_reg ),
         .\hotplug_count_synth.count_for_reset_r_reg[11] ({rx_cc_cdc_sync_n_8,rx_cc_cdc_sync_n_9,rx_cc_cdc_sync_n_10,rx_cc_cdc_sync_n_11}),
@@ -2734,7 +2734,7 @@ module aurora_8b10b_0_aurora_8b10b_0_HOTPLUG
         .R(SR));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_IDLE_AND_VER_GEN
+module aurora_8b10b_0_IDLE_AND_VER_GEN
    (gen_v_flop_1_i_0,
     gen_a_i,
     gen_k_flop_0_i_0,
@@ -3144,7 +3144,7 @@ module aurora_8b10b_0_aurora_8b10b_0_IDLE_AND_VER_GEN
         .O(D));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_LANE_INIT_SM_4BYTE
+module aurora_8b10b_0_LANE_INIT_SM_4BYTE
    (LANE_UP,
     D_0,
     align_r_reg_0,
@@ -3737,7 +3737,7 @@ module aurora_8b10b_0_aurora_8b10b_0_LANE_INIT_SM_4BYTE
         .R(1'b0));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_LEFT_ALIGN_CONTROL
+module aurora_8b10b_0_LEFT_ALIGN_CONTROL
    (MUX_SELECT,
     mux_select_c,
     user_clk);
@@ -3757,7 +3757,7 @@ module aurora_8b10b_0_aurora_8b10b_0_LEFT_ALIGN_CONTROL
         .R(1'b0));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_LEFT_ALIGN_MUX
+module aurora_8b10b_0_LEFT_ALIGN_MUX
    (Q,
     stage_2_data_r,
     MUX_SELECT,
@@ -4095,7 +4095,7 @@ module aurora_8b10b_0_aurora_8b10b_0_LEFT_ALIGN_MUX
         .R(1'b0));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_LL_TO_AXI
+module aurora_8b10b_0_LL_TO_AXI
    (M_AXI_RX_TKEEP,
     rx_eof,
     \m_axi_rx_tkeep[1] );
@@ -4131,7 +4131,7 @@ module aurora_8b10b_0_aurora_8b10b_0_LL_TO_AXI
         .O(M_AXI_RX_TKEEP[0]));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_OUTPUT_MUX
+module aurora_8b10b_0_OUTPUT_MUX
    (M_AXI_RX_TDATA,
     Q,
     user_clk,
@@ -4472,7 +4472,7 @@ module aurora_8b10b_0_aurora_8b10b_0_OUTPUT_MUX
         .R(1'b0));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_OUTPUT_SWITCH_CONTROL
+module aurora_8b10b_0_OUTPUT_SWITCH_CONTROL
    (OUTPUT_SELECT_Buffer,
     output_select_c,
     user_clk);
@@ -4492,7 +4492,7 @@ module aurora_8b10b_0_aurora_8b10b_0_OUTPUT_SWITCH_CONTROL
         .R(1'b0));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_RESET_LOGIC
+module aurora_8b10b_0_RESET_LOGIC
    (link_reset_comb_r,
     SYSTEM_RESET_reg_0,
     new_pkt_r,
@@ -4606,7 +4606,7 @@ module aurora_8b10b_0_aurora_8b10b_0_RESET_LOGIC
         .CLR(gt_txresetdone_r2_reg_0),
         .D(1'b1),
         .Q(gt_txresetdone_r));
-  aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_22 link_reset_cdc_sync
+  aurora_8b10b_0_cdc_sync__parameterized3_22 link_reset_cdc_sync
        (.init_clk_in(init_clk_in),
         .link_reset_comb_r(link_reset_comb_r),
         .out(scndry_out),
@@ -4627,11 +4627,11 @@ module aurora_8b10b_0_aurora_8b10b_0_RESET_LOGIC
         .I4(tx_dst_rdy),
         .I5(new_pkt_r_reg),
         .O(new_pkt_r));
-  aurora_8b10b_0_aurora_8b10b_0_cdc_sync_23 pll_not_locked_cdc_sync
+  aurora_8b10b_0_cdc_sync_23 pll_not_locked_cdc_sync
        (.PLL_NOT_LOCKED(PLL_NOT_LOCKED),
         .out(pll_not_locked_sync),
         .user_clk(user_clk));
-  aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_24 tx_lock_cdc_sync
+  aurora_8b10b_0_cdc_sync__parameterized3_24 tx_lock_cdc_sync
        (.init_clk_in(init_clk_in),
         .out(tx_lock_sync),
         .tx_lock_comb_r(tx_lock_comb_r),
@@ -4644,7 +4644,7 @@ module aurora_8b10b_0_aurora_8b10b_0_RESET_LOGIC
         .R(1'b0));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_RX_LL
+module aurora_8b10b_0_RX_LL
    (rx_eof,
     FRAME_ERR,
     M_AXI_RX_TLAST,
@@ -5047,7 +5047,7 @@ module aurora_8b10b_0_aurora_8b10b_0_RX_LL
         .I1(STORAGE_SELECT_Buffer[4]),
         .I2(p_1_in[6]),
         .O(\STORAGE_DATA_Buffer[9]_i_1_n_0 ));
-  aurora_8b10b_0_aurora_8b10b_0_RX_LL_NFC nfc_module_i
+  aurora_8b10b_0_RX_LL_NFC nfc_module_i
        (.D({stage_1_data_r[8],stage_1_data_r[9],stage_1_data_r[10],stage_1_data_r[11],stage_1_data_r[24],stage_1_data_r[25],stage_1_data_r[26],stage_1_data_r[27]}),
         .D_0(D_0),
         .Q(Q),
@@ -5056,7 +5056,7 @@ module aurora_8b10b_0_aurora_8b10b_0_RX_LL
         .std_bool(std_bool),
         .tx_dst_rdy(tx_dst_rdy),
         .user_clk(user_clk));
-  aurora_8b10b_0_aurora_8b10b_0_RX_LL_PDU_DATAPATH rx_ll_pdu_datapath_i
+  aurora_8b10b_0_RX_LL_PDU_DATAPATH rx_ll_pdu_datapath_i
        (.D(D),
         .\DEFRAMED_DATA_V_Buffer_reg[0] (\DEFRAMED_DATA_V_Buffer_reg[0] ),
         .FRAME_ERR(FRAME_ERR),
@@ -5089,7 +5089,7 @@ module aurora_8b10b_0_aurora_8b10b_0_RX_LL
         .user_clk(user_clk));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_RX_LL_DEFRAMER
+module aurora_8b10b_0_RX_LL_DEFRAMER
    (mux_select_c,
     \AFTER_SCP_Buffer_reg[1]_0 ,
     \AFTER_SCP_Buffer_reg[1]_1 ,
@@ -5292,7 +5292,7 @@ module aurora_8b10b_0_aurora_8b10b_0_RX_LL_DEFRAMER
         .O(\AFTER_SCP_Buffer_reg[1]_0 ));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_RX_LL_NFC
+module aurora_8b10b_0_RX_LL_NFC
    (Q,
     std_bool,
     user_clk,
@@ -5675,7 +5675,7 @@ module aurora_8b10b_0_aurora_8b10b_0_RX_LL_NFC
         .R(SS));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_RX_LL_PDU_DATAPATH
+module aurora_8b10b_0_RX_LL_PDU_DATAPATH
    (rx_eof,
     FRAME_ERR,
     \stage_1_data_r_reg[8]_0 ,
@@ -5869,13 +5869,13 @@ module aurora_8b10b_0_aurora_8b10b_0_RX_LL_PDU_DATAPATH
         .D(SRC_RDY_N_Buffer),
         .Q(rx_src_rdy),
         .S(SS));
-  aurora_8b10b_0_aurora_8b10b_0_OUTPUT_MUX output_mux_i
+  aurora_8b10b_0_OUTPUT_MUX output_mux_i
        (.M_AXI_RX_TDATA(M_AXI_RX_TDATA),
         .\OUTPUT_DATA_Buffer_reg[16]_0 (Q[31:16]),
         .OUTPUT_SELECT_Buffer(OUTPUT_SELECT_Buffer),
         .Q({STORAGE_DATA[0],STORAGE_DATA[1],STORAGE_DATA[2],STORAGE_DATA[3],STORAGE_DATA[4],STORAGE_DATA[5],STORAGE_DATA[6],STORAGE_DATA[7],STORAGE_DATA[8],STORAGE_DATA[9],STORAGE_DATA[10],STORAGE_DATA[11],STORAGE_DATA[12],STORAGE_DATA[13],STORAGE_DATA[14],STORAGE_DATA[15],STORAGE_DATA[16],STORAGE_DATA[17],STORAGE_DATA[18],STORAGE_DATA[19],STORAGE_DATA[20],STORAGE_DATA[21],STORAGE_DATA[22],STORAGE_DATA[23],STORAGE_DATA[24],STORAGE_DATA[25],STORAGE_DATA[26],STORAGE_DATA[27],STORAGE_DATA[28],STORAGE_DATA[29],STORAGE_DATA[30],STORAGE_DATA[31]}),
         .user_clk(user_clk));
-  aurora_8b10b_0_aurora_8b10b_0_SIDEBAND_OUTPUT sideband_output_i
+  aurora_8b10b_0_SIDEBAND_OUTPUT sideband_output_i
        (.D(rx_rem_c),
         .EOF_N_Buffer(EOF_N_Buffer),
         .EOF_N_Buffer_reg_0(stage_3_storage_count_control_i_n_4),
@@ -6225,7 +6225,7 @@ module aurora_8b10b_0_aurora_8b10b_0_RX_LL_PDU_DATAPATH
         .D(stage_1_pad_r_reg_0),
         .Q(stage_1_pad_r),
         .R(1'b0));
-  aurora_8b10b_0_aurora_8b10b_0_RX_LL_DEFRAMER stage_1_rx_ll_deframer_i
+  aurora_8b10b_0_RX_LL_DEFRAMER stage_1_rx_ll_deframer_i
        (.\AFTER_SCP_Buffer_reg[1]_0 (stage_1_rx_ll_deframer_i_n_1),
         .\AFTER_SCP_Buffer_reg[1]_1 (stage_1_rx_ll_deframer_i_n_2),
         .D(D),
@@ -6464,7 +6464,7 @@ module aurora_8b10b_0_aurora_8b10b_0_RX_LL_PDU_DATAPATH
         .D(stage_1_rx_ll_deframer_i_n_6),
         .Q(stage_2_frame_err_r),
         .R(SS));
-  aurora_8b10b_0_aurora_8b10b_0_LEFT_ALIGN_CONTROL stage_2_left_align_control_i
+  aurora_8b10b_0_LEFT_ALIGN_CONTROL stage_2_left_align_control_i
        (.MUX_SELECT(MUX_SELECT),
         .mux_select_c(mux_select_c),
         .user_clk(user_clk));
@@ -6480,7 +6480,7 @@ module aurora_8b10b_0_aurora_8b10b_0_RX_LL_PDU_DATAPATH
         .D(stage_1_rx_ll_deframer_i_n_1),
         .Q(stage_2_start_with_data_r),
         .R(SS));
-  aurora_8b10b_0_aurora_8b10b_0_VALID_DATA_COUNTER stage_2_valid_data_counter_i
+  aurora_8b10b_0_VALID_DATA_COUNTER stage_2_valid_data_counter_i
        (.\COUNT_Buffer_reg[0]_0 (plusOp),
         .D(rx_rem_c),
         .FRAME_ERR_RESULT_Buffer0(FRAME_ERR_RESULT_Buffer0),
@@ -6495,21 +6495,21 @@ module aurora_8b10b_0_aurora_8b10b_0_RX_LL_PDU_DATAPATH
         .stage_2_start_with_data_r(stage_2_start_with_data_r),
         .stage_3_end_storage_r(stage_3_end_storage_r),
         .user_clk(user_clk));
-  aurora_8b10b_0_aurora_8b10b_0_LEFT_ALIGN_MUX stage_3_left_align_datapath_mux_i
+  aurora_8b10b_0_LEFT_ALIGN_MUX stage_3_left_align_datapath_mux_i
        (.MUX_SELECT(MUX_SELECT),
         .Q(Q),
         .stage_2_data_r(stage_2_data_r),
         .user_clk(user_clk));
-  aurora_8b10b_0_aurora_8b10b_0_OUTPUT_SWITCH_CONTROL stage_3_output_switch_control_i
+  aurora_8b10b_0_OUTPUT_SWITCH_CONTROL stage_3_output_switch_control_i
        (.OUTPUT_SELECT_Buffer(OUTPUT_SELECT_Buffer),
         .output_select_c(output_select_c),
         .user_clk(user_clk));
-  aurora_8b10b_0_aurora_8b10b_0_STORAGE_CE_CONTROL stage_3_storage_ce_control_i
+  aurora_8b10b_0_STORAGE_CE_CONTROL stage_3_storage_ce_control_i
        (.D({ce_command_c[0],ce_command_c[1]}),
         .Q({p_0_in0,stage_3_storage_ce_control_i_n_1}),
         .SS(SS),
         .user_clk(user_clk));
-  aurora_8b10b_0_aurora_8b10b_0_STORAGE_COUNT_CONTROL stage_3_storage_count_control_i
+  aurora_8b10b_0_STORAGE_COUNT_CONTROL stage_3_storage_count_control_i
        (.D({ce_command_c[0],ce_command_c[1]}),
         .Q({stage_3_storage_count_r[0],stage_3_storage_count_r[1]}),
         .SR(sideband_output_i_n_1),
@@ -6521,20 +6521,20 @@ module aurora_8b10b_0_aurora_8b10b_0_RX_LL_PDU_DATAPATH
         .\storage_count_r_reg[0]_1 ({stage_2_data_v_count_r[0],stage_2_data_v_count_r[1]}),
         .\storage_count_r_reg[1]_0 (stage_3_storage_count_control_i_n_5),
         .user_clk(user_clk));
-  aurora_8b10b_0_aurora_8b10b_0_STORAGE_SWITCH_CONTROL stage_3_storage_switch_control_i
+  aurora_8b10b_0_STORAGE_SWITCH_CONTROL stage_3_storage_switch_control_i
        (.Q(stage_3_storage_count_r[1]),
         .STORAGE_SELECT_Buffer(STORAGE_SELECT_Buffer),
         .stage_2_start_with_data_r(stage_2_start_with_data_r),
         .stage_3_end_storage_r(stage_3_end_storage_r),
         .user_clk(user_clk));
-  aurora_8b10b_0_aurora_8b10b_0_STORAGE_MUX stage_4_storage_mux_i
+  aurora_8b10b_0_STORAGE_MUX stage_4_storage_mux_i
        (.E({p_0_in0,stage_3_storage_ce_control_i_n_1}),
         .Q({STORAGE_DATA[0],STORAGE_DATA[1],STORAGE_DATA[2],STORAGE_DATA[3],STORAGE_DATA[4],STORAGE_DATA[5],STORAGE_DATA[6],STORAGE_DATA[7],STORAGE_DATA[8],STORAGE_DATA[9],STORAGE_DATA[10],STORAGE_DATA[11],STORAGE_DATA[12],STORAGE_DATA[13],STORAGE_DATA[14],STORAGE_DATA[15],STORAGE_DATA[16],STORAGE_DATA[17],STORAGE_DATA[18],STORAGE_DATA[19],STORAGE_DATA[20],STORAGE_DATA[21],STORAGE_DATA[22],STORAGE_DATA[23],STORAGE_DATA[24],STORAGE_DATA[25],STORAGE_DATA[26],STORAGE_DATA[27],STORAGE_DATA[28],STORAGE_DATA[29],STORAGE_DATA[30],STORAGE_DATA[31]}),
         .\STORAGE_DATA_Buffer_reg[0]_0 (\STORAGE_DATA_Buffer_reg[0] ),
         .user_clk(user_clk));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_SIDEBAND_OUTPUT
+module aurora_8b10b_0_SIDEBAND_OUTPUT
    (stage_3_end_storage_r,
     stage_2_frame_err_r_reg,
     SRC_RDY_N_Buffer,
@@ -6683,7 +6683,7 @@ module aurora_8b10b_0_aurora_8b10b_0_SIDEBAND_OUTPUT
         .O(stage_2_frame_err_r_reg));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_STANDARD_CC_MODULE
+module aurora_8b10b_0_STANDARD_CC_MODULE
    (DO_CC_I,
     WARN_CC_reg_0,
     do_nfc_r,
@@ -7190,7 +7190,7 @@ module aurora_8b10b_0_aurora_8b10b_0_STANDARD_CC_MODULE
         .R(1'b0));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_STORAGE_CE_CONTROL
+module aurora_8b10b_0_STORAGE_CE_CONTROL
    (Q,
     SS,
     D,
@@ -7219,7 +7219,7 @@ module aurora_8b10b_0_aurora_8b10b_0_STORAGE_CE_CONTROL
         .R(SS));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_STORAGE_COUNT_CONTROL
+module aurora_8b10b_0_STORAGE_COUNT_CONTROL
    (Q,
     D,
     stage_2_start_with_data_r_reg,
@@ -7333,7 +7333,7 @@ module aurora_8b10b_0_aurora_8b10b_0_STORAGE_COUNT_CONTROL
         .R(SR));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_STORAGE_MUX
+module aurora_8b10b_0_STORAGE_MUX
    (Q,
     E,
     \STORAGE_DATA_Buffer_reg[0]_0 ,
@@ -7542,7 +7542,7 @@ module aurora_8b10b_0_aurora_8b10b_0_STORAGE_MUX
         .R(1'b0));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_STORAGE_SWITCH_CONTROL
+module aurora_8b10b_0_STORAGE_SWITCH_CONTROL
    (STORAGE_SELECT_Buffer,
     Q,
     stage_2_start_with_data_r,
@@ -7592,7 +7592,7 @@ module aurora_8b10b_0_aurora_8b10b_0_STORAGE_SWITCH_CONTROL
         .R(1'b0));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_SYM_DEC_4BYTE
+module aurora_8b10b_0_SYM_DEC_4BYTE
    (RX_NEG_Buffer,
     \left_align_select_r_reg[0]_0 ,
     \left_align_select_r_reg[1]_0 ,
@@ -9556,7 +9556,7 @@ module aurora_8b10b_0_aurora_8b10b_0_SYM_DEC_4BYTE
         .R(1'b0));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_SYM_GEN_4BYTE
+module aurora_8b10b_0_SYM_GEN_4BYTE
    (TXCHARISK,
     TXDATA,
     GEN_SP,
@@ -10913,7 +10913,7 @@ module aurora_8b10b_0_aurora_8b10b_0_SYM_GEN_4BYTE
         .R(1'b0));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_TX_LL
+module aurora_8b10b_0_TX_LL
    (gen_cc_i,
     D,
     do_nfc_r_reg,
@@ -10992,7 +10992,7 @@ module aurora_8b10b_0_aurora_8b10b_0_TX_LL
   wire tx_ll_datapath_i_n_0;
   wire user_clk;
 
-  aurora_8b10b_0_aurora_8b10b_0_TX_LL_CONTROL tx_ll_control_i
+  aurora_8b10b_0_TX_LL_CONTROL tx_ll_control_i
        (.D(tx_ll_control_i_n_12),
         .DO_CC_I(DO_CC_I),
         .\FC_NB_Buffer_reg[0]_0 (\FC_NB_Buffer_reg[0] ),
@@ -11019,7 +11019,7 @@ module aurora_8b10b_0_aurora_8b10b_0_TX_LL
         .storage_pad_r0(storage_pad_r0),
         .storage_v_r0(storage_v_r0),
         .user_clk(user_clk));
-  aurora_8b10b_0_aurora_8b10b_0_TX_LL_DATAPATH tx_ll_datapath_i
+  aurora_8b10b_0_TX_LL_DATAPATH tx_ll_datapath_i
        (.D(p_12_in),
         .E(pdu_ok_c),
         .\GEN_PAD_Buffer_reg[0]_0 (\GEN_PAD_Buffer_reg[0] ),
@@ -11037,7 +11037,7 @@ module aurora_8b10b_0_aurora_8b10b_0_TX_LL
         .user_clk(user_clk));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_TX_LL_CONTROL
+module aurora_8b10b_0_TX_LL_CONTROL
    (gen_cc_i,
     do_cc_r_reg_0,
     do_nfc_r_reg_0,
@@ -11403,7 +11403,7 @@ module aurora_8b10b_0_aurora_8b10b_0_TX_LL_CONTROL
         .O(p_12_in));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_TX_LL_DATAPATH
+module aurora_8b10b_0_TX_LL_DATAPATH
    (in_frame_r_reg_0,
     \TX_PE_DATA_V_Buffer_reg[0]_0 ,
     \GEN_PAD_Buffer_reg[0]_0 ,
@@ -12014,7 +12014,7 @@ module aurora_8b10b_0_aurora_8b10b_0_TX_LL_DATAPATH
         .R(1'b0));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_VALID_DATA_COUNTER
+module aurora_8b10b_0_VALID_DATA_COUNTER
    (D,
     Q,
     FRAME_ERR_RESULT_Buffer0,
@@ -12108,7 +12108,7 @@ module aurora_8b10b_0_aurora_8b10b_0_VALID_DATA_COUNTER
         .O(end_storage_r_i_2_n_0));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_cdc_sync
+module aurora_8b10b_0_cdc_sync
    (out,
     RESET,
     user_clk);
@@ -12202,7 +12202,7 @@ module aurora_8b10b_0_aurora_8b10b_0_cdc_sync
 endmodule
 
 (* ORIG_REF_NAME = "aurora_8b10b_0_cdc_sync" *) 
-module aurora_8b10b_0_aurora_8b10b_0_cdc_sync_16
+module aurora_8b10b_0_cdc_sync_16
    (out,
     user_clk);
   output out;
@@ -12298,7 +12298,7 @@ module aurora_8b10b_0_aurora_8b10b_0_cdc_sync_16
 endmodule
 
 (* ORIG_REF_NAME = "aurora_8b10b_0_cdc_sync" *) 
-module aurora_8b10b_0_aurora_8b10b_0_cdc_sync_23
+module aurora_8b10b_0_cdc_sync_23
    (out,
     PLL_NOT_LOCKED,
     user_clk);
@@ -12392,7 +12392,7 @@ module aurora_8b10b_0_aurora_8b10b_0_cdc_sync_23
 endmodule
 
 (* ORIG_REF_NAME = "aurora_8b10b_0_cdc_sync" *) 
-module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1
+module aurora_8b10b_0_cdc_sync__parameterized1
    (AR,
     HPCNT_RESET,
     GT_RESET,
@@ -12498,7 +12498,7 @@ module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1
 endmodule
 
 (* ORIG_REF_NAME = "aurora_8b10b_0_cdc_sync" *) 
-module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_0
+module aurora_8b10b_0_cdc_sync__parameterized1_0
    (out,
     RESET,
     init_clk_in);
@@ -12592,7 +12592,7 @@ module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_0
 endmodule
 
 (* ORIG_REF_NAME = "aurora_8b10b_0_cdc_sync" *) 
-module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_1
+module aurora_8b10b_0_cdc_sync__parameterized1_1
    (E,
     reset_time_out_reg,
     quad1_common_lock_in,
@@ -12782,7 +12782,7 @@ module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_1
 endmodule
 
 (* ORIG_REF_NAME = "aurora_8b10b_0_cdc_sync" *) 
-module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_11
+module aurora_8b10b_0_cdc_sync__parameterized1_11
    (out,
     SR,
     init_clk_in);
@@ -12886,7 +12886,7 @@ module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_11
 endmodule
 
 (* ORIG_REF_NAME = "aurora_8b10b_0_cdc_sync" *) 
-module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_2
+module aurora_8b10b_0_cdc_sync__parameterized1_2
    (init_clk_in);
   input init_clk_in;
 
@@ -12979,7 +12979,7 @@ module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_2
 endmodule
 
 (* ORIG_REF_NAME = "aurora_8b10b_0_cdc_sync" *) 
-module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_21
+module aurora_8b10b_0_cdc_sync__parameterized1_21
    (out,
     in0,
     drpclk_in);
@@ -13073,7 +13073,7 @@ module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_21
 endmodule
 
 (* ORIG_REF_NAME = "aurora_8b10b_0_cdc_sync" *) 
-module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_4
+module aurora_8b10b_0_cdc_sync__parameterized1_4
    (out,
     SR,
     init_clk_in,
@@ -13180,7 +13180,7 @@ module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_4
 endmodule
 
 (* ORIG_REF_NAME = "aurora_8b10b_0_cdc_sync" *) 
-module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_8
+module aurora_8b10b_0_cdc_sync__parameterized1_8
    (E,
     \FSM_sequential_rx_state_reg[1] ,
     quad1_common_lock_in,
@@ -13357,7 +13357,7 @@ module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_8
 endmodule
 
 (* ORIG_REF_NAME = "aurora_8b10b_0_cdc_sync" *) 
-module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_9
+module aurora_8b10b_0_cdc_sync__parameterized1_9
    (init_clk_in);
   input init_clk_in;
 
@@ -13450,7 +13450,7 @@ module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_9
 endmodule
 
 (* ORIG_REF_NAME = "aurora_8b10b_0_cdc_sync" *) 
-module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3
+module aurora_8b10b_0_cdc_sync__parameterized3
    (out,
     run_phase_alignment_int,
     init_clk_in,
@@ -13557,7 +13557,7 @@ module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3
 endmodule
 
 (* ORIG_REF_NAME = "aurora_8b10b_0_cdc_sync" *) 
-module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_12
+module aurora_8b10b_0_cdc_sync__parameterized3_12
    (init_clk_in,
     user_clk);
   input init_clk_in;
@@ -13658,7 +13658,7 @@ module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_12
 endmodule
 
 (* ORIG_REF_NAME = "aurora_8b10b_0_cdc_sync" *) 
-module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_13
+module aurora_8b10b_0_cdc_sync__parameterized3_13
    (out,
     \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.INPUT_FLOP.p_level_in_d1_cdc_from_reg_0 ,
     init_clk_in,
@@ -13765,7 +13765,7 @@ module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_13
 endmodule
 
 (* ORIG_REF_NAME = "aurora_8b10b_0_cdc_sync" *) 
-module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_14
+module aurora_8b10b_0_cdc_sync__parameterized3_14
    (out,
     rx_fsm_reset_done_int,
     init_clk_in,
@@ -13872,7 +13872,7 @@ module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_14
 endmodule
 
 (* ORIG_REF_NAME = "aurora_8b10b_0_cdc_sync" *) 
-module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_22
+module aurora_8b10b_0_cdc_sync__parameterized3_22
    (out,
     link_reset_comb_r,
     init_clk_in,
@@ -13979,7 +13979,7 @@ module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_22
 endmodule
 
 (* ORIG_REF_NAME = "aurora_8b10b_0_cdc_sync" *) 
-module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_24
+module aurora_8b10b_0_cdc_sync__parameterized3_24
    (out,
     tx_lock_comb_r,
     init_clk_in,
@@ -14086,7 +14086,7 @@ module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_24
 endmodule
 
 (* ORIG_REF_NAME = "aurora_8b10b_0_cdc_sync" *) 
-module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_6
+module aurora_8b10b_0_cdc_sync__parameterized3_6
    (out,
     \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.s_level_out_d5_reg_0 ,
     tx_fsm_reset_done_int,
@@ -14201,7 +14201,7 @@ module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_6
 endmodule
 
 (* ORIG_REF_NAME = "aurora_8b10b_0_cdc_sync" *) 
-module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_7
+module aurora_8b10b_0_cdc_sync__parameterized3_7
    (out,
     gtrxreset_i_0,
     init_clk_in,
@@ -14308,7 +14308,7 @@ module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_7
 endmodule
 
 (* ORIG_REF_NAME = "aurora_8b10b_0_cdc_sync" *) 
-module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6
+module aurora_8b10b_0_cdc_sync__parameterized6
    (out,
     gtrxreset_i,
     user_clk,
@@ -14415,7 +14415,7 @@ module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6
 endmodule
 
 (* ORIG_REF_NAME = "aurora_8b10b_0_cdc_sync" *) 
-module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_10
+module aurora_8b10b_0_cdc_sync__parameterized6_10
    (out,
     rxfsm_rxresetdone_r,
     user_clk,
@@ -14522,7 +14522,7 @@ module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_10
 endmodule
 
 (* ORIG_REF_NAME = "aurora_8b10b_0_cdc_sync" *) 
-module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_15
+module aurora_8b10b_0_cdc_sync__parameterized6_15
    (rxpmaresetdone_i,
     user_clk,
     init_clk_in);
@@ -14626,7 +14626,7 @@ module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_15
 endmodule
 
 (* ORIG_REF_NAME = "aurora_8b10b_0_cdc_sync" *) 
-module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_17
+module aurora_8b10b_0_cdc_sync__parameterized6_17
    (out,
     \GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.INPUT_FLOP.p_level_in_d1_cdc_from_reg_0 ,
     user_clk,
@@ -14733,7 +14733,7 @@ module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_17
 endmodule
 
 (* ORIG_REF_NAME = "aurora_8b10b_0_cdc_sync" *) 
-module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_18
+module aurora_8b10b_0_cdc_sync__parameterized6_18
    (txpmaresetdone_i,
     user_clk,
     init_clk_in);
@@ -14837,7 +14837,7 @@ module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_18
 endmodule
 
 (* ORIG_REF_NAME = "aurora_8b10b_0_cdc_sync" *) 
-module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_19
+module aurora_8b10b_0_cdc_sync__parameterized6_19
    (out,
     SR,
     init_clk_in,
@@ -14944,7 +14944,7 @@ module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_19
 endmodule
 
 (* ORIG_REF_NAME = "aurora_8b10b_0_cdc_sync" *) 
-module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_20
+module aurora_8b10b_0_cdc_sync__parameterized6_20
    (AR,
     gt_common_reset_out,
     init_clk_in,
@@ -15051,7 +15051,7 @@ module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_20
 endmodule
 
 (* ORIG_REF_NAME = "aurora_8b10b_0_cdc_sync" *) 
-module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_25
+module aurora_8b10b_0_cdc_sync__parameterized6_25
    (O,
     \hotplug_count_synth.count_for_reset_r_reg[7] ,
     \hotplug_count_synth.count_for_reset_r_reg[11] ,
@@ -15407,7 +15407,7 @@ module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_25
 endmodule
 
 (* ORIG_REF_NAME = "aurora_8b10b_0_cdc_sync" *) 
-module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_3
+module aurora_8b10b_0_cdc_sync__parameterized6_3
    (out,
     txfsm_txresetdone_r,
     user_clk,
@@ -15514,7 +15514,7 @@ module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_3
 endmodule
 
 (* ORIG_REF_NAME = "aurora_8b10b_0_cdc_sync" *) 
-module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_5
+module aurora_8b10b_0_cdc_sync__parameterized6_5
    (out,
     time_out_wait_bypass,
     user_clk,
@@ -15621,7 +15621,7 @@ module aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_5
 endmodule
 
 (* CC_FREQ_FACTOR = "12" *) (* EXAMPLE_SIMULATION = "0" *) (* SIM_GTRESET_SPEEDUP = "FALSE" *) 
-module aurora_8b10b_0_aurora_8b10b_0_core
+module aurora_8b10b_0_core
    (S_AXI_TX_TDATA,
     S_AXI_TX_TKEEP,
     S_AXI_TX_TVALID,
@@ -15902,7 +15902,7 @@ module aurora_8b10b_0_aurora_8b10b_0_core
   assign M_AXI_RX_TKEEP[1:3] = \^M_AXI_RX_TKEEP [1:3];
   GND GND
        (.G(\<const0> ));
-  aurora_8b10b_0_aurora_8b10b_0_AURORA_LANE_4BYTE aurora_8b10b_0_aurora_lane_4byte_0_i
+  aurora_8b10b_0_AURORA_LANE_4BYTE aurora_8b10b_0_aurora_lane_4byte_0_i
        (.D(rx_char_is_comma_i),
         .GEN_SCP(GEN_SCP),
         .GEN_SNF(GEN_SNF),
@@ -15970,7 +15970,7 @@ module aurora_8b10b_0_aurora_8b10b_0_core
         .\word_aligned_data_r_reg[26] (aurora_8b10b_0_aurora_lane_4byte_0_i_n_20),
         .\word_aligned_data_r_reg[27] (aurora_8b10b_0_aurora_lane_4byte_0_i_n_21),
         .\word_aligned_data_r_reg[28] ({aurora_8b10b_0_aurora_lane_4byte_0_i_n_81,aurora_8b10b_0_aurora_lane_4byte_0_i_n_82,aurora_8b10b_0_aurora_lane_4byte_0_i_n_83,aurora_8b10b_0_aurora_lane_4byte_0_i_n_84}));
-  aurora_8b10b_0_aurora_8b10b_0_GLOBAL_LOGIC aurora_8b10b_0_global_logic_i
+  aurora_8b10b_0_GLOBAL_LOGIC aurora_8b10b_0_global_logic_i
        (.CHANNEL_UP(CHANNEL_UP),
         .D({soft_err_i[0],soft_err_i[1]}),
         .HARD_ERR(HARD_ERR),
@@ -15990,7 +15990,7 @@ module aurora_8b10b_0_aurora_8b10b_0_core
         .p_0_in(p_0_in),
         .start_rx_i(start_rx_i),
         .user_clk(user_clk));
-  aurora_8b10b_0_aurora_8b10b_0_RX_LL aurora_8b10b_0_rx_ll_i
+  aurora_8b10b_0_RX_LL aurora_8b10b_0_rx_ll_i
        (.D({rx_scp_striped_i[0],rx_scp_striped_i[1]}),
         .\DEFRAMED_DATA_V_Buffer_reg[0] ({rx_pe_data_v_striped_i[0],rx_pe_data_v_striped_i[1]}),
         .D_0(\tx_ll_control_i/D ),
@@ -16022,7 +16022,7 @@ module aurora_8b10b_0_aurora_8b10b_0_core
         .std_bool(std_bool),
         .tx_dst_rdy(tx_dst_rdy),
         .user_clk(user_clk));
-  aurora_8b10b_0_aurora_8b10b_0_TX_LL aurora_8b10b_0_tx_ll_i
+  aurora_8b10b_0_TX_LL aurora_8b10b_0_tx_ll_i
        (.D(\tx_ll_control_i/D ),
         .DO_CC_I(DO_CC_I),
         .\FC_NB_Buffer_reg[0] ({FC_NB[0],FC_NB[1],FC_NB[2],FC_NB[3]}),
@@ -16046,11 +16046,11 @@ module aurora_8b10b_0_aurora_8b10b_0_core
         .p_0_in(p_0_in),
         .tx_dst_rdy(tx_dst_rdy),
         .user_clk(user_clk));
-  aurora_8b10b_0_aurora_8b10b_0_AXI_TO_LL axi_to_ll_pdu_i
+  aurora_8b10b_0_AXI_TO_LL axi_to_ll_pdu_i
        (.new_pkt_r(new_pkt_r),
         .new_pkt_r_reg_0(axi_to_ll_pdu_i_n_0),
         .user_clk(user_clk));
-  aurora_8b10b_0_aurora_8b10b_0_RESET_LOGIC core_reset_logic_i
+  aurora_8b10b_0_RESET_LOGIC core_reset_logic_i
        (.CHANNEL_UP(CHANNEL_UP),
         .LINK_RESET_OUT(LINK_RESET_OUT),
         .PLL_NOT_LOCKED(PLL_NOT_LOCKED),
@@ -16067,13 +16067,13 @@ module aurora_8b10b_0_aurora_8b10b_0_core
         .tx_dst_rdy(tx_dst_rdy),
         .tx_lock(tx_lock),
         .user_clk(user_clk));
-  aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1 gt_reset_cdc_sync
+  aurora_8b10b_0_cdc_sync__parameterized1 gt_reset_cdc_sync
        (.AR(gt_reset_sync_init_clk),
         .GT_RESET(GT_RESET),
         .HPCNT_RESET(HPCNT_RESET),
         .init_clk_in(init_clk_in),
         .out(reset_sync_init_clk));
-  aurora_8b10b_0_aurora_8b10b_0_GT_WRAPPER gt_wrapper_i
+  aurora_8b10b_0_GT_WRAPPER gt_wrapper_i
        (.AR(gt_reset_sync_init_clk),
         .D(rx_char_is_comma_i),
         .DRPADDR_IN(DRPADDR_IN),
@@ -16132,19 +16132,19 @@ module aurora_8b10b_0_aurora_8b10b_0_core
         .tx_lock(tx_lock),
         .user_clk(user_clk),
         .\word_aligned_control_bits_r_reg[2] (\aurora_8b10b_0_sym_dec_4byte_i/previous_cycle_control_r ));
-  aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_0 hpcnt_reset_cdc_sync
+  aurora_8b10b_0_cdc_sync__parameterized1_0 hpcnt_reset_cdc_sync
        (.RESET(RESET),
         .init_clk_in(init_clk_in),
         .out(reset_sync_init_clk));
-  aurora_8b10b_0_aurora_8b10b_0_LL_TO_AXI ll_to_axi_pdu_i
+  aurora_8b10b_0_LL_TO_AXI ll_to_axi_pdu_i
        (.M_AXI_RX_TKEEP({\^M_AXI_RX_TKEEP [1],\^M_AXI_RX_TKEEP [2],\^M_AXI_RX_TKEEP [3]}),
         .\m_axi_rx_tkeep[1] ({rx_rem[0],rx_rem[1]}),
         .rx_eof(rx_eof));
-  aurora_8b10b_0_aurora_8b10b_0_cdc_sync reset_sync_user_clk_cdc_sync
+  aurora_8b10b_0_cdc_sync reset_sync_user_clk_cdc_sync
        (.RESET(RESET),
         .out(reset_sync_user_clk),
         .user_clk(user_clk));
-  aurora_8b10b_0_aurora_8b10b_0_STANDARD_CC_MODULE standard_cc_module_i
+  aurora_8b10b_0_STANDARD_CC_MODULE standard_cc_module_i
        (.DO_CC_I(DO_CC_I),
         .Q(\nfc_module_i/nfc_counter_r_reg ),
         .S_AXI_NFC_ACK(S_AXI_NFC_ACK),
@@ -16155,7 +16155,7 @@ module aurora_8b10b_0_aurora_8b10b_0_core
         .user_clk(user_clk));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_gt
+module aurora_8b10b_0_gt
    (gtpe2_i_0,
     TXN,
     TXP,
@@ -17059,7 +17059,7 @@ module aurora_8b10b_0_aurora_8b10b_0_gt
         .I3(p_0_in),
         .I4(drp_op_done),
         .O(DRPDI[9]));
-  aurora_8b10b_0_aurora_8b10b_0_gtrxreset_seq gtrxreset_seq_i
+  aurora_8b10b_0_gtrxreset_seq gtrxreset_seq_i
        (.DRPADDR({gtrxreset_seq_i_n_4,gtrxreset_seq_i_n_5,gtrxreset_seq_i_n_6,gtrxreset_seq_i_n_7,gtrxreset_seq_i_n_8,gtrxreset_seq_i_n_9,gtrxreset_seq_i_n_10}),
         .DRPADDR_IN({DRPADDR_IN[8:5],DRPADDR_IN[3:1]}),
         .DRPDO_OUT(DRPDO_OUT),
@@ -17296,7 +17296,7 @@ module aurora_8b10b_0_aurora_8b10b_0_gt
         .O(gtpe2_i_6[0]));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_gtrxreset_seq
+module aurora_8b10b_0_gtrxreset_seq
    (GTRXRESET,
     drp_op_done,
     Q,
@@ -17636,7 +17636,7 @@ module aurora_8b10b_0_aurora_8b10b_0_gtrxreset_seq
         .I4(p_0_in0_in),
         .I5(Q[1]),
         .O(gtrxreset_i__0));
-  aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_19 gtrxreset_in_cdc_sync
+  aurora_8b10b_0_cdc_sync__parameterized6_19 gtrxreset_in_cdc_sync
        (.SR(SR),
         .drpclk_in(drpclk_in),
         .init_clk_in(init_clk_in),
@@ -17992,12 +17992,12 @@ module aurora_8b10b_0_aurora_8b10b_0_gtrxreset_seq
         .CLR(rst_ss),
         .D(\rd_data[9]_i_1_n_0 ),
         .Q(\rd_data_reg[15]_0 [9]));
-  aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_20 rst_cdc_sync
+  aurora_8b10b_0_cdc_sync__parameterized6_20 rst_cdc_sync
        (.AR(rst_ss),
         .drpclk_in(drpclk_in),
         .gt_common_reset_out(gt_common_reset_out),
         .init_clk_in(init_clk_in));
-  aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_21 rxpmaresetdone_cdc_sync
+  aurora_8b10b_0_cdc_sync__parameterized1_21 rxpmaresetdone_cdc_sync
        (.drpclk_in(drpclk_in),
         .in0(in0),
         .out(rxpmaresetdone_ss));
@@ -18009,7 +18009,7 @@ module aurora_8b10b_0_aurora_8b10b_0_gtrxreset_seq
         .Q(rxpmaresetdone_sss));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_multi_gt
+module aurora_8b10b_0_multi_gt
    (gtpe2_i,
     TXN,
     TXP,
@@ -18174,7 +18174,7 @@ module aurora_8b10b_0_aurora_8b10b_0_multi_gt
   wire user_clk;
   wire [0:0]\word_aligned_control_bits_r_reg[2] ;
 
-  aurora_8b10b_0_aurora_8b10b_0_gt gt0_aurora_8b10b_0_i
+  aurora_8b10b_0_gt gt0_aurora_8b10b_0_i
        (.D(D),
         .DRPADDR_IN(DRPADDR_IN),
         .DRPDI_IN(DRPDI_IN),
@@ -18231,7 +18231,7 @@ module aurora_8b10b_0_aurora_8b10b_0_multi_gt
         .\word_aligned_control_bits_r_reg[2] (\word_aligned_control_bits_r_reg[2] ));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_rx_startup_fsm
+module aurora_8b10b_0_rx_startup_fsm
    (gtrxreset_i_0,
     gt_rxuserrdy_i,
     quad1_common_lock_in,
@@ -18686,7 +18686,7 @@ module aurora_8b10b_0_aurora_8b10b_0_rx_startup_fsm
         .D(check_tlock_max_i_1_n_0),
         .Q(check_tlock_max_reg_n_0),
         .R(AR));
-  aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_7 gtrxreset_cdc_sync
+  aurora_8b10b_0_cdc_sync__parameterized3_7 gtrxreset_cdc_sync
        (.gtrxreset_i_0(gtrxreset_i_0),
         .init_clk_in(init_clk_in),
         .out(scndry_out),
@@ -19179,7 +19179,7 @@ module aurora_8b10b_0_aurora_8b10b_0_rx_startup_fsm
         .D(rxresetdone_s2),
         .Q(rxresetdone_s3),
         .R(1'b0));
-  aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_8 sync_PLL0LOCK_cdc_sync
+  aurora_8b10b_0_cdc_sync__parameterized1_8 sync_PLL0LOCK_cdc_sync
        (.E(sync_PLL0LOCK_cdc_sync_n_0),
         .\FSM_sequential_rx_state_reg[0] (\FSM_sequential_rx_state[3]_i_4_n_0 ),
         .\FSM_sequential_rx_state_reg[0]_0 (\FSM_sequential_rx_state[3]_i_5_n_0 ),
@@ -19197,43 +19197,43 @@ module aurora_8b10b_0_aurora_8b10b_0_rx_startup_fsm
         .reset_time_out_reg_2(reset_time_out_i_4_n_0),
         .rxresetdone_s3(rxresetdone_s3),
         .time_tlock_max(time_tlock_max));
-  aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_9 sync_PLL1LOCK_cdc_sync
+  aurora_8b10b_0_cdc_sync__parameterized1_9 sync_PLL1LOCK_cdc_sync
        (.init_clk_in(init_clk_in));
-  aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_10 sync_RXRESETDONE_cdc_sync
+  aurora_8b10b_0_cdc_sync__parameterized6_10 sync_RXRESETDONE_cdc_sync
        (.init_clk_in(init_clk_in),
         .out(rxresetdone_s2),
         .rxfsm_rxresetdone_r(rxfsm_rxresetdone_r),
         .user_clk(user_clk));
-  aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_11 sync_mmcm_lock_reclocked_cdc_sync
+  aurora_8b10b_0_cdc_sync__parameterized1_11 sync_mmcm_lock_reclocked_cdc_sync
        (.SR(sync_mmcm_lock_reclocked_cdc_sync_n_1),
         .init_clk_in(init_clk_in),
         .out(mmcm_lock_i));
-  aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_12 sync_pmaresetdone_fallingedge_detect_cdc_sync
+  aurora_8b10b_0_cdc_sync__parameterized3_12 sync_pmaresetdone_fallingedge_detect_cdc_sync
        (.init_clk_in(init_clk_in),
         .user_clk(user_clk));
-  aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_13 sync_run_phase_alignment_int_cdc_sync
+  aurora_8b10b_0_cdc_sync__parameterized3_13 sync_run_phase_alignment_int_cdc_sync
        (.\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.INPUT_FLOP.p_level_in_d1_cdc_from_reg_0 (run_phase_alignment_int_reg_n_0),
         .init_clk_in(init_clk_in),
         .out(run_phase_alignment_int_s2),
         .user_clk(user_clk));
-  aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_14 sync_rx_fsm_reset_done_int_cdc_sync
+  aurora_8b10b_0_cdc_sync__parameterized3_14 sync_rx_fsm_reset_done_int_cdc_sync
        (.init_clk_in(init_clk_in),
         .out(sync_rx_fsm_reset_done_int_cdc_sync_n_0),
         .rx_fsm_reset_done_int(rx_fsm_reset_done_int),
         .user_clk(user_clk));
-  aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_15 sync_rxpmaresetdone_cdc_sync
+  aurora_8b10b_0_cdc_sync__parameterized6_15 sync_rxpmaresetdone_cdc_sync
        (.init_clk_in(init_clk_in),
         .rxpmaresetdone_i(rxpmaresetdone_i),
         .user_clk(user_clk));
-  aurora_8b10b_0_aurora_8b10b_0_cdc_sync_16 sync_rxpmaresetdone_rx_s_cdc_sync
+  aurora_8b10b_0_cdc_sync_16 sync_rxpmaresetdone_rx_s_cdc_sync
        (.out(rxpmaresetdone_rx_s),
         .user_clk(user_clk));
-  aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_17 sync_time_out_wait_bypass_cdc_sync
+  aurora_8b10b_0_cdc_sync__parameterized6_17 sync_time_out_wait_bypass_cdc_sync
        (.\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.INPUT_FLOP.p_level_in_d1_cdc_from_reg_0 (time_out_wait_bypass_reg_n_0),
         .init_clk_in(init_clk_in),
         .out(time_out_wait_bypass_s2),
         .user_clk(user_clk));
-  aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_18 sync_txpmaresetdone_cdc_sync
+  aurora_8b10b_0_cdc_sync__parameterized6_18 sync_txpmaresetdone_cdc_sync
        (.init_clk_in(init_clk_in),
         .txpmaresetdone_i(txpmaresetdone_i),
         .user_clk(user_clk));
@@ -20056,7 +20056,7 @@ module aurora_8b10b_0_aurora_8b10b_0_rx_startup_fsm
         .S(\wait_time_cnt[6]_i_1_n_0 ));
 endmodule
 
-module aurora_8b10b_0_aurora_8b10b_0_tx_startup_fsm
+module aurora_8b10b_0_tx_startup_fsm
    (out,
     gt_tx_reset_i,
     gt_common_reset_out,
@@ -20861,7 +20861,7 @@ module aurora_8b10b_0_aurora_8b10b_0_tx_startup_fsm
         .D(scndry_out),
         .Q(run_phase_alignment_int_s3),
         .R(1'b0));
-  aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_1 sync_PLL0LOCK_cdc_sync
+  aurora_8b10b_0_cdc_sync__parameterized1_1 sync_PLL0LOCK_cdc_sync
        (.E(sync_PLL0LOCK_cdc_sync_n_0),
         .\FSM_sequential_tx_state_reg[0] (\FSM_sequential_tx_state[3]_i_4_n_0 ),
         .\FSM_sequential_tx_state_reg[0]_0 (\FSM_sequential_tx_state[3]_i_6_n_0 ),
@@ -20877,29 +20877,29 @@ module aurora_8b10b_0_aurora_8b10b_0_tx_startup_fsm
         .reset_time_out_reg(sync_PLL0LOCK_cdc_sync_n_1),
         .reset_time_out_reg_0(init_wait_done_reg_n_0),
         .txresetdone_s3(txresetdone_s3));
-  aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_2 sync_PLL1LOCK_cdc_sync
+  aurora_8b10b_0_cdc_sync__parameterized1_2 sync_PLL1LOCK_cdc_sync
        (.init_clk_in(init_clk_in));
-  aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_3 sync_TXRESETDONE_cdc_sync
+  aurora_8b10b_0_cdc_sync__parameterized6_3 sync_TXRESETDONE_cdc_sync
        (.init_clk_in(init_clk_in),
         .out(txresetdone_s2),
         .txfsm_txresetdone_r(txfsm_txresetdone_r),
         .user_clk(user_clk));
-  aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized1_4 sync_mmcm_lock_reclocked_cdc_sync
+  aurora_8b10b_0_cdc_sync__parameterized1_4 sync_mmcm_lock_reclocked_cdc_sync
        (.PLL_NOT_LOCKED(PLL_NOT_LOCKED),
         .SR(sync_mmcm_lock_reclocked_cdc_sync_n_1),
         .init_clk_in(init_clk_in),
         .out(mmcm_lock_i));
-  aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3 sync_run_phase_alignment_int_cdc_sync
+  aurora_8b10b_0_cdc_sync__parameterized3 sync_run_phase_alignment_int_cdc_sync
        (.init_clk_in(init_clk_in),
         .out(scndry_out),
         .run_phase_alignment_int(run_phase_alignment_int),
         .user_clk(user_clk));
-  aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized6_5 sync_time_out_wait_bypass_cdc_sync
+  aurora_8b10b_0_cdc_sync__parameterized6_5 sync_time_out_wait_bypass_cdc_sync
        (.init_clk_in(init_clk_in),
         .out(time_out_wait_bypass_s2),
         .time_out_wait_bypass(time_out_wait_bypass),
         .user_clk(user_clk));
-  aurora_8b10b_0_aurora_8b10b_0_cdc_sync__parameterized3_6 sync_tx_fsm_reset_done_int_cdc_sync
+  aurora_8b10b_0_cdc_sync__parameterized3_6 sync_tx_fsm_reset_done_int_cdc_sync
        (.\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.s_level_out_d5_reg_0 (\GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.s_level_out_d5_reg ),
         .init_clk_in(init_clk_in),
         .out(out),

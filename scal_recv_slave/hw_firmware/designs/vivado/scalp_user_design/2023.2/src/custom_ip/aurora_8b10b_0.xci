@@ -69,10 +69,10 @@
         "C_GT_LOC_7": [ { "value": "X", "resolve_type": "user", "enabled": false, "usage": "all" } ],
         "C_GT_LOC_6": [ { "value": "X", "resolve_type": "user", "enabled": false, "usage": "all" } ],
         "C_GT_LOC_5": [ { "value": "X", "resolve_type": "user", "enabled": false, "usage": "all" } ],
-        "C_GT_LOC_4": [ { "value": "X", "resolve_type": "user", "usage": "all" } ],
+        "C_GT_LOC_4": [ { "value": "X", "value_src": "user", "resolve_type": "user", "usage": "all" } ],
         "C_GT_LOC_3": [ { "value": "X", "resolve_type": "user", "usage": "all" } ],
-        "C_GT_LOC_2": [ { "value": "X", "resolve_type": "user", "usage": "all" } ],
-        "C_GT_LOC_1": [ { "value": "1", "resolve_type": "user", "usage": "all" } ],
+        "C_GT_LOC_2": [ { "value": "1", "value_src": "user", "resolve_type": "user", "usage": "all" } ],
+        "C_GT_LOC_1": [ { "value": "X", "value_src": "user", "resolve_type": "user", "usage": "all" } ],
         "C_GT_CLOCK_1": [ { "value": "GTPQ0", "resolve_type": "user", "usage": "all" } ],
         "C_GT_CLOCK_2": [ { "value": "None", "resolve_type": "user", "enabled": false, "usage": "all" } ],
         "C_USE_CHIPSCOPE": [ { "value": "false", "resolve_type": "user", "format": "bool", "usage": "all" } ],
@@ -143,8 +143,8 @@
         "cc_refclk_frequency": [ { "value": "125.000", "resolve_type": "generated", "format": "float", "usage": "all" } ],
         "c_init_clk": [ { "value": "50.0", "resolve_type": "generated", "format": "float", "usage": "all" } ],
         "drp_freq": [ { "value": "50.0", "resolve_type": "generated", "format": "float", "usage": "all" } ],
-        "c_gt_loc_1": [ { "value": "1", "resolve_type": "generated", "usage": "all" } ],
-        "c_gt_loc_2": [ { "value": "X", "resolve_type": "generated", "usage": "all" } ],
+        "c_gt_loc_1": [ { "value": "X", "resolve_type": "generated", "usage": "all" } ],
+        "c_gt_loc_2": [ { "value": "1", "resolve_type": "generated", "usage": "all" } ],
         "c_gt_loc_3": [ { "value": "X", "resolve_type": "generated", "usage": "all" } ],
         "c_gt_loc_4": [ { "value": "X", "resolve_type": "generated", "usage": "all" } ],
         "c_gt_loc_5": [ { "value": "X", "resolve_type": "generated", "usage": "all" } ],
@@ -645,5 +645,5 @@
       }
     }
   },
-  "checksum": "8d228f2e"
+  "checksum": "7f3e2990"
 }
