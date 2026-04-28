@@ -1,0 +1,56 @@
+--Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+--Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+----------------------------------------------------------------------------------
+--Tool Version: Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
+--Date        : Sun Apr 12 11:49:54 2026
+--Host        : theodros-ThinkPad-P16s-Gen-2 running 64-bit Ubuntu 24.04.2 LTS
+--Command     : generate_target vga_hdmi_clk_rst_system_wrapper.bd
+--Design      : vga_hdmi_clk_rst_system_wrapper
+--Purpose     : IP block netlist
+----------------------------------------------------------------------------------
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+library UNISIM;
+use UNISIM.VCOMPONENTS.ALL;
+entity vga_hdmi_clk_rst_system_wrapper is
+  port (
+    ClkHdmiRstxRNAO : out STD_LOGIC_VECTOR ( 0 to 0 );
+    ClkHdmiRstxRO : out STD_LOGIC_VECTOR ( 0 to 0 );
+    ClkHdmixCO : out STD_LOGIC;
+    ClkVgaRstxRNAO : out STD_LOGIC_VECTOR ( 0 to 0 );
+    ClkVgaRstxRO : out STD_LOGIC_VECTOR ( 0 to 0 );
+    ClkVgaxCO : out STD_LOGIC;
+    PsClockxCI : in STD_LOGIC;
+    PsResetxRN : in STD_LOGIC;
+    VgaHdmiClkPllLockedxSO : out STD_LOGIC
+  );
+end vga_hdmi_clk_rst_system_wrapper;
+
+architecture STRUCTURE of vga_hdmi_clk_rst_system_wrapper is
+  component vga_hdmi_clk_rst_system is
+  port (
+    ClkHdmiRstxRNAO : out STD_LOGIC_VECTOR ( 0 to 0 );
+    ClkHdmiRstxRO : out STD_LOGIC_VECTOR ( 0 to 0 );
+    ClkHdmixCO : out STD_LOGIC;
+    ClkVgaRstxRNAO : out STD_LOGIC_VECTOR ( 0 to 0 );
+    ClkVgaRstxRO : out STD_LOGIC_VECTOR ( 0 to 0 );
+    ClkVgaxCO : out STD_LOGIC;
+    VgaHdmiClkPllLockedxSO : out STD_LOGIC;
+    PsResetxRN : in STD_LOGIC;
+    PsClockxCI : in STD_LOGIC
+  );
+  end component vga_hdmi_clk_rst_system;
+begin
+vga_hdmi_clk_rst_system_i: component vga_hdmi_clk_rst_system
+     port map (
+      ClkHdmiRstxRNAO(0) => ClkHdmiRstxRNAO(0),
+      ClkHdmiRstxRO(0) => ClkHdmiRstxRO(0),
+      ClkHdmixCO => ClkHdmixCO,
+      ClkVgaRstxRNAO(0) => ClkVgaRstxRNAO(0),
+      ClkVgaRstxRO(0) => ClkVgaRstxRO(0),
+      ClkVgaxCO => ClkVgaxCO,
+      PsClockxCI => PsClockxCI,
+      PsResetxRN => PsResetxRN,
+      VgaHdmiClkPllLockedxSO => VgaHdmiClkPllLockedxSO
+    );
+end STRUCTURE;
