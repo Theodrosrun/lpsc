@@ -1008,7 +1008,7 @@ begin
 
 	aurora_comms: entity work.scalp_communication 
 		port map (
-			reset => Clk125RstxRNA,
+			reset => not Clk125RstxRNA,
 			clk => Clk125xC,
 			gtp_p_in =>  GTPFromNorthPxSI,
 			gtp_n_in =>  GTPFromNorthNxSI,
