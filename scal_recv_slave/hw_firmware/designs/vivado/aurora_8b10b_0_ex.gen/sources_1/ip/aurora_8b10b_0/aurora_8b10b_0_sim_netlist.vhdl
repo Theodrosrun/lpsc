@@ -2,10 +2,10 @@
 -- Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
--- Date        : Tue Apr 28 17:44:19 2026
--- Host        : andre running 64-bit Fedora Linux 42 (Workstation Edition)
+-- Date        : Sun May  3 14:41:28 2026
+-- Host        : theodros-ThinkPad-P16s-Gen-2 running 64-bit Ubuntu 24.04.2 LTS
 -- Command     : write_vhdl -force -mode funcsim
---               /home/andre/dev/mse/ma-lpsc/lpsc/scal_recv_slave/hw_firmware/designs/vivado/aurora_8b10b_0_ex.gen/sources_1/ip/aurora_8b10b_0/aurora_8b10b_0_sim_netlist.vhdl
+--               /home/theodros/Documents/Master/LPSC/scal_recv_slave/hw_firmware/designs/vivado/aurora_8b10b_0_ex.gen/sources_1/ip/aurora_8b10b_0/aurora_8b10b_0_sim_netlist.vhdl
 -- Design      : aurora_8b10b_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.

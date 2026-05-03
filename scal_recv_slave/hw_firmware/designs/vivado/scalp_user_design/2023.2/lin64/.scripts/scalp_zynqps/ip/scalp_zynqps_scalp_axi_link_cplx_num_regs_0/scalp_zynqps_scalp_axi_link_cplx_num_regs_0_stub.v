@@ -2,7 +2,7 @@
 // Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
-// Date        : Sun Apr 12 11:29:34 2026
+// Date        : Sun May  3 14:40:41 2026
 // Host        : theodros-ThinkPad-P16s-Gen-2 running 64-bit Ubuntu 24.04.2 LTS
 // Command     : write_verilog -force -mode synth_stub -rename_top scalp_zynqps_scalp_axi_link_cplx_num_regs_0 -prefix
 //               scalp_zynqps_scalp_axi_link_cplx_num_regs_0_ scalp_zynqps_scalp_axi_link_firmwareid_0_stub.v
@@ -15,7 +15,7 @@
 // The synthesis directives are for Synopsys Synplify support to prevent IO buffer insertion.
 // Please paste the declaration into a Verilog source file or add the file as an additional source.
 (* CHECK_LICENSE_TYPE = "scalp_zynqps_scalp_axi_link_firmwareid_0,scalp_axi_link,{}" *) (* downgradeipidentifiedwarnings = "yes" *) (* ip_definition_source = "package_project" *) 
-(* x_core_info = "scalp_axi_link,Vivado 2023.2" *) 
+(* x_core_info = "scalp_axi_link,Vivado 2025.2" *) 
 module scalp_zynqps_scalp_axi_link_cplx_num_regs_0(SAxiSlvClkxCI, SAxiSlvRstxRANI, 
   SAxiSlvARAddrxDI, SAxiSlvARValidxSI, SAxiSlvARReadyxSO, SAxiSlvRDataxDO, SAxiSlvRRespxDO, 
   SAxiSlvRValidxSO, SAxiSlvRReadyxSI, SAxiSlvAWAddrxDI, SAxiSlvAWValidxSI, 
@@ -26,9 +26,9 @@ module scalp_zynqps_scalp_axi_link_cplx_num_regs_0(SAxiSlvClkxCI, SAxiSlvRstxRAN
   SAxiMstAWReadyxSI, SAxiMstWDataxDO, SAxiMstWStrbxDO, SAxiMstWValidxSO, SAxiMstWReadyxSI, 
   SAxiMstBRespxDI, SAxiMstBValidxSI, SAxiMstBReadyxSO)
 /* synthesis syn_black_box black_box_pad_pin="SAxiSlvClkxCI,SAxiSlvRstxRANI,SAxiSlvARAddrxDI[31:0],SAxiSlvARValidxSI,SAxiSlvARReadyxSO,SAxiSlvRDataxDO[31:0],SAxiSlvRRespxDO[1:0],SAxiSlvRValidxSO,SAxiSlvRReadyxSI,SAxiSlvAWAddrxDI[31:0],SAxiSlvAWValidxSI,SAxiSlvAWReadyxSO,SAxiSlvWDataxDI[31:0],SAxiSlvWStrbxDI[3:0],SAxiSlvWValidxSI,SAxiSlvWReadyxSO,SAxiSlvBRespxDO[1:0],SAxiSlvBValidxSO,SAxiSlvBReadyxSI,SAxiMstClkxCO,SAxiMstRstxRANO,SAxiMstARAddrxDO[31:0],SAxiMstARValidxSO,SAxiMstARReadyxSI,SAxiMstRDataxDI[31:0],SAxiMstRRespxDI[1:0],SAxiMstRValidxSI,SAxiMstRReadyxSO,SAxiMstAWAddrxDO[31:0],SAxiMstAWValidxSO,SAxiMstAWReadyxSI,SAxiMstWDataxDO[31:0],SAxiMstWStrbxDO[3:0],SAxiMstWValidxSO,SAxiMstWReadyxSI,SAxiMstBRespxDI[1:0],SAxiMstBValidxSI,SAxiMstBReadyxSO" */;
-  (* x_interface_info = "xilinx.com:signal:clock:1.0 aximm_slv_clk CLK" *) (* x_interface_parameter = "XIL_INTERFACENAME aximm_slv_clk, ASSOCIATED_RESET SAxiSlvRstxRANI, ASSOCIATED_BUSIF aximm_slv_if, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN /sys_clock_clk_out1, INSERT_VIP 0" *) input SAxiSlvClkxCI;
-  (* x_interface_info = "xilinx.com:signal:reset:1.0 aximm_slv_rst RST" *) (* x_interface_parameter = "XIL_INTERFACENAME aximm_slv_rst, POLARITY ACTIVE_LOW, INSERT_VIP 0" *) input SAxiSlvRstxRANI;
-  (* x_interface_info = "xilinx.com:interface:aximm:1.0 aximm_slv_if ARADDR" *) (* x_interface_parameter = "XIL_INTERFACENAME aximm_slv_if, DATA_WIDTH 32, PROTOCOL AXI4LITE, ID_WIDTH 0, ADDR_WIDTH 32, AWUSER_WIDTH 0, ARUSER_WIDTH 0, WUSER_WIDTH 0, RUSER_WIDTH 0, BUSER_WIDTH 0, READ_WRITE_MODE READ_WRITE, HAS_BURST 0, HAS_LOCK 0, HAS_PROT 0, HAS_CACHE 0, HAS_QOS 0, HAS_REGION 0, HAS_WSTRB 1, HAS_BRESP 1, HAS_RRESP 1, SUPPORTS_NARROW_BURST 0, MAX_BURST_LENGTH 1, PHASE 0.0, CLK_DOMAIN /sys_clock_clk_out1, NUM_READ_THREADS 1, NUM_WRITE_THREADS 1, RUSER_BITS_PER_BYTE 0, WUSER_BITS_PER_BYTE 0, INSERT_VIP 0" *) input [31:0]SAxiSlvARAddrxDI;
+  (* x_interface_info = "xilinx.com:signal:clock:1.0 aximm_slv_clk CLK" *) (* x_interface_mode = "slave aximm_slv_clk" *) (* x_interface_parameter = "XIL_INTERFACENAME aximm_slv_clk, ASSOCIATED_RESET SAxiSlvRstxRANI, ASSOCIATED_BUSIF aximm_slv_if, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN /sys_clock_clk_out1, INSERT_VIP 0" *) input SAxiSlvClkxCI;
+  (* x_interface_info = "xilinx.com:signal:reset:1.0 aximm_slv_rst RST" *) (* x_interface_mode = "slave aximm_slv_rst" *) (* x_interface_parameter = "XIL_INTERFACENAME aximm_slv_rst, POLARITY ACTIVE_LOW, INSERT_VIP 0" *) input SAxiSlvRstxRANI;
+  (* x_interface_info = "xilinx.com:interface:aximm:1.0 aximm_slv_if ARADDR" *) (* x_interface_mode = "slave aximm_slv_if" *) (* x_interface_parameter = "XIL_INTERFACENAME aximm_slv_if, DATA_WIDTH 32, PROTOCOL AXI4LITE, ID_WIDTH 0, ADDR_WIDTH 32, AWUSER_WIDTH 0, ARUSER_WIDTH 0, WUSER_WIDTH 0, RUSER_WIDTH 0, BUSER_WIDTH 0, READ_WRITE_MODE READ_WRITE, HAS_BURST 0, HAS_LOCK 0, HAS_PROT 0, HAS_CACHE 0, HAS_QOS 0, HAS_REGION 0, HAS_WSTRB 1, HAS_BRESP 1, HAS_RRESP 1, SUPPORTS_NARROW_BURST 0, MAX_BURST_LENGTH 1, PHASE 0.0, CLK_DOMAIN /sys_clock_clk_out1, NUM_READ_THREADS 1, NUM_WRITE_THREADS 1, RUSER_BITS_PER_BYTE 0, WUSER_BITS_PER_BYTE 0, INSERT_VIP 0" *) input [31:0]SAxiSlvARAddrxDI;
   (* x_interface_info = "xilinx.com:interface:aximm:1.0 aximm_slv_if ARVALID" *) input SAxiSlvARValidxSI;
   (* x_interface_info = "xilinx.com:interface:aximm:1.0 aximm_slv_if ARREADY" *) output SAxiSlvARReadyxSO;
   (* x_interface_info = "xilinx.com:interface:aximm:1.0 aximm_slv_if RDATA" *) output [31:0]SAxiSlvRDataxDO;
@@ -45,9 +45,9 @@ module scalp_zynqps_scalp_axi_link_cplx_num_regs_0(SAxiSlvClkxCI, SAxiSlvRstxRAN
   (* x_interface_info = "xilinx.com:interface:aximm:1.0 aximm_slv_if BRESP" *) output [1:0]SAxiSlvBRespxDO;
   (* x_interface_info = "xilinx.com:interface:aximm:1.0 aximm_slv_if BVALID" *) output SAxiSlvBValidxSO;
   (* x_interface_info = "xilinx.com:interface:aximm:1.0 aximm_slv_if BREADY" *) input SAxiSlvBReadyxSI;
-  (* x_interface_info = "xilinx.com:signal:clock:1.0 aximm_mst_clk CLK" *) (* x_interface_parameter = "XIL_INTERFACENAME aximm_mst_clk, ASSOCIATED_RESET SAxiMstRstxRANO, ASSOCIATED_BUSIF aximm_mst_if, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN scalp_zynqps_scalp_axi_link_firmwareid_0_SAxiMstClkxCO, INSERT_VIP 0" *) output SAxiMstClkxCO;
-  (* x_interface_info = "xilinx.com:signal:reset:1.0 aximm_master_reset RST" *) (* x_interface_parameter = "XIL_INTERFACENAME aximm_master_reset, POLARITY ACTIVE_LOW, INSERT_VIP 0" *) output SAxiMstRstxRANO;
-  (* x_interface_info = "xilinx.com:interface:aximm:1.0 aximm_mst_if ARADDR" *) (* x_interface_parameter = "XIL_INTERFACENAME aximm_mst_if, DATA_WIDTH 32, PROTOCOL AXI4LITE, ID_WIDTH 0, ADDR_WIDTH 32, AWUSER_WIDTH 0, ARUSER_WIDTH 0, WUSER_WIDTH 0, RUSER_WIDTH 0, BUSER_WIDTH 0, READ_WRITE_MODE READ_WRITE, HAS_BURST 0, HAS_LOCK 0, HAS_PROT 0, HAS_CACHE 0, HAS_QOS 0, HAS_REGION 0, HAS_WSTRB 1, HAS_BRESP 1, HAS_RRESP 1, SUPPORTS_NARROW_BURST 0, MAX_BURST_LENGTH 1, PHASE 0.0, CLK_DOMAIN scalp_zynqps_scalp_axi_link_firmwareid_0_SAxiMstClkxCO, NUM_READ_THREADS 1, NUM_WRITE_THREADS 1, RUSER_BITS_PER_BYTE 0, WUSER_BITS_PER_BYTE 0, INSERT_VIP 0" *) output [31:0]SAxiMstARAddrxDO;
+  (* x_interface_info = "xilinx.com:signal:clock:1.0 aximm_mst_clk CLK" *) (* x_interface_mode = "master aximm_mst_clk" *) (* x_interface_parameter = "XIL_INTERFACENAME aximm_mst_clk, ASSOCIATED_RESET SAxiMstRstxRANO, ASSOCIATED_BUSIF aximm_mst_if, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN scalp_zynqps_scalp_axi_link_firmwareid_0_SAxiMstClkxCO, INSERT_VIP 0" *) output SAxiMstClkxCO;
+  (* x_interface_info = "xilinx.com:signal:reset:1.0 aximm_master_reset RST" *) (* x_interface_mode = "master aximm_master_reset" *) (* x_interface_parameter = "XIL_INTERFACENAME aximm_master_reset, POLARITY ACTIVE_LOW, INSERT_VIP 0" *) output SAxiMstRstxRANO;
+  (* x_interface_info = "xilinx.com:interface:aximm:1.0 aximm_mst_if ARADDR" *) (* x_interface_mode = "master aximm_mst_if" *) (* x_interface_parameter = "XIL_INTERFACENAME aximm_mst_if, DATA_WIDTH 32, PROTOCOL AXI4LITE, ID_WIDTH 0, ADDR_WIDTH 32, AWUSER_WIDTH 0, ARUSER_WIDTH 0, WUSER_WIDTH 0, RUSER_WIDTH 0, BUSER_WIDTH 0, READ_WRITE_MODE READ_WRITE, HAS_BURST 0, HAS_LOCK 0, HAS_PROT 0, HAS_CACHE 0, HAS_QOS 0, HAS_REGION 0, HAS_WSTRB 1, HAS_BRESP 1, HAS_RRESP 1, SUPPORTS_NARROW_BURST 0, MAX_BURST_LENGTH 1, PHASE 0.0, CLK_DOMAIN scalp_zynqps_scalp_axi_link_firmwareid_0_SAxiMstClkxCO, NUM_READ_THREADS 1, NUM_WRITE_THREADS 1, RUSER_BITS_PER_BYTE 0, WUSER_BITS_PER_BYTE 0, INSERT_VIP 0" *) output [31:0]SAxiMstARAddrxDO;
   (* x_interface_info = "xilinx.com:interface:aximm:1.0 aximm_mst_if ARVALID" *) output SAxiMstARValidxSO;
   (* x_interface_info = "xilinx.com:interface:aximm:1.0 aximm_mst_if ARREADY" *) input SAxiMstARReadyxSI;
   (* x_interface_info = "xilinx.com:interface:aximm:1.0 aximm_mst_if RDATA" *) input [31:0]SAxiMstRDataxDI;

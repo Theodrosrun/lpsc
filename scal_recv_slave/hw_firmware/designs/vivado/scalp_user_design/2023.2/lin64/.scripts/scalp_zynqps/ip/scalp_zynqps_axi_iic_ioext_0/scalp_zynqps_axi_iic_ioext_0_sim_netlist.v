@@ -2,10 +2,10 @@
 // Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
-// Date        : Sun Apr 12 11:39:36 2026
+// Date        : Sun May  3 14:41:29 2026
 // Host        : theodros-ThinkPad-P16s-Gen-2 running 64-bit Ubuntu 24.04.2 LTS
 // Command     : write_verilog -force -mode funcsim
-//               /home/theodros/Documents/Master/LPSC/scalp_revc/hw_firmware/designs/vivado/scalp_user_design/2023.2/lin64/.scripts/scalp_zynqps/ip/scalp_zynqps_axi_iic_ioext_0/scalp_zynqps_axi_iic_ioext_0_sim_netlist.v
+//               /home/theodros/Documents/Master/LPSC/scal_recv_slave/hw_firmware/designs/vivado/scalp_user_design/2023.2/lin64/.scripts/scalp_zynqps/ip/scalp_zynqps_axi_iic_ioext_0/scalp_zynqps_axi_iic_ioext_0_sim_netlist.v
 // Design      : scalp_zynqps_axi_iic_ioext_0
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.

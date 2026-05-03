@@ -2,10 +2,10 @@
 // Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
-// Date        : Tue Apr 28 17:44:19 2026
-// Host        : andre running 64-bit Fedora Linux 42 (Workstation Edition)
+// Date        : Sun May  3 14:41:28 2026
+// Host        : theodros-ThinkPad-P16s-Gen-2 running 64-bit Ubuntu 24.04.2 LTS
 // Command     : write_verilog -force -mode synth_stub
-//               /home/andre/dev/mse/ma-lpsc/lpsc/scal_recv_slave/hw_firmware/designs/vivado/aurora_8b10b_0_ex.gen/sources_1/ip/aurora_8b10b_0/aurora_8b10b_0_stub.v
+//               /home/theodros/Documents/Master/LPSC/scal_recv_slave/hw_firmware/designs/vivado/aurora_8b10b_0_ex.gen/sources_1/ip/aurora_8b10b_0/aurora_8b10b_0_stub.v
 // Design      : aurora_8b10b_0
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7z015clg485-2
