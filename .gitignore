@@ -72,3 +72,9 @@ xvlog.*
 *.dcp
 tools/fp_calc
 tools/mandelbrot.ppm
+
+## ghdl
+*.o
+**/sim/work
+**/sim/ppm
+**/sim/waves
