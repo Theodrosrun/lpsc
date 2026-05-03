@@ -511,14 +511,14 @@ architecture arch of scalp_user_design is
 
     component scalp_communication is
 	port (
-		reset: in std_logic;
-		clk: in std_logic;
-		gtp_p_in: in std_logic_vector(0 downto 0); 
-		gtp_n_in: in std_logic_vector(0 downto 0); 
-		gtp_p_out: out std_logic_vector(0 downto 0); 
-		gtp_n_out: out std_logic_vector(0 downto 0); 
-		gtp_ref_clk_p: in std_logic;
-		gtp_ref_clk_n: in std_logic
+        reset         : in  std_logic;
+        clk           : in  std_logic;
+        gtp_p_in      : in  std_logic;
+        gtp_n_in      : in  std_logic;
+        gtp_p_out     : out std_logic;
+        gtp_n_out     : out std_logic;
+        gtp_ref_clk_p  : in  std_logic;
+        gtp_ref_clk_n  : in  std_logic
 	);
     end component;
 

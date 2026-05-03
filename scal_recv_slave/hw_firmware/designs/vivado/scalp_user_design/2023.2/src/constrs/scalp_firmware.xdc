@@ -42,10 +42,10 @@ set_property PACKAGE_PIN Y8 [get_ports GTPFromNorthNxSI]
 set_property PACKAGE_PIN W8 [get_ports GTPFromNorthPxSI]
 set_property PACKAGE_PIN Y4 [get_ports GTPToNorthNxSO]
 set_property PACKAGE_PIN W4 [get_ports GTPToNorthPxSO]
-#set_property PACKAGE_PIN AB7 [get_ports GTPFromSouthNxSI]
-#set_property PACKAGE_PIN AA7 [get_ports GTPFromSouthPxSI]
-#set_property PACKAGE_PIN AB3 [get_ports GTPToSouthNxSO]
-#set_property PACKAGE_PIN AA3 [get_ports GTPToSouthPxSO]
+set_property PACKAGE_PIN AB7 [get_ports GTPFromSouthNxSI]
+set_property PACKAGE_PIN AA7 [get_ports GTPFromSouthPxSI]
+set_property PACKAGE_PIN AB3 [get_ports GTPToSouthNxSO]
+set_property PACKAGE_PIN AA3 [get_ports GTPToSouthPxSO]
 #set_property PACKAGE_PIN AB9 [get_ports GTPFromEastNxSI]
 #set_property PACKAGE_PIN AA9 [get_ports GTPFromEastPxSI]
 #set_property PACKAGE_PIN AB5 [get_ports GTPToEastNxSO]
@@ -303,4 +303,5 @@ set_property IOSTANDARD LVCMOS25 [get_ports SelfRstxRNO]
 set_operating_conditions -grade extended -process maximum
 # 4'' by 4'' PCB, no heatsink, no air flow
 set_operating_conditions -airflow 0 -heatsink none -board small
+
 

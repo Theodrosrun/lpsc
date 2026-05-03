@@ -95,20 +95,20 @@ entity scalp_user_design is
         -- GTPRefClk1PxCI     : in    std_logic;
         -- GTPRefClk1NxCI     : in    std_logic;
         -- North
-        GTPFromNorthPxSI   : in    std_logic;
-        GTPFromNorthNxSI   : in    std_logic;
-        GTPToNorthPxSO     : out   std_logic;
-        GTPToNorthNxSO     : out   std_logic;
+        -- GTPFromNorthPxSI   : in    std_logic;
+        -- GTPFromNorthNxSI   : in    std_logic;
+        -- GTPToNorthPxSO     : out   std_logic;
+        -- GTPToNorthNxSO     : out   std_logic;
         -- East
         -- GTPFromEastPxSI    : in    std_logic;
         -- GTPFromEastNxSI    : in    std_logic;
         -- GTPToEastPxSO      : out   std_logic;
         -- GTPToEastNxSO      : out   std_logic;
         -- South
-        -- GTPFromSouthPxSI   : in    std_logic;
-        -- GTPFromSouthNxSI   : in    std_logic;
-        -- GTPToSouthPxSO     : out   std_logic;
-        -- GTPToSouthNxSO     : out   std_logic;
+        GTPFromSouthPxSI   : in    std_logic;
+        GTPFromSouthNxSI   : in    std_logic;
+        GTPToSouthPxSO     : out   std_logic;
+        GTPToSouthNxSO     : out   std_logic;
         -- West
         -- GTPFromWestPxSI    : in    std_logic;
         -- GTPFromWestNxSI    : in    std_logic;
@@ -511,14 +511,14 @@ architecture arch of scalp_user_design is
 
     component scalp_communication is
 	port (
-		reset: in std_logic;
-		clk: in std_logic;
-		gtp_p_in: in std_logic_vector(0 downto 0); 
-		gtp_n_in: in std_logic_vector(0 downto 0); 
-		gtp_p_out: out std_logic_vector(0 downto 0); 
-		gtp_n_out: out std_logic_vector(0 downto 0); 
-		gtp_ref_clk_p: in std_logic;
-		gtp_ref_clk_n: in std_logic
+        reset         : in  std_logic;
+        clk           : in  std_logic;
+        gtp_p_in      : in  std_logic;
+        gtp_n_in      : in  std_logic;
+        gtp_p_out     : out std_logic;
+        gtp_n_out     : out std_logic;
+        gtp_ref_clk_p  : in  std_logic;
+        gtp_ref_clk_n  : in  std_logic
 	);
     end component;
 
@@ -1010,10 +1010,10 @@ begin
 		port map (
 			reset => not Clk125RstxRNA,
 			clk => Clk125xC,
-			gtp_p_in =>  GTPFromNorthPxSI,
-			gtp_n_in =>  GTPFromNorthNxSI,
-			gtp_p_out => GTPToNorthPxSO,
-			gtp_n_out => GTPToNorthNxSO,
+            gtp_p_in      => GTPFromSouthPxSI,
+            gtp_n_in      => GTPFromSouthNxSI,
+            gtp_p_out     => GTPToSouthPxSO,
+            gtp_n_out     => GTPToSouthNxSO,
 			gtp_ref_clk_p => GTPRefClk0PxCI,
 			gtp_ref_clk_n => GTPRefClk0NxCI
 		);
