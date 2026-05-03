@@ -15,9 +15,10 @@ entity mandelbrot_engine is
         -- Input: Pixel Coordinates (C)
         i_re     : in  signed(DATA_W-1 downto 0);
         i_im     : in  signed(DATA_W-1 downto 0);
-        i_valid  : in  std_logic;
-        o_ready  : out std_logic; -- Ready for new pixel
 
+        i_valid  : in  std_logic;
+
+        o_ready  : out std_logic;
         -- Output: Iteration Count for Coloring
         o_iter   : out unsigned(7 downto 0);
         o_valid  : out std_logic
@@ -91,6 +92,9 @@ begin
                         if math_o_valid = '1' then
                             if (math_div = '1') or (iter_count = MAX_ITER) then
                                 state <= FINISH;
+                                if iter_count = MAX_ITER then
+                                    iter_count <= (others=> '0');
+                                end if;
                             else
                                 -- Feed back result and trigger next iteration
                                 reg_z_re     <= math_z_re_next;

@@ -41,12 +41,11 @@ size_t mandelbrot_fixed(int32_t x, int32_t y)
 {
 	int32_t zr = x;
 	int32_t zi = y;
-	size_t iter;
 
-	for (iter = 0; iter < MAX_ITER; iter++) {
+	for (size_t iter = 0; iter < MAX_ITER; iter++) {
 		if (mandelbrot_iter(&zr, &zi)) {
-			break;
+			return iter;
 		}
 	}
-	return iter;
+	return 0;
 }
