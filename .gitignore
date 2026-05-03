@@ -70,3 +70,5 @@ xvlog.*
 
 ## checkpoint files
 *.dcp
+tools/fp_calc
+tools/mandelbrot.ppm
