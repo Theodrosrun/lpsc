@@ -1,42 +1,43 @@
+#include <math.h>
 #include <stdint.h>
 #include <stddef.h>
 #include <stdbool.h>
 #include <stdio.h>
 
-#define FRAC_BITS 15
-#define SCALE	  (1 << FRAC_BITS)
-#define MAX_ITER  100
+#define DATA_W	 15
+#define FRAC_W	 15
+#define SCALE	 (1 << FRAC_W)
+#define MAX_ITER 100
 
-#define CR	  float_to_fp(0.355)
-#define CI	  float_to_fp(0.355)
+#define CR	 (double_to_fp(0.355))
+#define CI	 (double_to_fp(0.355))
 
-// Helper to convert float to fixed for testing
-int32_t float_to_fp(float f)
+int32_t double_to_fp(double f)
 {
-	return (int32_t)(f * SCALE);
+	return (int32_t)round(f * SCALE);
 }
+
 int mandelbrot_iter(int32_t *zr, int32_t *zi)
 {
-	int64_t zr2_64 = ((int64_t)*zr * *zr);
-	int64_t zi2_64 = ((int64_t)*zi * *zi);
-	int64_t zrzi_64 = ((int64_t)*zr * *zi);
+	int64_t zr2_64 = (int64_t)*zr * *zr;
+	int64_t zi2_64 = (int64_t)*zi * *zi;
+	int64_t zrzi_64 = (int64_t)*zr * *zi;
 
-	// Check escape condition: (zr^2 + zi^2) >= 4
-	// In fixed point: (zr^2 + zi^2) >= 4 * (2^15 * 2^15)
-	if ((zr2_64 + zi2_64) >= ((int64_t)4 << (2 * FRAC_BITS))) {
+	// Divergence check using full precision (matches VHDL sum_sq_full >> FRAC_W)
+	if (((zr2_64 + zi2_64) >> FRAC_W) >= ((int64_t)4 << FRAC_W)) {
 		return 1;
 	}
 
-	// Shift back to 15 fractional bits (Truncating shift)
-	int32_t zr2 = (int32_t)(zr2_64 >> FRAC_BITS);
-	int32_t zi2 = (int32_t)(zi2_64 >> FRAC_BITS);
-	int32_t zrzi2 = (int32_t)((2 * zrzi_64) >> FRAC_BITS);
+	int32_t zr2 = (int32_t)(zr2_64 >> FRAC_W);
+	int32_t zi2 = (int32_t)(zi2_64 >> FRAC_W);
+	int32_t zrzi = (int32_t)(zrzi_64 >> FRAC_W);
+	int32_t zrzi2 = zrzi * 2;
 
-	// Update z
 	*zr = zr2 - zi2 + CR;
 	*zi = zrzi2 + CI;
 	return 0;
 }
+
 size_t mandelbrot_fixed(int32_t x, int32_t y)
 {
 	int32_t zr = x;
