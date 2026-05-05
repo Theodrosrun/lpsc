@@ -438,6 +438,21 @@ architecture arch of scalp_user_design is
             HdmiTxxDIO        : inout t_hdmi_tx);
     end component scalp_hdmi;
 
+    component mandelbrot_zoom is
+        generic (
+            DATA_W : integer := 18;
+            FRAC_W : integer := 15
+        );
+        port (
+            frame_counter : in unsigned(6 downto 0); -- 0 to 99
+
+            x0 : out signed(DATA_W-1 downto 0);
+            y0 : out signed(DATA_W-1 downto 0);
+            dx : out signed(DATA_W-1 downto 0);
+            dy : out signed(DATA_W-1 downto 0)
+        );
+    end component;
+
     -- Signals
     -- Clocks
     -- Processing system clock
@@ -476,6 +491,12 @@ architecture arch of scalp_user_design is
     ---------------------------------------------------------------------------
     signal GPIOSwitchesxD   : std_logic_vector((C_GPIO_SWITCHES_SIZE - 1) downto 0) := (others => '0');
     signal GPIOJoystickxD   : std_logic_vector((C_GPIO_JOYSTICK_SIZE - 1) downto 0) := (others => '0');
+
+    signal MandelbrotFrameCntxD : unsigned(6 downto 0) := (others => '0');
+    signal MandelbrotX0xD       : signed(17 downto 0) := (others => '0');
+    signal MandelbrotY0xD       : signed(17 downto 0) := (others => '0');
+    signal MandelbrotDxxD       : signed(17 downto 0) := (others => '0');
+    signal MandelbrotDyxD       : signed(17 downto 0) := (others => '0');
 
     -- Attributes
     attribute mark_debug       : string;
@@ -916,6 +937,24 @@ begin
                 );
 
         end block VgaxB;
+
+        MandelbrotZoomxB : block is
+        begin
+            
+            MandelbrotZoomxI : entity work.mandelbrot_zoom
+                generic map (
+                    DATA_W => 18,
+                    FRAC_W => 15
+                )
+                port map (
+                    frame_counter => MandelbrotFrameCntxD,
+                    x0            => MandelbrotX0xD,
+                    y0            => MandelbrotY0xD,
+                    dx            => MandelbrotDxxD,
+                    dy            => MandelbrotDyxD
+                );
+
+        end block MandelbrotZoomxB;
 
     end block PLxB;
 
