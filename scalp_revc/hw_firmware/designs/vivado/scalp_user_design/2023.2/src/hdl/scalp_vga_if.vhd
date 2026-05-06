@@ -19,16 +19,14 @@ entity scalp_vga_if is
         VidOnxSI       : in  std_logic;
         HxCntxDI       : in  std_logic_vector(15 downto 0);
         VxCntxDI       : in  std_logic_vector(15 downto 0);
-        BramRdData1xDI : in  std_logic_vector(8 downto 0);
-        BramRdData2xDI : in  std_logic_vector(8 downto 0);
+        BramRdDataxDI  : in  std_logic_vector(8 downto 0);
         BramRdAddrxDO  : out std_logic_vector((C_BRAM_ADDR_BIT_SIZE - 1) downto 0);
         PixelxDO       : out t_hdmi_vga_pix
     );
 end scalp_vga_if;
 
 architecture rtl of scalp_vga_if is
-    signal BramRdBankSelxS : std_logic := '0';
-    signal VgaVidOnDlyxS   : std_logic := '0';
+    signal VgaVidOnDlyxS : std_logic := '0';
 begin
 
     process (PllLockedxSI, RstxRANI, ClkxCI) is
@@ -38,56 +36,42 @@ begin
         variable BramRdAddrxD : integer := 0;
     begin
         if (PllLockedxSI = '0') or (RstxRANI = '0') then
-            BramRdAddrxDO   <= (others => '0');
-            BramRdBankSelxS <= '0';
-            VgaVidOnDlyxS   <= '0';
-            PixelxDO        <= C_HDMI_VGA_PIX_IDLE;
+            BramRdAddrxDO <= (others => '0');
+            VgaVidOnDlyxS <= '0';
+            PixelxDO      <= C_HDMI_VGA_PIX_IDLE;
 
         elsif rising_edge(ClkxCI) then
 
-            ----------------------------------------------------------------
-            -- Display of the current pixel
-            ----------------------------------------------------------------
             if VgaVidOnDlyxS = '1' then
-                if BramRdBankSelxS = '0' then
-                    PixelCodexD := BramRdData1xDI;
-                else
-                    PixelCodexD := BramRdData2xDI;
-                end if;
+                PixelCodexD := BramRdDataxDI;
 
-                if PixelCodexD(0) = '1' then
-                    PixelxDO.RxD <= (others => '1');
-                    PixelxDO.GxD <= (others => '0');
-                    PixelxDO.BxD <= (others => '0');
-                else
-                    PixelxDO.RxD <= (others => '1');
-                    PixelxDO.GxD <= (others => '1');
-                    PixelxDO.BxD <= (others => '1');
-                end if;
+                PixelxDO.RxD <= PixelCodexD(8 downto 6) &
+                                PixelCodexD(8 downto 6) &
+                                PixelCodexD(8 downto 7);
+
+                PixelxDO.GxD <= PixelCodexD(5 downto 3) &
+                                PixelCodexD(5 downto 3) &
+                                PixelCodexD(5 downto 4);
+
+                PixelxDO.BxD <= PixelCodexD(2 downto 0) &
+                                PixelCodexD(2 downto 0) &
+                                PixelCodexD(2 downto 1);
             else
                 PixelxDO <= C_HDMI_VGA_PIX_IDLE;
             end if;
 
-            ----------------------------------------------------------------
-            -- Preparation of the next pixel
-            ----------------------------------------------------------------
-            VgaVidOnDlyxS   <= VidOnxSI;
-            BramRdAddrxDO   <= (others => '0');
-            BramRdBankSelxS <= '0';
+            VgaVidOnDlyxS <= VidOnxSI;
+            BramRdAddrxDO <= (others => '0');
 
             if VidOnxSI = '1' then
                 HxScaledxD := (to_integer(unsigned(HxCntxDI)) * C_BUFFER_WIDTH) / C_VGA_ACTIVE_SIZE;
                 VxScaledxD := (to_integer(unsigned(VxCntxDI)) * C_BUFFER_HEIGHT) / C_VGA_ACTIVE_SIZE;
 
-                if VxScaledxD < (C_BUFFER_HEIGHT / 2) then
-                    BramRdAddrxD := (VxScaledxD * C_BUFFER_WIDTH) + HxScaledxD;
-                    BramRdBankSelxS <= '0';
-                else
-                    BramRdAddrxD := ((VxScaledxD - (C_BUFFER_HEIGHT / 2)) * C_BUFFER_WIDTH) + HxScaledxD;
-                    BramRdBankSelxS <= '1';
-                end if;
+                BramRdAddrxD := (VxScaledxD * C_BUFFER_WIDTH) + HxScaledxD;
 
-                BramRdAddrxDO <= std_logic_vector(to_unsigned(BramRdAddrxD, C_BRAM_ADDR_BIT_SIZE));
+                BramRdAddrxDO <= std_logic_vector(
+                    to_unsigned(BramRdAddrxD, C_BRAM_ADDR_BIT_SIZE)
+                );
             end if;
         end if;
     end process;

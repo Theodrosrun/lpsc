@@ -114,6 +114,13 @@
           <Proxy FileSetName="vga_hdmi_clk_rst_system_vga_hdmi_clock_0"/>
         </CompFileExtendedInfo>
       </File>
+      <File Path="$PPRDIR/../../src/hdl/scalp_swiss_flag_gen.vhd">
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <File Path="$PPRDIR/../.scripts/scalp_zynqps/scalp_zynqps.bd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
@@ -160,7 +167,31 @@
           <Proxy FileSetName="scalp_zynqps_system_ila_0_0"/>
         </CompFileExtendedInfo>
       </File>
-      <File Path="$PPRDIR/../../src/hdl/scalp_swiss_flag_gen.vhd">
+      <File Path="$PPRDIR/../../src/hdl/mandelbrot_iter.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../src/hdl/mandelbrot_engine.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../src/hdl/mandelbrot_palette.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../src/hdl/mandelbrot_picture_gen.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../src/hdl/mandelbrot_zoom.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
