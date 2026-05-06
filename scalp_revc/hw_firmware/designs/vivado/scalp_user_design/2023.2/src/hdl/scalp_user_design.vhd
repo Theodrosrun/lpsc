@@ -453,6 +453,16 @@ architecture arch of scalp_user_design is
         );
     end component;
 
+    component mandelbrot_palette is
+        generic (
+            MAX_ITER : integer := 100
+        );
+        port (
+            iter  : in  unsigned(7 downto 0);
+            pixel : out std_logic_vector(8 downto 0)
+        );
+    end component;
+
     -- Signals
     -- Clocks
     -- Processing system clock
@@ -491,12 +501,6 @@ architecture arch of scalp_user_design is
     ---------------------------------------------------------------------------
     signal GPIOSwitchesxD   : std_logic_vector((C_GPIO_SWITCHES_SIZE - 1) downto 0) := (others => '0');
     signal GPIOJoystickxD   : std_logic_vector((C_GPIO_JOYSTICK_SIZE - 1) downto 0) := (others => '0');
-
-    signal MandelbrotFrameCntxD : unsigned(6 downto 0) := (others => '0');
-    signal MandelbrotX0xD       : signed(17 downto 0) := (others => '0');
-    signal MandelbrotY0xD       : signed(17 downto 0) := (others => '0');
-    signal MandelbrotDxxD       : signed(17 downto 0) := (others => '0');
-    signal MandelbrotDyxD       : signed(17 downto 0) := (others => '0');
 
     -- Attributes
     attribute mark_debug       : string;
@@ -583,18 +587,27 @@ begin
     end block PSxB;
 
     PLxB : block is
-        constant C_BUFFER_WIDTH       : integer := 32;
-        constant C_BUFFER_HEIGHT      : integer := 32;
-        constant C_BRAM_ADDR_BIT_SIZE : integer := 11;
+        constant C_CLK_FREQ_HZ        : integer := 125000000;
+        constant C_ANIM_PERIOD_MS     : integer := 50;
+        constant C_ANIM_PERIOD_CYCLES : integer := (C_CLK_FREQ_HZ / 1000) * C_ANIM_PERIOD_MS;
+        constant C_BUFFER_WIDTH       : integer := 64;
+        constant C_BUFFER_HEIGHT      : integer := 64;
+        constant C_BRAM_ADDR_BIT_SIZE : integer := 12;
         constant C_VGA_ACTIVE_SIZE    : integer := 720;
 
-        signal BramWrAddrxD    : std_logic_vector((C_BRAM_ADDR_BIT_SIZE - 1) downto 0) := (others => '0');
-        signal BramRdAddrxD    : std_logic_vector((C_BRAM_ADDR_BIT_SIZE - 1) downto 0) := (others => '0');
-        signal BramWrDataxD    : std_logic_vector(8 downto 0) := (others => '0');
-        signal BramRdData1xD   : std_logic_vector(8 downto 0) := (others => '0');
-        signal BramRdData2xD   : std_logic_vector(8 downto 0) := (others => '0');
-        signal BramWe1xD       : std_logic_vector(0 downto 0) := "0";
-        signal BramWe2xD       : std_logic_vector(0 downto 0) := "0";
+        signal MandelbrotAnimTimeCntxD : integer range 0 to C_ANIM_PERIOD_CYCLES - 1 := 0;
+        signal MandelbrotAnimTickxS    : std_logic := '0';
+        signal MandelbrotFrameCntxD  : unsigned(6 downto 0) := (others => '0');
+        signal MandelbrotX0xD        : signed(17 downto 0) := (others => '0');
+        signal MandelbrotY0xD        : signed(17 downto 0) := (others => '0');
+        signal MandelbrotDxxD        : signed(17 downto 0) := (others => '0');
+        signal MandelbrotDyxD        : signed(17 downto 0) := (others => '0');
+        signal MandelbrotFrameDonexS : std_logic := '0';
+        signal BramWrAddrxD  : std_logic_vector((C_BRAM_ADDR_BIT_SIZE - 1) downto 0) := (others => '0');
+        signal BramRdAddrxD  : std_logic_vector((C_BRAM_ADDR_BIT_SIZE - 1) downto 0) := (others => '0');
+        signal BramWrDataxD  : std_logic_vector(8 downto 0) := (others => '0');
+        signal BramRdDataxD  : std_logic_vector(8 downto 0) := (others => '0');
+        signal BramWexD      : std_logic_vector(0 downto 0) := "0";
 
     begin  -- block PLxB
 
@@ -838,22 +851,84 @@ begin
 
         end block HdmixB;
 
+        MandelbrotAnimTickxP : process(Clk125xC)
+        begin
+            if rising_edge(Clk125xC) then
+                if Clk125RstxR = '1' then
+                    MandelbrotAnimTimeCntxD <= 0;
+                    MandelbrotAnimTickxS    <= '0';
+
+                elsif MandelbrotAnimTimeCntxD = C_ANIM_PERIOD_CYCLES - 1 then
+                    MandelbrotAnimTimeCntxD <= 0;
+                    MandelbrotAnimTickxS    <= '1';
+
+                else
+                    MandelbrotAnimTimeCntxD <= MandelbrotAnimTimeCntxD + 1;
+                    MandelbrotAnimTickxS    <= '0';
+                end if;
+            end if;
+        end process;
+
+        MandelbrotFrameCntxP : process(Clk125xC)
+        begin
+            if rising_edge(Clk125xC) then
+                if Clk125RstxR = '1' then
+                    MandelbrotFrameCntxD <= (others => '0');
+
+                elsif MandelbrotAnimTickxS = '1' then
+                    if MandelbrotFrameCntxD = 99 then
+                        MandelbrotFrameCntxD <= (others => '0');
+                    else
+                        MandelbrotFrameCntxD <= MandelbrotFrameCntxD + 1;
+                    end if;
+                end if;
+            end if;
+        end process;
+
+        MandelbrotZoomxB : block is
+        begin
+            
+            MandelbrotZoomxI : entity work.mandelbrot_zoom
+                generic map (
+                    DATA_W => 18,
+                    FRAC_W => 15
+                )
+                port map (
+                    frame_counter => MandelbrotFrameCntxD,
+                    x0            => MandelbrotX0xD,
+                    y0            => MandelbrotY0xD,
+                    dx            => MandelbrotDxxD,
+                    dy            => MandelbrotDyxD
+                );
+
+        end block MandelbrotZoomxB;
+
         ImGenxB : block is
         begin
 
-            SwissFlagGenxI : entity work.scalp_swiss_flag_gen
+            MandelbrotPictureGenxI : entity work.mandelbrot_picture_gen
                 generic map (
                     C_BUFFER_WIDTH       => C_BUFFER_WIDTH,
                     C_BUFFER_HEIGHT      => C_BUFFER_HEIGHT,
-                    C_BRAM_ADDR_BIT_SIZE => C_BRAM_ADDR_BIT_SIZE
+                    C_BRAM_ADDR_BIT_SIZE => C_BRAM_ADDR_BIT_SIZE,
+                    DATA_W               => 18,
+                    FRAC_W               => 15,
+                    MAX_ITER             => 100
                 )
                 port map (
                     ClkxCI        => Clk125xC,
                     RstxRANI      => Clk125RstxRNA,
+
+                    X0xDI         => MandelbrotX0xD,
+                    Y0xDI         => MandelbrotY0xD,
+                    DxxDI         => MandelbrotDxxD,
+                    DyxDI         => MandelbrotDyxD,
+
                     BramWrAddrxDO => BramWrAddrxD,
                     BramWrDataxDO => BramWrDataxD,
-                    BramWe1xDO    => BramWe1xD,
-                    BramWe2xDO    => BramWe2xD
+                    BramWexSO     => BramWexD,
+
+                    FrameDonexSO  => MandelbrotFrameDonexS
                 );
 
         end block ImGenxB;
@@ -861,9 +936,9 @@ begin
         VideoMemxB : block is
         begin
 
-            BramSDPMacro1xI : BRAM_SDP_MACRO
+            BramSDPMacroxI : BRAM_SDP_MACRO
                 generic map (
-                    BRAM_SIZE           => "18Kb",
+                    BRAM_SIZE           => "36Kb",
                     DEVICE              => "7SERIES",
                     WRITE_WIDTH         => 9,
                     READ_WIDTH          => 9,
@@ -871,45 +946,22 @@ begin
                     INIT_FILE           => "NONE",
                     SIM_COLLISION_CHECK => "ALL",
                     SRVAL               => X"00000",
-                    write_mode          => "WRITE_FIRST",
-                    INIT                => X"00000")
+                    WRITE_MODE          => "WRITE_FIRST",
+                    INIT                => X"00000"
+                )
                 port map (
-                    DO     => BramRdData1xD,
+                    DO     => BramRdDataxD,
                     DI     => BramWrDataxD,
                     RDADDR => BramRdAddrxD,
                     RDCLK  => HdmiVgaClocksxC.VgaxC,
                     RDEN   => '1',
                     REGCE  => '1',
                     RST    => '0',
-                    WE     => BramWe1xD,
+                    WE     => BramWexD,
                     WRADDR => BramWrAddrxD,
                     WRCLK  => Clk125xC,
-                    WREN   => '1');
-
-            BramSDPMacro2xI : BRAM_SDP_MACRO
-                generic map (
-                    BRAM_SIZE           => "18Kb",
-                    DEVICE              => "7SERIES",
-                    WRITE_WIDTH         => 9,
-                    READ_WIDTH          => 9,
-                    DO_REG              => 0,
-                    INIT_FILE           => "NONE",
-                    SIM_COLLISION_CHECK => "ALL",
-                    SRVAL               => X"00000",
-                    write_mode          => "WRITE_FIRST",
-                    INIT                => X"00000")
-                port map (
-                    DO     => BramRdData2xD,
-                    DI     => BramWrDataxD,
-                    RDADDR => BramRdAddrxD,
-                    RDCLK  => HdmiVgaClocksxC.VgaxC,
-                    RDEN   => '1',
-                    REGCE  => '1',
-                    RST    => '0',
-                    WE     => BramWe2xD,
-                    WRADDR => BramWrAddrxD,
-                    WRCLK  => Clk125xC,
-                    WREN   => '1');
+                    WREN   => '1'
+                );
 
         end block VideoMemxB;
 
@@ -930,31 +982,12 @@ begin
                     VidOnxSI       => VgaPixCountersxD.VidOnxS,
                     HxCntxDI       => VgaPixCountersxD.HxD,
                     VxCntxDI       => VgaPixCountersxD.VxD,
-                    BramRdData1xDI => BramRdData1xD,
-                    BramRdData2xDI => BramRdData2xD,
+                    BramRdDataxDI  => BramRdDataxD,
                     BramRdAddrxDO  => BramRdAddrxD,
                     PixelxDO       => PixelxD
                 );
 
         end block VgaxB;
-
-        MandelbrotZoomxB : block is
-        begin
-            
-            MandelbrotZoomxI : entity work.mandelbrot_zoom
-                generic map (
-                    DATA_W => 18,
-                    FRAC_W => 15
-                )
-                port map (
-                    frame_counter => MandelbrotFrameCntxD,
-                    x0            => MandelbrotX0xD,
-                    y0            => MandelbrotY0xD,
-                    dx            => MandelbrotDxxD,
-                    dy            => MandelbrotDyxD
-                );
-
-        end block MandelbrotZoomxB;
 
     end block PLxB;
 
