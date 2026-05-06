@@ -453,16 +453,6 @@ architecture arch of scalp_user_design is
         );
     end component;
 
-    component mandelbrot_palette is
-        generic (
-            MAX_ITER : integer := 100
-        );
-        port (
-            iter  : in  unsigned(7 downto 0);
-            pixel : out std_logic_vector(8 downto 0)
-        );
-    end component;
-
     -- Signals
     -- Clocks
     -- Processing system clock
