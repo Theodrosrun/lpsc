@@ -580,9 +580,9 @@ begin
         constant C_CLK_FREQ_HZ        : integer := 125000000;
         constant C_ANIM_PERIOD_MS     : integer := 10;
         constant C_ANIM_PERIOD_CYCLES : integer := (C_CLK_FREQ_HZ / 1000) * C_ANIM_PERIOD_MS;
-        constant C_BUFFER_WIDTH       : integer := 64;
-        constant C_BUFFER_HEIGHT      : integer := 64;
-        constant C_BRAM_ADDR_BIT_SIZE : integer := 12;
+        constant C_BUFFER_WIDTH       : integer := 512;
+        constant C_BUFFER_HEIGHT      : integer := 512;
+        constant C_BRAM_ADDR_BIT_SIZE : integer := 18;
         constant C_VGA_ACTIVE_SIZE    : integer := 720;
 
         signal MandelbrotAnimTimeCntxD : integer range 0 to C_ANIM_PERIOD_CYCLES - 1 := 0;
@@ -954,31 +954,18 @@ begin
             VideoMemxB : block is
             begin
 
-                BramSDPMacroxI : BRAM_SDP_MACRO
-                    generic map (
-                        BRAM_SIZE           => "36Kb",
-                        DEVICE              => "7SERIES",
-                        WRITE_WIDTH         => 9,
-                        READ_WIDTH          => 9,
-                        DO_REG              => 0,
-                        INIT_FILE           => "NONE",
-                        SIM_COLLISION_CHECK => "ALL",
-                        SRVAL               => X"00000",
-                        WRITE_MODE          => "WRITE_FIRST",
-                        INIT                => X"00000"
-                    )
+                FrameBufferxI : entity work.blk_mem_gen_0
                     port map (
-                        DO     => BramRdDataxD,
-                        DI     => BramWrDataxD,
-                        RDADDR => BramRdAddrxD,
-                        RDCLK  => HdmiVgaClocksxC.VgaxC,
-                        RDEN   => '1',
-                        REGCE  => '1',
-                        RST    => '0',
-                        WE     => BramWexD,
-                        WRADDR => BramWrAddrxD,
-                        WRCLK  => Clk125xC,
-                        WREN   => '1'
+                        -- Port A: write port, Mandelbrot generator side
+                        clka  => Clk125xC,
+                        wea   => BramWexD,
+                        addra => BramWrAddrxD,
+                        dina  => BramWrDataxD,
+
+                        -- Port B: read port, VGA side
+                        clkb  => HdmiVgaClocksxC.VgaxC,
+                        addrb => BramRdAddrxD,
+                        doutb => BramRdDataxD
                     );
 
             end block VideoMemxB;
