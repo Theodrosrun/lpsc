@@ -54,6 +54,10 @@ architecture rtl of mandelbrot_picture_gen is
 
     signal PalettePixelxD : std_logic_vector(8 downto 0);
 
+    signal X0xD : signed(DATA_W-1 downto 0) := (others => '0');
+    signal Y0xD : signed(DATA_W-1 downto 0) := (others => '0');
+    signal DxxD : signed(DATA_W-1 downto 0) := (others => '0');
+    signal DyxD : signed(DATA_W-1 downto 0) := (others => '0');
 begin
 
     MandelbrotEnginexI : entity work.mandelbrot_engine
@@ -84,86 +88,129 @@ begin
             pixel => PalettePixelxD
         );
 
-    process(ClkxCI, RstxRANI)
-        variable BramWrAddrxD : integer := 0;
-    begin
-        if RstxRANI = '0' then
-            StatexS         <= IDLE;
-            HxCntxD         <= 0;
-            VxCntxD         <= 0;
-            CurrentRexD     <= (others => '0');
-            CurrentImxD     <= (others => '0');
-            EngineIValidxS  <= '0';
-            BramWrAddrxDO   <= (others => '0');
-            BramWrDataxDO   <= (others => '0');
-            BramWexSO       <= "0";
-            FrameDonexSO    <= '0';
+        process(ClkxCI, RstxRANI)
+        begin
+            if RstxRANI = '0' then
+                StatexS         <= IDLE;
+                HxCntxD         <= 0;
+                VxCntxD         <= 0;
 
-        elsif rising_edge(ClkxCI) then
+                CurrentRexD     <= (others => '0');
+                CurrentImxD     <= (others => '0');
 
-            EngineIValidxS <= '0';
-            BramWexSO      <= "0";
-            FrameDonexSO   <= '0';
+                X0xD         <= (others => '0');
+                Y0xD         <= (others => '0');
+                DxxD         <= (others => '0');
+                DyxD         <= (others => '0');
 
-            case StatexS is
+                EngineIValidxS  <= '0';
 
-                when IDLE =>
-                    HxCntxD     <= 0;
-                    VxCntxD     <= 0;
-                    CurrentRexD <= X0xDI;
-                    CurrentImxD <= Y0xDI;
-                    StatexS     <= SEND_PIXEL;
+                BramWrAddrxDO   <= (others => '0');
+                BramWrDataxDO   <= (others => '0');
+                BramWexSO       <= "0";
 
-                when SEND_PIXEL =>
-                    if EngineReadyxS = '1' then
-                        EngineIValidxS <= '1';
-                        StatexS        <= WAIT_RESULT;
-                    end if;
+                FrameDonexSO    <= '0';
 
-                when WAIT_RESULT =>
-                    if EngineOValidxS = '1' then
-                        StatexS <= WRITE_PIXEL;
-                    end if;
+            elsif rising_edge(ClkxCI) then
+                EngineIValidxS <= '0';
+                BramWexSO      <= "0";
+                FrameDonexSO   <= '0';
 
-                when WRITE_PIXEL =>
-                    BramWrAddrxD := (VxCntxD * C_BUFFER_WIDTH) + HxCntxD;
+                case StatexS is
 
-                    BramWrAddrxDO <= std_logic_vector(
-                        to_unsigned(BramWrAddrxD, C_BRAM_ADDR_BIT_SIZE)
-                    );
+                    ------------------------------------------------------------
+                    -- Start of a new frame
+                    -- Capture the parameters only once here.
+                    ------------------------------------------------------------
+                    when IDLE =>
+                        HxCntxD <= 0;
+                        VxCntxD <= 0;
 
-                    BramWrDataxDO <= PalettePixelxD;
-                    BramWexSO     <= "1";
+                        X0xD <= X0xDI;
+                        Y0xD <= Y0xDI;
+                        DxxD <= DxxDI;
+                        DyxD <= DyxDI;
 
-                    StatexS <= NEXT_PIXEL;
-
-                when NEXT_PIXEL =>
-                    if HxCntxD < (C_BUFFER_WIDTH - 1) then
-                        HxCntxD     <= HxCntxD + 1;
-                        CurrentRexD <= CurrentRexD + DxxDI;
-                        StatexS     <= SEND_PIXEL;
-                    else
-                        HxCntxD     <= 0;
                         CurrentRexD <= X0xDI;
+                        CurrentImxD <= Y0xDI;
 
-                        if VxCntxD < (C_BUFFER_HEIGHT - 1) then
-                            VxCntxD     <= VxCntxD + 1;
-                            CurrentImxD <= CurrentImxD + DyxDI;
-                            StatexS     <= SEND_PIXEL;
-                        else
-                            VxCntxD <= 0;
-                            StatexS <= FRAME_DONE;
+                        StatexS <= SEND_PIXEL;
+
+                    ------------------------------------------------------------
+                    -- Send the current pixel to the Mandelbrot engine
+                    ------------------------------------------------------------
+                    when SEND_PIXEL =>
+                        if EngineReadyxS = '1' then
+                            EngineIValidxS <= '1';
+                            StatexS        <= WAIT_RESULT;
                         end if;
-                    end if;
 
-                when FRAME_DONE =>
-                    FrameDonexSO <= '1';
-                    CurrentRexD  <= X0xDI;
-                    CurrentImxD  <= Y0xDI;
-                    StatexS      <= IDLE;
+                    ------------------------------------------------------------
+                    -- Wait for the engine result
+                    ------------------------------------------------------------
+                    when WAIT_RESULT =>
+                        if EngineOValidxS = '1' then
+                            StatexS <= WRITE_PIXEL;
+                        end if;
 
-            end case;
-        end if;
-    end process;
+                    ------------------------------------------------------------
+                    -- Write the pixel to the BRAM
+                    ------------------------------------------------------------
+                    when WRITE_PIXEL =>
+                        BramWrAddrxDO <= 
+                        std_logic_vector(
+                            to_unsigned(((VxCntxD * C_BUFFER_WIDTH) + HxCntxD), C_BRAM_ADDR_BIT_SIZE)
+                        );
+
+                        BramWrDataxDO <= PalettePixelxD;
+                        BramWexSO     <= "1";
+
+                        StatexS <= NEXT_PIXEL;
+
+                    ------------------------------------------------------------
+                    -- Move to the next pixel
+                    ------------------------------------------------------------
+                    when NEXT_PIXEL =>
+
+                        -- Next pixel on the same line
+                        if HxCntxD < (C_BUFFER_WIDTH - 1) then
+
+                            HxCntxD     <= HxCntxD + 1;
+                            CurrentRexD <= CurrentRexD + DxxD;
+                            StatexS     <= SEND_PIXEL;
+
+                        -- End of line
+                        else
+
+                            HxCntxD     <= 0;
+                            CurrentRexD <= X0xD;
+
+                            -- Next line
+                            if VxCntxD < (C_BUFFER_HEIGHT - 1) then
+
+                                VxCntxD     <= VxCntxD + 1;
+                                CurrentImxD <= CurrentImxD + DyxD;
+                                StatexS     <= SEND_PIXEL;
+
+                            -- End of frame
+                            else
+
+                                VxCntxD     <= 0;
+                                CurrentImxD <= Y0xD;
+                                StatexS     <= FRAME_DONE;
+
+                            end if;
+                        end if;
+
+                    ------------------------------------------------------------
+                    -- Frame done
+                    ------------------------------------------------------------
+                    when FRAME_DONE =>
+                        FrameDonexSO <= '1';
+                        StatexS      <= IDLE;
+
+                end case;
+            end if;
+        end process;
 
 end architecture;
