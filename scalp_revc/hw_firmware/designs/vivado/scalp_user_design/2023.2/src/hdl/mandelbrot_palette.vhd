@@ -7,7 +7,7 @@ entity mandelbrot_palette is
         MAX_ITER : integer := 100
     );
     port (
-        iter  : in  unsigned(7 downto 0);
+        iter  : in  unsigned(6 downto 0);
         pixel : out std_logic_vector(8 downto 0)
     );
 end entity;

@@ -20,7 +20,7 @@ entity mandelbrot_engine is
 
         o_ready  : out std_logic;
         -- Output: Iteration Count for Coloring
-        o_iter   : out unsigned(7 downto 0);
+        o_iter   : out unsigned(6 downto 0);
         o_valid  : out std_logic
     );
 end entity mandelbrot_engine;
@@ -33,7 +33,7 @@ architecture rtl of mandelbrot_engine is
     -- Internal Registers
     signal reg_c_re, reg_c_im : signed(DATA_W-1 downto 0);
     signal reg_z_re, reg_z_im : signed(DATA_W-1 downto 0);
-    signal iter_count         : unsigned(7 downto 0);
+    signal iter_count         : unsigned(6 downto 0);
 
     -- Pipelined Math Signals
     signal math_i_valid : std_logic;

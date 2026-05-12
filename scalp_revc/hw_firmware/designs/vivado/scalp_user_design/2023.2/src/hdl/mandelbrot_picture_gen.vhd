@@ -21,7 +21,7 @@ entity mandelbrot_picture_gen is
         DyxDI         : in  signed(DATA_W-1 downto 0);
 
         BramWrAddrxDO : out std_logic_vector((C_BRAM_ADDR_BIT_SIZE - 1) downto 0);
-        BramWrDataxDO : out std_logic_vector(8 downto 0);
+        BramWrDataxDO : out std_logic_vector(6 downto 0);
         BramWexSO     : out std_logic_vector(0 downto 0);
 
         FrameDonexSO  : out std_logic
@@ -49,10 +49,8 @@ architecture rtl of mandelbrot_picture_gen is
 
     signal EngineIValidxS : std_logic := '0';
     signal EngineReadyxS  : std_logic;
-    signal EngineIterxD   : unsigned(7 downto 0);
+    signal EngineIterxD   : unsigned(6 downto 0);
     signal EngineOValidxS : std_logic;
-
-    signal PalettePixelxD : std_logic_vector(8 downto 0);
 
     signal X0xD : signed(DATA_W-1 downto 0) := (others => '0');
     signal Y0xD : signed(DATA_W-1 downto 0) := (others => '0');
@@ -77,15 +75,6 @@ begin
 
             o_iter   => EngineIterxD,
             o_valid  => EngineOValidxS
-        );
-
-    MandelbrotPalettexI : entity work.mandelbrot_palette
-        generic map (
-            MAX_ITER => MAX_ITER
-        )
-        port map (
-            iter  => EngineIterxD,
-            pixel => PalettePixelxD
         );
 
         process(ClkxCI, RstxRANI)
@@ -162,7 +151,7 @@ begin
                             to_unsigned(((VxCntxD * C_BUFFER_WIDTH) + HxCntxD), C_BRAM_ADDR_BIT_SIZE)
                         );
 
-                        BramWrDataxDO <= PalettePixelxD;
+                        BramWrDataxDO <= std_logic_vector(EngineIterxD);
                         BramWexSO     <= "1";
 
                         StatexS <= NEXT_PIXEL;

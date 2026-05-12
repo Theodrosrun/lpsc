@@ -10,7 +10,8 @@ entity scalp_vga_if is
         C_BUFFER_WIDTH       : integer;
         C_BUFFER_HEIGHT      : integer;
         C_BRAM_ADDR_BIT_SIZE : integer;
-        C_VGA_ACTIVE_SIZE    : integer
+        C_VGA_ACTIVE_SIZE    : integer;
+        MAX_ITER             : integer := 100
     );
     port (
         ClkxCI         : in  std_logic;
@@ -19,7 +20,7 @@ entity scalp_vga_if is
         VidOnxSI       : in  std_logic;
         HxCntxDI       : in  std_logic_vector(15 downto 0);
         VxCntxDI       : in  std_logic_vector(15 downto 0);
-        BramRdDataxDI  : in  std_logic_vector(8 downto 0);
+        BramRdDataxDI  : in  std_logic_vector(6 downto 0);
         BramRdAddrxDO  : out std_logic_vector((C_BRAM_ADDR_BIT_SIZE - 1) downto 0);
         PixelxDO       : out t_hdmi_vga_pix
     );
@@ -27,10 +28,22 @@ end scalp_vga_if;
 
 architecture rtl of scalp_vga_if is
     signal VgaVidOnDlyxS : std_logic := '0';
+    signal IterationxD   : unsigned(6 downto 0);
+    signal PixelCodexD   : std_logic_vector(8 downto 0) := (others => '0');
 begin
 
+    IterationxD <= unsigned(BramRdDataxDI);
+
+    MandelbrotPalettexI : entity work.mandelbrot_palette
+        generic map (
+            MAX_ITER => MAX_ITER
+        )
+        port map (
+            iter  => IterationxD,
+            pixel => PixelCodexD
+        );
+
     process (PllLockedxSI, RstxRANI, ClkxCI) is
-        variable PixelCodexD  : std_logic_vector(8 downto 0) := (others => '0');
         variable HxScaledxD   : integer := 0;
         variable VxScaledxD   : integer := 0;
         variable BramRdAddrxD : integer := 0;
@@ -41,10 +54,7 @@ begin
             PixelxDO      <= C_HDMI_VGA_PIX_IDLE;
 
         elsif rising_edge(ClkxCI) then
-
             if VgaVidOnDlyxS = '1' then
-                PixelCodexD := BramRdDataxDI;
-
                 PixelxDO.RxD <= PixelCodexD(8 downto 6) &
                                 PixelCodexD(8 downto 6) &
                                 PixelCodexD(8 downto 7);

@@ -595,8 +595,8 @@ begin
         signal MandelbrotFrameDonexS : std_logic := '0';
         signal BramWrAddrxD  : std_logic_vector((C_BRAM_ADDR_BIT_SIZE - 1) downto 0) := (others => '0');
         signal BramRdAddrxD  : std_logic_vector((C_BRAM_ADDR_BIT_SIZE - 1) downto 0) := (others => '0');
-        signal BramWrDataxD  : std_logic_vector(8 downto 0) := (others => '0');
-        signal BramRdDataxD  : std_logic_vector(8 downto 0) := (others => '0');
+        signal BramWrDataxD  : std_logic_vector(6 downto 0) := (others => '0');
+        signal BramRdDataxD  : std_logic_vector(6 downto 0) := (others => '0');
         signal BramWexD      : std_logic_vector(0 downto 0) := "0";
 
     begin  -- block PLxB
@@ -981,7 +981,8 @@ begin
                         C_BUFFER_WIDTH       => C_BUFFER_WIDTH,
                         C_BUFFER_HEIGHT      => C_BUFFER_HEIGHT,
                         C_BRAM_ADDR_BIT_SIZE => C_BRAM_ADDR_BIT_SIZE,
-                        C_VGA_ACTIVE_SIZE    => C_VGA_ACTIVE_SIZE
+                        C_VGA_ACTIVE_SIZE    => C_VGA_ACTIVE_SIZE,
+                        MAX_ITER             => 100
                     )
                     port map (
                         ClkxCI         => HdmiVgaClocksxC.VgaxC,
