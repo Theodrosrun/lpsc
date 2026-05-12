@@ -37,12 +37,12 @@ architecture sim of tb_mandelbrot_picture_gen is
     signal clk        : std_logic := '0';
     signal reset      : std_logic := '1';
     signal bram_addr  : std_logic_vector(ADDR_BITS-1 downto 0);
-    signal bram_data  : std_logic_vector(8 downto 0);
+    signal bram_data  : std_logic_vector(6 downto 0);
     signal bram_we   : std_logic_vector(0 downto 0);
     signal frame_done : std_logic;
 
     -- Simple model of the BRAM: one entry per pixel
-    type bram_t is array (0 to WIDTH*HEIGHT-1) of std_logic_vector(8 downto 0);
+    type bram_t is array (0 to WIDTH*HEIGHT-1) of std_logic_vector(6 downto 0);
     signal bram : bram_t := (others => (others => '0'));
 
 begin
@@ -85,14 +85,14 @@ begin
     process is
         file     f_ppm : text open write_mode is "output.ppm";
         variable l     : line;
-        variable entry : std_logic_vector(8 downto 0);
+        variable entry : std_logic_vector(6 downto 0);
         variable iter  : integer;
         variable r, g, b : integer;
 
         -- Simple greyscale mapping: brighter = more iterations = near the set
         -- Inside-set pixels (bit 8 set) are rendered black.
         procedure iter_to_rgb (
-            val       : in  std_logic_vector(8 downto 0);
+            val       : in  std_logic_vector(6 downto 0);
             signal ro : out integer;
             signal go : out integer;
             signal bo : out integer
