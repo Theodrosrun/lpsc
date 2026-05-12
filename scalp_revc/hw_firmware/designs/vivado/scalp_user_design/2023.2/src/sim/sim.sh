@@ -44,4 +44,4 @@ analyse "$SCRIPT_DIR/tb_mandelbrot_picture_gen.vhd"
 simulate tb_mandelbrot_picture_gen 10000ms # Generates output.ppm
 mv output.ppm $PICTURE_GEN_OUTPUT_FILE
 
-diff $ENGINE_OUTPUT_FILE $PICTURE_GEN_OUTPUT_FILE
+cmp $ENGINE_OUTPUT_FILE $PICTURE_GEN_OUTPUT_FILE
