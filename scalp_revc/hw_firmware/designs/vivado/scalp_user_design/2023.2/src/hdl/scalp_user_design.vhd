@@ -580,6 +580,7 @@ begin
         constant C_CLK_FREQ_HZ        : integer := 125000000;
         constant C_ANIM_PERIOD_MS     : integer := 25;
         constant C_ANIM_PERIOD_CYCLES : integer := (C_CLK_FREQ_HZ / 1000) * C_ANIM_PERIOD_MS;
+        constant C_MAX_ITER           : integer := 100;
         constant C_BUFFER_WIDTH       : integer := 512;
         constant C_BUFFER_HEIGHT      : integer := 512;
         constant C_BRAM_ADDR_BIT_SIZE : integer := 18;
@@ -928,7 +929,7 @@ begin
                         C_BRAM_ADDR_BIT_SIZE => C_BRAM_ADDR_BIT_SIZE,
                         DATA_W               => 18,
                         FRAC_W               => 15,
-                        MAX_ITER             => 100
+                        MAX_ITER             => C_MAX_ITER
                     )
                     port map (
                         ClkxCI        => Clk125xC,
@@ -982,7 +983,7 @@ begin
                         C_BUFFER_HEIGHT      => C_BUFFER_HEIGHT,
                         C_BRAM_ADDR_BIT_SIZE => C_BRAM_ADDR_BIT_SIZE,
                         C_VGA_ACTIVE_SIZE    => C_VGA_ACTIVE_SIZE,
-                        MAX_ITER             => 100
+                        MAX_ITER             => C_MAX_ITER
                     )
                     port map (
                         ClkxCI         => HdmiVgaClocksxC.VgaxC,
