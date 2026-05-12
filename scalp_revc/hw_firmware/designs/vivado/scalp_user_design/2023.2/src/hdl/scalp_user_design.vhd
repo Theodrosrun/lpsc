@@ -352,6 +352,7 @@ architecture arch of scalp_user_design is
             FIXED_IO_ps_srstb   : inout std_logic;
             HdmiVgaClocksxCO    : out   t_hdmi_vga_clocks;
             Clk125xCO           : out   std_logic;
+            clk_usr             : out   std_logic;
             Clk125RstxRO        : out   std_logic;
             Clk125RstxRNAO      : out   std_logic;
             Clk125PllLockedxSO  : out   std_logic;
@@ -457,6 +458,7 @@ architecture arch of scalp_user_design is
     -- Clocks
     -- Processing system clock
     signal Clk125xC                : std_logic         := '0';
+    signal ClkUsrxC                : std_logic         := '0';
     -- Processing system pll locked
     signal Clk125PllLockedxS       : std_logic         := '0';
     -- Vga and Hdmi clocks
@@ -497,6 +499,8 @@ architecture arch of scalp_user_design is
     attribute keep             : string;
     -- Clocks
     attribute keep of Clk125xC : signal is "true";
+    attribute keep of ClkUsrxC : signal is "true";
+    
     -- Firmware ID
     -- attribute mark_debug of FirmwareIDAxixD  : signal is "true";
     -- attribute keep of FirmwareIDAxixD        : signal is "true";
@@ -532,6 +536,7 @@ begin
                 -- Clk and rst (125Mhz)
                 HdmiVgaClocksxCO    => HdmiVgaClocksxC,
                 Clk125xCO           => Clk125xC,
+                clk_usr             => ClkUsrxC,
                 Clk125RstxRO        => Clk125RstxR,
                 Clk125RstxRNAO      => Clk125RstxRNA,
                 Clk125PllLockedxSO  => Clk125PllLockedxS,
@@ -577,7 +582,7 @@ begin
     end block PSxB;
 
     PLxB : block is
-        constant C_CLK_FREQ_HZ        : integer := 125000000;
+        constant C_CLK_FREQ_HZ        : integer := 12500000;
         constant C_ANIM_PERIOD_MS     : integer := 25;
         constant C_ANIM_PERIOD_CYCLES : integer := (C_CLK_FREQ_HZ / 1000) * C_ANIM_PERIOD_MS;
         constant C_MAX_ITER           : integer := 100;
@@ -851,9 +856,9 @@ begin
             MandelbrotAnimxB : block is
             begin
 
-                MandelbrotAnimTickxP : process(Clk125xC)
+                MandelbrotAnimTickxP : process(ClkUsrxC)
                 begin
-                    if rising_edge(Clk125xC) then
+                    if rising_edge(ClkUsrxC) then
                         if Clk125RstxR = '1' then
                             MandelbrotAnimTimeCntxD <= 0;
                             MandelbrotAnimTickxS    <= '0';
@@ -877,9 +882,9 @@ begin
             MandelbrotFrameCntxB : block is
             begin
 
-                MandelbrotFrameCntxP : process(Clk125xC)
+                MandelbrotFrameCntxP : process(ClkUsrxC)
                 begin
-                    if rising_edge(Clk125xC) then
+                    if rising_edge(ClkUsrxC) then
                         if Clk125RstxR = '1' then
                             MandelbrotFrameCntxD <= (others => '0');
 
@@ -932,7 +937,7 @@ begin
                         MAX_ITER             => C_MAX_ITER
                     )
                     port map (
-                        ClkxCI        => Clk125xC,
+                        ClkxCI        => ClkUsrxC,
                         RstxRANI      => Clk125RstxRNA,
 
                         X0xDI         => MandelbrotX0xD,
@@ -958,7 +963,7 @@ begin
                 FrameBufferxI : entity work.blk_mem_gen_0
                     port map (
                         -- Port A: write port, Mandelbrot generator side
-                        clka  => Clk125xC,
+                        clka  => ClkUsrxC,
                         wea   => BramWexD,
                         addra => BramWrAddrxD,
                         dina  => BramWrDataxD,

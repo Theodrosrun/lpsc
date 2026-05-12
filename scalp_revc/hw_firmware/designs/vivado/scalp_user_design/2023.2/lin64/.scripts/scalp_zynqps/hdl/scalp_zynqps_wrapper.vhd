@@ -2,7 +2,7 @@
 --Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
---Date        : Sun Apr 12 11:38:39 2026
+--Date        : Tue May 12 18:53:57 2026
 --Host        : theodros-ThinkPad-P16s-Gen-2 running 64-bit Ubuntu 24.04.2 LTS
 --Command     : generate_target scalp_zynqps_wrapper.bd
 --Design      : scalp_zynqps_wrapper
@@ -92,7 +92,8 @@ entity scalp_zynqps_wrapper is
     aximm_mst_firmwareid_if_wdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
     aximm_mst_firmwareid_if_wready : in STD_LOGIC;
     aximm_mst_firmwareid_if_wstrb : out STD_LOGIC_VECTOR ( 3 downto 0 );
-    aximm_mst_firmwareid_if_wvalid : out STD_LOGIC
+    aximm_mst_firmwareid_if_wvalid : out STD_LOGIC;
+    clk_usr : out STD_LOGIC
   );
 end scalp_zynqps_wrapper;
 
@@ -181,7 +182,8 @@ architecture STRUCTURE of scalp_zynqps_wrapper is
     Clk125xCO : out STD_LOGIC;
     SAxiMstCplxNumRegsClkxCO : out STD_LOGIC;
     SAxiMstCplxNumRegsRstxRANO : out STD_LOGIC;
-    VgaHdmiClkPllLockedxSO : out STD_LOGIC
+    VgaHdmiClkPllLockedxSO : out STD_LOGIC;
+    clk_usr : out STD_LOGIC
   );
   end component scalp_zynqps;
   component IOBUF is
@@ -297,6 +299,7 @@ scalp_zynqps_i: component scalp_zynqps
       aximm_mst_firmwareid_if_wdata(31 downto 0) => aximm_mst_firmwareid_if_wdata(31 downto 0),
       aximm_mst_firmwareid_if_wready => aximm_mst_firmwareid_if_wready,
       aximm_mst_firmwareid_if_wstrb(3 downto 0) => aximm_mst_firmwareid_if_wstrb(3 downto 0),
-      aximm_mst_firmwareid_if_wvalid => aximm_mst_firmwareid_if_wvalid
+      aximm_mst_firmwareid_if_wvalid => aximm_mst_firmwareid_if_wvalid,
+      clk_usr => clk_usr
     );
 end STRUCTURE;

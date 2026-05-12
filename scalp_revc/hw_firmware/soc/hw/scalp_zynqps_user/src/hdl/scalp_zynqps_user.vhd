@@ -54,6 +54,7 @@ entity scalp_zynqps_wrapper is
         FIXED_IO_ps_srstb   : inout std_logic;
         HdmiVgaClocksxCO    : out   t_hdmi_vga_clocks;
         Clk125xCO           : out   std_logic;
+        clk_usr             : out   std_logic;
         Clk125RstxRO        : out   std_logic;
         Clk125RstxRNAO      : out   std_logic;
         Clk125PllLockedxSO  : out   std_logic;
@@ -199,6 +200,7 @@ begin
                 FIXED_IO_ps_porb                                           => FIXED_IO_ps_porb,
                 FIXED_IO_ps_srstb                                          => FIXED_IO_ps_srstb,
                 Clk125xCO                                                  => Clk125xCO,
+                clk_usr                                                    => clk_usr,
                 Clk125RstxRO(0)                                            => Clk125RstxRO,
                 Clk125RstxRNAO(0)                                          => Clk125RstxRNAO,
                 Clk125PllLockedxS                                          => Clk125PllLockedxSO,
