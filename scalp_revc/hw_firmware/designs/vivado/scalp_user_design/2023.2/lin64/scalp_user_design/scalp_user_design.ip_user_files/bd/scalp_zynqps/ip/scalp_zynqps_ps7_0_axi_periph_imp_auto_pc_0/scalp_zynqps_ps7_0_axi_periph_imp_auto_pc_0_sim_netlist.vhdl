@@ -2,10 +2,10 @@
 -- Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
--- Date        : Sun Apr 12 11:39:36 2026
+-- Date        : Sun Apr 12 11:39:35 2026
 -- Host        : theodros-ThinkPad-P16s-Gen-2 running 64-bit Ubuntu 24.04.2 LTS
--- Command     : write_vhdl -force -mode funcsim
---               /home/theodros/Documents/Master/LPSC/scalp_revc/hw_firmware/designs/vivado/scalp_user_design/2023.2/lin64/.scripts/scalp_zynqps/ip/scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0/scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0 -prefix
+--               scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_ scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_sim_netlist.vhdl
 -- Design      : scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -35,8 +35,6 @@ entity scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_3
     axaddr_incr : in STD_LOGIC_VECTOR ( 11 downto 0 );
     \axlen_cnt_reg[5]_1\ : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_b2s_incr_cmd : entity is "axi_protocol_converter_v2_1_37_b2s_incr_cmd";
 end scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_b2s_incr_cmd;
 
 architecture STRUCTURE of scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_b2s_incr_cmd is
@@ -1368,8 +1366,6 @@ entity scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_3
     m_valid_i_reg_0 : in STD_LOGIC;
     aclk : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_b2s_rd_cmd_fsm : entity is "axi_protocol_converter_v2_1_37_b2s_rd_cmd_fsm";
 end scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_b2s_rd_cmd_fsm;
 
 architecture STRUCTURE of scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_b2s_rd_cmd_fsm is
@@ -1975,8 +1971,6 @@ entity scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_3
     aclk : in STD_LOGIC;
     shandshake_r : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_b2s_simple_fifo : entity is "axi_protocol_converter_v2_1_37_b2s_simple_fifo";
 end scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_b2s_simple_fifo;
 
 architecture STRUCTURE of scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_b2s_simple_fifo is
@@ -3746,8 +3740,6 @@ entity scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_3
     cnt_read : in STD_LOGIC_VECTOR ( 1 downto 0 );
     aclk : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_b2s_wr_cmd_fsm : entity is "axi_protocol_converter_v2_1_37_b2s_wr_cmd_fsm";
 end scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_b2s_wr_cmd_fsm;
 
 architecture STRUCTURE of scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_b2s_wr_cmd_fsm is
@@ -4432,8 +4424,6 @@ entity scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_3
     \wrap_boundary_axaddr_r_reg[6]_0\ : in STD_LOGIC_VECTOR ( 6 downto 0 );
     \axaddr_wrap_reg[11]_1\ : in STD_LOGIC_VECTOR ( 11 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_b2s_wrap_cmd : entity is "axi_protocol_converter_v2_1_37_b2s_wrap_cmd";
 end scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_b2s_wrap_cmd;
 
 architecture STRUCTURE of scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_b2s_wrap_cmd is
@@ -5615,8 +5605,6 @@ entity scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_register_slice_v2_1_36_ax
     sel_first_1 : in STD_LOGIC;
     \m_payload_i_reg[0]_0\ : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_register_slice_v2_1_36_axic_register_slice : entity is "axi_register_slice_v2_1_36_axic_register_slice";
 end scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_register_slice_v2_1_36_axic_register_slice;
 
 architecture STRUCTURE of scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_register_slice_v2_1_36_axic_register_slice is
@@ -11996,8 +11984,6 @@ entity scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_3
     \in\ : in STD_LOGIC_VECTOR ( 15 downto 0 );
     m_axi_bresp : in STD_LOGIC_VECTOR ( 1 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_b2s_b_channel : entity is "axi_protocol_converter_v2_1_37_b2s_b_channel";
 end scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_b2s_b_channel;
 
 architecture STRUCTURE of scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_b2s_b_channel is
@@ -12340,8 +12326,6 @@ entity scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_3
     \wrap_boundary_axaddr_r_reg[6]\ : in STD_LOGIC_VECTOR ( 6 downto 0 );
     \axaddr_wrap_reg[11]_0\ : in STD_LOGIC_VECTOR ( 11 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_b2s_cmd_translator : entity is "axi_protocol_converter_v2_1_37_b2s_cmd_translator";
 end scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_b2s_cmd_translator;
 
 architecture STRUCTURE of scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_b2s_cmd_translator is
@@ -12625,8 +12609,6 @@ entity scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_3
     D : in STD_LOGIC_VECTOR ( 11 downto 0 );
     areset_d1 : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_b2s_r_channel : entity is "axi_protocol_converter_v2_1_37_b2s_r_channel";
 end scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_b2s_r_channel;
 
 architecture STRUCTURE of scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_b2s_r_channel is
@@ -12870,8 +12852,6 @@ entity scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_register_slice_v2_1_36_ax
     E : in STD_LOGIC_VECTOR ( 0 to 0 );
     \m_payload_i_reg[0]\ : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_register_slice_v2_1_36_axi_register_slice : entity is "axi_register_slice_v2_1_36_axi_register_slice";
 end scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_register_slice_v2_1_36_axi_register_slice;
 
 architecture STRUCTURE of scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_register_slice_v2_1_36_axi_register_slice is
@@ -13031,8 +13011,6 @@ entity scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_3
     \axaddr_incr_reg[3]_0\ : in STD_LOGIC_VECTOR ( 3 downto 0 );
     D : in STD_LOGIC_VECTOR ( 6 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_b2s_ar_channel : entity is "axi_protocol_converter_v2_1_37_b2s_ar_channel";
 end scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_b2s_ar_channel;
 
 architecture STRUCTURE of scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_b2s_ar_channel is
@@ -13399,8 +13377,6 @@ entity scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_3
     axaddr_incr : in STD_LOGIC_VECTOR ( 11 downto 0 );
     D : in STD_LOGIC_VECTOR ( 6 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_b2s_aw_channel : entity is "axi_protocol_converter_v2_1_37_b2s_aw_channel";
 end scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_b2s_aw_channel;
 
 architecture STRUCTURE of scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_b2s_aw_channel is
@@ -13743,8 +13719,6 @@ entity scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_3
     s_axi_arvalid : in STD_LOGIC;
     aresetn : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_b2s : entity is "axi_protocol_converter_v2_1_37_b2s";
 end scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_b2s;
 
 architecture STRUCTURE of scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_b2s is
@@ -14419,8 +14393,6 @@ entity scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_3
   attribute C_TRANSLATION_MODE of scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_axi_protocol_converter : entity is 2;
   attribute DowngradeIPIdentifiedWarnings : string;
   attribute DowngradeIPIdentifiedWarnings of scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_axi_protocol_converter : entity is "yes";
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_axi_protocol_converter : entity is "axi_protocol_converter_v2_1_37_axi_protocol_converter";
   attribute P_AXI3 : integer;
   attribute P_AXI3 of scalp_zynqps_ps7_0_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_axi_protocol_converter : entity is 1;
   attribute P_AXI4 : integer;

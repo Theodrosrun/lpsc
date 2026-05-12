@@ -2,7 +2,7 @@
   "schema": "xilinx.com:schema:json_instance:1.0",
   "ip_inst": {
     "xci_name": "vga_hdmi_clk_rst_system_inst_2_vga_hdmi_clock_0",
-    "cell_name": "vga_hdmi_clk_rst_sys_0/vga_hdmi_clock",
+    "cell_name": "vga_hdmi_clock",
     "component_reference": "xilinx.com:ip:clk_wiz:6.0",
     "ip_revision": "17",
     "gen_directory": ".",
@@ -687,5 +687,5 @@
       }
     }
   },
-  "checksum": "0750c75c"
+  "checksum": "afb5139d"
 }

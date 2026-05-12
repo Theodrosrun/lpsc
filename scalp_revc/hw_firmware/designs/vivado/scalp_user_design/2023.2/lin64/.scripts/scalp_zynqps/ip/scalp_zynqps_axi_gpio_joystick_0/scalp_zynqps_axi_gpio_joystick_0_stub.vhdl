@@ -2,10 +2,10 @@
 -- Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
--- Date        : Sun Apr 12 11:39:27 2026
+-- Date        : Sun Apr 12 11:39:26 2026
 -- Host        : theodros-ThinkPad-P16s-Gen-2 running 64-bit Ubuntu 24.04.2 LTS
--- Command     : write_vhdl -force -mode synth_stub
---               /home/theodros/Documents/Master/LPSC/scalp_revc/hw_firmware/designs/vivado/scalp_user_design/2023.2/lin64/.scripts/scalp_zynqps/ip/scalp_zynqps_axi_gpio_joystick_0/scalp_zynqps_axi_gpio_joystick_0_stub.vhdl
+-- Command     : write_vhdl -force -mode synth_stub -rename_top scalp_zynqps_axi_gpio_joystick_0 -prefix
+--               scalp_zynqps_axi_gpio_joystick_0_ scalp_zynqps_axi_gpio_joystick_0_stub.vhdl
 -- Design      : scalp_zynqps_axi_gpio_joystick_0
 -- Purpose     : Stub declaration of top-level module interface
 -- Device      : xc7z015clg485-2

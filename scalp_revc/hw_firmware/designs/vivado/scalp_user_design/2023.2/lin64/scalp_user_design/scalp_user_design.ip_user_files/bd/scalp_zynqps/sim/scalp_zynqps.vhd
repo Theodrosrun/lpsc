@@ -2,7 +2,7 @@
 --Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
---Date        : Sun Apr 12 11:38:39 2026
+--Date        : Tue May 12 18:53:57 2026
 --Host        : theodros-ThinkPad-P16s-Gen-2 running 64-bit Ubuntu 24.04.2 LTS
 --Command     : generate_target scalp_zynqps.bd
 --Design      : scalp_zynqps
@@ -1868,12 +1868,13 @@ entity scalp_zynqps is
     aximm_mst_firmwareid_if_wdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
     aximm_mst_firmwareid_if_wready : in STD_LOGIC;
     aximm_mst_firmwareid_if_wstrb : out STD_LOGIC_VECTOR ( 3 downto 0 );
-    aximm_mst_firmwareid_if_wvalid : out STD_LOGIC
+    aximm_mst_firmwareid_if_wvalid : out STD_LOGIC;
+    clk_usr : out STD_LOGIC
   );
-  attribute CORE_GENERATION_INFO : string;
-  attribute CORE_GENERATION_INFO of scalp_zynqps : entity is "scalp_zynqps,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=scalp_zynqps,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=28,numReposBlks=18,numNonXlnxBlks=2,numHierBlks=10,maxHierDepth=1,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=0,numPkgbdBlks=1,bdsource=USER,synth_mode=Hierarchical}";
-  attribute HW_HANDOFF : string;
-  attribute HW_HANDOFF of scalp_zynqps : entity is "scalp_zynqps.hwdef";
+  attribute core_generation_info : string;
+  attribute core_generation_info of scalp_zynqps : entity is "scalp_zynqps,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=scalp_zynqps,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=28,numReposBlks=18,numNonXlnxBlks=2,numHierBlks=10,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=0,numPkgbdBlks=1,bdsource=USER,synth_mode=Hierarchical}";
+  attribute hw_handoff : string;
+  attribute hw_handoff of scalp_zynqps : entity is "scalp_zynqps.hwdef";
 end scalp_zynqps;
 
 architecture STRUCTURE of scalp_zynqps is
@@ -2171,7 +2172,8 @@ architecture STRUCTURE of scalp_zynqps is
     resetn : in STD_LOGIC;
     clk_in1 : in STD_LOGIC;
     clk_125 : out STD_LOGIC;
-    locked : out STD_LOGIC
+    locked : out STD_LOGIC;
+    clk_usr : out STD_LOGIC
   );
   end component scalp_zynqps_sys_clock_0;
   component scalp_zynqps_axi_iic_ioext_0 is
@@ -2233,15 +2235,15 @@ architecture STRUCTURE of scalp_zynqps is
   signal \^clk125plllockedxs\ : STD_LOGIC;
   signal \^clk125rstxrnao\ : STD_LOGIC_VECTOR ( 0 to 0 );
   signal axi_gpio_0_ip2intc_irpt : STD_LOGIC;
-  attribute DEBUG : string;
-  attribute DEBUG of axi_gpio_0_ip2intc_irpt : signal is "true";
   attribute MARK_DEBUG : boolean;
   attribute MARK_DEBUG of axi_gpio_0_ip2intc_irpt : signal is std.standard.true;
+  attribute debug : string;
+  attribute debug of axi_gpio_0_ip2intc_irpt : signal is "true";
   signal axi_gpio_joystick_ip2intc_irpt : STD_LOGIC;
   signal axi_iic_ioext_iic2intc_irpt : STD_LOGIC;
   signal axi_intc_0_irq : STD_LOGIC;
-  attribute DEBUG of axi_intc_0_irq : signal is "true";
   attribute MARK_DEBUG of axi_intc_0_irq : signal is std.standard.true;
+  attribute debug of axi_intc_0_irq : signal is "true";
   signal gnd_constant_dout : STD_LOGIC_VECTOR ( 0 to 0 );
   signal processing_system7_0_FCLK_CLK0 : STD_LOGIC;
   signal processing_system7_0_FCLK_RESET0_N : STD_LOGIC;
@@ -2417,111 +2419,113 @@ architecture STRUCTURE of scalp_zynqps is
   signal NLW_processing_system7_0_USB0_PORT_INDCTL_UNCONNECTED : STD_LOGIC_VECTOR ( 1 downto 0 );
   signal NLW_rst_ps7_0_125M_mb_reset_UNCONNECTED : STD_LOGIC;
   signal NLW_rst_ps7_0_125M_bus_struct_reset_UNCONNECTED : STD_LOGIC_VECTOR ( 0 to 0 );
-  attribute X_INTERFACE_INFO : string;
-  attribute X_INTERFACE_INFO of Clk125xCO : signal is "xilinx.com:signal:clock:1.0 CLK.CLK125XCO CLK";
-  attribute X_INTERFACE_PARAMETER : string;
-  attribute X_INTERFACE_PARAMETER of Clk125xCO : signal is "XIL_INTERFACENAME CLK.CLK125XCO, CLK_DOMAIN /sys_clock_clk_out1, FREQ_HZ 125000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.0";
-  attribute X_INTERFACE_INFO of ClkHdmixCO : signal is "xilinx.com:signal:clock:1.0 CLK.CLKHDMIXCO CLK";
-  attribute X_INTERFACE_PARAMETER of ClkHdmixCO : signal is "XIL_INTERFACENAME CLK.CLKHDMIXCO, CLK_DOMAIN /vga_hdmi_clk_rst_sys_0/vga_hdmi_clock_clk_out1, FREQ_HZ 240000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.0";
-  attribute X_INTERFACE_INFO of ClkVgaxCO : signal is "xilinx.com:signal:clock:1.0 CLK.CLKVGAXCO CLK";
-  attribute X_INTERFACE_PARAMETER of ClkVgaxCO : signal is "XIL_INTERFACENAME CLK.CLKVGAXCO, CLK_DOMAIN /vga_hdmi_clk_rst_sys_0/vga_hdmi_clock_clk_out1, FREQ_HZ 48000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.0";
-  attribute X_INTERFACE_INFO of DDR_cas_n : signal is "xilinx.com:interface:ddrx:1.0 DDR CAS_N";
-  attribute X_INTERFACE_INFO of DDR_ck_n : signal is "xilinx.com:interface:ddrx:1.0 DDR CK_N";
-  attribute X_INTERFACE_INFO of DDR_ck_p : signal is "xilinx.com:interface:ddrx:1.0 DDR CK_P";
-  attribute X_INTERFACE_INFO of DDR_cke : signal is "xilinx.com:interface:ddrx:1.0 DDR CKE";
-  attribute X_INTERFACE_INFO of DDR_cs_n : signal is "xilinx.com:interface:ddrx:1.0 DDR CS_N";
-  attribute X_INTERFACE_INFO of DDR_odt : signal is "xilinx.com:interface:ddrx:1.0 DDR ODT";
-  attribute X_INTERFACE_INFO of DDR_ras_n : signal is "xilinx.com:interface:ddrx:1.0 DDR RAS_N";
-  attribute X_INTERFACE_INFO of DDR_reset_n : signal is "xilinx.com:interface:ddrx:1.0 DDR RESET_N";
-  attribute X_INTERFACE_INFO of DDR_we_n : signal is "xilinx.com:interface:ddrx:1.0 DDR WE_N";
-  attribute X_INTERFACE_INFO of FIXED_IO_ddr_vrn : signal is "xilinx.com:display_processing_system7:fixedio:1.0 FIXED_IO DDR_VRN";
-  attribute X_INTERFACE_MODE : string;
-  attribute X_INTERFACE_MODE of FIXED_IO_ddr_vrn : signal is "Master";
-  attribute X_INTERFACE_PARAMETER of FIXED_IO_ddr_vrn : signal is "XIL_INTERFACENAME FIXED_IO, CAN_DEBUG false";
-  attribute X_INTERFACE_INFO of FIXED_IO_ddr_vrp : signal is "xilinx.com:display_processing_system7:fixedio:1.0 FIXED_IO DDR_VRP";
-  attribute X_INTERFACE_INFO of FIXED_IO_ps_clk : signal is "xilinx.com:display_processing_system7:fixedio:1.0 FIXED_IO PS_CLK";
-  attribute X_INTERFACE_INFO of FIXED_IO_ps_porb : signal is "xilinx.com:display_processing_system7:fixedio:1.0 FIXED_IO PS_PORB";
-  attribute X_INTERFACE_INFO of FIXED_IO_ps_srstb : signal is "xilinx.com:display_processing_system7:fixedio:1.0 FIXED_IO PS_SRSTB";
-  attribute X_INTERFACE_INFO of IoExtIICxDIO_scl_i : signal is "xilinx.com:interface:iic:1.0 IoExtIICxDIO SCL_I";
-  attribute X_INTERFACE_MODE of IoExtIICxDIO_scl_i : signal is "Master";
-  attribute X_INTERFACE_INFO of IoExtIICxDIO_scl_o : signal is "xilinx.com:interface:iic:1.0 IoExtIICxDIO SCL_O";
-  attribute X_INTERFACE_INFO of IoExtIICxDIO_scl_t : signal is "xilinx.com:interface:iic:1.0 IoExtIICxDIO SCL_T";
-  attribute X_INTERFACE_INFO of IoExtIICxDIO_sda_i : signal is "xilinx.com:interface:iic:1.0 IoExtIICxDIO SDA_I";
-  attribute X_INTERFACE_INFO of IoExtIICxDIO_sda_o : signal is "xilinx.com:interface:iic:1.0 IoExtIICxDIO SDA_O";
-  attribute X_INTERFACE_INFO of IoExtIICxDIO_sda_t : signal is "xilinx.com:interface:iic:1.0 IoExtIICxDIO SDA_T";
-  attribute X_INTERFACE_INFO of SAxiMstCplxNumRegsClkxCO : signal is "xilinx.com:signal:clock:1.0 CLK.SAXIMSTCPLXNUMREGSCLKXCO CLK";
-  attribute X_INTERFACE_PARAMETER of SAxiMstCplxNumRegsClkxCO : signal is "XIL_INTERFACENAME CLK.SAXIMSTCPLXNUMREGSCLKXCO, ASSOCIATED_BUSIF aximm_mst_clpx_num_regs_if, CLK_DOMAIN scalp_zynqps_scalp_axi_link_cplx_num_regs_0_SAxiMstClkxCO, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.0";
-  attribute X_INTERFACE_INFO of SAxiMstCplxNumRegsRstxRANO : signal is "xilinx.com:signal:reset:1.0 RST.SAXIMSTCPLXNUMREGSRSTXRANO RST";
-  attribute X_INTERFACE_PARAMETER of SAxiMstCplxNumRegsRstxRANO : signal is "XIL_INTERFACENAME RST.SAXIMSTCPLXNUMREGSRSTXRANO, INSERT_VIP 0, POLARITY ACTIVE_LOW";
-  attribute X_INTERFACE_INFO of SAxiMstFirmwareIdClkxCO : signal is "xilinx.com:signal:clock:1.0 CLK.SAXIMSTFIRMWAREIDCLKXCO CLK";
-  attribute X_INTERFACE_PARAMETER of SAxiMstFirmwareIdClkxCO : signal is "XIL_INTERFACENAME CLK.SAXIMSTFIRMWAREIDCLKXCO, ASSOCIATED_BUSIF aximm_mst_firmwareid_if, CLK_DOMAIN scalp_zynqps_scalp_axi_link_firmwareid_0_SAxiMstClkxCO, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.0";
-  attribute X_INTERFACE_INFO of SAxiMstFirmwareIdRstxRANO : signal is "xilinx.com:signal:reset:1.0 RST.SAXIMSTFIRMWAREIDRSTXRANO RST";
-  attribute X_INTERFACE_PARAMETER of SAxiMstFirmwareIdRstxRANO : signal is "XIL_INTERFACENAME RST.SAXIMSTFIRMWAREIDRSTXRANO, INSERT_VIP 0, POLARITY ACTIVE_LOW";
-  attribute X_INTERFACE_INFO of aximm_mst_clpx_num_regs_if_arready : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_clpx_num_regs_if ARREADY";
-  attribute X_INTERFACE_INFO of aximm_mst_clpx_num_regs_if_arvalid : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_clpx_num_regs_if ARVALID";
-  attribute X_INTERFACE_INFO of aximm_mst_clpx_num_regs_if_awready : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_clpx_num_regs_if AWREADY";
-  attribute X_INTERFACE_INFO of aximm_mst_clpx_num_regs_if_awvalid : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_clpx_num_regs_if AWVALID";
-  attribute X_INTERFACE_INFO of aximm_mst_clpx_num_regs_if_bready : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_clpx_num_regs_if BREADY";
-  attribute X_INTERFACE_INFO of aximm_mst_clpx_num_regs_if_bvalid : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_clpx_num_regs_if BVALID";
-  attribute X_INTERFACE_INFO of aximm_mst_clpx_num_regs_if_rready : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_clpx_num_regs_if RREADY";
-  attribute X_INTERFACE_INFO of aximm_mst_clpx_num_regs_if_rvalid : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_clpx_num_regs_if RVALID";
-  attribute X_INTERFACE_INFO of aximm_mst_clpx_num_regs_if_wready : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_clpx_num_regs_if WREADY";
-  attribute X_INTERFACE_INFO of aximm_mst_clpx_num_regs_if_wvalid : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_clpx_num_regs_if WVALID";
-  attribute X_INTERFACE_INFO of aximm_mst_firmwareid_if_arready : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if ARREADY";
-  attribute X_INTERFACE_INFO of aximm_mst_firmwareid_if_arvalid : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if ARVALID";
-  attribute X_INTERFACE_INFO of aximm_mst_firmwareid_if_awready : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if AWREADY";
-  attribute X_INTERFACE_INFO of aximm_mst_firmwareid_if_awvalid : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if AWVALID";
-  attribute X_INTERFACE_INFO of aximm_mst_firmwareid_if_bready : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if BREADY";
-  attribute X_INTERFACE_INFO of aximm_mst_firmwareid_if_bvalid : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if BVALID";
-  attribute X_INTERFACE_INFO of aximm_mst_firmwareid_if_rready : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if RREADY";
-  attribute X_INTERFACE_INFO of aximm_mst_firmwareid_if_rvalid : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if RVALID";
-  attribute X_INTERFACE_INFO of aximm_mst_firmwareid_if_wready : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if WREADY";
-  attribute X_INTERFACE_INFO of aximm_mst_firmwareid_if_wvalid : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if WVALID";
-  attribute X_INTERFACE_INFO of Clk125RstxRNAO : signal is "xilinx.com:signal:reset:1.0 RST.CLK125RSTXRNAO RST";
-  attribute X_INTERFACE_PARAMETER of Clk125RstxRNAO : signal is "XIL_INTERFACENAME RST.CLK125RSTXRNAO, INSERT_VIP 0, POLARITY ACTIVE_LOW";
-  attribute X_INTERFACE_INFO of Clk125RstxRO : signal is "xilinx.com:signal:reset:1.0 RST.CLK125RSTXRO RST";
-  attribute X_INTERFACE_PARAMETER of Clk125RstxRO : signal is "XIL_INTERFACENAME RST.CLK125RSTXRO, INSERT_VIP 0, POLARITY ACTIVE_HIGH";
-  attribute X_INTERFACE_INFO of ClkHdmiRstxRNAO : signal is "xilinx.com:signal:reset:1.0 RST.CLKHDMIRSTXRNAO RST";
-  attribute X_INTERFACE_PARAMETER of ClkHdmiRstxRNAO : signal is "XIL_INTERFACENAME RST.CLKHDMIRSTXRNAO, INSERT_VIP 0, POLARITY ACTIVE_LOW";
-  attribute X_INTERFACE_INFO of ClkHdmiRstxRO : signal is "xilinx.com:signal:reset:1.0 RST.CLKHDMIRSTXRO RST";
-  attribute X_INTERFACE_PARAMETER of ClkHdmiRstxRO : signal is "XIL_INTERFACENAME RST.CLKHDMIRSTXRO, INSERT_VIP 0, POLARITY ACTIVE_HIGH";
-  attribute X_INTERFACE_INFO of ClkVgaRstxRNAO : signal is "xilinx.com:signal:reset:1.0 RST.CLKVGARSTXRNAO RST";
-  attribute X_INTERFACE_PARAMETER of ClkVgaRstxRNAO : signal is "XIL_INTERFACENAME RST.CLKVGARSTXRNAO, INSERT_VIP 0, POLARITY ACTIVE_LOW";
-  attribute X_INTERFACE_INFO of ClkVgaRstxRO : signal is "xilinx.com:signal:reset:1.0 RST.CLKVGARSTXRO RST";
-  attribute X_INTERFACE_PARAMETER of ClkVgaRstxRO : signal is "XIL_INTERFACENAME RST.CLKVGARSTXRO, INSERT_VIP 0, POLARITY ACTIVE_HIGH";
-  attribute X_INTERFACE_INFO of DDR_addr : signal is "xilinx.com:interface:ddrx:1.0 DDR ADDR";
-  attribute X_INTERFACE_MODE of DDR_addr : signal is "Master";
-  attribute X_INTERFACE_PARAMETER of DDR_addr : signal is "XIL_INTERFACENAME DDR, AXI_ARBITRATION_SCHEME TDM, BURST_LENGTH 8, CAN_DEBUG false, CAS_LATENCY 11, CAS_WRITE_LATENCY 11, CS_ENABLED true, DATA_MASK_ENABLED true, DATA_WIDTH 8, MEMORY_TYPE COMPONENTS, MEM_ADDR_MAP ROW_COLUMN_BANK, SLOT Single, TIMEPERIOD_PS 1250";
-  attribute X_INTERFACE_INFO of DDR_ba : signal is "xilinx.com:interface:ddrx:1.0 DDR BA";
-  attribute X_INTERFACE_INFO of DDR_dm : signal is "xilinx.com:interface:ddrx:1.0 DDR DM";
-  attribute X_INTERFACE_INFO of DDR_dq : signal is "xilinx.com:interface:ddrx:1.0 DDR DQ";
-  attribute X_INTERFACE_INFO of DDR_dqs_n : signal is "xilinx.com:interface:ddrx:1.0 DDR DQS_N";
-  attribute X_INTERFACE_INFO of DDR_dqs_p : signal is "xilinx.com:interface:ddrx:1.0 DDR DQS_P";
-  attribute X_INTERFACE_INFO of FIXED_IO_mio : signal is "xilinx.com:display_processing_system7:fixedio:1.0 FIXED_IO MIO";
-  attribute X_INTERFACE_INFO of GPIOJoystickxDI_tri_i : signal is "xilinx.com:interface:gpio:1.0 GPIOJoystickxDI TRI_I";
-  attribute X_INTERFACE_MODE of GPIOJoystickxDI_tri_i : signal is "Master";
-  attribute X_INTERFACE_INFO of GPIOResetBtnxDO_tri_o : signal is "xilinx.com:interface:gpio:1.0 GPIOResetBtnxDO TRI_O";
-  attribute X_INTERFACE_MODE of GPIOResetBtnxDO_tri_o : signal is "Master";
-  attribute X_INTERFACE_INFO of GPIOSwitchesxDI_tri_i : signal is "xilinx.com:interface:gpio:1.0 GPIOSwitchesxDI TRI_I";
-  attribute X_INTERFACE_MODE of GPIOSwitchesxDI_tri_i : signal is "Master";
-  attribute X_INTERFACE_INFO of aximm_mst_clpx_num_regs_if_araddr : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_clpx_num_regs_if ARADDR";
-  attribute X_INTERFACE_MODE of aximm_mst_clpx_num_regs_if_araddr : signal is "Master";
-  attribute X_INTERFACE_PARAMETER of aximm_mst_clpx_num_regs_if_araddr : signal is "XIL_INTERFACENAME aximm_mst_clpx_num_regs_if, ADDR_WIDTH 32, ARUSER_WIDTH 0, AWUSER_WIDTH 0, BUSER_WIDTH 0, CLK_DOMAIN scalp_zynqps_scalp_axi_link_cplx_num_regs_0_SAxiMstClkxCO, DATA_WIDTH 32, FREQ_HZ 100000000, HAS_BRESP 1, HAS_BURST 0, HAS_CACHE 0, HAS_LOCK 0, HAS_PROT 0, HAS_QOS 0, HAS_REGION 0, HAS_RRESP 1, HAS_WSTRB 1, ID_WIDTH 0, INSERT_VIP 0, MAX_BURST_LENGTH 1, NUM_READ_OUTSTANDING 1, NUM_READ_THREADS 1, NUM_WRITE_OUTSTANDING 1, NUM_WRITE_THREADS 1, PHASE 0.0, PROTOCOL AXI4LITE, READ_WRITE_MODE READ_WRITE, RUSER_BITS_PER_BYTE 0, RUSER_WIDTH 0, SUPPORTS_NARROW_BURST 0, WUSER_BITS_PER_BYTE 0, WUSER_WIDTH 0";
-  attribute X_INTERFACE_INFO of aximm_mst_clpx_num_regs_if_awaddr : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_clpx_num_regs_if AWADDR";
-  attribute X_INTERFACE_INFO of aximm_mst_clpx_num_regs_if_bresp : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_clpx_num_regs_if BRESP";
-  attribute X_INTERFACE_INFO of aximm_mst_clpx_num_regs_if_rdata : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_clpx_num_regs_if RDATA";
-  attribute X_INTERFACE_INFO of aximm_mst_clpx_num_regs_if_rresp : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_clpx_num_regs_if RRESP";
-  attribute X_INTERFACE_INFO of aximm_mst_clpx_num_regs_if_wdata : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_clpx_num_regs_if WDATA";
-  attribute X_INTERFACE_INFO of aximm_mst_clpx_num_regs_if_wstrb : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_clpx_num_regs_if WSTRB";
-  attribute X_INTERFACE_INFO of aximm_mst_firmwareid_if_araddr : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if ARADDR";
-  attribute X_INTERFACE_MODE of aximm_mst_firmwareid_if_araddr : signal is "Master";
-  attribute X_INTERFACE_PARAMETER of aximm_mst_firmwareid_if_araddr : signal is "XIL_INTERFACENAME aximm_mst_firmwareid_if, ADDR_WIDTH 32, ARUSER_WIDTH 0, AWUSER_WIDTH 0, BUSER_WIDTH 0, CLK_DOMAIN scalp_zynqps_scalp_axi_link_firmwareid_0_SAxiMstClkxCO, DATA_WIDTH 32, FREQ_HZ 100000000, HAS_BRESP 1, HAS_BURST 0, HAS_CACHE 0, HAS_LOCK 0, HAS_PROT 0, HAS_QOS 0, HAS_REGION 0, HAS_RRESP 1, HAS_WSTRB 1, ID_WIDTH 0, INSERT_VIP 0, MAX_BURST_LENGTH 1, NUM_READ_OUTSTANDING 1, NUM_READ_THREADS 1, NUM_WRITE_OUTSTANDING 1, NUM_WRITE_THREADS 1, PHASE 0.0, PROTOCOL AXI4LITE, READ_WRITE_MODE READ_WRITE, RUSER_BITS_PER_BYTE 0, RUSER_WIDTH 0, SUPPORTS_NARROW_BURST 0, WUSER_BITS_PER_BYTE 0, WUSER_WIDTH 0";
-  attribute X_INTERFACE_INFO of aximm_mst_firmwareid_if_awaddr : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if AWADDR";
-  attribute X_INTERFACE_INFO of aximm_mst_firmwareid_if_bresp : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if BRESP";
-  attribute X_INTERFACE_INFO of aximm_mst_firmwareid_if_rdata : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if RDATA";
-  attribute X_INTERFACE_INFO of aximm_mst_firmwareid_if_rresp : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if RRESP";
-  attribute X_INTERFACE_INFO of aximm_mst_firmwareid_if_wdata : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if WDATA";
-  attribute X_INTERFACE_INFO of aximm_mst_firmwareid_if_wstrb : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if WSTRB";
+  attribute x_interface_info : string;
+  attribute x_interface_info of Clk125xCO : signal is "xilinx.com:signal:clock:1.0 CLK.CLK125XCO CLK";
+  attribute x_interface_parameter : string;
+  attribute x_interface_parameter of Clk125xCO : signal is "XIL_INTERFACENAME CLK.CLK125XCO, CLK_DOMAIN /sys_clock_clk_out1, FREQ_HZ 125000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.0";
+  attribute x_interface_info of ClkHdmixCO : signal is "xilinx.com:signal:clock:1.0 CLK.CLKHDMIXCO CLK";
+  attribute x_interface_parameter of ClkHdmixCO : signal is "XIL_INTERFACENAME CLK.CLKHDMIXCO, CLK_DOMAIN /vga_hdmi_clk_rst_sys_0/vga_hdmi_clock_clk_out1, FREQ_HZ 240000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.0";
+  attribute x_interface_info of ClkVgaxCO : signal is "xilinx.com:signal:clock:1.0 CLK.CLKVGAXCO CLK";
+  attribute x_interface_parameter of ClkVgaxCO : signal is "XIL_INTERFACENAME CLK.CLKVGAXCO, CLK_DOMAIN /vga_hdmi_clk_rst_sys_0/vga_hdmi_clock_clk_out1, FREQ_HZ 48000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.0";
+  attribute x_interface_info of DDR_cas_n : signal is "xilinx.com:interface:ddrx:1.0 DDR CAS_N";
+  attribute x_interface_info of DDR_ck_n : signal is "xilinx.com:interface:ddrx:1.0 DDR CK_N";
+  attribute x_interface_info of DDR_ck_p : signal is "xilinx.com:interface:ddrx:1.0 DDR CK_P";
+  attribute x_interface_info of DDR_cke : signal is "xilinx.com:interface:ddrx:1.0 DDR CKE";
+  attribute x_interface_info of DDR_cs_n : signal is "xilinx.com:interface:ddrx:1.0 DDR CS_N";
+  attribute x_interface_info of DDR_odt : signal is "xilinx.com:interface:ddrx:1.0 DDR ODT";
+  attribute x_interface_info of DDR_ras_n : signal is "xilinx.com:interface:ddrx:1.0 DDR RAS_N";
+  attribute x_interface_info of DDR_reset_n : signal is "xilinx.com:interface:ddrx:1.0 DDR RESET_N";
+  attribute x_interface_info of DDR_we_n : signal is "xilinx.com:interface:ddrx:1.0 DDR WE_N";
+  attribute x_interface_info of FIXED_IO_ddr_vrn : signal is "xilinx.com:display_processing_system7:fixedio:1.0 FIXED_IO DDR_VRN";
+  attribute x_interface_mode : string;
+  attribute x_interface_mode of FIXED_IO_ddr_vrn : signal is "Master";
+  attribute x_interface_parameter of FIXED_IO_ddr_vrn : signal is "XIL_INTERFACENAME FIXED_IO, CAN_DEBUG false";
+  attribute x_interface_info of FIXED_IO_ddr_vrp : signal is "xilinx.com:display_processing_system7:fixedio:1.0 FIXED_IO DDR_VRP";
+  attribute x_interface_info of FIXED_IO_ps_clk : signal is "xilinx.com:display_processing_system7:fixedio:1.0 FIXED_IO PS_CLK";
+  attribute x_interface_info of FIXED_IO_ps_porb : signal is "xilinx.com:display_processing_system7:fixedio:1.0 FIXED_IO PS_PORB";
+  attribute x_interface_info of FIXED_IO_ps_srstb : signal is "xilinx.com:display_processing_system7:fixedio:1.0 FIXED_IO PS_SRSTB";
+  attribute x_interface_info of IoExtIICxDIO_scl_i : signal is "xilinx.com:interface:iic:1.0 IoExtIICxDIO SCL_I";
+  attribute x_interface_mode of IoExtIICxDIO_scl_i : signal is "Master";
+  attribute x_interface_info of IoExtIICxDIO_scl_o : signal is "xilinx.com:interface:iic:1.0 IoExtIICxDIO SCL_O";
+  attribute x_interface_info of IoExtIICxDIO_scl_t : signal is "xilinx.com:interface:iic:1.0 IoExtIICxDIO SCL_T";
+  attribute x_interface_info of IoExtIICxDIO_sda_i : signal is "xilinx.com:interface:iic:1.0 IoExtIICxDIO SDA_I";
+  attribute x_interface_info of IoExtIICxDIO_sda_o : signal is "xilinx.com:interface:iic:1.0 IoExtIICxDIO SDA_O";
+  attribute x_interface_info of IoExtIICxDIO_sda_t : signal is "xilinx.com:interface:iic:1.0 IoExtIICxDIO SDA_T";
+  attribute x_interface_info of SAxiMstCplxNumRegsClkxCO : signal is "xilinx.com:signal:clock:1.0 CLK.SAXIMSTCPLXNUMREGSCLKXCO CLK";
+  attribute x_interface_parameter of SAxiMstCplxNumRegsClkxCO : signal is "XIL_INTERFACENAME CLK.SAXIMSTCPLXNUMREGSCLKXCO, ASSOCIATED_BUSIF aximm_mst_clpx_num_regs_if, CLK_DOMAIN scalp_zynqps_scalp_axi_link_cplx_num_regs_0_SAxiMstClkxCO, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.0";
+  attribute x_interface_info of SAxiMstCplxNumRegsRstxRANO : signal is "xilinx.com:signal:reset:1.0 RST.SAXIMSTCPLXNUMREGSRSTXRANO RST";
+  attribute x_interface_parameter of SAxiMstCplxNumRegsRstxRANO : signal is "XIL_INTERFACENAME RST.SAXIMSTCPLXNUMREGSRSTXRANO, INSERT_VIP 0, POLARITY ACTIVE_LOW";
+  attribute x_interface_info of SAxiMstFirmwareIdClkxCO : signal is "xilinx.com:signal:clock:1.0 CLK.SAXIMSTFIRMWAREIDCLKXCO CLK";
+  attribute x_interface_parameter of SAxiMstFirmwareIdClkxCO : signal is "XIL_INTERFACENAME CLK.SAXIMSTFIRMWAREIDCLKXCO, ASSOCIATED_BUSIF aximm_mst_firmwareid_if, CLK_DOMAIN scalp_zynqps_scalp_axi_link_firmwareid_0_SAxiMstClkxCO, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.0";
+  attribute x_interface_info of SAxiMstFirmwareIdRstxRANO : signal is "xilinx.com:signal:reset:1.0 RST.SAXIMSTFIRMWAREIDRSTXRANO RST";
+  attribute x_interface_parameter of SAxiMstFirmwareIdRstxRANO : signal is "XIL_INTERFACENAME RST.SAXIMSTFIRMWAREIDRSTXRANO, INSERT_VIP 0, POLARITY ACTIVE_LOW";
+  attribute x_interface_info of aximm_mst_clpx_num_regs_if_arready : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_clpx_num_regs_if ARREADY";
+  attribute x_interface_info of aximm_mst_clpx_num_regs_if_arvalid : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_clpx_num_regs_if ARVALID";
+  attribute x_interface_info of aximm_mst_clpx_num_regs_if_awready : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_clpx_num_regs_if AWREADY";
+  attribute x_interface_info of aximm_mst_clpx_num_regs_if_awvalid : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_clpx_num_regs_if AWVALID";
+  attribute x_interface_info of aximm_mst_clpx_num_regs_if_bready : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_clpx_num_regs_if BREADY";
+  attribute x_interface_info of aximm_mst_clpx_num_regs_if_bvalid : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_clpx_num_regs_if BVALID";
+  attribute x_interface_info of aximm_mst_clpx_num_regs_if_rready : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_clpx_num_regs_if RREADY";
+  attribute x_interface_info of aximm_mst_clpx_num_regs_if_rvalid : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_clpx_num_regs_if RVALID";
+  attribute x_interface_info of aximm_mst_clpx_num_regs_if_wready : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_clpx_num_regs_if WREADY";
+  attribute x_interface_info of aximm_mst_clpx_num_regs_if_wvalid : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_clpx_num_regs_if WVALID";
+  attribute x_interface_info of aximm_mst_firmwareid_if_arready : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if ARREADY";
+  attribute x_interface_info of aximm_mst_firmwareid_if_arvalid : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if ARVALID";
+  attribute x_interface_info of aximm_mst_firmwareid_if_awready : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if AWREADY";
+  attribute x_interface_info of aximm_mst_firmwareid_if_awvalid : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if AWVALID";
+  attribute x_interface_info of aximm_mst_firmwareid_if_bready : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if BREADY";
+  attribute x_interface_info of aximm_mst_firmwareid_if_bvalid : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if BVALID";
+  attribute x_interface_info of aximm_mst_firmwareid_if_rready : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if RREADY";
+  attribute x_interface_info of aximm_mst_firmwareid_if_rvalid : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if RVALID";
+  attribute x_interface_info of aximm_mst_firmwareid_if_wready : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if WREADY";
+  attribute x_interface_info of aximm_mst_firmwareid_if_wvalid : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if WVALID";
+  attribute x_interface_info of clk_usr : signal is "xilinx.com:signal:clock:1.0 CLK.CLK_USR CLK";
+  attribute x_interface_parameter of clk_usr : signal is "XIL_INTERFACENAME CLK.CLK_USR, CLK_DOMAIN /sys_clock_clk_out1, FREQ_HZ 125000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.0";
+  attribute x_interface_info of Clk125RstxRNAO : signal is "xilinx.com:signal:reset:1.0 RST.CLK125RSTXRNAO RST";
+  attribute x_interface_parameter of Clk125RstxRNAO : signal is "XIL_INTERFACENAME RST.CLK125RSTXRNAO, INSERT_VIP 0, POLARITY ACTIVE_LOW";
+  attribute x_interface_info of Clk125RstxRO : signal is "xilinx.com:signal:reset:1.0 RST.CLK125RSTXRO RST";
+  attribute x_interface_parameter of Clk125RstxRO : signal is "XIL_INTERFACENAME RST.CLK125RSTXRO, INSERT_VIP 0, POLARITY ACTIVE_HIGH";
+  attribute x_interface_info of ClkHdmiRstxRNAO : signal is "xilinx.com:signal:reset:1.0 RST.CLKHDMIRSTXRNAO RST";
+  attribute x_interface_parameter of ClkHdmiRstxRNAO : signal is "XIL_INTERFACENAME RST.CLKHDMIRSTXRNAO, INSERT_VIP 0, POLARITY ACTIVE_LOW";
+  attribute x_interface_info of ClkHdmiRstxRO : signal is "xilinx.com:signal:reset:1.0 RST.CLKHDMIRSTXRO RST";
+  attribute x_interface_parameter of ClkHdmiRstxRO : signal is "XIL_INTERFACENAME RST.CLKHDMIRSTXRO, INSERT_VIP 0, POLARITY ACTIVE_HIGH";
+  attribute x_interface_info of ClkVgaRstxRNAO : signal is "xilinx.com:signal:reset:1.0 RST.CLKVGARSTXRNAO RST";
+  attribute x_interface_parameter of ClkVgaRstxRNAO : signal is "XIL_INTERFACENAME RST.CLKVGARSTXRNAO, INSERT_VIP 0, POLARITY ACTIVE_LOW";
+  attribute x_interface_info of ClkVgaRstxRO : signal is "xilinx.com:signal:reset:1.0 RST.CLKVGARSTXRO RST";
+  attribute x_interface_parameter of ClkVgaRstxRO : signal is "XIL_INTERFACENAME RST.CLKVGARSTXRO, INSERT_VIP 0, POLARITY ACTIVE_HIGH";
+  attribute x_interface_info of DDR_addr : signal is "xilinx.com:interface:ddrx:1.0 DDR ADDR";
+  attribute x_interface_mode of DDR_addr : signal is "Master";
+  attribute x_interface_parameter of DDR_addr : signal is "XIL_INTERFACENAME DDR, AXI_ARBITRATION_SCHEME TDM, BURST_LENGTH 8, CAN_DEBUG false, CAS_LATENCY 11, CAS_WRITE_LATENCY 11, CS_ENABLED true, DATA_MASK_ENABLED true, DATA_WIDTH 8, MEMORY_TYPE COMPONENTS, MEM_ADDR_MAP ROW_COLUMN_BANK, SLOT Single, TIMEPERIOD_PS 1250";
+  attribute x_interface_info of DDR_ba : signal is "xilinx.com:interface:ddrx:1.0 DDR BA";
+  attribute x_interface_info of DDR_dm : signal is "xilinx.com:interface:ddrx:1.0 DDR DM";
+  attribute x_interface_info of DDR_dq : signal is "xilinx.com:interface:ddrx:1.0 DDR DQ";
+  attribute x_interface_info of DDR_dqs_n : signal is "xilinx.com:interface:ddrx:1.0 DDR DQS_N";
+  attribute x_interface_info of DDR_dqs_p : signal is "xilinx.com:interface:ddrx:1.0 DDR DQS_P";
+  attribute x_interface_info of FIXED_IO_mio : signal is "xilinx.com:display_processing_system7:fixedio:1.0 FIXED_IO MIO";
+  attribute x_interface_info of GPIOJoystickxDI_tri_i : signal is "xilinx.com:interface:gpio:1.0 GPIOJoystickxDI TRI_I";
+  attribute x_interface_mode of GPIOJoystickxDI_tri_i : signal is "Master";
+  attribute x_interface_info of GPIOResetBtnxDO_tri_o : signal is "xilinx.com:interface:gpio:1.0 GPIOResetBtnxDO TRI_O";
+  attribute x_interface_mode of GPIOResetBtnxDO_tri_o : signal is "Master";
+  attribute x_interface_info of GPIOSwitchesxDI_tri_i : signal is "xilinx.com:interface:gpio:1.0 GPIOSwitchesxDI TRI_I";
+  attribute x_interface_mode of GPIOSwitchesxDI_tri_i : signal is "Master";
+  attribute x_interface_info of aximm_mst_clpx_num_regs_if_araddr : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_clpx_num_regs_if ARADDR";
+  attribute x_interface_mode of aximm_mst_clpx_num_regs_if_araddr : signal is "Master";
+  attribute x_interface_parameter of aximm_mst_clpx_num_regs_if_araddr : signal is "XIL_INTERFACENAME aximm_mst_clpx_num_regs_if, ADDR_WIDTH 32, ARUSER_WIDTH 0, AWUSER_WIDTH 0, BUSER_WIDTH 0, CLK_DOMAIN scalp_zynqps_scalp_axi_link_cplx_num_regs_0_SAxiMstClkxCO, DATA_WIDTH 32, FREQ_HZ 100000000, HAS_BRESP 1, HAS_BURST 0, HAS_CACHE 0, HAS_LOCK 0, HAS_PROT 0, HAS_QOS 0, HAS_REGION 0, HAS_RRESP 1, HAS_WSTRB 1, ID_WIDTH 0, INSERT_VIP 0, MAX_BURST_LENGTH 1, NUM_READ_OUTSTANDING 1, NUM_READ_THREADS 1, NUM_WRITE_OUTSTANDING 1, NUM_WRITE_THREADS 1, PHASE 0.0, PROTOCOL AXI4LITE, READ_WRITE_MODE READ_WRITE, RUSER_BITS_PER_BYTE 0, RUSER_WIDTH 0, SUPPORTS_NARROW_BURST 0, WUSER_BITS_PER_BYTE 0, WUSER_WIDTH 0";
+  attribute x_interface_info of aximm_mst_clpx_num_regs_if_awaddr : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_clpx_num_regs_if AWADDR";
+  attribute x_interface_info of aximm_mst_clpx_num_regs_if_bresp : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_clpx_num_regs_if BRESP";
+  attribute x_interface_info of aximm_mst_clpx_num_regs_if_rdata : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_clpx_num_regs_if RDATA";
+  attribute x_interface_info of aximm_mst_clpx_num_regs_if_rresp : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_clpx_num_regs_if RRESP";
+  attribute x_interface_info of aximm_mst_clpx_num_regs_if_wdata : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_clpx_num_regs_if WDATA";
+  attribute x_interface_info of aximm_mst_clpx_num_regs_if_wstrb : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_clpx_num_regs_if WSTRB";
+  attribute x_interface_info of aximm_mst_firmwareid_if_araddr : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if ARADDR";
+  attribute x_interface_mode of aximm_mst_firmwareid_if_araddr : signal is "Master";
+  attribute x_interface_parameter of aximm_mst_firmwareid_if_araddr : signal is "XIL_INTERFACENAME aximm_mst_firmwareid_if, ADDR_WIDTH 32, ARUSER_WIDTH 0, AWUSER_WIDTH 0, BUSER_WIDTH 0, CLK_DOMAIN scalp_zynqps_scalp_axi_link_firmwareid_0_SAxiMstClkxCO, DATA_WIDTH 32, FREQ_HZ 100000000, HAS_BRESP 1, HAS_BURST 0, HAS_CACHE 0, HAS_LOCK 0, HAS_PROT 0, HAS_QOS 0, HAS_REGION 0, HAS_RRESP 1, HAS_WSTRB 1, ID_WIDTH 0, INSERT_VIP 0, MAX_BURST_LENGTH 1, NUM_READ_OUTSTANDING 1, NUM_READ_THREADS 1, NUM_WRITE_OUTSTANDING 1, NUM_WRITE_THREADS 1, PHASE 0.0, PROTOCOL AXI4LITE, READ_WRITE_MODE READ_WRITE, RUSER_BITS_PER_BYTE 0, RUSER_WIDTH 0, SUPPORTS_NARROW_BURST 0, WUSER_BITS_PER_BYTE 0, WUSER_WIDTH 0";
+  attribute x_interface_info of aximm_mst_firmwareid_if_awaddr : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if AWADDR";
+  attribute x_interface_info of aximm_mst_firmwareid_if_bresp : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if BRESP";
+  attribute x_interface_info of aximm_mst_firmwareid_if_rdata : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if RDATA";
+  attribute x_interface_info of aximm_mst_firmwareid_if_rresp : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if RRESP";
+  attribute x_interface_info of aximm_mst_firmwareid_if_wdata : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if WDATA";
+  attribute x_interface_info of aximm_mst_firmwareid_if_wstrb : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if WSTRB";
 begin
   Clk125PllLockedxS <= \^clk125plllockedxs\;
   Clk125RstxRNAO(0) <= \^clk125rstxrnao\(0);
@@ -3015,6 +3019,7 @@ sys_clock: component scalp_zynqps_sys_clock_0
      port map (
       clk_125 => sys_clock_clk_126,
       clk_in1 => processing_system7_0_FCLK_CLK0,
+      clk_usr => clk_usr,
       locked => \^clk125plllockedxs\,
       resetn => processing_system7_0_FCLK_RESET0_N
     );

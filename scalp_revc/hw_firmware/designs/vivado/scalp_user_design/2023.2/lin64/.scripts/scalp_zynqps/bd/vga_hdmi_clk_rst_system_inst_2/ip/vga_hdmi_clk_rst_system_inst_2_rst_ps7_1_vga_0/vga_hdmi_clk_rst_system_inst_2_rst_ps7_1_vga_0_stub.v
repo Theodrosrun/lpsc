@@ -4,8 +4,8 @@
 // Tool Version: Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
 // Date        : Sun Apr 12 11:39:58 2026
 // Host        : theodros-ThinkPad-P16s-Gen-2 running 64-bit Ubuntu 24.04.2 LTS
-// Command     : write_verilog -force -mode synth_stub
-//               /home/theodros/Documents/Master/LPSC/scalp_revc/hw_firmware/designs/vivado/scalp_user_design/2023.2/lin64/.scripts/scalp_zynqps/bd/vga_hdmi_clk_rst_system_inst_2/ip/vga_hdmi_clk_rst_system_inst_2_rst_ps7_1_vga_0/vga_hdmi_clk_rst_system_inst_2_rst_ps7_1_vga_0_stub.v
+// Command     : write_verilog -force -mode synth_stub -rename_top vga_hdmi_clk_rst_system_inst_2_rst_ps7_1_vga_0 -prefix
+//               vga_hdmi_clk_rst_system_inst_2_rst_ps7_1_vga_0_ vga_hdmi_clk_rst_system_inst_2_rst_ps7_1_vga_0_stub.v
 // Design      : vga_hdmi_clk_rst_system_inst_2_rst_ps7_1_vga_0
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7z015clg485-2

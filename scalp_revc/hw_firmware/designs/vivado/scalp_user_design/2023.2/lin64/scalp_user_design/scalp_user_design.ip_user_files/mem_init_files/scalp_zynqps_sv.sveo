@@ -117,7 +117,8 @@ scalp_zynqps_sv your_instance_name (
   .Clk125xCO(Clk125xCO), // output wire Clk125xCO
   .SAxiMstCplxNumRegsClkxCO(SAxiMstCplxNumRegsClkxCO), // output wire SAxiMstCplxNumRegsClkxCO
   .SAxiMstCplxNumRegsRstxRANO(SAxiMstCplxNumRegsRstxRANO), // output wire SAxiMstCplxNumRegsRstxRANO
-  .VgaHdmiClkPllLockedxSO(VgaHdmiClkPllLockedxSO) // output wire VgaHdmiClkPllLockedxSO
+  .VgaHdmiClkPllLockedxSO(VgaHdmiClkPllLockedxSO), // output wire VgaHdmiClkPllLockedxSO
+  .clk_usr(clk_usr) // output wire clk_usr
 );
 // INST_TAG_END ------  End cut for WRAPPER INSTANTIATION Template  ------
 

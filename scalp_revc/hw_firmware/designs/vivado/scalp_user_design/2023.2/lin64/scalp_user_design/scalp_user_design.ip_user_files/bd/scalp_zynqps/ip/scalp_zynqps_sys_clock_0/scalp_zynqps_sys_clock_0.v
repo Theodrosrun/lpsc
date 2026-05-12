@@ -54,6 +54,7 @@
 //   Clock     Freq (MHz)  (degrees)    (%)     Jitter (ps)  Error (ps)
 //----------------------------------------------------------------------------
 // _clk_125__125.00000______0.000______50.0______119.348_____96.948
+// _clk_usr__125.00000______0.000______50.0______119.348_____96.948
 //
 //----------------------------------------------------------------------------
 // Input Clock   Freq (MHz)    Input Jitter (UI)
@@ -62,12 +63,13 @@
 
 `timescale 1ps/1ps
 
-(* CORE_GENERATION_INFO = "scalp_zynqps_sys_clock_0,clk_wiz_v6_0_17_0_0,{component_name=scalp_zynqps_sys_clock_0,use_phase_alignment=true,use_min_o_jitter=false,use_max_i_jitter=false,use_dyn_phase_shift=false,use_inclk_switchover=false,use_dyn_reconfig=false,enable_axi=0,feedback_source=FDBK_AUTO,PRIMITIVE=MMCM,num_out_clk=1,clkin1_period=8.000,clkin2_period=10.000,use_power_down=false,use_reset=true,use_locked=true,use_inclk_stopped=false,feedback_type=SINGLE,CLOCK_MGR_TYPE=NA,manual_override=false}" *)
+(* CORE_GENERATION_INFO = "scalp_zynqps_sys_clock_0,clk_wiz_v6_0_17_0_0,{component_name=scalp_zynqps_sys_clock_0,use_phase_alignment=true,use_min_o_jitter=false,use_max_i_jitter=false,use_dyn_phase_shift=false,use_inclk_switchover=false,use_dyn_reconfig=false,enable_axi=0,feedback_source=FDBK_AUTO,PRIMITIVE=MMCM,num_out_clk=2,clkin1_period=8.000,clkin2_period=10.000,use_power_down=false,use_reset=true,use_locked=true,use_inclk_stopped=false,feedback_type=SINGLE,CLOCK_MGR_TYPE=NA,manual_override=false}" *)
 
 module scalp_zynqps_sys_clock_0 
  (
   // Clock out ports
   output        clk_125,
+  output        clk_usr,
   // Status and control signals
   input         resetn,
   output        locked,
@@ -79,6 +81,7 @@ module scalp_zynqps_sys_clock_0
   (
   // Clock out ports  
   .clk_125(clk_125),
+  .clk_usr(clk_usr),
   // Status and control signals               
   .resetn(resetn), 
   .locked(locked),

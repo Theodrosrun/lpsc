@@ -2,7 +2,7 @@
   "schema": "xilinx.com:schema:json_instance:1.0",
   "ip_inst": {
     "xci_name": "vga_hdmi_clk_rst_system_inst_2_rst_ps7_2_hdmi_0",
-    "cell_name": "vga_hdmi_clk_rst_sys_0/rst_ps7_2_hdmi",
+    "cell_name": "rst_ps7_2_hdmi",
     "component_reference": "xilinx.com:ip:proc_sys_reset:5.0",
     "ip_revision": "17",
     "gen_directory": ".",
@@ -192,5 +192,5 @@
       }
     }
   },
-  "checksum": "006a0c4e"
+  "checksum": "1d8b696d"
 }

@@ -2,10 +2,10 @@
 -- Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
--- Date        : Sun Apr 12 11:39:27 2026
+-- Date        : Sun Apr 12 11:39:26 2026
 -- Host        : theodros-ThinkPad-P16s-Gen-2 running 64-bit Ubuntu 24.04.2 LTS
--- Command     : write_vhdl -force -mode funcsim
---               /home/theodros/Documents/Master/LPSC/scalp_revc/hw_firmware/designs/vivado/scalp_user_design/2023.2/lin64/.scripts/scalp_zynqps/ip/scalp_zynqps_axi_gpio_switches_0/scalp_zynqps_axi_gpio_switches_0_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top scalp_zynqps_axi_gpio_switches_0 -prefix
+--               scalp_zynqps_axi_gpio_switches_0_ scalp_zynqps_axi_gpio_switches_0_sim_netlist.vhdl
 -- Design      : scalp_zynqps_axi_gpio_switches_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -57,8 +57,6 @@ entity scalp_zynqps_axi_gpio_switches_0_address_decoder is
     ip2bus_wrack_i_D1 : in STD_LOGIC;
     s_axi_awready : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of scalp_zynqps_axi_gpio_switches_0_address_decoder : entity is "address_decoder";
 end scalp_zynqps_axi_gpio_switches_0_address_decoder;
 
 architecture STRUCTURE of scalp_zynqps_axi_gpio_switches_0_address_decoder is
@@ -911,8 +909,6 @@ entity scalp_zynqps_axi_gpio_switches_0_interrupt_control is
     GPIO_xferAck_i : in STD_LOGIC;
     ip2Bus_RdAck_intr_reg_hole : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of scalp_zynqps_axi_gpio_switches_0_interrupt_control : entity is "interrupt_control";
 end scalp_zynqps_axi_gpio_switches_0_interrupt_control;
 
 architecture STRUCTURE of scalp_zynqps_axi_gpio_switches_0_interrupt_control is
@@ -1061,8 +1057,6 @@ entity scalp_zynqps_axi_gpio_switches_0_xpm_cdc_array_single is
   attribute DEST_SYNC_FF of scalp_zynqps_axi_gpio_switches_0_xpm_cdc_array_single : entity is 4;
   attribute INIT_SYNC_FF : integer;
   attribute INIT_SYNC_FF of scalp_zynqps_axi_gpio_switches_0_xpm_cdc_array_single : entity is 0;
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of scalp_zynqps_axi_gpio_switches_0_xpm_cdc_array_single : entity is "xpm_cdc_array_single";
   attribute SIM_ASSERT_CHK : integer;
   attribute SIM_ASSERT_CHK of scalp_zynqps_axi_gpio_switches_0_xpm_cdc_array_single : entity is 0;
   attribute SRC_INPUT_REG : integer;
@@ -1213,8 +1207,6 @@ entity scalp_zynqps_axi_gpio_switches_0_GPIO_Core is
     s_axi_wdata : in STD_LOGIC_VECTOR ( 3 downto 0 );
     \Not_Dual.gpio_OE_reg[0]_0\ : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of scalp_zynqps_axi_gpio_switches_0_GPIO_Core : entity is "GPIO_Core";
 end scalp_zynqps_axi_gpio_switches_0_GPIO_Core;
 
 architecture STRUCTURE of scalp_zynqps_axi_gpio_switches_0_GPIO_Core is
@@ -1510,8 +1502,6 @@ entity scalp_zynqps_axi_gpio_switches_0_slave_attachment is
     s_axi_araddr : in STD_LOGIC_VECTOR ( 6 downto 0 );
     s_axi_awaddr : in STD_LOGIC_VECTOR ( 6 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of scalp_zynqps_axi_gpio_switches_0_slave_attachment : entity is "slave_attachment";
 end scalp_zynqps_axi_gpio_switches_0_slave_attachment;
 
 architecture STRUCTURE of scalp_zynqps_axi_gpio_switches_0_slave_attachment is
@@ -2247,8 +2237,6 @@ entity scalp_zynqps_axi_gpio_switches_0_axi_lite_ipif is
     s_axi_araddr : in STD_LOGIC_VECTOR ( 6 downto 0 );
     s_axi_awaddr : in STD_LOGIC_VECTOR ( 6 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of scalp_zynqps_axi_gpio_switches_0_axi_lite_ipif : entity is "axi_lite_ipif";
 end scalp_zynqps_axi_gpio_switches_0_axi_lite_ipif;
 
 architecture STRUCTURE of scalp_zynqps_axi_gpio_switches_0_axi_lite_ipif is
@@ -2368,8 +2356,6 @@ entity scalp_zynqps_axi_gpio_switches_0_axi_gpio is
   attribute C_TRI_DEFAULT of scalp_zynqps_axi_gpio_switches_0_axi_gpio : entity is "32'b11111111111111111111111111111111";
   attribute C_TRI_DEFAULT_2 : string;
   attribute C_TRI_DEFAULT_2 of scalp_zynqps_axi_gpio_switches_0_axi_gpio : entity is "32'b11111111111111111111111111111111";
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of scalp_zynqps_axi_gpio_switches_0_axi_gpio : entity is "axi_gpio";
   attribute downgradeipidentifiedwarnings : string;
   attribute downgradeipidentifiedwarnings of scalp_zynqps_axi_gpio_switches_0_axi_gpio : entity is "yes";
   attribute ip_group : string;

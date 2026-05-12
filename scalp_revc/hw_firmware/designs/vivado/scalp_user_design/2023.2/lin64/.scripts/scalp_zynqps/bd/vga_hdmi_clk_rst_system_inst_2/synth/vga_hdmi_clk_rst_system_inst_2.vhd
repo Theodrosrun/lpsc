@@ -2,7 +2,7 @@
 --Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
---Date        : Sun Apr 12 11:38:50 2026
+--Date        : Tue May 12 18:53:58 2026
 --Host        : theodros-ThinkPad-P16s-Gen-2 running 64-bit Ubuntu 24.04.2 LTS
 --Command     : generate_target vga_hdmi_clk_rst_system_inst_2.bd
 --Design      : vga_hdmi_clk_rst_system_inst_2
@@ -24,10 +24,10 @@ entity vga_hdmi_clk_rst_system_inst_2 is
     PsResetxRN : in STD_LOGIC;
     VgaHdmiClkPllLockedxSO : out STD_LOGIC
   );
-  attribute CORE_GENERATION_INFO : string;
-  attribute CORE_GENERATION_INFO of vga_hdmi_clk_rst_system_inst_2 : entity is "vga_hdmi_clk_rst_system_inst_2,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=vga_hdmi_clk_rst_system_inst_2,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=3,numReposBlks=3,numNonXlnxBlks=0,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=/home/jo/projects/scalp_revc/hw_firmware/designs/vivado/scalp_user_design/2023.2/lin64/scalp_user_design/scalp_user_design.srcs/sources_1/bd/vga_hdmi_clk_rst_system/vga_hdmi_clk_rst_system.bd,synth_mode=Hierarchical}";
-  attribute HW_HANDOFF : string;
-  attribute HW_HANDOFF of vga_hdmi_clk_rst_system_inst_2 : entity is "vga_hdmi_clk_rst_system_inst_2.hwdef";
+  attribute core_generation_info : string;
+  attribute core_generation_info of vga_hdmi_clk_rst_system_inst_2 : entity is "vga_hdmi_clk_rst_system_inst_2,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=vga_hdmi_clk_rst_system_inst_2,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=3,numReposBlks=3,numNonXlnxBlks=0,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=/home/jo/projects/scalp_revc/hw_firmware/designs/vivado/scalp_user_design/2023.2/lin64/scalp_user_design/scalp_user_design.srcs/sources_1/bd/vga_hdmi_clk_rst_system/vga_hdmi_clk_rst_system.bd,synth_mode=Hierarchical}";
+  attribute hw_handoff : string;
+  attribute hw_handoff of vga_hdmi_clk_rst_system_inst_2 : entity is "vga_hdmi_clk_rst_system_inst_2.hwdef";
 end vga_hdmi_clk_rst_system_inst_2;
 
 architecture STRUCTURE of vga_hdmi_clk_rst_system_inst_2 is
@@ -77,24 +77,24 @@ architecture STRUCTURE of vga_hdmi_clk_rst_system_inst_2 is
   signal NLW_rst_ps7_2_hdmi_mb_reset_UNCONNECTED : STD_LOGIC;
   signal NLW_rst_ps7_2_hdmi_bus_struct_reset_UNCONNECTED : STD_LOGIC_VECTOR ( 0 to 0 );
   signal NLW_rst_ps7_2_hdmi_interconnect_aresetn_UNCONNECTED : STD_LOGIC_VECTOR ( 0 to 0 );
-  attribute X_INTERFACE_INFO : string;
-  attribute X_INTERFACE_INFO of ClkHdmixCO : signal is "xilinx.com:signal:clock:1.0 CLK.CLKHDMIXCO CLK";
-  attribute X_INTERFACE_PARAMETER : string;
-  attribute X_INTERFACE_PARAMETER of ClkHdmixCO : signal is "XIL_INTERFACENAME CLK.CLKHDMIXCO, ASSOCIATED_RESET ClkHdmiRstxRO:ClkHdmiRstxRNAO, CLK_DOMAIN /vga_hdmi_clk_rst_sys_0/vga_hdmi_clock_clk_out1, FREQ_HZ 240000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.0";
-  attribute X_INTERFACE_INFO of ClkVgaxCO : signal is "xilinx.com:signal:clock:1.0 CLK.CLKVGAXCO CLK";
-  attribute X_INTERFACE_PARAMETER of ClkVgaxCO : signal is "XIL_INTERFACENAME CLK.CLKVGAXCO, ASSOCIATED_RESET ClkVgaRstxRO:ClkVgaRstxRNAO, CLK_DOMAIN /vga_hdmi_clk_rst_sys_0/vga_hdmi_clock_clk_out1, FREQ_HZ 48000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.0";
-  attribute X_INTERFACE_INFO of PsClockxCI : signal is "xilinx.com:signal:clock:1.0 CLK.PSCLOCKXCI CLK";
-  attribute X_INTERFACE_PARAMETER of PsClockxCI : signal is "XIL_INTERFACENAME CLK.PSCLOCKXCI, ASSOCIATED_RESET PsResetxRN, CLK_DOMAIN scalp_zynqps_processing_system7_0_0_FCLK_CLK0, FREQ_HZ 125000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.0";
-  attribute X_INTERFACE_INFO of PsResetxRN : signal is "xilinx.com:signal:reset:1.0 RST.PSRESETXRN RST";
-  attribute X_INTERFACE_PARAMETER of PsResetxRN : signal is "XIL_INTERFACENAME RST.PSRESETXRN, INSERT_VIP 0, POLARITY ACTIVE_LOW";
-  attribute X_INTERFACE_INFO of ClkHdmiRstxRNAO : signal is "xilinx.com:signal:reset:1.0 RST.CLKHDMIRSTXRNAO RST";
-  attribute X_INTERFACE_PARAMETER of ClkHdmiRstxRNAO : signal is "XIL_INTERFACENAME RST.CLKHDMIRSTXRNAO, INSERT_VIP 0, POLARITY ACTIVE_LOW";
-  attribute X_INTERFACE_INFO of ClkHdmiRstxRO : signal is "xilinx.com:signal:reset:1.0 RST.CLKHDMIRSTXRO RST";
-  attribute X_INTERFACE_PARAMETER of ClkHdmiRstxRO : signal is "XIL_INTERFACENAME RST.CLKHDMIRSTXRO, INSERT_VIP 0, POLARITY ACTIVE_HIGH";
-  attribute X_INTERFACE_INFO of ClkVgaRstxRNAO : signal is "xilinx.com:signal:reset:1.0 RST.CLKVGARSTXRNAO RST";
-  attribute X_INTERFACE_PARAMETER of ClkVgaRstxRNAO : signal is "XIL_INTERFACENAME RST.CLKVGARSTXRNAO, INSERT_VIP 0, POLARITY ACTIVE_LOW";
-  attribute X_INTERFACE_INFO of ClkVgaRstxRO : signal is "xilinx.com:signal:reset:1.0 RST.CLKVGARSTXRO RST";
-  attribute X_INTERFACE_PARAMETER of ClkVgaRstxRO : signal is "XIL_INTERFACENAME RST.CLKVGARSTXRO, INSERT_VIP 0, POLARITY ACTIVE_HIGH";
+  attribute x_interface_info : string;
+  attribute x_interface_info of ClkHdmixCO : signal is "xilinx.com:signal:clock:1.0 CLK.CLKHDMIXCO CLK";
+  attribute x_interface_parameter : string;
+  attribute x_interface_parameter of ClkHdmixCO : signal is "XIL_INTERFACENAME CLK.CLKHDMIXCO, ASSOCIATED_RESET ClkHdmiRstxRO:ClkHdmiRstxRNAO, CLK_DOMAIN /vga_hdmi_clk_rst_sys_0/vga_hdmi_clock_clk_out1, FREQ_HZ 240000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.0";
+  attribute x_interface_info of ClkVgaxCO : signal is "xilinx.com:signal:clock:1.0 CLK.CLKVGAXCO CLK";
+  attribute x_interface_parameter of ClkVgaxCO : signal is "XIL_INTERFACENAME CLK.CLKVGAXCO, ASSOCIATED_RESET ClkVgaRstxRO:ClkVgaRstxRNAO, CLK_DOMAIN /vga_hdmi_clk_rst_sys_0/vga_hdmi_clock_clk_out1, FREQ_HZ 48000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.0";
+  attribute x_interface_info of PsClockxCI : signal is "xilinx.com:signal:clock:1.0 CLK.PSCLOCKXCI CLK";
+  attribute x_interface_parameter of PsClockxCI : signal is "XIL_INTERFACENAME CLK.PSCLOCKXCI, ASSOCIATED_RESET PsResetxRN, CLK_DOMAIN scalp_zynqps_processing_system7_0_0_FCLK_CLK0, FREQ_HZ 125000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.0";
+  attribute x_interface_info of PsResetxRN : signal is "xilinx.com:signal:reset:1.0 RST.PSRESETXRN RST";
+  attribute x_interface_parameter of PsResetxRN : signal is "XIL_INTERFACENAME RST.PSRESETXRN, INSERT_VIP 0, POLARITY ACTIVE_LOW";
+  attribute x_interface_info of ClkHdmiRstxRNAO : signal is "xilinx.com:signal:reset:1.0 RST.CLKHDMIRSTXRNAO RST";
+  attribute x_interface_parameter of ClkHdmiRstxRNAO : signal is "XIL_INTERFACENAME RST.CLKHDMIRSTXRNAO, INSERT_VIP 0, POLARITY ACTIVE_LOW";
+  attribute x_interface_info of ClkHdmiRstxRO : signal is "xilinx.com:signal:reset:1.0 RST.CLKHDMIRSTXRO RST";
+  attribute x_interface_parameter of ClkHdmiRstxRO : signal is "XIL_INTERFACENAME RST.CLKHDMIRSTXRO, INSERT_VIP 0, POLARITY ACTIVE_HIGH";
+  attribute x_interface_info of ClkVgaRstxRNAO : signal is "xilinx.com:signal:reset:1.0 RST.CLKVGARSTXRNAO RST";
+  attribute x_interface_parameter of ClkVgaRstxRNAO : signal is "XIL_INTERFACENAME RST.CLKVGARSTXRNAO, INSERT_VIP 0, POLARITY ACTIVE_LOW";
+  attribute x_interface_info of ClkVgaRstxRO : signal is "xilinx.com:signal:reset:1.0 RST.CLKVGARSTXRO RST";
+  attribute x_interface_parameter of ClkVgaRstxRO : signal is "XIL_INTERFACENAME RST.CLKVGARSTXRO, INSERT_VIP 0, POLARITY ACTIVE_HIGH";
 begin
   ClkHdmixCO <= \^clkhdmixco\;
   ClkVgaxCO <= \^clkvgaxco\;
