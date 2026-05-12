@@ -7,6 +7,11 @@ WAVEDIR="$SCRIPT_DIR/waves"
 PPMDIR="$SCRIPT_DIR/ppm"
 GHDL_FLAGS="--std=08"
 
+DATE=$(date +%Y%m%d_%H%M%S)
+
+ENGINE_OUTPUT_FILE="$PPMDIR/output_engine_$DATE.ppm"
+PICTURE_GEN_OUTPUT_FILE="$PPMDIR/output_engine_$DATE.ppm"
+
 mkdir -p "$WORKDIR" "$WAVEDIR" "$PPMDIR"
 
 analyse() {
@@ -25,11 +30,18 @@ simulate() {
 # ── Sources (order matters) ───────────────────────────────────────────────────
 analyse "$SCRIPT_DIR/../hdl/mandelbrot_iter.vhd"
 analyse "$SCRIPT_DIR/../hdl/mandelbrot_engine.vhd"
+analyse "$SCRIPT_DIR/../hdl/mandelbrot_picture_gen.vhd"
 
 # ── Testbenches ───────────────────────────────────────────────────────────────
 analyse "$SCRIPT_DIR/tb_mandelbrot_iter.vhd"
 simulate tb_mandelbrot_iter
 
 analyse "$SCRIPT_DIR/tb_mandelbrot_engine.vhd"
-simulate tb_mandelbrot_engine 10000ms # Generates output.ppm
-mv output.ppm "$PPMDIR/output_$(date +%Y%m%d_%H%M%S).ppm"
+simulate tb_mandelbrot_engine 10000ms
+mv output.ppm $ENGINE_OUTPUT_FILE
+
+analyse "$SCRIPT_DIR/tb_mandelbrot_picture_gen.vhd"
+simulate tb_mandelbrot_picture_gen 10000ms # Generates output.ppm
+mv output.ppm $PICTURE_GEN_OUTPUT_FILE
+
+diff $ENGINE_OUTPUT_FILE $PICTURE_GEN_OUTPUT_FILE
