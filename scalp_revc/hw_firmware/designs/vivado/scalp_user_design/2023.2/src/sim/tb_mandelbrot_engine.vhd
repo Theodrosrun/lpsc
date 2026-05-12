@@ -9,8 +9,8 @@ end entity tb_mandelbrot_engine;
 architecture sim of tb_mandelbrot_engine is
     -- Simulation Constants
     constant CLK_PERIOD : time := 10 ns;
-    constant WIDTH      : integer := 800/4;
-    constant HEIGHT     : integer := 600/4;
+    constant WIDTH      : integer := 720/10;
+    constant HEIGHT     : integer := 720/10;
     constant DATA_W     : integer := 18;
     constant FRAC_W     : integer := 15;
     constant MAX_ITER   : integer := 100;
