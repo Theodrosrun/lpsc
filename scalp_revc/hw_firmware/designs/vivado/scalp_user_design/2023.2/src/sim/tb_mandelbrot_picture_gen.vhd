@@ -51,24 +51,27 @@ begin
 
     dut : entity work.mandelbrot_picture_gen
         generic map (
-            WIDTH     => WIDTH,
-            HEIGHT    => HEIGHT,
-            ADDR_BITS => ADDR_BITS,
+            C_BUFFER_WIDTH     => WIDTH,
+            C_BUFFER_HEIGHT    => HEIGHT,
+            C_BRAM_ADDR_BIT_SIZE => ADDR_BITS,
             DATA_W    => 18,
             FRAC_W    => 15,
             MAX_ITER  => MAX_ITER
         )
         port map (
-            clk        => clk,
-            reset      => reset,
-            bram_addr  => bram_addr,
-            bram_data  => bram_data,
-            bram_we   => bram_we,
-            frame_done => frame_done,
-            x0 => X0,
-            y0 => Y0,
-            dx => DX,
-            dy => DY
+                ClkxCI        => clk,
+                RstxRANI      => not reset,
+                
+                X0xDI         => X0,
+                Y0xDI         => Y0,
+                DxxDI         => DX,
+                DyxDI         => DY,
+                
+                BramWrAddrxDO => bram_addr,
+                BramWrDataxDO => bram_data,
+                BramWexSO     => bram_we,
+                
+                FrameDonexSO  => frame_done
         );
 
     -- BRAM write model
