@@ -4,8 +4,8 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-#define WIDTH	  (800 / 4)
-#define HEIGHT	  (600 / 4)
+#define WIDTH	  (720 / 10)
+#define HEIGHT	  (720 / 10)
 #define MAX_ITER  100
 
 // Fixed-point config
@@ -63,9 +63,11 @@ int main(void)
 		int32_t curr_x = double_to_fp(x_min);
 		for (int x = 0; x < WIDTH; x++) {
 			size_t iter = mandelbrot_fixed(curr_x, curr_y);
-			uint8_t r, g, b;
-			get_color(iter, &r, &g, &b);
-			fprintf(fp, "%d %d %d\n", r, g, b);
+			fprintf(fp, "%zu\n", iter);
+
+			// uint8_t r, g, b;
+			// get_color(iter, &r, &g, &b);
+			// fprintf(fp, "%d %d %d\n", r, g, b);
 			curr_x += dx;
 		}
 		curr_y += dy;

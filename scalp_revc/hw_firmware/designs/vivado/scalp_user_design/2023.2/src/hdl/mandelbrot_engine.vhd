@@ -44,7 +44,7 @@ architecture rtl of mandelbrot_engine is
 begin
 
     -- Instantiate your math unit
-    u_math : entity work.mandelbrot_iter
+    mandelbrot_iter : entity work.mandelbrot_iter
         generic map (DATA_W => DATA_W, FRAC_W => FRAC_W)
         port map (
             clk     => clk,
