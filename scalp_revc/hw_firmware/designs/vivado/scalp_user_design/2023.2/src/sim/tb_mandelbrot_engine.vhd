@@ -40,7 +40,7 @@ architecture sim of tb_mandelbrot_engine is
     signal i_im    : signed(DATA_W-1 downto 0) := (others => '0');
     signal i_valid : std_logic := '0';
     signal o_ready : std_logic;
-    signal o_iter  : unsigned(7 downto 0);
+    signal o_iter  : unsigned(6 downto 0);
     signal o_valid : std_logic;
     type rgb_color is array (0 to 2) of integer;
     type palette_t is array (0 to MAX_ITER - 1) of rgb_color;
@@ -64,7 +64,7 @@ architecture sim of tb_mandelbrot_engine is
     ( 255, 142, 28 ), ( 255, 146, 25 ), ( 255, 150, 22 ), ( 255, 154, 19 ), ( 255, 158, 17 ), ( 255, 162, 14 ),
     ( 255, 165, 12 ), ( 255, 169, 10 ), ( 255, 173, 8 ),  ( 255, 177, 6 ));
 
-    procedure write_pixel(file f : text; iter : in unsigned(7 downto 0)) is
+    procedure write_pixel(file f : text; iter : in unsigned(6 downto 0)) is
         variable l : line;
         variable r, g, b : integer;
         variable idx : integer;
