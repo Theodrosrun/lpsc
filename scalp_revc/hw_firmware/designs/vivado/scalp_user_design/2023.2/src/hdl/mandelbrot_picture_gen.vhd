@@ -129,7 +129,7 @@ begin
     end process;
     
     
-    process(all)
+    process(StatexS, HxCntxD, VxCntxD, CurrentRexD, CurrentImxD, X0xD, Y0xD, DxxD, DyxD, EngineReadyxS, EngineOValidxS, EngineIterxD) is
     begin
         -- Default: hold all registers, clear strobes
         NextStatexS         <= StatexS;
