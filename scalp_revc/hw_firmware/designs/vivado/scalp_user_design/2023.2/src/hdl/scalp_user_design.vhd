@@ -591,6 +591,10 @@ begin
         constant C_BRAM_ADDR_BIT_SIZE : integer := 18;
         constant C_VGA_ACTIVE_SIZE    : integer := 720;
 
+        signal ClkUsrRstSync1xR        : std_logic := '1';
+        signal ClkUsrRstSync2xR        : std_logic := '1';
+        signal ClkUsrRstxR             : std_logic := '1';
+        signal ClkUsrRstxRNA           : std_logic := '0';
         signal MandelbrotAnimTimeCntxD : integer range 0 to C_ANIM_PERIOD_CYCLES - 1 := 0;
         signal MandelbrotAnimTickxS    : std_logic := '0';
         signal MandelbrotFrameCntxD  : unsigned(6 downto 0) := (others => '0');
@@ -850,6 +854,20 @@ begin
         MandelbrotxB : block is
         begin
 
+            ClkUsrResetSyncxP : process(ClkUsrxC, Clk125RstxR)
+            begin
+                if Clk125RstxR = '1' then
+                    ClkUsrRstSync1xR <= '1';
+                    ClkUsrRstSync2xR <= '1';
+                elsif rising_edge(ClkUsrxC) then
+                    ClkUsrRstSync1xR <= '0';
+                    ClkUsrRstSync2xR <= ClkUsrRstSync1xR;
+                end if;
+            end process;
+
+            ClkUsrRstxR   <= ClkUsrRstSync2xR;
+            ClkUsrRstxRNA <= not ClkUsrRstxR;
+
             ---------------------------------------------------------------------------
             -- Animation tick generator
             ---------------------------------------------------------------------------
@@ -859,7 +877,7 @@ begin
                 MandelbrotAnimTickxP : process(ClkUsrxC)
                 begin
                     if rising_edge(ClkUsrxC) then
-                        if Clk125RstxR = '1' then
+                        if ClkUsrRstxR = '1' then
                             MandelbrotAnimTimeCntxD <= 0;
                             MandelbrotAnimTickxS    <= '0';
 
@@ -885,7 +903,7 @@ begin
                 MandelbrotFrameCntxP : process(ClkUsrxC)
                 begin
                     if rising_edge(ClkUsrxC) then
-                        if Clk125RstxR = '1' then
+                        if ClkUsrRstxR = '1' then
                             MandelbrotFrameCntxD <= (others => '0');
 
                         elsif MandelbrotAnimTickxS = '1' then
@@ -938,7 +956,7 @@ begin
                     )
                     port map (
                         ClkxCI        => ClkUsrxC,
-                        RstxRANI      => Clk125RstxRNA,
+                        RstxRANI      => ClkUsrRstxRNA,
 
                         X0xDI         => MandelbrotX0xD,
                         Y0xDI         => MandelbrotY0xD,
