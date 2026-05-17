@@ -854,6 +854,9 @@ begin
         MandelbrotxB : block is
         begin
 
+            ---------------------------------------------------------------------------
+            -- Reset synchronizer for user clock domain
+            ---------------------------------------------------------------------------
             ClkUsrResetSyncxP : process(ClkUsrxC)
             begin
                 if rising_edge(ClkUsrxC) then
