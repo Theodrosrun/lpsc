@@ -854,13 +854,10 @@ begin
         MandelbrotxB : block is
         begin
 
-            ClkUsrResetSyncxP : process(ClkUsrxC, Clk125RstxR)
+            ClkUsrResetSyncxP : process(ClkUsrxC)
             begin
-                if Clk125RstxR = '1' then
-                    ClkUsrRstSync1xR <= '1';
-                    ClkUsrRstSync2xR <= '1';
-                elsif rising_edge(ClkUsrxC) then
-                    ClkUsrRstSync1xR <= '0';
+                if rising_edge(ClkUsrxC) then
+                    ClkUsrRstSync1xR <= Clk125RstxR;
                     ClkUsrRstSync2xR <= ClkUsrRstSync1xR;
                 end if;
             end process;
