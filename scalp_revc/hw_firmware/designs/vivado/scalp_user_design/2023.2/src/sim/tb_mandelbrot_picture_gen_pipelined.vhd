@@ -9,8 +9,8 @@ end entity tb_mandelbrot_picture_gen_pipelined;
 architecture sim of tb_mandelbrot_picture_gen_pipelined is
 
     constant CLK_PERIOD : time    := 10 ns;
-    constant WIDTH      : integer := 720/4;
-    constant HEIGHT     : integer := 720/4;
+    constant WIDTH      : integer := 720/10;
+    constant HEIGHT     : integer := 720/10;
     constant ADDR_BITS  : integer := 19;
     constant MAX_ITER   : integer := 100;
     constant DATA_W     : integer := 18;

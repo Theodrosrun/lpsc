@@ -36,6 +36,7 @@ architecture sim of tb_mandelbrot_picture_gen is
 
     signal clk        : std_logic := '0';
     signal reset      : std_logic := '1';
+    signal start      : std_logic := '0';
     signal bram_addr  : std_logic_vector(ADDR_BITS-1 downto 0);
     signal bram_data  : std_logic_vector(6 downto 0);
     signal bram_we   : std_logic_vector(0 downto 0);
@@ -91,7 +92,7 @@ begin
 
     clk <= not clk after CLK_PERIOD / 2;
 
-    dut : entity work.mandelbrot_picture_gen
+    dut : entity work.mandelbrot_picture_gen(fsm)
         generic map (
             C_BUFFER_WIDTH     => WIDTH,
             C_BUFFER_HEIGHT    => HEIGHT,
@@ -103,7 +104,7 @@ begin
         port map (
                 ClkxCI        => clk,
                 RstxRANI      => not reset,
-                
+                StartxDI =>   start,
                 X0xDI         => X0,
                 Y0xDI         => Y0,
                 DxxDI         => DX,
@@ -147,9 +148,14 @@ begin
     begin
         -- Hold reset for a few cycles
         reset <= '1';
+        start <= '0';
         wait for CLK_PERIOD * 4;
         wait until rising_edge(clk);
         reset <= '0';
+        start <= '1';
+        wait for CLK_PERIOD + CLK_PERIOD / 2;
+        wait until rising_edge(clk);
+        start <= '0';
 
         -- Wait for one complete frame
         wait until rising_edge(clk) and frame_done = '1';

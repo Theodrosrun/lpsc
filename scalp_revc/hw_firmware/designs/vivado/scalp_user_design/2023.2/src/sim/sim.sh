@@ -10,9 +10,8 @@ GHDL_FLAGS="--std=08"
 DATE=$(date +%Y%m%d_%H%M%S)
 
 ENGINE_OUTPUT_FILE="$PPMDIR/output_engine_$DATE.ppm"
-ENGINE_PIPELINED_OUTPUT_FILE="$PPMDIR/output_engine_pipeline_$DATE.ppm"
-PICTURE_GEN_OUTPUT_FILE="$PPMDIR/output_engine_$DATE.ppm"
-PICTURE_GEN_PIPELINED_OUTPUT_FILE="$PPMDIR/output_engine_pipeline_$DATE.ppm"
+PICTURE_GEN_OUTPUT_FILE="$PPMDIR/picture_gen_fsm_$DATE.ppm"
+PICTURE_GEN_PIPELINED_OUTPUT_FILE="$PPMDIR/picture_gen_pipeline_$DATE.ppm"
 
 mkdir -p "$WORKDIR" "$WAVEDIR" "$PPMDIR"
 
@@ -32,10 +31,12 @@ simulate() {
 # ── Sources (order matters) ───────────────────────────────────────────────────
 analyse "$SCRIPT_DIR/../hdl/mandelbrot_iter.vhd"
 analyse "$SCRIPT_DIR/../hdl/mandelbrot_iter_combinatorial.vhd"
-analyse "$SCRIPT_DIR/../hdl/mandelbrot_engine.vhd"
-analyse "$SCRIPT_DIR/../hdl/mandelbrot_picture_gen.vhd"
-
 analyse "$SCRIPT_DIR/../hdl/mandelbrot_iter_pipelined.vhd"
+
+analyse "$SCRIPT_DIR/../hdl/mandelbrot_engine.vhd"
+
+analyse "$SCRIPT_DIR/../hdl/mandelbrot_picture_gen.vhd"
+analyse "$SCRIPT_DIR/../hdl/mandelbrot_picture_gen_fsm.vhd"
 analyse "$SCRIPT_DIR/../hdl/mandelbrot_picture_gen_pipelined.vhd"
 
 # ── Testbenches ───────────────────────────────────────────────────────────────
@@ -47,18 +48,22 @@ analyse "$SCRIPT_DIR/tb_mandelbrot_iter_pipelined.vhd"
 analyse "$SCRIPT_DIR/tb_mandelbrot_picture_gen_pipelined.vhd"
 
 # ── Simulate ───────────────────────────────────────────────────────────────
-# simulate tb_mandelbrot_iter
-#simulate tb_mandelbrot_iter_pipelined
-# simulate tb_mandelbrot_engine 10000ms
-# mv output.ppm $ENGINE_OUTPUT_FILE
+simulate tb_mandelbrot_iter
+simulate tb_mandelbrot_iter_pipelined
 
-# simulate tb_mandelbrot_picture_gen 10000ms # Generates output.ppm
-# mv output.ppm $PICTURE_GEN_OUTPUT_FILE
+simulate tb_mandelbrot_engine 10000ms
+mv output.ppm $ENGINE_OUTPUT_FILE
 
-simulate tb_mandelbrot_picture_gen_pipelined 100ms # Generates output.ppm
+simulate tb_mandelbrot_picture_gen 10000ms
+mv output.ppm $PICTURE_GEN_OUTPUT_FILE
+
+simulate tb_mandelbrot_picture_gen_pipelined 100ms
 mv output.ppm $PICTURE_GEN_PIPELINED_OUTPUT_FILE
-echo "Moved to $PICTURE_GEN_PIPELINED_OUTPUT_FILE"
-icat $PICTURE_GEN_PIPELINED_OUTPUT_FILE
 
-# cmp $ENGINE_OUTPUT_FILE $PICTURE_GEN_OUTPUT_FILE
-# cmp $PICTURE_GEN_PIPELINED_OUTPUT_FILE $PICTURE_GEN_OUTPUT_FILE
+echo "Comparing Engine output and picture gen output"
+cmp $ENGINE_OUTPUT_FILE $PICTURE_GEN_OUTPUT_FILE
+
+echo "Comparing picture gen fsm vs pipelined output"
+cmp $PICTURE_GEN_PIPELINED_OUTPUT_FILE $PICTURE_GEN_OUTPUT_FILE
+
+echo "All tests passed"
