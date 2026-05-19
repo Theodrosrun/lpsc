@@ -591,8 +591,6 @@ begin
         constant C_BRAM_ADDR_BIT_SIZE : integer := 18;
         constant C_VGA_ACTIVE_SIZE    : integer := 720;
 
-        signal ClkUsrRstSync1xR        : std_logic := '1';
-        signal ClkUsrRstSync2xR        : std_logic := '1';
         signal ClkUsrRstxR             : std_logic := '1';
         signal ClkUsrRstxRNA           : std_logic := '0';
         signal MandelbrotAnimTimeCntxD : integer range 0 to C_ANIM_PERIOD_CYCLES - 1 := 0;
@@ -857,15 +855,25 @@ begin
             ---------------------------------------------------------------------------
             -- Reset synchronizer for user clock domain
             ---------------------------------------------------------------------------
-            ClkUsrResetSyncxP : process(ClkUsrxC)
-            begin
-                if rising_edge(ClkUsrxC) then
-                    ClkUsrRstSync1xR <= Clk125RstxR;
-                    ClkUsrRstSync2xR <= ClkUsrRstSync1xR;
-                end if;
-            end process;
+            ClkUsrResetSyncxI : entity work.scalp_cdc_sync
+                generic map (
+                    C_CDC_TYPE   => 1,
+                    C_RESET_STATE => 0,
+                    C_SINGLE_BIT => 1,
+                    C_FLOP_INPUT => 1
+                )
+                port map (
+                    PrimaryClkxCAI     => Clk125xC,
+                    PrimaryResetxRNI   => '1',
+                    PrimaryxSI         => Clk125RstxR,
+                    PrimaryxDI         => (others => '0'),
+                    PrimaryAckxSO      => open,
+                    SecondaryClkxCAI   => ClkUsrxC,
+                    SecondaryResetxRNI => '1',
+                    SecondaryxSO       => ClkUsrRstxR,
+                    SecondaryxDO       => open
+                );
 
-            ClkUsrRstxR   <= ClkUsrRstSync2xR;
             ClkUsrRstxRNA <= not ClkUsrRstxR;
 
             ---------------------------------------------------------------------------
