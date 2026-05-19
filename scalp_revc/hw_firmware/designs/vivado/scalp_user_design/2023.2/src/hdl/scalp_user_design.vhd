@@ -882,17 +882,15 @@ begin
             MandelbrotAnimxB : block is
             begin
 
-                MandelbrotAnimTickxP : process(ClkUsrxC)
+                MandelbrotAnimTickxP : process(ClkUsrRstxR, ClkUsrxC)
                 begin
-                    if rising_edge(ClkUsrxC) then
-                        if ClkUsrRstxR = '1' then
+                    if ClkUsrRstxR = '1' then
                             MandelbrotAnimTimeCntxD <= 0;
                             MandelbrotAnimTickxS    <= '0';
-
-                        elsif MandelbrotAnimTimeCntxD = C_ANIM_PERIOD_CYCLES - 1 then
+                    elsif rising_edge(ClkUsrxC) then
+                        if MandelbrotAnimTimeCntxD = C_ANIM_PERIOD_CYCLES - 1 then
                             MandelbrotAnimTimeCntxD <= 0;
                             MandelbrotAnimTickxS    <= '1';
-
                         else
                             MandelbrotAnimTimeCntxD <= MandelbrotAnimTimeCntxD + 1;
                             MandelbrotAnimTickxS    <= '0';
@@ -907,21 +905,19 @@ begin
             ---------------------------------------------------------------------------
             MandelbrotFrameCntxB : block is
             begin
-
-                MandelbrotFrameCntxP : process(ClkUsrxC)
+                MandelbrotFrameCntxP : process(ClkUsrRstxR, ClkUsrxC)
                 begin
-                    if rising_edge(ClkUsrxC) then
                         if ClkUsrRstxR = '1' then
                             MandelbrotFrameCntxD <= (others => '0');
-
-                        elsif MandelbrotAnimTickxS = '1' then
-                            if MandelbrotFrameCntxD = 99 then
-                                MandelbrotFrameCntxD <= (others => '0');
-                            else
-                                MandelbrotFrameCntxD <= MandelbrotFrameCntxD + 1;
+                        elsif rising_edge(ClkUsrxC) then
+                            if MandelbrotAnimTickxS = '1' then
+                                if MandelbrotFrameCntxD = 99 then
+                                    MandelbrotFrameCntxD <= (others => '0');
+                                else
+                                    MandelbrotFrameCntxD <= MandelbrotFrameCntxD + 1;
+                                end if;
                             end if;
                         end if;
-                    end if;
                 end process;
 
             end block MandelbrotFrameCntxB;
@@ -953,7 +949,7 @@ begin
             MandelbrotPictureGenxB : block is
             begin
 
-                MandelbrotPictureGenxI : entity work.mandelbrot_picture_gen
+                MandelbrotPictureGenxI : entity work.mandelbrot_picture_gen(fsm)
                     generic map (
                         C_BUFFER_WIDTH       => C_BUFFER_WIDTH,
                         C_BUFFER_HEIGHT      => C_BUFFER_HEIGHT,
@@ -965,6 +961,7 @@ begin
                     port map (
                         ClkxCI        => ClkUsrxC,
                         RstxRANI      => ClkUsrRstxRNA,
+                        StartxDI      => MandelbrotAnimTickxS,
 
                         X0xDI         => MandelbrotX0xD,
                         Y0xDI         => MandelbrotY0xD,
