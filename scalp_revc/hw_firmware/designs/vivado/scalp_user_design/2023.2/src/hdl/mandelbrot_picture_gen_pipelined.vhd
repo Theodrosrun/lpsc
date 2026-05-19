@@ -317,4 +317,4 @@ begin
 		end if;
 	end process p_engine;
 
-end architecture rtl;
+end architecture pipelined;
