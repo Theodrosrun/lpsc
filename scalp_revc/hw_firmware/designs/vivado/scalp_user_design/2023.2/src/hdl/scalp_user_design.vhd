@@ -583,7 +583,7 @@ begin
 
     PLxB : block is
         constant C_CLK_FREQ_HZ        : integer := 12500000;
-        constant C_ANIM_PERIOD_MS     : integer := 25;
+        constant C_ANIM_PERIOD_MS     : integer := 10;
         constant C_ANIM_PERIOD_CYCLES : integer := (C_CLK_FREQ_HZ / 1000) * C_ANIM_PERIOD_MS;
         constant C_MAX_ITER           : integer := 100;
         constant C_BUFFER_WIDTH       : integer := 512;
@@ -603,6 +603,7 @@ begin
         signal MandelbrotFrameDonexS : std_logic := '0';
         signal MandelbrotStartxS : std_logic := '0';
         signal FrameReadyxS      : std_logic;
+        signal AnimTickReadyxS      : std_logic;
         signal BramWrAddrxD  : std_logic_vector((C_BRAM_ADDR_BIT_SIZE - 1) downto 0) := (others => '0');
         signal BramRdAddrxD  : std_logic_vector((C_BRAM_ADDR_BIT_SIZE - 1) downto 0) := (others => '0');
         signal BramWrDataxD  : std_logic_vector(6 downto 0) := (others => '0');
@@ -937,15 +938,20 @@ begin
                     if ClkUsrRstxR = '1' then
                         MandelbrotStartxS <= '0';
                         FrameReadyxS      <= '1';
+                        AnimTickReadyxS <= '1';
                     elsif rising_edge(ClkUsrxC) then
                         MandelbrotStartxS <= '0';
 
                         if MandelbrotFrameDonexS = '1' then
                             FrameReadyxS <= '1';
                         end if;
-			
-                        if MandelbrotAnimTickxS = '1' and FrameReadyxS = '1' then
+                        if MandelbrotAnimTickxS = '1' then
+                           AnimTickReadyxS <= '1';
+                        end if;
+
+                        if AnimTickReadyxS = '1' and FrameReadyxS = '1' then
                             MandelbrotStartxS <= '1';
+                            AnimTickReadyxS   <= '0';
                             FrameReadyxS      <= '0';
                         end if;
                     end if;
@@ -991,7 +997,7 @@ begin
                     port map (
                         ClkxCI        => ClkUsrxC,
                         RstxRANI      => ClkUsrRstxRNA,
-                        StartxDI      => MandelbrotAnimTickxS,
+                        StartxDI      => MandelbrotStartxS,
 
                         X0xDI         => MandelbrotX0xD,
                         Y0xDI         => MandelbrotY0xD,
