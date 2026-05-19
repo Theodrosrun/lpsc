@@ -601,6 +601,8 @@ begin
         signal MandelbrotDxxD        : signed(17 downto 0) := (others => '0');
         signal MandelbrotDyxD        : signed(17 downto 0) := (others => '0');
         signal MandelbrotFrameDonexS : std_logic := '0';
+        signal MandelbrotStartxS : std_logic := '0';
+        signal FrameReadyxS      : std_logic;
         signal BramWrAddrxD  : std_logic_vector((C_BRAM_ADDR_BIT_SIZE - 1) downto 0) := (others => '0');
         signal BramRdAddrxD  : std_logic_vector((C_BRAM_ADDR_BIT_SIZE - 1) downto 0) := (others => '0');
         signal BramWrDataxD  : std_logic_vector(6 downto 0) := (others => '0');
@@ -910,7 +912,7 @@ begin
                         if ClkUsrRstxR = '1' then
                             MandelbrotFrameCntxD <= (others => '0');
                         elsif rising_edge(ClkUsrxC) then
-                            if MandelbrotAnimTickxS = '1' then
+                            if MandelbrotFrameDonexS = '1' then
                                 if MandelbrotFrameCntxD = 99 then
                                     MandelbrotFrameCntxD <= (others => '0');
                                 else
@@ -922,6 +924,34 @@ begin
 
             end block MandelbrotFrameCntxB;
 
+            ---------------------------------------------------------------------------
+            -- Start gate: pulse Start only when the timer fires AND the previous
+            --             frame is already done.  Tracks "pending" ticks so a slow
+            --             render never drops an animation tick silently.
+            ---------------------------------------------------------------------------
+            MandelbrotStartGatexB : block is
+            begin
+            
+                MandelbrotStartGatexP : process(ClkUsrRstxR, ClkUsrxC)
+                begin
+                    if ClkUsrRstxR = '1' then
+                        MandelbrotStartxS <= '0';
+                        FrameReadyxS      <= '1';
+                    elsif rising_edge(ClkUsrxC) then
+                        MandelbrotStartxS <= '0';
+
+                        if MandelbrotFrameDonexS = '1' then
+                            FrameReadyxS <= '1';
+                        end if;
+			
+                        if MandelbrotAnimTickxS = '1' and FrameReadyxS = '1' then
+                            MandelbrotStartxS <= '1';
+                            FrameReadyxS      <= '0';
+                        end if;
+                    end if;
+                end process;
+            
+            end block MandelbrotStartGatexB;
             ---------------------------------------------------------------------------
             -- Zoom parameter generator
             ---------------------------------------------------------------------------
