@@ -1,7 +1,7 @@
 {
    "ActiveEmotionalView":"Default View",
    "Default View_ScaleFactor":"0.871201",
-   "Default View_TopLeft":"535,1119",
+   "Default View_TopLeft":"-247,1090",
    "ExpandedHierarchyInLayout":"",
    "comment_0":"According to screen resolution, 
 the clock frequencies can be 
@@ -73,7 +73,8 @@ preplace netloc scalp_axi_link_0_SAxiMstRstxRANO 1 3 1 1450J 1460n
 preplace netloc scalp_axi_link_cplx_num_regs_SAxiMstClkxCO 1 3 1 1390J 1160n
 preplace netloc scalp_axi_link_cplx_num_regs_SAxiMstRstxRANO 1 3 1 1410J 1190n
 preplace netloc sys_clock_clk_126 1 0 4 -20 1160 510 440 1010 1560 1370J
-preplace netloc sys_clock_locked 1 1 3 550 1370 910 1370 NJ
+preplace netloc sys_clock_clk_usr 1 2 2 910J 1600 NJ
+preplace netloc sys_clock_locked 1 1 3 550 1370 940 1370 NJ
 preplace netloc vga_hdmi_clk_rst_sys_0_ClkHdmiRstxRNAO 1 3 1 1370J -10n
 preplace netloc vga_hdmi_clk_rst_sys_0_ClkHdmiRstxRO 1 3 1 1380J 20n
 preplace netloc vga_hdmi_clk_rst_sys_0_ClkHdmixCO 1 3 1 1390J 50n
@@ -82,7 +83,6 @@ preplace netloc vga_hdmi_clk_rst_sys_0_ClkVgaRstxRO 1 3 1 1410J 110n
 preplace netloc vga_hdmi_clk_rst_sys_0_ClkVgaxCO 1 3 1 1370J 140n
 preplace netloc vga_hdmi_clk_rst_sys_0_VgaHdmiClkPllLockedxSO 1 3 1 NJ 170
 preplace netloc xlconcat_0_dout 1 2 1 990 530n
-preplace netloc sys_clock_clk_usr 1 2 2 910J 1600 NJ
 preplace netloc axi_gpio_0_GPIO 1 3 1 NJ 740
 preplace netloc axi_gpio_joystick_GPIO 1 3 1 NJ 300
 preplace netloc axi_gpio_reset_btn_GPIO 1 3 1 NJ 610

@@ -2,10 +2,10 @@
 // Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
-// Date        : Tue May 12 18:34:52 2026
+// Date        : Tue May 19 19:05:16 2026
 // Host        : theodros-ThinkPad-P16s-Gen-2 running 64-bit Ubuntu 24.04.2 LTS
-// Command     : write_verilog -force -mode funcsim -rename_top scalp_zynqps_sys_clock_0 -prefix
-//               scalp_zynqps_sys_clock_0_ scalp_zynqps_sys_clock_0_sim_netlist.v
+// Command     : write_verilog -force -mode funcsim
+//               /home/theodros/Documents/Master/LPSC/scalp_revc/hw_firmware/designs/vivado/scalp_user_design/2023.2/lin64/.scripts/scalp_zynqps/ip/scalp_zynqps_sys_clock_0/scalp_zynqps_sys_clock_0_sim_netlist.v
 // Design      : scalp_zynqps_sys_clock_0
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -32,7 +32,7 @@ module scalp_zynqps_sys_clock_0
   wire locked;
   wire resetn;
 
-  scalp_zynqps_sys_clock_0_scalp_zynqps_sys_clock_0_clk_wiz inst
+  scalp_zynqps_sys_clock_0_clk_wiz inst
        (.clk_125(clk_125),
         .clk_in1(clk_in1),
         .clk_usr(clk_usr),
@@ -40,7 +40,7 @@ module scalp_zynqps_sys_clock_0
         .resetn(resetn));
 endmodule
 
-module scalp_zynqps_sys_clock_0_scalp_zynqps_sys_clock_0_clk_wiz
+module scalp_zynqps_sys_clock_0_clk_wiz
    (clk_125,
     clk_usr,
     resetn,
@@ -98,16 +98,16 @@ module scalp_zynqps_sys_clock_0_scalp_zynqps_sys_clock_0_clk_wiz
   (* BOX_TYPE = "PRIMITIVE" *) 
   MMCME2_ADV #(
     .BANDWIDTH("OPTIMIZED"),
-    .CLKFBOUT_MULT_F(8.000000),
+    .CLKFBOUT_MULT_F(9.000000),
     .CLKFBOUT_PHASE(0.000000),
     .CLKFBOUT_USE_FINE_PS("FALSE"),
     .CLKIN1_PERIOD(8.000000),
     .CLKIN2_PERIOD(0.000000),
-    .CLKOUT0_DIVIDE_F(8.000000),
+    .CLKOUT0_DIVIDE_F(9.000000),
     .CLKOUT0_DUTY_CYCLE(0.500000),
     .CLKOUT0_PHASE(0.000000),
     .CLKOUT0_USE_FINE_PS("FALSE"),
-    .CLKOUT1_DIVIDE(8),
+    .CLKOUT1_DIVIDE(15),
     .CLKOUT1_DUTY_CYCLE(0.500000),
     .CLKOUT1_PHASE(0.000000),
     .CLKOUT1_USE_FINE_PS("FALSE"),

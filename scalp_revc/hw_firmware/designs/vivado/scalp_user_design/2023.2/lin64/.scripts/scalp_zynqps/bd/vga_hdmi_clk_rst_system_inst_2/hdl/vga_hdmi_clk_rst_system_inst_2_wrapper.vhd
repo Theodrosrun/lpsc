@@ -2,7 +2,7 @@
 --Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
---Date        : Tue May 12 18:53:58 2026
+--Date        : Tue May 19 19:04:52 2026
 --Host        : theodros-ThinkPad-P16s-Gen-2 running 64-bit Ubuntu 24.04.2 LTS
 --Command     : generate_target vga_hdmi_clk_rst_system_inst_2_wrapper.bd
 --Design      : vga_hdmi_clk_rst_system_inst_2_wrapper
