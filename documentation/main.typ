@@ -66,3 +66,7 @@
 
 
 ///////////////////////////Document starts/////////////////////////////
+
+TODO: Mesurer le nombre d'itérations avec vio
+TODO: Ajouter les scripts de test
+
