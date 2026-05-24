@@ -78,7 +78,7 @@ architecture pipelined of mandelbrot_picture_gen is
 
 begin
 
-	u_iter : entity work.mandelbrot_iter
+	u_iter : entity work.mandelbrot_iter(pipelined)
 	generic map (DATA_W => DATA_W, FRAC_W => FRAC_W)
 	port map (
 			 clk     => ClkxCI,
