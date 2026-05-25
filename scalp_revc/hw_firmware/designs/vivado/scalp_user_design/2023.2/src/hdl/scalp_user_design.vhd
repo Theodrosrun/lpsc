@@ -582,7 +582,7 @@ begin
     end block PSxB;
 
     PLxB : block is
-        constant C_CLK_FREQ_HZ        : integer := 12500000;
+        constant C_CLK_FREQ_HZ        : integer := 125000000;
         constant C_ANIM_PERIOD_MS     : integer := 10;
         constant C_ANIM_PERIOD_CYCLES : integer := (C_CLK_FREQ_HZ / 1000) * C_ANIM_PERIOD_MS;
         constant C_MAX_ITER           : integer := 100;
