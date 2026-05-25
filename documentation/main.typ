@@ -45,7 +45,7 @@
 
   //===========Page style===============
   pagebreak-section: false, //For pagebreak after adding a new level one heading (=)
-  show-outline: false, //true or false
+  show-outline: true, //true or false
   page-paper: "a4",
 
   //-----chic header package----
@@ -64,7 +64,6 @@
   //For more customitation you can check the documentation. !! Enjoy :D !!
 )
 
-
 ///////////////////////////Document starts/////////////////////////////
 
 TODO: Mesurer le nombre d'itérations avec vio
@@ -76,7 +75,7 @@ The purpose of this laboratory work is to implement a hardware-based fractal ima
 
 The system is written in VHDL and integrated in the `scalp_user_design` top-level module. It uses a BRAM memory as a framebuffer, a pixel coordinate generator, a Mandelbrot computation engine, an iteration unit, a color palette and a VGA interface.
 
-Several architectures were implemented and compared. A first version uses a finite state machine and a simple iterative computation flow. A second version improves the design by using pipelining, both in the Mandelbrot iteration unit and in the picture generation architecture. The goal is to evaluate the impact of pipelining on timing performance and maximum operating frequency.
+Several architectures were implemented and compared. The first version uses a finite state machine and a sequential computation flow. The second version improves the design by using pipelining in the computation path and in the picture generation architecture. The objective is to evaluate the impact of pipelining on timing performance, frame generation time and maximum operating frequency.
 
 = Mathematical principle
 
@@ -94,7 +93,7 @@ $
   z_n = z_"re" + j z_"im"
 $
 
-By separating real and imaginary parts, the equations become:
+By separating the real and imaginary parts, the equations become:
 
 $
   z_"re"(n+1) = z_"re"(n)^2 - z_"im"(n)^2 + c_"re"
@@ -122,7 +121,7 @@ reg_c_im <= to_signed(11633, DATA_W);
 The design uses fixed-point arithmetic with `FRAC_W = 15`. Therefore, the value `11633` corresponds approximately to:
 
 $
-  11633 / 2^15 approx 0.355
+  11633 / 2^15 ≈ 0.355
 $
 
 Thus, the complex constant used is approximately:
@@ -133,7 +132,7 @@ $
 
 = Fixed-point representation
 
-The design uses signed fixed-point arithmetic instead of floating-point arithmetic. This is more suitable for FPGA implementation because it reduces resource usage and avoids the need for expensive floating-point operators.
+The design uses signed fixed-point arithmetic instead of floating-point arithmetic. This is more suitable for FPGA implementation because it reduces resource usage and avoids expensive floating-point operators.
 
 The main numerical parameters are:
 
@@ -151,7 +150,7 @@ $
 For example:
 
 $
-  0.355 dot 32768 approx 11633
+  0.355 * 32768 ≈ 11633
 $
 
 The use of fixed-point arithmetic provides a good compromise between precision and hardware cost. The precision is sufficient to generate a correct fractal image, while the arithmetic units remain small enough for FPGA implementation.
@@ -203,9 +202,33 @@ mandelbrot_picture_gen(fsm)
 mandelbrot_picture_gen(pipelined)
 ```
 
+== FSM picture generator
+
 The FSM version processes one pixel at a time. It waits for the Mandelbrot engine to finish the computation of the current pixel before moving to the next one.
 
-The pipelined version improves throughput by overlapping operations and reducing idle time. This version is more complex, but it allows the design to reach a higher operating frequency.
+This architecture is simple and easy to debug because the control flow is sequential:
+
+```text
+Start frame
+  ↓
+Generate pixel coordinate
+  ↓
+Start Mandelbrot engine
+  ↓
+Wait for result
+  ↓
+Write iteration count to BRAM
+  ↓
+Move to next pixel
+  ↓
+End frame
+```
+
+The drawback is that the next pixel cannot be started until the current pixel is finished. Therefore, the global throughput is limited.
+
+== Pipelined picture generator
+
+The pipelined version improves throughput by overlapping operations and reducing idle time. This version is more complex, but it allows the design to reach a higher operating frequency and a shorter frame generation time.
 
 In the top-level design, the selected architecture is defined by the instantiation:
 
@@ -276,7 +299,7 @@ This version is useful as a reference implementation, but it is not optimal for 
 
 == Pipelined iteration unit
 
-In the pipelined version, the arithmetic operations are split into several stages separated by registers. This reduces the delay of each combinational stage and improves the timing performance.
+In the pipelined version, the arithmetic operations are split into several stages separated by registers. This reduces the delay of each combinational stage and improves timing performance.
 
 The drawback is that the result is not available immediately. It appears after the pipeline latency. However, this is not a problem because the Mandelbrot engine waits for `math_o_valid` before continuing.
 
@@ -286,7 +309,7 @@ To explicitly select the pipelined version, the instantiation should be written 
 mandelbrot_iter : entity work.mandelbrot_iter(pipelined)
 ```
 
-To explicitly select the combinational version, the instantiation should be:
+To explicitly select the combinational version, the instantiation should be written as:
 
 ```vhdl
 mandelbrot_iter : entity work.mandelbrot_iter(combinatorial)
@@ -294,7 +317,7 @@ mandelbrot_iter : entity work.mandelbrot_iter(combinatorial)
 
 It is recommended to always specify the architecture explicitly. Otherwise, the selected architecture may depend on the compilation order in Vivado.
 
-= Possible architecture combinations
+= Architecture combinations
 
 The implemented design allows several combinations between the picture generator and the iteration unit.
 
@@ -308,9 +331,9 @@ Pipelined picture generator + pipelined iteration unit
 
 The first combination is the simplest one. It is easy to understand and useful for validation, but it has the lowest performance.
 
-The second combination keeps the FSM-based control but improves the arithmetic timing by using a pipelined iteration unit.
+The second combination keeps the FSM-based control but improves arithmetic timing by using a pipelined iteration unit.
 
-The third combination is the most optimized version. It uses both a pipelined picture generator and a pipelined iteration unit. This is the version that provides the best timing results.
+The third combination is the most optimized version. It uses both a pipelined picture generator and a pipelined iteration unit. This is the version that provides the best performance.
 
 = Framebuffer memory
 
@@ -370,8 +393,6 @@ Port B Width = 7
 Port B Depth = 262144
 ```
 
-The width of 7 bits corresponds to the stored iteration value, while the depth of 262144 corresponds to the total number of pixels in the 512 x 512 framebuffer.
-
 This memory organization reduces the required BRAM resources compared to storing full RGB values. The framebuffer only stores the iteration count, and the final color is generated later by the palette module during display.
 
 = VGA scaling
@@ -399,12 +420,10 @@ Then the BRAM read address is computed with:
 BramRdAddrxD := (VxScaledxD * C_BUFFER_WIDTH) + HxScaledxD;
 ```
 
-This means that the display coordinate is mapped to the corresponding pixel in the 512 x 512 framebuffer.
-
 The scaling factor is:
 
 $
-  720 / 512 approx 1.406
+  720 / 512 ≈ 1.406
 $
 
 As a result, the 512 x 512 image is enlarged to fill the 720 x 720 display area. This approach reduces memory usage and computation time, because only 262144 pixels need to be generated instead of 518400 pixels for a full 720 x 720 framebuffer.
@@ -425,14 +444,126 @@ Pixels that diverge quickly receive one color, while pixels that require more it
 
 This separation between computation and color generation is useful because the framebuffer only stores the iteration count, not the full RGB value. This reduces memory usage.
 
+= Simulation and test script
+
+A simulation script was created to automate the validation of the main Mandelbrot hardware blocks. The script uses GHDL to analyse, elaborate and simulate the VHDL sources and their corresponding testbenches.
+
+The script is located in:
+
+```text
+sim.sh
+```
+
+Its role is to compile the design files in the correct order, run the different testbenches, generate waveform files, and compare the generated image outputs.
+
+The script first creates three output directories:
+
+```bash
+WORKDIR="$SCRIPT_DIR/work"
+WAVEDIR="$SCRIPT_DIR/waves"
+PPMDIR="$SCRIPT_DIR/ppm"
+```
+
+The `work` directory is used by GHDL for compilation files, the `waves` directory stores the generated VCD waveform files, and the `ppm` directory stores the generated image outputs.
+
+The script defines two helper functions:
+
+```bash
+analyse() {
+    echo "Analysing $1..."
+    ghdl -a $GHDL_FLAGS --workdir="$WORKDIR" "$1"
+}
+
+simulate() {
+    local tb="$1"
+    local stop_time="${2:-10us}"
+    echo "── Running $tb ──"
+    ghdl -e $GHDL_FLAGS --workdir="$WORKDIR" -o "$WORKDIR/$tb" "$tb"
+    "$WORKDIR/$tb" --vcd="$WAVEDIR/$tb.vcd" --stop-time="$stop_time"
+}
+```
+
+The `analyse` function compiles a VHDL source file with GHDL. The `simulate` function elaborates a testbench, runs the simulation, and exports a VCD waveform file.
+
+The compilation order is important because several architectures depend on common entities. The script first analyses the Mandelbrot iteration unit and its two architectures:
+
+```bash
+analyse "$SCRIPT_DIR/../hdl/mandelbrot_iter.vhd"
+analyse "$SCRIPT_DIR/../hdl/mandelbrot_iter_combinatorial.vhd"
+analyse "$SCRIPT_DIR/../hdl/mandelbrot_iter_pipelined.vhd"
+```
+
+Then it compiles the Mandelbrot engine and the picture generator architectures:
+
+```bash
+analyse "$SCRIPT_DIR/../hdl/mandelbrot_engine.vhd"
+
+analyse "$SCRIPT_DIR/../hdl/mandelbrot_picture_gen.vhd"
+analyse "$SCRIPT_DIR/../hdl/mandelbrot_picture_gen_fsm.vhd"
+analyse "$SCRIPT_DIR/../hdl/mandelbrot_picture_gen_pipelined.vhd"
+```
+
+After the design files, the script compiles the testbenches:
+
+```bash
+analyse "$SCRIPT_DIR/tb_mandelbrot_iter.vhd"
+analyse "$SCRIPT_DIR/tb_mandelbrot_engine.vhd"
+analyse "$SCRIPT_DIR/tb_mandelbrot_picture_gen.vhd"
+
+analyse "$SCRIPT_DIR/tb_mandelbrot_iter_pipelined.vhd"
+analyse "$SCRIPT_DIR/tb_mandelbrot_picture_gen_pipelined.vhd"
+```
+
+The following simulations are then executed:
+
+```bash
+simulate tb_mandelbrot_iter
+simulate tb_mandelbrot_iter_pipelined
+
+simulate tb_mandelbrot_engine 10000ms
+simulate tb_mandelbrot_picture_gen 10000ms
+simulate tb_mandelbrot_picture_gen_pipelined 100ms
+```
+
+The iteration unit testbenches validate the elementary Mandelbrot iteration step. The engine testbench validates the complete iterative computation for one or more pixels. The picture generator testbenches validate the complete frame generation flow for both the FSM and pipelined architectures.
+
+The testbenches generate PPM image files. The script renames the generated files with a timestamp in order to keep the results of each run:
+
+```bash
+ENGINE_OUTPUT_FILE="$PPMDIR/output_engine_$DATE.ppm"
+PICTURE_GEN_OUTPUT_FILE="$PPMDIR/picture_gen_fsm_$DATE.ppm"
+PICTURE_GEN_PIPELINED_OUTPUT_FILE="$PPMDIR/picture_gen_pipeline_$DATE.ppm"
+```
+
+After simulation, the script compares the generated images using `cmp`:
+
+```bash
+cmp $ENGINE_OUTPUT_FILE $PICTURE_GEN_OUTPUT_FILE
+cmp $PICTURE_GEN_PIPELINED_OUTPUT_FILE $PICTURE_GEN_OUTPUT_FILE
+```
+
+The first comparison checks that the Mandelbrot engine and the FSM picture generator produce the same image output. The second comparison checks that the pipelined picture generator produces the same image as the FSM version.
+
+This is important because the pipelined implementation changes the internal timing of the design, but it must not change the final computed result. If the generated PPM files are identical, the functional behaviour of the FSM and pipelined versions is equivalent.
+
+If all comparisons succeed, the script prints:
+
+```text
+All tests passed
+```
+
+This confirms that the tested Mandelbrot blocks are functionally correct and that the FSM and pipelined architectures generate the same image output.
+
 = Timing analysis
 
-Vivado timing reports were used to evaluate the maximum operating frequency of the design. Two implementations were compared: a baseline implementation and a pipelined implementation.
+Vivado timing reports were used to evaluate the maximum operating frequency of the design. Two implementations were compared: a baseline FSM implementation and a pipelined implementation.
 
-The baseline implementation was constrained at 75 MHz. The corresponding clock period is:
+== FSM implementation
+
+The FSM implementation was constrained at 75 MHz. The corresponding clock period is:
 
 $
-  T = 1 / 75 " MHz" = 13.333 " ns"
+  T = 1 / 75 "MHz" = 13.333 "ns"
 $
 
 Vivado reported:
@@ -444,19 +575,21 @@ Worst Negative Slack = 0.512 ns
 Because the slack is positive, all timing constraints are met. The estimated critical path delay is:
 
 $
-  13.333 " ns" - 0.512 " ns" = 12.821 " ns"
+  13.333 "ns" - 0.512 "ns" = 12.821 "ns"
 $
 
 The estimated maximum frequency is therefore:
 
 $
-  f_"max" = 1 / 12.821 " ns" approx 78 " MHz"
+  f_"max" = 1 / 12.821 "ns" ≈ 78 "MHz"
 $
+
+== Pipelined implementation
 
 The pipelined implementation was constrained at 125 MHz. The corresponding clock period is:
 
 $
-  T = 1 / 125 " MHz" = 8 " ns"
+  T = 1 / 125 "MHz" = 8 "ns"
 $
 
 Vivado reported:
@@ -465,17 +598,19 @@ Vivado reported:
 Worst Negative Slack = 0.857 ns
 ```
 
-The estimated critical path delay is:
+Because the slack is positive, all timing constraints are met. The estimated critical path delay is:
 
 $
-  8 " ns" - 0.857 " ns" = 7.143 " ns"
+  8 "ns" - 0.857 "ns" = 7.143 "ns"
 $
 
-The estimated maximum frequency is:
+The estimated maximum frequency is therefore:
 
 $
-  f_"max" = 1 / 7.143 " ns" approx 140 " MHz"
+  f_"max" = 1 / 7.143 "ns" ≈ 140 "MHz"
 $
+
+== Timing comparison
 
 The comparison is summarized below:
 
@@ -483,122 +618,145 @@ The comparison is summarized below:
   columns: 6,
   align: center,
   [Architecture], [Constraint], [Period], [WNS], [Critical path], [Estimated Fmax],
-  [Baseline], [75 MHz], [13.333 ns], [0.512 ns], [12.821 ns], [78 MHz],
+  [FSM], [75 MHz], [13.333 ns], [0.512 ns], [12.821 ns], [78 MHz],
   [Pipelined], [125 MHz], [8.000 ns], [0.857 ns], [7.143 ns], [140 MHz],
 )
 
-The operating frequency increased from 75 MHz to 125 MHz:
+The validated operating frequency increased from 75 MHz to 125 MHz:
 
 $
   125 / 75 = 1.67
 $
 
-This corresponds to an improvement of approximately 66.7 percent.
+This corresponds to an improvement of approximately:
+
+$
+  (125 / 75 - 1) * 100 ≈ 66.7 %
+$
 
 If the estimated maximum frequencies are compared, the improvement is:
 
 $
-  140 / 78 approx 1.79
+  140 / 78 ≈ 1.79
 $
 
-which corresponds to approximately 79 percent.
+which corresponds to approximately:
 
-This improvement is mainly due to the reduction of the critical path. In the baseline version, several arithmetic operations are chained in the same combinational path. In the pipelined version, these operations are separated by registers, which allows the FPGA to operate at a higher clock frequency.
+$
+  (140 / 78 - 1) * 100 ≈ 79 %
+$
 
-= Frame generation time measurement
+This improvement is mainly due to the reduction of the critical path. In the FSM version, several arithmetic operations are chained in the same combinational path. In the pipelined version, these operations are separated by registers, which allows the FPGA to operate at a higher clock frequency.
 
-The generation time of a complete frame can be measured by adding a cycle counter and reading it with a VIO core in Vivado Hardware Manager.
+= Frame generation time
 
-The design already provides a frame-complete signal:
+The frame generation time was measured for both implemented architectures. The measurement corresponds to the time required to compute one complete 512 x 512 framebuffer. It does not correspond to the VGA refresh time, because the VGA interface only reads and scales the already generated framebuffer for display.
 
-```vhdl
-MandelbrotFrameDonexS
-```
+== FSM frame generation time
 
-The measurement principle is:
+For the FSM version running at 75 MHz, the measured frame generation count is:
 
 ```text
-Start frame generation
-      ↓
-Reset cycle counter
-      ↓
-Increment counter every clock cycle
-      ↓
-Stop when MandelbrotFrameDonexS is asserted
-      ↓
-Read final counter value with VIO
+27,400,456 clock cycles
 ```
 
-A possible VHDL implementation is:
-
-```vhdl
-signal FrameCycleCntxD     : unsigned(31 downto 0) := (others => '0');
-signal LastFrameCycleCntxD : unsigned(31 downto 0) := (others => '0');
-signal FrameMeasuringxS    : std_logic := '0';
-
-process(ClkUsrxC, ClkUsrRstxRNA)
-begin
-    if ClkUsrRstxRNA = '0' then
-        FrameCycleCntxD     <= (others => '0');
-        LastFrameCycleCntxD <= (others => '0');
-        FrameMeasuringxS    <= '0';
-
-    elsif rising_edge(ClkUsrxC) then
-
-        if MandelbrotStartxS = '1' then
-            FrameCycleCntxD  <= (others => '0');
-            FrameMeasuringxS <= '1';
-
-        elsif FrameMeasuringxS = '1' then
-            FrameCycleCntxD <= FrameCycleCntxD + 1;
-        end if;
-
-        if MandelbrotFrameDonexS = '1' and FrameMeasuringxS = '1' then
-            LastFrameCycleCntxD <= FrameCycleCntxD;
-            FrameMeasuringxS    <= '0';
-        end if;
-
-    end if;
-end process;
-```
-
-The signal `LastFrameCycleCntxD` is connected to an input probe of the VIO core. The value can then be read directly in Vivado Hardware Manager.
-
-At 125 MHz, the frame generation time is:
+The frame generation time is:
 
 $
-  t_"frame" = "cycle count" / 125000000
+  t_"frame" = 27400456 / 75000000
 $
 
-In milliseconds:
-
 $
-  t_"frame,ms" = "cycle count" / 125000
+  t_"frame" ≈ 0.365 "s"
 $
 
-For example, if the VIO reports:
+Therefore:
+
+$
+  t_"frame" ≈ 365 "ms"
+$
+
+The corresponding frame rate is:
+
+$
+  "FPS" = 1 / 0.365 ≈ 2.74
+$
+
+Thus, the FSM version generates approximately:
 
 ```text
-LastFrameCycleCntxD = 12500000
+2.74 FPS
 ```
 
-then the frame generation time is:
+== Pipelined frame generation time
+
+For the pipelined version running at 125 MHz, the measured frame generation count is:
+
+```text
+12,993,601 clock cycles
+```
+
+The frame generation time is:
 
 $
-  12500000 / 125000000 = 0.1 " s" = 100 " ms"
+  t_"frame" = 12993601 / 125000000
 $
 
-This measurement corresponds to the time required to compute and fill the framebuffer. It does not correspond to the VGA refresh time, which is determined by the video timing.
+$
+  t_"frame" ≈ 0.10395 "s"
+$
+
+Therefore:
+
+$
+  t_"frame" ≈ 104 "ms"
+$
+
+The corresponding frame rate is:
+
+$
+  "FPS" = 1 / 0.10395 ≈ 9.62
+$
+
+Thus, the pipelined version generates approximately:
+
+```text
+9.62 FPS
+```
+
+== Frame generation comparison
+
+The comparison is summarized below:
+
+#table(
+  columns: 5,
+  align: center,
+  [Architecture], [Clock], [Cycles per frame], [Frame time], [Frame rate],
+  [FSM], [75 MHz], [27,400,456], [365 ms], [2.74 FPS],
+  [Pipelined], [125 MHz], [12,993,601], [104 ms], [9.62 FPS],
+)
+
+The frame time improvement is:
+
+$
+  365 / 104 ≈ 3.51
+$
+
+Therefore, the pipelined version generates a complete frame approximately 3.5 times faster than the FSM version.
+
+This improvement comes from two effects. First, the pipelined version runs at a higher clock frequency. Second, it requires fewer cycles per frame because the computation flow has less idle time and better overlaps the internal operations.
 
 = Discussion
 
 The results show that the Mandelbrot algorithm is well suited for FPGA implementation. The computation is repetitive and can be mapped efficiently to hardware using fixed-point arithmetic.
 
-The FSM-based architecture is simple and easy to debug, but its performance is limited because it processes the computation sequentially. The pipelined architecture is more complex, but it significantly improves the timing performance.
+The FSM-based architecture is simple and easy to debug, but its performance is limited because it processes the computation sequentially. The pipelined architecture is more complex, but it significantly improves both timing performance and frame generation time.
 
-The timing comparison shows that pipelining reduces the critical path from approximately 12.821 ns to 7.143 ns. As a result, the design can run at 125 MHz with positive slack, whereas the baseline implementation was limited to approximately 75 MHz.
+The timing comparison shows that pipelining reduces the critical path from approximately 12.821 ns to 7.143 ns. As a result, the design can run at 125 MHz with positive slack, whereas the FSM implementation was validated at 75 MHz.
 
-The framebuffer resolution also has an important impact on memory usage and generation time. In this implementation, a 512 x 512 framebuffer is used, which corresponds to 262144 pixels. This choice reduces the required BRAM size and decreases the number of pixels that must be computed for each frame.
+The frame generation comparison also shows a clear improvement. The FSM version generates one frame in approximately 365 ms, while the pipelined version generates one frame in approximately 104 ms. This corresponds to an improvement factor of approximately 3.5.
+
+The framebuffer resolution also has an important impact on memory usage and generation time. In this implementation, a 512 x 512 framebuffer is used, corresponding to 262144 pixels. This choice reduces the required BRAM size and decreases the number of pixels that must be computed for each frame.
 
 The VGA active area is 720 x 720 pixels, but the framebuffer is scaled during display. This means that the generated 512 x 512 image is enlarged to fill the screen. This is a good compromise between image quality, memory usage and frame generation time.
 
@@ -610,6 +768,6 @@ The architecture is modular. The main blocks are responsible for pixel generatio
 
 The use of fixed-point arithmetic allows efficient implementation on FPGA while maintaining sufficient precision for image generation. The framebuffer decouples image generation from video display. In this implementation, a 512 x 512 framebuffer is used and scaled to the 720 x 720 active display area, reducing memory usage while still displaying the image over the full screen.
 
-The pipelined implementation provides a significant timing improvement. Compared to the baseline implementation, the validated operating frequency increased from 75 MHz to 125 MHz, corresponding to an improvement of approximately 66.7 percent. The estimated maximum frequency increased from about 78 MHz to about 140 MHz.
+The pipelined implementation provides a significant performance improvement. Compared to the FSM implementation, the validated operating frequency increased from 75 MHz to 125 MHz, corresponding to an improvement of approximately 66.7 percent. The measured frame generation time decreased from approximately 365 ms to 104 ms, meaning that the pipelined version is approximately 3.5 times faster.
 
 Overall, the project demonstrates how an iterative mathematical algorithm can be efficiently implemented in hardware, and how architectural choices such as pipelining, memory size and fixed-point precision directly influence performance, resource usage and image quality.
