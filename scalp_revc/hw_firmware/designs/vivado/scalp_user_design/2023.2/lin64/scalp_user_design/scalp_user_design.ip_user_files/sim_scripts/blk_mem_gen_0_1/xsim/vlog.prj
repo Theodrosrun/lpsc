@@ -1,4 +1,4 @@
-verilog xil_defaultlib -i "../../../../../../../../../../../../../../../../../tools/Xilinx/2025.2/data/rsb/busdef" --include "/tools/Xilinx/2025.2/data/xilinx_vip/include" \
+verilog xil_defaultlib -i "../../../../../../../../../../../../../../../../vivado/2025.2/data/rsb/busdef" --include "/home/andre/vivado/2025.2/data/xilinx_vip/include" \
 "../../../../scalp_user_design.gen/sources_1/ip/blk_mem_gen_0_1/sim/blk_mem_gen_0.v" \
 
 verilog xil_defaultlib "glbl.v"

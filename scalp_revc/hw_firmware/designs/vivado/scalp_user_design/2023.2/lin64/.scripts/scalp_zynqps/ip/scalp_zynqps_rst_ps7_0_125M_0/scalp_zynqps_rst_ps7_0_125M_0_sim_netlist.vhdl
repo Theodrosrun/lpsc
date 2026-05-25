@@ -2,8 +2,8 @@
 -- Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
--- Date        : Sun Apr 12 11:39:57 2026
--- Host        : theodros-ThinkPad-P16s-Gen-2 running 64-bit Ubuntu 24.04.2 LTS
+-- Date        : Tue Apr 14 18:01:19 2026
+-- Host        : andre running 64-bit Fedora Linux 42 (Workstation Edition)
 -- Command     : write_vhdl -force -mode funcsim -rename_top scalp_zynqps_rst_ps7_0_125M_0 -prefix
 --               scalp_zynqps_rst_ps7_0_125M_0_ scalp_zynqps_rst_ps7_0_125M_0_sim_netlist.vhdl
 -- Design      : scalp_zynqps_rst_ps7_0_125M_0

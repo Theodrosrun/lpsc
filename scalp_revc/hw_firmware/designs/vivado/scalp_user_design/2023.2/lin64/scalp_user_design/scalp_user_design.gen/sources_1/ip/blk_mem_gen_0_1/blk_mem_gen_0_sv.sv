@@ -58,13 +58,13 @@ module blk_mem_gen_0_sv (
   (* X_INTERFACE_IGNORE = "true" *)
   input wire [0:0] wea,
   (* X_INTERFACE_IGNORE = "true" *)
-  input wire [17:0] addra,
+  input wire [15:0] addra,
   (* X_INTERFACE_IGNORE = "true" *)
   input wire [6:0] dina,
   (* X_INTERFACE_IGNORE = "true" *)
   input wire clkb,
   (* X_INTERFACE_IGNORE = "true" *)
-  input wire [17:0] addrb,
+  input wire [15:0] addrb,
   (* X_INTERFACE_IGNORE = "true" *)
   output wire [6:0] doutb
 );

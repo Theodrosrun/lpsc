@@ -454,6 +454,9 @@ architecture arch of scalp_user_design is
         );
     end component;
 
+    type slv_array_t is array(natural range <>) of std_logic_vector;
+
+
     -- Signals
     -- Clocks
     -- Processing system clock
@@ -590,6 +593,7 @@ begin
         constant C_BUFFER_HEIGHT      : integer := 512;
         constant C_BRAM_ADDR_BIT_SIZE : integer := 18;
         constant C_VGA_ACTIVE_SIZE    : integer := 720;
+        constant C_BRAM_COUNT         : integer := 4;
 
         signal ClkUsrRstxR             : std_logic := '1';
         signal ClkUsrRstxRNA           : std_logic := '0';
@@ -608,7 +612,11 @@ begin
         signal BramRdAddrxD  : std_logic_vector((C_BRAM_ADDR_BIT_SIZE - 1) downto 0) := (others => '0');
         signal BramWrDataxD  : std_logic_vector(6 downto 0) := (others => '0');
         signal BramRdDataxD  : std_logic_vector(6 downto 0) := (others => '0');
-        signal BramWexD      : std_logic_vector(0 downto 0) := "0";
+        signal MandelbrotBramWexD      : std_logic_vector(0 downto 0) := "0";
+        signal BramWexD    : std_logic_vector(C_BRAM_COUNT - 1 downto 0);
+	signal BramSelRdxD : std_logic_vector(C_BRAM_COUNT - 1 downto 0);
+        signal BramRdDataArrayxD : slv_array_t(0 to C_BRAM_COUNT - 1)(BramRdDataxD'range);
+
 
     begin  -- block PLxB
 
@@ -985,7 +993,7 @@ begin
             MandelbrotPictureGenxB : block is
             begin
 
-                MandelbrotPictureGenxI : entity work.mandelbrot_picture_gen(fsm)
+                MandelbrotPictureGenxI : entity work.mandelbrot_picture_gen(pipelined)
                     generic map (
                         C_BUFFER_WIDTH       => C_BUFFER_WIDTH,
                         C_BUFFER_HEIGHT      => C_BUFFER_HEIGHT,
@@ -1006,7 +1014,7 @@ begin
 
                         BramWrAddrxDO => BramWrAddrxD,
                         BramWrDataxDO => BramWrDataxD,
-                        BramWexSO     => BramWexD,
+                        BramWexSO     => MandelbrotBramWexD,
 
                         FrameDonexSO  => MandelbrotFrameDonexS
                     );
@@ -1019,20 +1027,63 @@ begin
             VideoMemxB : block is
             begin
 
-                FrameBufferxI : entity work.blk_mem_gen_0
-                    port map (
-                        -- Port A: write port, Mandelbrot generator side
-                        clka  => ClkUsrxC,
-                        wea   => BramWexD,
-                        addra => BramWrAddrxD,
-                        dina  => BramWrDataxD,
+                gen_we : for i in 0 to C_BRAM_COUNT - 1 generate
+                    BramWexD(i) <= MandelbrotBramWexD(0) 
+                        when BramWrAddrxD(BramWrAddrxD'high downto BramWrAddrxD'high-1) = std_logic_vector(to_unsigned(i, 2)) 
+                        else '0';
+                end generate;
 
-                        -- Port B: read port, VGA side
+                process(HdmiVgaClocksxC.VgaxC)
+                begin
+                    if rising_edge(HdmiVgaClocksxC.VgaxC) then
+                        BramSelRdxD <= (others => '0');
+                        case BramRdAddrxD(BramRdAddrxD'high downto BramRdAddrxD'high-1) is
+                            when "00"   => BramSelRdxD <= "0001";
+                            when "01"   => BramSelRdxD <= "0010";
+                            when "10"   => BramSelRdxD <= "0100";
+                            when others => BramSelRdxD <= "1000";
+                        end case;
+                    end if;
+                end process;
+
+                with BramSelRdxD select BramRdDataxD <=
+                    BramRdDataArrayxD(0) when "0001",
+                    BramRdDataArrayxD(1) when "0010",
+                    BramRdDataArrayxD(2) when "0100",
+                    BramRdDataArrayxD(3) when others;
+
+                FrameBuffer0xI : entity work.blk_mem_gen_0
+                    port map (
+                        clka  => ClkUsrxC,  wea(0) => BramWexD(0),
+                        addra => BramWrAddrxD(BramWrAddrxD'high-2 downto 0), dina => BramWrDataxD,
                         clkb  => HdmiVgaClocksxC.VgaxC,
-                        addrb => BramRdAddrxD,
-                        doutb => BramRdDataxD
+                        addrb => BramRdAddrxD(BramRdAddrxD'high-2 downto 0), doutb => BramRdDataArrayxD(0)
                     );
 
+                FrameBuffer1xI : entity work.blk_mem_gen_0_1
+                    port map (
+                        clka  => ClkUsrxC,  wea(0) => BramWexD(1),
+                        addra => BramWrAddrxD(BramWrAddrxD'high-2 downto 0), dina => BramWrDataxD,
+                        clkb  => HdmiVgaClocksxC.VgaxC,
+                        addrb => BramRdAddrxD(BramRdAddrxD'high-2 downto 0), doutb => BramRdDataArrayxD(1)
+                    );
+
+                FrameBuffer2xI : entity work.blk_mem_gen_0_2
+                    port map (
+                        clka  => ClkUsrxC,  wea(0) => BramWexD(2),
+                        addra => BramWrAddrxD(BramWrAddrxD'high-2 downto 0), dina => BramWrDataxD,
+                        clkb  => HdmiVgaClocksxC.VgaxC,
+                        addrb => BramRdAddrxD(BramRdAddrxD'high-2 downto 0), doutb => BramRdDataArrayxD(2)
+                    );
+
+                FrameBuffer3xI : entity work.blk_mem_gen_0_3
+                    port map (
+                        clka  => ClkUsrxC,  wea(0) => BramWexD(3),
+                        addra => BramWrAddrxD(BramWrAddrxD'high-2 downto 0), dina => BramWrDataxD,
+                        clkb  => HdmiVgaClocksxC.VgaxC,
+                        addrb => BramRdAddrxD(BramRdAddrxD'high-2 downto 0), doutb => BramRdDataArrayxD(3)
+                    );
+            
             end block VideoMemxB;
 
             ---------------------------------------------------------------------------

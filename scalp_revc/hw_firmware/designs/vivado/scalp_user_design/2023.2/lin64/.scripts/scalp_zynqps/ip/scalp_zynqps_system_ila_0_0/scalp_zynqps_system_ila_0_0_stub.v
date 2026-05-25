@@ -2,10 +2,10 @@
 // Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
-// Date        : Tue May 12 18:31:49 2026
-// Host        : theodros-ThinkPad-P16s-Gen-2 running 64-bit Ubuntu 24.04.2 LTS
-// Command     : write_verilog -force -mode synth_stub -rename_top scalp_zynqps_system_ila_0_0 -prefix
-//               scalp_zynqps_system_ila_0_0_ scalp_zynqps_system_ila_0_0_stub.v
+// Date        : Mon May 25 15:02:03 2026
+// Host        : andre running 64-bit Fedora Linux 42 (Workstation Edition)
+// Command     : write_verilog -force -mode synth_stub
+//               /home/andre/dev/mse/ma-lpsc/lpsc/scalp_revc/hw_firmware/designs/vivado/scalp_user_design/2023.2/lin64/.scripts/scalp_zynqps/ip/scalp_zynqps_system_ila_0_0/scalp_zynqps_system_ila_0_0_stub.v
 // Design      : scalp_zynqps_system_ila_0_0
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7z015clg485-2
