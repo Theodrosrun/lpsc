@@ -587,8 +587,6 @@ begin
     PLxB : block is
         type signed_array_t is array(natural range <>) of signed;
         constant C_CLK_FREQ_HZ        : integer := 125000000;
-        constant C_ANIM_PERIOD_MS     : integer := 10;
-        constant C_ANIM_PERIOD_CYCLES : integer := (C_CLK_FREQ_HZ / 1000) * C_ANIM_PERIOD_MS;
         constant C_MAX_ITER           : integer := 100;
         constant C_BUFFER_WIDTH       : integer := 512;
         constant C_BUFFER_HEIGHT      : integer := 512;
@@ -599,8 +597,6 @@ begin
         constant FRAC_W               : integer := DATA_W - 3;
         signal ClkUsrRstxR             : std_logic := '1';
         signal ClkUsrRstxRNA           : std_logic := '0';
-        signal MandelbrotAnimTimeCntxD : integer range 0 to C_ANIM_PERIOD_CYCLES - 1 := 0;
-        signal MandelbrotAnimTickxS    : std_logic := '0';
         signal MandelbrotFrameCntxD  : unsigned(6 downto 0) := (others => '0');
         signal MandelbrotX0xD        : signed(DATA_W - 1 downto 0) := (others => '0');
         signal MandelbrotY0BasexD    : signed(DATA_W - 1 downto 0) := (others => '0');
@@ -610,7 +606,6 @@ begin
 
         signal MandelbrotStartxS : std_logic := '0';
         signal FrameReadyxS      : std_logic_vector(C_BRAM_COUNT - 1 downto 0);
-        signal AnimTickReadyxS   : std_logic;
         signal BramWrAddrxD  : std_logic_vector((C_BRAM_ADDR_BIT_SIZE - 1) downto 0) := (others => '0');
         signal BramRdAddrxD  : std_logic_vector((C_BRAM_ADDR_BIT_SIZE - 1) downto 0) := (others => '0');
         signal BramWrDataxD  : std_logic_vector(6 downto 0) := (others => '0');
@@ -892,29 +887,6 @@ begin
 
             ClkUsrRstxRNA <= not ClkUsrRstxR;
 
-            ---------------------------------------------------------------------------
-            -- Animation tick generator
-            ---------------------------------------------------------------------------
-            MandelbrotAnimxB : block is
-            begin
-
-                MandelbrotAnimTickxP : process(ClkUsrRstxR, ClkUsrxC)
-                begin
-                    if ClkUsrRstxR = '1' then
-                            MandelbrotAnimTimeCntxD <= 0;
-                            MandelbrotAnimTickxS    <= '0';
-                    elsif rising_edge(ClkUsrxC) then
-                        if MandelbrotAnimTimeCntxD = C_ANIM_PERIOD_CYCLES - 1 then
-                            MandelbrotAnimTimeCntxD <= 0;
-                            MandelbrotAnimTickxS    <= '1';
-                        else
-                            MandelbrotAnimTimeCntxD <= MandelbrotAnimTimeCntxD + 1;
-                            MandelbrotAnimTickxS    <= '0';
-                        end if;
-                    end if;
-                end process;
-
-            end block MandelbrotAnimxB;
 
             MandelbrotStartAndFrameCounterxB : block is
             begin
@@ -924,7 +896,6 @@ begin
                     if ClkUsrRstxR = '1' then
                         MandelbrotStartxS <= '0';
                         FrameReadyxS      <= (others => '1');
-                        AnimTickReadyxS <= '1';
                         MandelbrotFrameCntxD <= (others => '0');
                     elsif rising_edge(ClkUsrxC) then
                         MandelbrotStartxS <= '0';
@@ -935,14 +906,8 @@ begin
                             end if;
                         end loop;
 
-
-                        if MandelbrotAnimTickxS = '1' then
-                           AnimTickReadyxS <= '1';
-                        end if;
-
-                        if AnimTickReadyxS = '1' and FrameReadyxS = "1111" then
+                        if FrameReadyxS = "1111" then
                             MandelbrotStartxS <= '1';
-                            AnimTickReadyxS   <= '0';
                             FrameReadyxS      <= (others => '0');
 
                             if MandelbrotFrameCntxD = 99 then
