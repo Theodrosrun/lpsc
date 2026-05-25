@@ -286,9 +286,7 @@ begin
 
 				when DONE_ST =>
 					v_frame_done  := '1';
-					if StartxDI = '1' then
-						eng_state <= IDLE;
-					end if;
+					v_state := IDLE;
 			end case;
 
 			eng_state <= v_state;
