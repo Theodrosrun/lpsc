@@ -585,6 +585,7 @@ begin
     end block PSxB;
 
     PLxB : block is
+        type signed_array_t is array(natural range <>) of signed;
         constant C_CLK_FREQ_HZ        : integer := 125000000;
         constant C_ANIM_PERIOD_MS     : integer := 10;
         constant C_ANIM_PERIOD_CYCLES : integer := (C_CLK_FREQ_HZ / 1000) * C_ANIM_PERIOD_MS;
@@ -594,29 +595,33 @@ begin
         constant C_BRAM_ADDR_BIT_SIZE : integer := 18;
         constant C_VGA_ACTIVE_SIZE    : integer := 720;
         constant C_BRAM_COUNT         : integer := 4;
-
+        constant DATA_W               : integer := C_BRAM_ADDR_BIT_SIZE;
+        constant FRAC_W               : integer := DATA_W - 3;
         signal ClkUsrRstxR             : std_logic := '1';
         signal ClkUsrRstxRNA           : std_logic := '0';
         signal MandelbrotAnimTimeCntxD : integer range 0 to C_ANIM_PERIOD_CYCLES - 1 := 0;
         signal MandelbrotAnimTickxS    : std_logic := '0';
         signal MandelbrotFrameCntxD  : unsigned(6 downto 0) := (others => '0');
-        signal MandelbrotX0xD        : signed(17 downto 0) := (others => '0');
-        signal MandelbrotY0xD        : signed(17 downto 0) := (others => '0');
-        signal MandelbrotDxxD        : signed(17 downto 0) := (others => '0');
-        signal MandelbrotDyxD        : signed(17 downto 0) := (others => '0');
-        signal MandelbrotFrameDonexS : std_logic := '0';
+        signal MandelbrotX0xD        : signed(DATA_W - 1 downto 0) := (others => '0');
+        signal MandelbrotY0BasexD    : signed(DATA_W - 1 downto 0) := (others => '0');
+        signal MandelbrotY0xD        : signed_array_t(0 to 3)(DATA_W -1 downto 0);
+        signal MandelbrotDxxD        : signed(DATA_W - 1 downto 0) := (others => '0');
+        signal MandelbrotDyxD        : signed(DATA_W - 1 downto 0) := (others => '0');
+
         signal MandelbrotStartxS : std_logic := '0';
-        signal FrameReadyxS      : std_logic;
-        signal AnimTickReadyxS      : std_logic;
+        signal FrameReadyxS      : std_logic_vector(C_BRAM_COUNT - 1 downto 0);
+        signal AnimTickReadyxS   : std_logic;
         signal BramWrAddrxD  : std_logic_vector((C_BRAM_ADDR_BIT_SIZE - 1) downto 0) := (others => '0');
         signal BramRdAddrxD  : std_logic_vector((C_BRAM_ADDR_BIT_SIZE - 1) downto 0) := (others => '0');
         signal BramWrDataxD  : std_logic_vector(6 downto 0) := (others => '0');
         signal BramRdDataxD  : std_logic_vector(6 downto 0) := (others => '0');
         signal MandelbrotBramWexD      : std_logic_vector(0 downto 0) := "0";
         signal BramWexD    : std_logic_vector(C_BRAM_COUNT - 1 downto 0);
-	signal BramSelRdxD : std_logic_vector(C_BRAM_COUNT - 1 downto 0);
+        signal BramSelRdxD : std_logic_vector(C_BRAM_COUNT - 1 downto 0);
         signal BramRdDataArrayxD : slv_array_t(0 to C_BRAM_COUNT - 1)(BramRdDataxD'range);
-
+        signal BramWrAddrArrayxD   : slv_array_t(0 to 3)(C_BRAM_ADDR_BIT_SIZE-3 downto 0);
+        signal BramWrDataArrayxD   : slv_array_t(0 to 3)(BramWrDataxD'range);
+        signal FrameDoneArrayxS    : std_logic_vector(3 downto 0);
 
     begin  -- block PLxB
 
@@ -911,80 +916,65 @@ begin
 
             end block MandelbrotAnimxB;
 
-            ---------------------------------------------------------------------------
-            -- Animation frame counter
-            ---------------------------------------------------------------------------
-            MandelbrotFrameCntxB : block is
-            begin
-                MandelbrotFrameCntxP : process(ClkUsrRstxR, ClkUsrxC)
-                begin
-                        if ClkUsrRstxR = '1' then
-                            MandelbrotFrameCntxD <= (others => '0');
-                        elsif rising_edge(ClkUsrxC) then
-                            if MandelbrotFrameDonexS = '1' then
-                                if MandelbrotFrameCntxD = 99 then
-                                    MandelbrotFrameCntxD <= (others => '0');
-                                else
-                                    MandelbrotFrameCntxD <= MandelbrotFrameCntxD + 1;
-                                end if;
-                            end if;
-                        end if;
-                end process;
-
-            end block MandelbrotFrameCntxB;
-
-            ---------------------------------------------------------------------------
-            -- Start gate: pulse Start only when the timer fires AND the previous
-            --             frame is already done.  Tracks "pending" ticks so a slow
-            --             render never drops an animation tick silently.
-            ---------------------------------------------------------------------------
-            MandelbrotStartGatexB : block is
+            MandelbrotStartAndFrameCounterxB : block is
             begin
             
                 MandelbrotStartGatexP : process(ClkUsrRstxR, ClkUsrxC)
                 begin
                     if ClkUsrRstxR = '1' then
                         MandelbrotStartxS <= '0';
-                        FrameReadyxS      <= '1';
+                        FrameReadyxS      <= (others => '1');
                         AnimTickReadyxS <= '1';
+                        MandelbrotFrameCntxD <= (others => '0');
                     elsif rising_edge(ClkUsrxC) then
                         MandelbrotStartxS <= '0';
 
-                        if MandelbrotFrameDonexS = '1' then
-                            FrameReadyxS <= '1';
-                        end if;
+                        for i in 0 to C_BRAM_COUNT - 1 loop
+                            if FrameDoneArrayxS(i) = '1' then
+                                FrameReadyxS(i) <= FrameDoneArrayxS(i);
+                            end if;
+                        end loop;
+
+
                         if MandelbrotAnimTickxS = '1' then
                            AnimTickReadyxS <= '1';
                         end if;
 
-                        if AnimTickReadyxS = '1' and FrameReadyxS = '1' then
+                        if AnimTickReadyxS = '1' and FrameReadyxS = "1111" then
                             MandelbrotStartxS <= '1';
                             AnimTickReadyxS   <= '0';
-                            FrameReadyxS      <= '0';
+                            FrameReadyxS      <= (others => '0');
+
+                            if MandelbrotFrameCntxD = 99 then
+                                MandelbrotFrameCntxD <= (others => '0');
+                            else
+                                MandelbrotFrameCntxD <= MandelbrotFrameCntxD + 1;
+                            end if;
                         end if;
                     end if;
                 end process;
-            
-            end block MandelbrotStartGatexB;
+
+            end block MandelbrotStartAndFrameCounterxB;
             ---------------------------------------------------------------------------
             -- Zoom parameter generator
             ---------------------------------------------------------------------------
             MandelbrotZoomxB : block is
             begin
-
                 MandelbrotZoomxI : entity work.mandelbrot_zoom
-                    generic map (
-                        DATA_W => 18,
-                        FRAC_W => 15
-                    )
+                    generic map (DATA_W => DATA_W, FRAC_W => FRAC_W)
                     port map (
                         frame_counter => MandelbrotFrameCntxD,
                         x0            => MandelbrotX0xD,
-                        y0            => MandelbrotY0xD,
+                        y0            => MandelbrotY0BasexD,   -- base y0 for gen 0
                         dx            => MandelbrotDxxD,
                         dy            => MandelbrotDyxD
                     );
 
+                gen_y0 : for i in 0 to 3 generate
+                    MandelbrotY0xD(i) <= MandelbrotY0BasexD + 
+                        resize(to_signed(i * (C_BUFFER_HEIGHT/4), DATA_W) * MandelbrotDyxD, C_BRAM_ADDR_BIT_SIZE);
+                end generate;
+            
             end block MandelbrotZoomxB;
 
             ---------------------------------------------------------------------------
@@ -992,51 +982,47 @@ begin
             ---------------------------------------------------------------------------
             MandelbrotPictureGenxB : block is
             begin
+            
+                gen_picture : for i in 0 to C_BRAM_COUNT - 1 generate
+                    MandelbrotPictureGenxI : entity work.mandelbrot_picture_gen(pipelined)
+                        generic map (
+                            C_BUFFER_WIDTH       => C_BUFFER_WIDTH,
+                            C_BUFFER_HEIGHT      => C_BUFFER_HEIGHT/4,  -- each gen does 1/4 of the rows
+                            C_BRAM_ADDR_BIT_SIZE => C_BRAM_ADDR_BIT_SIZE - 2,  -- divide address space by 4
+                            DATA_W               => DATA_W,
+                            FRAC_W               => FRAC_W,
+                            MAX_ITER             => C_MAX_ITER
+                        )
+                        port map (
+                            ClkxCI        => ClkUsrxC,
+                            RstxRANI      => ClkUsrRstxRNA,
+                            StartxDI      => MandelbrotStartxS,
 
-                MandelbrotPictureGenxI : entity work.mandelbrot_picture_gen(pipelined)
-                    generic map (
-                        C_BUFFER_WIDTH       => C_BUFFER_WIDTH,
-                        C_BUFFER_HEIGHT      => C_BUFFER_HEIGHT,
-                        C_BRAM_ADDR_BIT_SIZE => C_BRAM_ADDR_BIT_SIZE,
-                        DATA_W               => 18,
-                        FRAC_W               => 15,
-                        MAX_ITER             => C_MAX_ITER
-                    )
-                    port map (
-                        ClkxCI        => ClkUsrxC,
-                        RstxRANI      => ClkUsrRstxRNA,
-                        StartxDI      => MandelbrotStartxS,
+                            X0xDI         => MandelbrotX0xD,
+                            Y0xDI         => MandelbrotY0xD(i),
+                            DxxDI         => MandelbrotDxxD,
+                            DyxDI         => MandelbrotDyxD,
 
-                        X0xDI         => MandelbrotX0xD,
-                        Y0xDI         => MandelbrotY0xD,
-                        DxxDI         => MandelbrotDxxD,
-                        DyxDI         => MandelbrotDyxD,
+                            BramWrAddrxDO => BramWrAddrArrayxD(i),
+                            BramWrDataxDO => BramWrDataArrayxD(i),
+                            BramWexSO(0)  => BramWexD(i),
 
-                        BramWrAddrxDO => BramWrAddrxD,
-                        BramWrDataxDO => BramWrDataxD,
-                        BramWexSO     => MandelbrotBramWexD,
-
-                        FrameDonexSO  => MandelbrotFrameDonexS
-                    );
+                            FrameDonexSO  => FrameDoneArrayxS(i)
+                        );
+                end generate;
 
             end block MandelbrotPictureGenxB;
 
             ---------------------------------------------------------------------------
             -- Framebuffer BRAM
             ---------------------------------------------------------------------------
-            VideoMemxB : block is
+	    VideoMemxB : block is
             begin
 
-                gen_we : for i in 0 to C_BRAM_COUNT - 1 generate
-                    BramWexD(i) <= MandelbrotBramWexD(0) 
-                        when BramWrAddrxD(BramWrAddrxD'high downto BramWrAddrxD'high-1) = std_logic_vector(to_unsigned(i, 2)) 
-                        else '0';
-                end generate;
-
+                -- Read select register
                 process(HdmiVgaClocksxC.VgaxC)
                 begin
                     if rising_edge(HdmiVgaClocksxC.VgaxC) then
-                        BramSelRdxD <= (others => '0');
                         case BramRdAddrxD(BramRdAddrxD'high downto BramRdAddrxD'high-1) is
                             when "00"   => BramSelRdxD <= "0001";
                             when "01"   => BramSelRdxD <= "0010";
@@ -1046,6 +1032,7 @@ begin
                     end if;
                 end process;
 
+                -- Read data mux
                 with BramSelRdxD select BramRdDataxD <=
                     BramRdDataArrayxD(0) when "0001",
                     BramRdDataArrayxD(1) when "0010",
@@ -1054,38 +1041,49 @@ begin
 
                 FrameBuffer0xI : entity work.blk_mem_gen_0
                     port map (
-                        clka  => ClkUsrxC,  wea(0) => BramWexD(0),
-                        addra => BramWrAddrxD(BramWrAddrxD'high-2 downto 0), dina => BramWrDataxD,
+                        clka  => ClkUsrxC,
+                        wea(0) => BramWexD(0),
+                        addra => BramWrAddrArrayxD(0),
+                        dina  => BramWrDataArrayxD(0),
                         clkb  => HdmiVgaClocksxC.VgaxC,
-                        addrb => BramRdAddrxD(BramRdAddrxD'high-2 downto 0), doutb => BramRdDataArrayxD(0)
+                        addrb => BramRdAddrxD(BramRdAddrxD'high-2 downto 0),
+                        doutb => BramRdDataArrayxD(0)
                     );
 
                 FrameBuffer1xI : entity work.blk_mem_gen_0_1
                     port map (
-                        clka  => ClkUsrxC,  wea(0) => BramWexD(1),
-                        addra => BramWrAddrxD(BramWrAddrxD'high-2 downto 0), dina => BramWrDataxD,
+                        clka  => ClkUsrxC,
+                        wea(0) => BramWexD(1),
+                        addra => BramWrAddrArrayxD(1),
+                        dina  => BramWrDataArrayxD(1),
                         clkb  => HdmiVgaClocksxC.VgaxC,
-                        addrb => BramRdAddrxD(BramRdAddrxD'high-2 downto 0), doutb => BramRdDataArrayxD(1)
+                        addrb => BramRdAddrxD(BramRdAddrxD'high-2 downto 0),
+                        doutb => BramRdDataArrayxD(1)
                     );
 
                 FrameBuffer2xI : entity work.blk_mem_gen_0_2
                     port map (
-                        clka  => ClkUsrxC,  wea(0) => BramWexD(2),
-                        addra => BramWrAddrxD(BramWrAddrxD'high-2 downto 0), dina => BramWrDataxD,
+                        clka  => ClkUsrxC,
+                        wea(0) => BramWexD(2),
+                        addra => BramWrAddrArrayxD(2),
+                        dina  => BramWrDataArrayxD(2),
                         clkb  => HdmiVgaClocksxC.VgaxC,
-                        addrb => BramRdAddrxD(BramRdAddrxD'high-2 downto 0), doutb => BramRdDataArrayxD(2)
+                        addrb => BramRdAddrxD(BramRdAddrxD'high-2 downto 0),
+                        doutb => BramRdDataArrayxD(2)
                     );
 
                 FrameBuffer3xI : entity work.blk_mem_gen_0_3
                     port map (
-                        clka  => ClkUsrxC,  wea(0) => BramWexD(3),
-                        addra => BramWrAddrxD(BramWrAddrxD'high-2 downto 0), dina => BramWrDataxD,
+                        clka  => ClkUsrxC,
+                        wea(0) => BramWexD(3),
+                        addra => BramWrAddrArrayxD(3),
+                        dina  => BramWrDataArrayxD(3),
                         clkb  => HdmiVgaClocksxC.VgaxC,
-                        addrb => BramRdAddrxD(BramRdAddrxD'high-2 downto 0), doutb => BramRdDataArrayxD(3)
+                        addrb => BramRdAddrxD(BramRdAddrxD'high-2 downto 0),
+                        doutb => BramRdDataArrayxD(3)
                     );
             
             end block VideoMemxB;
-
             ---------------------------------------------------------------------------
             -- VGA framebuffer reader
             ---------------------------------------------------------------------------
