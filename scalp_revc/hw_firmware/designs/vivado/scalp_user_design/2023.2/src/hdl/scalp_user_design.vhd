@@ -22,12 +22,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
--- use ieee.math_real.all;
-use ieee.math_real."ceil";
-use ieee.math_real."log2";
--- use ieee.std_logic_unsigned.all;
--- use ieee.std_logic_arith.all;
--- use ieee.std_logic_misc.all;
+use ieee.math_real.all;
 
 library unisim;
 use unisim.vcomponents.all;
@@ -590,33 +585,34 @@ begin
         constant C_MAX_ITER           : integer := 100;
         constant C_BUFFER_WIDTH       : integer := 512;
         constant C_BUFFER_HEIGHT      : integer := 512;
-        constant C_BRAM_ADDR_BIT_SIZE : integer := 18;
-        constant C_VGA_ACTIVE_SIZE    : integer := 720;
-        constant C_BRAM_COUNT         : integer := 4;
-        constant DATA_W               : integer := C_BRAM_ADDR_BIT_SIZE;
-        constant FRAC_W               : integer := DATA_W - 3;
-        signal ClkUsrRstxR             : std_logic := '1';
-        signal ClkUsrRstxRNA           : std_logic := '0';
-        signal MandelbrotFrameCntxD  : unsigned(6 downto 0) := (others => '0');
-        signal MandelbrotX0xD        : signed(DATA_W - 1 downto 0) := (others => '0');
-        signal MandelbrotY0BasexD    : signed(DATA_W - 1 downto 0) := (others => '0');
-        signal MandelbrotY0xD        : signed_array_t(0 to 3)(DATA_W -1 downto 0);
-        signal MandelbrotDxxD        : signed(DATA_W - 1 downto 0) := (others => '0');
-        signal MandelbrotDyxD        : signed(DATA_W - 1 downto 0) := (others => '0');
+        constant C_BRAM_COUNT         : integer := 32;
+        constant C_BRAM_ADDR_BIT_SIZE : integer := integer(round(log2(real(C_BUFFER_WIDTH * C_BUFFER_HEIGHT))));
+        constant C_BRAM_SEL_BITS      : natural := integer(round(log2(real(C_BRAM_COUNT))));
+        constant C_BRAM_DEPTH_BITS    : integer := C_BRAM_ADDR_BIT_SIZE - C_BRAM_SEL_BITS;
 
-        signal MandelbrotStartxS : std_logic := '0';
-        signal FrameReadyxS      : std_logic_vector(C_BRAM_COUNT - 1 downto 0);
-        signal BramWrAddrxD  : std_logic_vector((C_BRAM_ADDR_BIT_SIZE - 1) downto 0) := (others => '0');
-        signal BramRdAddrxD  : std_logic_vector((C_BRAM_ADDR_BIT_SIZE - 1) downto 0) := (others => '0');
-        signal BramWrDataxD  : std_logic_vector(6 downto 0) := (others => '0');
-        signal BramRdDataxD  : std_logic_vector(6 downto 0) := (others => '0');
-        signal MandelbrotBramWexD      : std_logic_vector(0 downto 0) := "0";
-        signal BramWexD    : std_logic_vector(C_BRAM_COUNT - 1 downto 0);
-        signal BramSelRdxD : std_logic_vector(C_BRAM_COUNT - 1 downto 0);
-        signal BramRdDataArrayxD : slv_array_t(0 to C_BRAM_COUNT - 1)(BramRdDataxD'range);
-        signal BramWrAddrArrayxD   : slv_array_t(0 to 3)(C_BRAM_ADDR_BIT_SIZE-3 downto 0);
-        signal BramWrDataArrayxD   : slv_array_t(0 to 3)(BramWrDataxD'range);
-        signal FrameDoneArrayxS    : std_logic_vector(3 downto 0);
+        constant C_VGA_ACTIVE_SIZE    : integer := 720;
+        constant DATA_W               : integer := 18;
+        constant FRAC_W               : integer := DATA_W - 3;
+        signal ClkUsrRstxR            : std_logic := '1';
+        signal ClkUsrRstxRNA          : std_logic := '0';
+        signal MandelbrotFrameCntxD   : unsigned(6 downto 0) := (others => '0');
+        signal MandelbrotX0xD         : signed(DATA_W - 1 downto 0) := (others => '0');
+        signal MandelbrotY0BasexD     : signed(DATA_W - 1 downto 0) := (others => '0');
+        signal MandelbrotY0xD         : signed_array_t(0 to C_BRAM_COUNT - 1)(DATA_W -1 downto 0);
+        signal MandelbrotDxxD         : signed(DATA_W - 1 downto 0) := (others => '0');
+        signal MandelbrotDyxD         : signed(DATA_W - 1 downto 0) := (others => '0');
+        signal MandelbrotStartxS      : std_logic := '0';
+        signal FrameReadyxS           : std_logic_vector(C_BRAM_COUNT - 1 downto 0);
+        signal BramWrAddrxD           : std_logic_vector((C_BRAM_ADDR_BIT_SIZE - 1) downto 0) := (others => '0');
+        signal BramRdAddrxD           : std_logic_vector((C_BRAM_ADDR_BIT_SIZE - 1) downto 0) := (others => '0');
+        signal BramRdDataxD           : std_logic_vector(6 downto 0) := (others => '0');
+        signal MandelbrotBramWexD     : std_logic_vector(0 downto 0) := "0";
+        signal BramWexD               : std_logic_vector(C_BRAM_COUNT - 1 downto 0);
+        signal BramSelRdxD            : std_logic_vector(C_BRAM_COUNT - 1 downto 0);
+        signal BramRdDataArrayxD      : slv_array_t(0 to C_BRAM_COUNT - 1)(BramRdDataxD'range);
+        signal BramWrAddrArrayxD      : slv_array_t(0 to C_BRAM_COUNT - 1)(C_BRAM_DEPTH_BITS - 1 downto 0);
+        signal BramWrDataArrayxD      : slv_array_t(0 to C_BRAM_COUNT - 1)(6 downto 0);
+        signal FrameDoneArrayxS       : std_logic_vector(C_BRAM_COUNT - 1 downto 0);
 
     begin  -- block PLxB
 
@@ -906,7 +902,7 @@ begin
                             end if;
                         end loop;
 
-                        if FrameReadyxS = "1111" then
+                        if FrameReadyxS = (FrameReadyxS'range => '1') then
                             MandelbrotStartxS <= '1';
                             FrameReadyxS      <= (others => '0');
 
@@ -935,9 +931,9 @@ begin
                         dy            => MandelbrotDyxD
                     );
 
-                gen_y0 : for i in 0 to 3 generate
+                gen_y0 : for i in 0 to C_BRAM_COUNT - 1 generate
                     MandelbrotY0xD(i) <= MandelbrotY0BasexD + 
-                        resize(to_signed(i * (C_BUFFER_HEIGHT/4), DATA_W) * MandelbrotDyxD, C_BRAM_ADDR_BIT_SIZE);
+                        resize(to_signed(i * (C_BUFFER_HEIGHT/ C_BRAM_COUNT), DATA_W) * MandelbrotDyxD, DATA_W);
                 end generate;
             
             end block MandelbrotZoomxB;
@@ -952,8 +948,8 @@ begin
                     MandelbrotPictureGenxI : entity work.mandelbrot_picture_gen(pipelined)
                         generic map (
                             C_BUFFER_WIDTH       => C_BUFFER_WIDTH,
-                            C_BUFFER_HEIGHT      => C_BUFFER_HEIGHT/4,  -- each gen does 1/4 of the rows
-                            C_BRAM_ADDR_BIT_SIZE => C_BRAM_ADDR_BIT_SIZE - 2,  -- divide address space by 4
+                            C_BUFFER_HEIGHT      => C_BUFFER_HEIGHT / C_BRAM_COUNT,
+                            C_BRAM_ADDR_BIT_SIZE => C_BRAM_DEPTH_BITS,
                             DATA_W               => DATA_W,
                             FRAC_W               => FRAC_W,
                             MAX_ITER             => C_MAX_ITER
@@ -983,71 +979,42 @@ begin
             ---------------------------------------------------------------------------
 	    VideoMemxB : block is
             begin
-
-                -- Read select register
                 process(HdmiVgaClocksxC.VgaxC)
+                    variable BramIdxV : integer range 0 to C_BRAM_COUNT - 1;
                 begin
                     if rising_edge(HdmiVgaClocksxC.VgaxC) then
-                        case BramRdAddrxD(BramRdAddrxD'high downto BramRdAddrxD'high-1) is
-                            when "00"   => BramSelRdxD <= "0001";
-                            when "01"   => BramSelRdxD <= "0010";
-                            when "10"   => BramSelRdxD <= "0100";
-                            when others => BramSelRdxD <= "1000";
-                        end case;
+                        -- Extract which BRAM index from the top bits of the address
+                        BramIdxV := to_integer(unsigned(
+                            BramRdAddrxD(BramRdAddrxD'high downto 
+                                BramRdAddrxD'high - C_BRAM_SEL_BITS + 1)
+                        ));
+                        BramSelRdxD               <= (others => '0');
+                        BramSelRdxD(BramIdxV)     <= '1';
                     end if;
                 end process;
 
-                -- Read data mux
-                with BramSelRdxD select BramRdDataxD <=
-                    BramRdDataArrayxD(0) when "0001",
-                    BramRdDataArrayxD(1) when "0010",
-                    BramRdDataArrayxD(2) when "0100",
-                    BramRdDataArrayxD(3) when others;
+                process(BramSelRdxD, BramRdDataArrayxD)
+                begin
+                    BramRdDataxD <= BramRdDataArrayxD(0); 
+                    for i in 0 to C_BRAM_COUNT - 1 loop
+                        if BramSelRdxD(i) = '1' then
+                            BramRdDataxD <= BramRdDataArrayxD(i);
+                        end if;
+                    end loop;
+                end process;
 
-                FrameBuffer0xI : entity work.blk_mem_gen_0
-                    port map (
-                        clka  => ClkUsrxC,
-                        wea(0) => BramWexD(0),
-                        addra => BramWrAddrArrayxD(0),
-                        dina  => BramWrDataArrayxD(0),
-                        clkb  => HdmiVgaClocksxC.VgaxC,
-                        addrb => BramRdAddrxD(BramRdAddrxD'high-2 downto 0),
-                        doutb => BramRdDataArrayxD(0)
-                    );
-
-                FrameBuffer1xI : entity work.blk_mem_gen_0_1
-                    port map (
-                        clka  => ClkUsrxC,
-                        wea(0) => BramWexD(1),
-                        addra => BramWrAddrArrayxD(1),
-                        dina  => BramWrDataArrayxD(1),
-                        clkb  => HdmiVgaClocksxC.VgaxC,
-                        addrb => BramRdAddrxD(BramRdAddrxD'high-2 downto 0),
-                        doutb => BramRdDataArrayxD(1)
-                    );
-
-                FrameBuffer2xI : entity work.blk_mem_gen_0_2
-                    port map (
-                        clka  => ClkUsrxC,
-                        wea(0) => BramWexD(2),
-                        addra => BramWrAddrArrayxD(2),
-                        dina  => BramWrDataArrayxD(2),
-                        clkb  => HdmiVgaClocksxC.VgaxC,
-                        addrb => BramRdAddrxD(BramRdAddrxD'high-2 downto 0),
-                        doutb => BramRdDataArrayxD(2)
-                    );
-
-                FrameBuffer3xI : entity work.blk_mem_gen_0_3
-                    port map (
-                        clka  => ClkUsrxC,
-                        wea(0) => BramWexD(3),
-                        addra => BramWrAddrArrayxD(3),
-                        dina  => BramWrDataArrayxD(3),
-                        clkb  => HdmiVgaClocksxC.VgaxC,
-                        addrb => BramRdAddrxD(BramRdAddrxD'high-2 downto 0),
-                        doutb => BramRdDataArrayxD(3)
-                    );
-            
+                GEN_BRAMS : for i in 0 to C_BRAM_COUNT - 1 generate
+                    FrameBufferxI : entity work.blk_mem_gen_0
+                        port map (
+                            clka  => ClkUsrxC,
+                            wea(0) => BramWexD(i),
+                            addra => BramWrAddrArrayxD(i)(C_BRAM_DEPTH_BITS - 1 downto 0),
+                            dina  => BramWrDataArrayxD(i),
+                            clkb  => HdmiVgaClocksxC.VgaxC,
+                            addrb => BramRdAddrxD(C_BRAM_DEPTH_BITS - 1 downto 0),
+                            doutb => BramRdDataArrayxD(i)
+                        );
+                end generate;
             end block VideoMemxB;
             ---------------------------------------------------------------------------
             -- VGA framebuffer reader
