@@ -2,8 +2,8 @@
 --Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
---Date        : Tue May 19 19:04:50 2026
---Host        : theodros-ThinkPad-P16s-Gen-2 running 64-bit Ubuntu 24.04.2 LTS
+--Date        : Tue May 26 13:42:17 2026
+--Host        : andre running 64-bit Fedora Linux 42 (Workstation Edition)
 --Command     : generate_target scalp_zynqps.bd
 --Design      : scalp_zynqps
 --Purpose     : IP block netlist
@@ -2480,7 +2480,7 @@ architecture STRUCTURE of scalp_zynqps is
   attribute x_interface_info of aximm_mst_firmwareid_if_wready : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if WREADY";
   attribute x_interface_info of aximm_mst_firmwareid_if_wvalid : signal is "xilinx.com:interface:aximm:1.0 aximm_mst_firmwareid_if WVALID";
   attribute x_interface_info of clk_usr : signal is "xilinx.com:signal:clock:1.0 CLK.CLK_USR CLK";
-  attribute x_interface_parameter of clk_usr : signal is "XIL_INTERFACENAME CLK.CLK_USR, CLK_DOMAIN /sys_clock_clk_out1, FREQ_HZ 75000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.0";
+  attribute x_interface_parameter of clk_usr : signal is "XIL_INTERFACENAME CLK.CLK_USR, CLK_DOMAIN /sys_clock_clk_out1, FREQ_HZ 125000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.0";
   attribute x_interface_info of Clk125RstxRNAO : signal is "xilinx.com:signal:reset:1.0 RST.CLK125RSTXRNAO RST";
   attribute x_interface_parameter of Clk125RstxRNAO : signal is "XIL_INTERFACENAME RST.CLK125RSTXRNAO, INSERT_VIP 0, POLARITY ACTIVE_LOW";
   attribute x_interface_info of Clk125RstxRO : signal is "xilinx.com:signal:reset:1.0 RST.CLK125RSTXRO RST";
