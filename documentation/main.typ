@@ -65,135 +65,51 @@
 )
 
 ///////////////////////////Document starts/////////////////////////////
-
-TODO: Mesurer le nombre d'itérations avec vio
-TODO: Ajouter les scripts de test
-
+///////////////////////////
 = Introduction
 
-The purpose of this laboratory work is to implement a hardware-based fractal image generator on an FPGA. The developed design computes a Mandelbrot/Julia-type image, stores the result in an internal video memory, and displays it through a VGA/HDMI output.
+The purpose of this laboratory work is to implement and optimize a hardware-based fractal image generator on an FPGA. The developed design computes a Mandelbrot/Julia-type image, stores the result in internal video memory, and displays it through a VGA/HDMI output.
 
-The system is written in VHDL and integrated in the `scalp_user_design` top-level module. It uses a BRAM memory as a framebuffer, a pixel coordinate generator, a Mandelbrot computation engine, an iteration unit, a color palette and a VGA interface.
+The system is written in VHDL and integrated in the `scalp_user_design` top-level module. It uses BRAM memories as framebuffers, a pixel coordinate generator, a Mandelbrot computation engine, an iteration unit, a color palette and a VGA interface.
 
-Several architectures were implemented and compared. The first version uses a finite state machine and a sequential computation flow. The second version improves the design by using pipelining in the computation path and in the picture generation architecture. The objective is to evaluate the impact of pipelining on timing performance, frame generation time and maximum operating frequency.
+Several architectures were implemented and compared. The first version uses a finite state machine and a sequential computation flow. The second version improves the design by using pipelining in the computation path and in the picture generation architecture. The final version adds spatial parallelism by using four pipelined Mandelbrot picture generators working in parallel on four independent parts of the image.
 
-= Mathematical principle
+The objective is to evaluate the impact of fixed-point arithmetic, pipelining, memory partitioning and parallel computation on timing performance, FPGA resource usage and frame generation time.
 
-The fractal computation is based on an iterative complex equation. For each pixel, a complex coordinate is generated. The Mandelbrot iteration is then applied until the point diverges or until the maximum number of iterations is reached.
-
-The recurrence relation is:
-
-$
-  z_(n+1) = z_n^2 + c
-$
-
-where:
-
-$
-  z_n = z_"re" + j z_"im"
-$
-
-By separating the real and imaginary parts, the equations become:
-
-$
-  z_"re"(n+1) = z_"re"(n)^2 - z_"im"(n)^2 + c_"re"
-$
-
-$
-  z_"im"(n+1) = 2 z_"re"(n) z_"im"(n) + c_"im"
-$
-
-The divergence condition is:
-
-$
-  z_"re"^2 + z_"im"^2 >= 4
-$
-
-If this condition becomes true, the point is considered divergent. The number of iterations required before divergence is used as the pixel value. This value is later converted into a color by the palette module.
-
-In the current implementation, the constant `c` is fixed inside the Mandelbrot engine:
-
-```vhdl
-reg_c_re <= to_signed(11633, DATA_W);
-reg_c_im <= to_signed(11633, DATA_W);
-```
-
-The design uses fixed-point arithmetic with `FRAC_W = 15`. Therefore, the value `11633` corresponds approximately to:
-
-$
-  11633 / 2^15 ≈ 0.355
-$
-
-Thus, the complex constant used is approximately:
-
-$
-  c = 0.355 + j 0.355
-$
-
-= Fixed-point representation
-
-The design uses signed fixed-point arithmetic instead of floating-point arithmetic. This is more suitable for FPGA implementation because it reduces resource usage and avoids expensive floating-point operators.
-
-The main numerical parameters are:
-
-```vhdl
-DATA_W := 18
-FRAC_W := 15
-```
-
-This means that each value is represented with 18 bits, including 15 fractional bits. A real value is converted to fixed-point format by multiplying it by:
-
-$
-  2^15 = 32768
-$
-
-For example:
-
-$
-  0.355 * 32768 ≈ 11633
-$
-
-The use of fixed-point arithmetic provides a good compromise between precision and hardware cost. The precision is sufficient to generate a correct fractal image, while the arithmetic units remain small enough for FPGA implementation.
-
-= Global architecture
+= Global system architecture
 
 The complete design is composed of the following main blocks:
 
 ```text
 scalp_user_design
+ ├── Zynq processing system
+ ├── Clock and reset generation
+ ├── mandelbrot_zoom
  ├── mandelbrot_picture_gen
  ├── mandelbrot_engine
  ├── mandelbrot_iter
- ├── BRAM framebuffer
- ├── mandelbrot_palette
- └── scalp_vga_if
+ ├── BRAM framebuffers
+ ├── scalp_vga_if
+ └── mandelbrot_palette
 ```
 
-The global data flow is:
+The global computation and display flow is:
 
-```text
-Pixel coordinates
-      ↓
-Complex coordinate generation
-      ↓
-Mandelbrot engine
-      ↓
-Iteration count
-      ↓
-BRAM framebuffer
-      ↓
-Color palette
-      ↓
-VGA/HDMI output
-```
+#align(center)[
+  #image("images/architecture.png", width: 50%)
+]
 
 The image is generated pixel by pixel. For each pixel, the picture generator computes the corresponding complex coordinate and sends it to the Mandelbrot engine. The engine performs the iterative calculation and outputs the iteration count. This value is written into the BRAM framebuffer.
 
+The design was first implemented with a single picture generator writing to one framebuffer. The final version improves the throughput by using four Mandelbrot picture generators in parallel. Each generator computes one quarter of the image and writes the result to its own BRAM region.
+
 During display, the VGA interface reads the framebuffer, sends the stored iteration value to the palette module, and outputs the corresponding RGB value.
 
-= Mandelbrot picture generator
+= Mandelbrot computation architecture
 
-The `mandelbrot_picture_gen` block is responsible for scanning the complete image. It generates the horizontal and vertical pixel positions and converts them into complex coordinates.
+== Mandelbrot picture generator
+
+The `mandelbrot_picture_gen` block is responsible for scanning an image region. It generates the horizontal and vertical pixel positions and converts them into complex coordinates.
 
 Two architectures are available for this block:
 
@@ -202,49 +118,62 @@ mandelbrot_picture_gen(fsm)
 mandelbrot_picture_gen(pipelined)
 ```
 
-== FSM picture generator
+=== FSM picture generator
 
 The FSM version processes one pixel at a time. It waits for the Mandelbrot engine to finish the computation of the current pixel before moving to the next one.
 
-This architecture is simple and easy to debug because the control flow is sequential:
+The control flow is sequential:
 
-```text
-Start frame
-  ↓
-Generate pixel coordinate
-  ↓
-Start Mandelbrot engine
-  ↓
-Wait for result
-  ↓
-Write iteration count to BRAM
-  ↓
-Move to next pixel
-  ↓
-End frame
-```
+#align(center)[
+  #image("images/fsm.png", width: 50%)
+]
 
-The drawback is that the next pixel cannot be started until the current pixel is finished. Therefore, the global throughput is limited.
+This architecture is simple and easy to debug, but the throughput is limited because the next pixel cannot start until the current pixel has finished.
 
-== Pipelined picture generator
+=== Single pipelined picture generator
 
-The pipelined version improves throughput by overlapping operations and reducing idle time. This version is more complex, but it allows the design to reach a higher operating frequency and a shorter frame generation time.
+The single pipelined version improves throughput by overlapping operations and reducing idle time. It allows the design to reach a higher operating frequency and a shorter frame generation time.
 
-In the top-level design, the selected architecture is defined by the instantiation:
+The selected architecture can be controlled by the instantiation:
 
 ```vhdl
 MandelbrotPictureGenxI : entity work.mandelbrot_picture_gen(pipelined)
 ```
 
-To use the FSM version instead, the instantiation can be changed to:
+or, for the FSM version:
 
 ```vhdl
 MandelbrotPictureGenxI : entity work.mandelbrot_picture_gen(fsm)
 ```
 
-= Mandelbrot engine
+=== Parallel pipelined picture generator
+
+The final implementation uses four pipelined picture generators in parallel. The complete 512 x 512 framebuffer is divided into four horizontal regions:
+
+```text
+Generator 0 -> rows 0 to 127
+Generator 1 -> rows 128 to 255
+Generator 2 -> rows 256 to 383
+Generator 3 -> rows 384 to 511
+```
+
+Each generator receives the same horizontal start coordinate `x0` and horizontal step `dx`, but receives a different vertical start coordinate `y0`. This allows each generator to compute a different part of the complex plane.
+
+Each generator computes:
+
+$
+  512 * 128 = 65536
+$
+
+pixels instead of the complete 512 x 512 image. A full frame is considered complete only when all four generators have asserted their individual `FrameDone` signal.
+
+== Mandelbrot engine
 
 The `mandelbrot_engine` module controls the iterative computation for one pixel. It receives the initial complex coordinate and repeatedly calls the `mandelbrot_iter` block until the point diverges or the maximum number of iterations is reached.
+
+#align(center)[
+  #image("images/engine.png", width: 80%)
+]
 
 The engine is implemented as a finite state machine with three states:
 
@@ -266,9 +195,9 @@ In the `ITERATE` state, the engine waits for `math_o_valid`, which indicates tha
 
 In the `FINISH` state, the engine outputs the final iteration count on `o_iter` and asserts `o_valid`.
 
-This design is compatible with both the combinational and pipelined versions of the iteration unit, because the engine does not assume that the result is available immediately. It always waits for the `math_o_valid` signal.
+The engine is compatible with both the combinational and pipelined versions of the iteration unit, because it waits for the `math_o_valid` signal before continuing.
 
-= Mandelbrot iteration unit
+== Mandelbrot iteration unit
 
 The `mandelbrot_iter` block performs one step of the Mandelbrot recurrence:
 
@@ -289,66 +218,24 @@ mandelbrot_iter(combinatorial)
 mandelbrot_iter(pipelined)
 ```
 
-== Combinational iteration unit
+In the combinational version, all arithmetic operations are placed in one combinational path. This is simple, but it creates a long critical path.
 
-In the combinational version, all arithmetic operations are placed in one combinational path. This includes multiplications, additions, subtractions and the divergence comparison.
-
-The advantage of this implementation is its simplicity. However, the critical path is long, which limits the maximum clock frequency.
-
-This version is useful as a reference implementation, but it is not optimal for high-frequency operation.
-
-== Pipelined iteration unit
-
-In the pipelined version, the arithmetic operations are split into several stages separated by registers. This reduces the delay of each combinational stage and improves timing performance.
-
-The drawback is that the result is not available immediately. It appears after the pipeline latency. However, this is not a problem because the Mandelbrot engine waits for `math_o_valid` before continuing.
-
-To explicitly select the pipelined version, the instantiation should be written as:
-
-```vhdl
-mandelbrot_iter : entity work.mandelbrot_iter(pipelined)
-```
-
-To explicitly select the combinational version, the instantiation should be written as:
-
-```vhdl
-mandelbrot_iter : entity work.mandelbrot_iter(combinatorial)
-```
-
-It is recommended to always specify the architecture explicitly. Otherwise, the selected architecture may depend on the compilation order in Vivado.
-
-= Architecture combinations
-
-The implemented design allows several combinations between the picture generator and the iteration unit.
-
-The main possible combinations are:
-
-```text
-FSM picture generator + combinational iteration unit
-FSM picture generator + pipelined iteration unit
-Pipelined picture generator + pipelined iteration unit
-```
-
-The first combination is the simplest one. It is easy to understand and useful for validation, but it has the lowest performance.
-
-The second combination keeps the FSM-based control but improves arithmetic timing by using a pipelined iteration unit.
-
-The third combination is the most optimized version. It uses both a pipelined picture generator and a pipelined iteration unit. This is the version that provides the best performance.
+In the pipelined version, the arithmetic operations are split into several stages separated by registers. This reduces the delay of each combinational stage and improves the timing performance. The drawback is additional latency, but this latency is handled by the valid/ready control signals.
 
 = Framebuffer memory
 
-The computed iteration count is stored in a BRAM framebuffer. Each address corresponds to one pixel of the generated image.
+The computed iteration count is stored in BRAM. Each address corresponds to one pixel of the generated image.
 
-In this project, the framebuffer resolution is:
+The framebuffer resolution is:
 
 $
-  512 times 512
+  512 * 512
 $
 
 Therefore, the total number of pixels stored in memory is:
 
 $
-  512 times 512 = 262144
+  512 * 512 = 262144
 $
 
 Each pixel stores the iteration count returned by the Mandelbrot engine. The stored data width is 7 bits:
@@ -363,25 +250,19 @@ $
   2^7 = 128
 $
 
-The BRAM depth is therefore configured as:
+== Single-BRAM organization
+
+In the first versions, the complete framebuffer is stored in one BRAM. The required depth is:
 
 ```text
 Depth = 262144
 ```
 
-The address width must be 18 bits, because:
+The address width is 18 bits, because:
 
 $
   2^18 = 262144
 $
-
-Thus, the framebuffer constants used in the top-level design are:
-
-```vhdl
-constant C_BUFFER_WIDTH       : integer := 512;
-constant C_BUFFER_HEIGHT      : integer := 512;
-constant C_BRAM_ADDR_BIT_SIZE : integer := 18;
-```
 
 The Block Memory Generator is configured with:
 
@@ -393,11 +274,58 @@ Port B Width = 7
 Port B Depth = 262144
 ```
 
-This memory organization reduces the required BRAM resources compared to storing full RGB values. The framebuffer only stores the iteration count, and the final color is generated later by the palette module during display.
+== Parallel BRAM organization
 
-= VGA scaling
+In the final parallel version, the framebuffer is split into four independent BRAMs. Each BRAM stores one quarter of the image:
 
-The framebuffer resolution is not equal to the display resolution. In this project, the Mandelbrot image is generated and stored in a 512 x 512 BRAM framebuffer, while the active VGA display area is 720 x 720 pixels:
+$
+  262144 / 4 = 65536
+$
+
+Therefore, each BRAM has:
+
+```text
+Width = 7 bits
+Depth = 65536
+```
+
+Since:
+
+$
+  65536 = 2^16
+$
+
+each BRAM uses a 16-bit address. This is why the picture generators use:
+
+```vhdl
+C_BRAM_ADDR_BIT_SIZE => C_BRAM_ADDR_BIT_SIZE - 2
+```
+
+because:
+
+$
+  18 - 2 = 16
+$
+
+The four BRAMs together still store the complete 512 x 512 framebuffer:
+
+```text
+BRAM 0 -> 65536 pixels
+BRAM 1 -> 65536 pixels
+BRAM 2 -> 65536 pixels
+BRAM 3 -> 65536 pixels
+Total  -> 262144 pixels
+```
+
+This organization has the same total framebuffer capacity as the single-BRAM version, but it allows the four Mandelbrot generators to write their results independently and in parallel.
+
+#align(center)[
+  #image("images/parallelism.png", width: 80%)
+]
+
+= VGA scaling and display
+
+The framebuffer resolution is not equal to the display resolution. The Mandelbrot image is generated and stored in a 512 x 512 framebuffer, while the active VGA display area is 720 x 720 pixels:
 
 ```vhdl
 constant C_BUFFER_WIDTH    : integer := 512;
@@ -405,16 +333,14 @@ constant C_BUFFER_HEIGHT   : integer := 512;
 constant C_VGA_ACTIVE_SIZE : integer := 720;
 ```
 
-Therefore, the VGA interface performs a scaling operation when reading the framebuffer. The goal is to display the 512 x 512 generated image over the full 720 x 720 active area.
-
-The horizontal and vertical display coordinates are converted into framebuffer coordinates using:
+Therefore, the VGA interface performs a scaling operation when reading the framebuffer. The horizontal and vertical display coordinates are converted into framebuffer coordinates using:
 
 ```vhdl
 HxScaledxD := (to_integer(unsigned(HxCntxDI)) * C_BUFFER_WIDTH) / C_VGA_ACTIVE_SIZE;
 VxScaledxD := (to_integer(unsigned(VxCntxDI)) * C_BUFFER_HEIGHT) / C_VGA_ACTIVE_SIZE;
 ```
 
-Then the BRAM read address is computed with:
+Then the global framebuffer read address is computed with:
 
 ```vhdl
 BramRdAddrxD := (VxScaledxD * C_BUFFER_WIDTH) + HxScaledxD;
@@ -426,9 +352,9 @@ $
   720 / 512 ≈ 1.406
 $
 
-As a result, the 512 x 512 image is enlarged to fill the 720 x 720 display area. This approach reduces memory usage and computation time, because only 262144 pixels need to be generated instead of 518400 pixels for a full 720 x 720 framebuffer.
+In the parallel BRAM version, the two most significant bits of the read address select which BRAM must be read. The remaining lower address bits select the pixel inside the selected BRAM. This allows the VGA interface to see the four BRAMs as one logical 512 x 512 framebuffer.
 
-The trade-off is that the displayed image is slightly upscaled, but the hardware cost is significantly lower.
+The trade-off is that the displayed image is slightly upscaled, but the hardware cost is significantly lower than computing and storing a full 720 x 720 framebuffer.
 
 = Color palette
 
@@ -437,7 +363,7 @@ The `mandelbrot_palette` module converts the iteration count read from the frame
 The general principle is:
 
 ```text
-Iteration count → RGB value
+Iteration count -> RGB value
 ```
 
 Pixels that diverge quickly receive one color, while pixels that require more iterations receive another color. Points that do not diverge before the maximum number of iterations are usually displayed with a dark color.
@@ -446,7 +372,7 @@ This separation between computation and color generation is useful because the f
 
 = Simulation and test script
 
-A simulation script was created to automate the validation of the main Mandelbrot hardware blocks. The script uses GHDL to analyse, elaborate and simulate the VHDL sources and their corresponding testbenches.
+A simulation script was created to automate the validation of the Mandelbrot VHDL blocks. The script uses GHDL to compile the sources, run the testbenches and generate VCD waveform files.
 
 The script is located in:
 
@@ -454,97 +380,24 @@ The script is located in:
 sim.sh
 ```
 
-Its role is to compile the design files in the correct order, run the different testbenches, generate waveform files, and compare the generated image outputs.
-
-The script first creates three output directories:
-
-```bash
-WORKDIR="$SCRIPT_DIR/work"
-WAVEDIR="$SCRIPT_DIR/waves"
-PPMDIR="$SCRIPT_DIR/ppm"
-```
-
-The `work` directory is used by GHDL for compilation files, the `waves` directory stores the generated VCD waveform files, and the `ppm` directory stores the generated image outputs.
-
-The script defines two helper functions:
-
-```bash
-analyse() {
-    echo "Analysing $1..."
-    ghdl -a $GHDL_FLAGS --workdir="$WORKDIR" "$1"
-}
-
-simulate() {
-    local tb="$1"
-    local stop_time="${2:-10us}"
-    echo "── Running $tb ──"
-    ghdl -e $GHDL_FLAGS --workdir="$WORKDIR" -o "$WORKDIR/$tb" "$tb"
-    "$WORKDIR/$tb" --vcd="$WAVEDIR/$tb.vcd" --stop-time="$stop_time"
-}
-```
-
-The `analyse` function compiles a VHDL source file with GHDL. The `simulate` function elaborates a testbench, runs the simulation, and exports a VCD waveform file.
-
-The compilation order is important because several architectures depend on common entities. The script first analyses the Mandelbrot iteration unit and its two architectures:
-
-```bash
-analyse "$SCRIPT_DIR/../hdl/mandelbrot_iter.vhd"
-analyse "$SCRIPT_DIR/../hdl/mandelbrot_iter_combinatorial.vhd"
-analyse "$SCRIPT_DIR/../hdl/mandelbrot_iter_pipelined.vhd"
-```
-
-Then it compiles the Mandelbrot engine and the picture generator architectures:
-
-```bash
-analyse "$SCRIPT_DIR/../hdl/mandelbrot_engine.vhd"
-
-analyse "$SCRIPT_DIR/../hdl/mandelbrot_picture_gen.vhd"
-analyse "$SCRIPT_DIR/../hdl/mandelbrot_picture_gen_fsm.vhd"
-analyse "$SCRIPT_DIR/../hdl/mandelbrot_picture_gen_pipelined.vhd"
-```
-
-After the design files, the script compiles the testbenches:
-
-```bash
-analyse "$SCRIPT_DIR/tb_mandelbrot_iter.vhd"
-analyse "$SCRIPT_DIR/tb_mandelbrot_engine.vhd"
-analyse "$SCRIPT_DIR/tb_mandelbrot_picture_gen.vhd"
-
-analyse "$SCRIPT_DIR/tb_mandelbrot_iter_pipelined.vhd"
-analyse "$SCRIPT_DIR/tb_mandelbrot_picture_gen_pipelined.vhd"
-```
-
-The following simulations are then executed:
+It compiles the Mandelbrot iteration unit, the Mandelbrot engine, the FSM picture generator and the pipelined picture generator in the correct order. Then, it runs the corresponding testbenches:
 
 ```bash
 simulate tb_mandelbrot_iter
 simulate tb_mandelbrot_iter_pipelined
-
 simulate tb_mandelbrot_engine 10000ms
 simulate tb_mandelbrot_picture_gen 10000ms
 simulate tb_mandelbrot_picture_gen_pipelined 100ms
 ```
 
-The iteration unit testbenches validate the elementary Mandelbrot iteration step. The engine testbench validates the complete iterative computation for one or more pixels. The picture generator testbenches validate the complete frame generation flow for both the FSM and pipelined architectures.
-
-The testbenches generate PPM image files. The script renames the generated files with a timestamp in order to keep the results of each run:
-
-```bash
-ENGINE_OUTPUT_FILE="$PPMDIR/output_engine_$DATE.ppm"
-PICTURE_GEN_OUTPUT_FILE="$PPMDIR/picture_gen_fsm_$DATE.ppm"
-PICTURE_GEN_PIPELINED_OUTPUT_FILE="$PPMDIR/picture_gen_pipeline_$DATE.ppm"
-```
-
-After simulation, the script compares the generated images using `cmp`:
+The testbenches generate PPM image files. These files are then compared with `cmp` to verify that the different architectures produce the same image:
 
 ```bash
 cmp $ENGINE_OUTPUT_FILE $PICTURE_GEN_OUTPUT_FILE
 cmp $PICTURE_GEN_PIPELINED_OUTPUT_FILE $PICTURE_GEN_OUTPUT_FILE
 ```
 
-The first comparison checks that the Mandelbrot engine and the FSM picture generator produce the same image output. The second comparison checks that the pipelined picture generator produces the same image as the FSM version.
-
-This is important because the pipelined implementation changes the internal timing of the design, but it must not change the final computed result. If the generated PPM files are identical, the functional behaviour of the FSM and pipelined versions is equivalent.
+The first comparison checks that the Mandelbrot engine and the FSM picture generator produce the same result. The second comparison checks that the pipelined picture generator produces the same image as the FSM version.
 
 If all comparisons succeed, the script prints:
 
@@ -552,11 +405,11 @@ If all comparisons succeed, the script prints:
 All tests passed
 ```
 
-This confirms that the tested Mandelbrot blocks are functionally correct and that the FSM and pipelined architectures generate the same image output.
+This confirms that the tested Mandelbrot blocks are functionally correct. The parallel version reuses the validated pipelined generator several times and distributes the framebuffer into independent regions.
 
 = Timing analysis
 
-Vivado timing reports were used to evaluate the maximum operating frequency of the design. Two implementations were compared: a baseline FSM implementation and a pipelined implementation.
+Vivado timing reports were used to evaluate the maximum operating frequency of the design. Three implementations were compared: the FSM implementation, the single pipelined implementation, and the final parallel pipelined implementation.
 
 == FSM implementation
 
@@ -584,9 +437,9 @@ $
   f_"max" = 1 / 12.821 "ns" ≈ 78 "MHz"
 $
 
-== Pipelined implementation
+== Single pipelined implementation
 
-The pipelined implementation was constrained at 125 MHz. The corresponding clock period is:
+The single pipelined implementation was constrained at 125 MHz. The corresponding clock period is:
 
 $
   T = 1 / 125 "MHz" = 8 "ns"
@@ -610,6 +463,34 @@ $
   f_"max" = 1 / 7.143 "ns" ≈ 140 "MHz"
 $
 
+== Parallel pipelined implementation
+
+The parallel pipelined implementation was also constrained at 125 MHz. The corresponding clock period is:
+
+$
+  T = 1 / 125 "MHz" = 8 "ns"
+$
+
+Vivado reported:
+
+```text
+Worst Negative Slack = 0.105 ns
+```
+
+Because the slack is positive, all timing constraints are met. The estimated critical path delay is:
+
+$
+  8 "ns" - 0.105 "ns" = 7.895 "ns"
+$
+
+The estimated maximum frequency is therefore:
+
+$
+  f_"max" = 1 / 7.895 "ns" ≈ 126.7 "MHz"
+$
+
+The parallel pipelined version still meets timing at 125 MHz, but with a smaller timing margin than the single pipelined version. This is expected because the design duplicates the Mandelbrot computation path four times and adds extra logic for BRAM selection, frame synchronization and framebuffer partitioning.
+
 == Timing comparison
 
 The comparison is summarized below:
@@ -619,110 +500,54 @@ The comparison is summarized below:
   align: center,
   [Architecture], [Constraint], [Period], [WNS], [Critical path], [Estimated Fmax],
   [FSM], [75 MHz], [13.333 ns], [0.512 ns], [12.821 ns], [78 MHz],
-  [Pipelined], [125 MHz], [8.000 ns], [0.857 ns], [7.143 ns], [140 MHz],
+  [Single pipelined], [125 MHz], [8.000 ns], [0.857 ns], [7.143 ns], [140 MHz],
+  [Parallel pipelined], [125 MHz], [8.000 ns], [0.105 ns], [7.895 ns], [126.7 MHz],
 )
 
-The validated operating frequency increased from 75 MHz to 125 MHz:
+All implementations meet timing because all WNS values are positive. The FSM version was validated at 75 MHz, while both pipelined versions were validated at 125 MHz.
 
-$
-  125 / 75 = 1.67
-$
+The single pipelined version has the highest estimated maximum frequency. The parallel pipelined version has a lower estimated maximum frequency because it uses four computation paths in parallel and requires additional control and memory selection logic. However, it provides the best frame generation time because four image regions are computed simultaneously.
 
-This corresponds to an improvement of approximately:
+= FPGA resource utilization
 
-$
-  (125 / 75 - 1) * 100 ≈ 66.7 %
-$
+Vivado resource reports were used to evaluate the hardware cost of the final pipelined and parallelized implementation. The most important resources are LUTs, flip-flops, BRAMs and DSP blocks.
 
-If the estimated maximum frequencies are compared, the improvement is:
+The resource utilization of the final implementation is summarized below:
 
-$
-  140 / 78 ≈ 1.79
-$
+#table(
+  columns: 5,
+  align: center,
+  [Resource], [Used], [Available], [Utilization], [Comment],
+  [LUT], [~6000], [46200], [13%], [Logic, control and arithmetic],
+  [Flip-Flop], [~6500], [92400], [7%], [Pipeline and control registers],
+  [BRAM], [~56], [95], [59%], [Framebuffer memories],
+  [DSP], [~18], [160], [11%], [Fixed-point multiplications],
+)
 
-which corresponds to approximately:
+The final implementation uses a moderate amount of LUTs and flip-flops. The LUT utilization is approximately 13%, while the flip-flop utilization is approximately 7%. These resources are mainly used for control logic, address generation, synchronization between the four generators, and pipeline registers.
 
-$
-  (140 / 78 - 1) * 100 ≈ 79 %
-$
+The most used resource is BRAM, with approximately 59% utilization. This is expected because the design stores the complete 512 x 512 framebuffer in FPGA memory. In the final parallel version, the framebuffer is divided into four independent BRAM regions. Each region stores one quarter of the image, which allows the four Mandelbrot generators to write their results independently and in parallel.
 
-This improvement is mainly due to the reduction of the critical path. In the FSM version, several arithmetic operations are chained in the same combinational path. In the pipelined version, these operations are separated by registers, which allows the FPGA to operate at a higher clock frequency.
+The DSP utilization is approximately 11%. These DSP blocks are mainly used by the fixed-point multiplications inside the Mandelbrot iteration units. Since the final architecture instantiates four pipelined Mandelbrot generators, several multiplication paths are active in parallel, which increases DSP usage compared to a single-generator version.
+
+The parallel pipelined version uses more resources than the FSM and single pipelined versions. This is expected because the computation path is replicated four times and additional logic is required for BRAM selection, frame synchronization and framebuffer partitioning. However, the resource usage remains within the available FPGA limits.
+
+This resource increase is justified by the performance improvement. The final parallel pipelined version reduces the frame generation time to approximately 34.6 ms, corresponding to about 28.9 FPS, while still meeting timing at 125 MHz.
 
 = Frame generation time
 
-The frame generation time was measured for both implemented architectures. The measurement corresponds to the time required to compute one complete 512 x 512 framebuffer. It does not correspond to the VGA refresh time, because the VGA interface only reads and scales the already generated framebuffer for display.
+The frame generation time was measured for the implemented architectures. The measurement corresponds to the time required to compute one complete 512 x 512 framebuffer.
 
-== FSM frame generation time
-
-For the FSM version running at 75 MHz, the measured frame generation count is:
+Three versions are compared:
 
 ```text
-27,400,456 clock cycles
+FSM version
+Single pipelined version
+Parallel pipelined version with four generators
 ```
 
-The frame generation time is:
+In the parallel pipelined version, the framebuffer is split into four independent parts. Four Mandelbrot picture generators run in parallel, and each generator computes one quarter of the image. Each generator writes to its own BRAM. A frame is considered complete only when all four generators have finished their part.
 
-$
-  t_"frame" = 27400456 / 75000000
-$
-
-$
-  t_"frame" ≈ 0.365 "s"
-$
-
-Therefore:
-
-$
-  t_"frame" ≈ 365 "ms"
-$
-
-The corresponding frame rate is:
-
-$
-  "FPS" = 1 / 0.365 ≈ 2.74
-$
-
-Thus, the FSM version generates approximately:
-
-```text
-2.74 FPS
-```
-
-== Pipelined frame generation time
-
-For the pipelined version running at 125 MHz, the measured frame generation count is:
-
-```text
-12,993,601 clock cycles
-```
-
-The frame generation time is:
-
-$
-  t_"frame" = 12993601 / 125000000
-$
-
-$
-  t_"frame" ≈ 0.10395 "s"
-$
-
-Therefore:
-
-$
-  t_"frame" ≈ 104 "ms"
-$
-
-The corresponding frame rate is:
-
-$
-  "FPS" = 1 / 0.10395 ≈ 9.62
-$
-
-Thus, the pipelined version generates approximately:
-
-```text
-9.62 FPS
-```
 
 == Frame generation comparison
 
@@ -733,41 +558,32 @@ The comparison is summarized below:
   align: center,
   [Architecture], [Clock], [Cycles per frame], [Frame time], [Frame rate],
   [FSM], [75 MHz], [27,400,456], [365 ms], [2.74 FPS],
-  [Pipelined], [125 MHz], [12,993,601], [104 ms], [9.62 FPS],
+  [Single pipelined], [125 MHz], [12,993,601], [104 ms], [9.62 FPS],
+  [Parallel pipelined], [125 MHz], [4,326,949], [34.6 ms], [28.9 FPS],
 )
 
-The frame time improvement is:
+Compared to the FSM version, the single pipelined version improves the frame generation time by:
 
 $
   365 / 104 ≈ 3.51
 $
 
-Therefore, the pipelined version generates a complete frame approximately 3.5 times faster than the FSM version.
+Therefore, the single pipelined version is approximately 3.5 times faster than the FSM version.
 
-This improvement comes from two effects. First, the pipelined version runs at a higher clock frequency. Second, it requires fewer cycles per frame because the computation flow has less idle time and better overlaps the internal operations.
+Compared to the single pipelined version, the parallel pipelined version improves the frame generation time by:
 
-= Discussion
+$
+  104 / 34.6 ≈ 3.01
+$
 
-The results show that the Mandelbrot algorithm is well suited for FPGA implementation. The computation is repetitive and can be mapped efficiently to hardware using fixed-point arithmetic.
+Therefore, the parallel pipelined version is approximately 3.0 times faster than the single pipelined version.
 
-The FSM-based architecture is simple and easy to debug, but its performance is limited because it processes the computation sequentially. The pipelined architecture is more complex, but it significantly improves both timing performance and frame generation time.
+Compared to the original FSM version, the parallel pipelined version improves the frame generation time by:
 
-The timing comparison shows that pipelining reduces the critical path from approximately 12.821 ns to 7.143 ns. As a result, the design can run at 125 MHz with positive slack, whereas the FSM implementation was validated at 75 MHz.
+$
+  365 / 34.6 ≈ 10.55
+$
 
-The frame generation comparison also shows a clear improvement. The FSM version generates one frame in approximately 365 ms, while the pipelined version generates one frame in approximately 104 ms. This corresponds to an improvement factor of approximately 3.5.
+Therefore, the final parallel pipelined version is approximately 10.5 times faster than the FSM version.
 
-The framebuffer resolution also has an important impact on memory usage and generation time. In this implementation, a 512 x 512 framebuffer is used, corresponding to 262144 pixels. This choice reduces the required BRAM size and decreases the number of pixels that must be computed for each frame.
-
-The VGA active area is 720 x 720 pixels, but the framebuffer is scaled during display. This means that the generated 512 x 512 image is enlarged to fill the screen. This is a good compromise between image quality, memory usage and frame generation time.
-
-= Conclusion
-
-This laboratory work resulted in a complete FPGA-based fractal generator. The system computes a Mandelbrot/Julia-type image in hardware, stores the result in a BRAM framebuffer, and displays it using a VGA interface.
-
-The architecture is modular. The main blocks are responsible for pixel generation, Mandelbrot iteration, framebuffer storage, color conversion and video output. This modularity made it possible to compare different implementation strategies.
-
-The use of fixed-point arithmetic allows efficient implementation on FPGA while maintaining sufficient precision for image generation. The framebuffer decouples image generation from video display. In this implementation, a 512 x 512 framebuffer is used and scaled to the 720 x 720 active display area, reducing memory usage while still displaying the image over the full screen.
-
-The pipelined implementation provides a significant performance improvement. Compared to the FSM implementation, the validated operating frequency increased from 75 MHz to 125 MHz, corresponding to an improvement of approximately 66.7 percent. The measured frame generation time decreased from approximately 365 ms to 104 ms, meaning that the pipelined version is approximately 3.5 times faster.
-
-Overall, the project demonstrates how an iterative mathematical algorithm can be efficiently implemented in hardware, and how architectural choices such as pipelining, memory size and fixed-point precision directly influence performance, resource usage and image quality.
+This improvement comes from two effects. First, the pipelined versions run at a higher clock frequency. Second, the parallel pipelined version divides the image into four independent regions, which are computed simultaneously by four Mandelbrot generators.
