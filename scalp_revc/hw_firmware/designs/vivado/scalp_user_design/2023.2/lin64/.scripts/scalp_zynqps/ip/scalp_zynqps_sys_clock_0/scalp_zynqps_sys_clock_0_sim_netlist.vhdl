@@ -2,7 +2,7 @@
 -- Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
--- Date        : Mon May 25 15:01:41 2026
+-- Date        : Tue May 26 13:42:43 2026
 -- Host        : andre running 64-bit Fedora Linux 42 (Workstation Edition)
 -- Command     : write_vhdl -force -mode funcsim
 --               /home/andre/dev/mse/ma-lpsc/lpsc/scalp_revc/hw_firmware/designs/vivado/scalp_user_design/2023.2/lin64/.scripts/scalp_zynqps/ip/scalp_zynqps_sys_clock_0/scalp_zynqps_sys_clock_0_sim_netlist.vhdl
@@ -77,16 +77,16 @@ clkout2_buf: unisim.vcomponents.BUFG
 mmcm_adv_inst: unisim.vcomponents.MMCME2_ADV
     generic map(
       BANDWIDTH => "OPTIMIZED",
-      CLKFBOUT_MULT_F => 9.000000,
+      CLKFBOUT_MULT_F => 8.000000,
       CLKFBOUT_PHASE => 0.000000,
       CLKFBOUT_USE_FINE_PS => false,
       CLKIN1_PERIOD => 8.000000,
       CLKIN2_PERIOD => 0.000000,
-      CLKOUT0_DIVIDE_F => 9.000000,
+      CLKOUT0_DIVIDE_F => 8.000000,
       CLKOUT0_DUTY_CYCLE => 0.500000,
       CLKOUT0_PHASE => 0.000000,
       CLKOUT0_USE_FINE_PS => false,
-      CLKOUT1_DIVIDE => 15,
+      CLKOUT1_DIVIDE => 8,
       CLKOUT1_DUTY_CYCLE => 0.500000,
       CLKOUT1_PHASE => 0.000000,
       CLKOUT1_USE_FINE_PS => false,

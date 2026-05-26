@@ -34,6 +34,8 @@ library scalp_lib;
 use scalp_lib.scalp_axi_pkg.all;
 use scalp_lib.scalp_hdmi_pkg.all;
 
+use work.mandelbrot_pkg.all;
+
 entity scalp_user_design is
 
     generic (
@@ -580,7 +582,6 @@ begin
     end block PSxB;
 
     PLxB : block is
-        type signed_array_t is array(natural range <>) of signed;
         constant C_CLK_FREQ_HZ        : integer := 125000000;
         constant C_MAX_ITER           : integer := 100;
         constant C_BUFFER_WIDTH       : integer := 512;
@@ -596,9 +597,10 @@ begin
         signal ClkUsrRstxR            : std_logic := '1';
         signal ClkUsrRstxRNA          : std_logic := '0';
         signal MandelbrotFrameCntxD   : unsigned(6 downto 0) := (others => '0');
+        signal LastFramexS            : std_logic;
         signal MandelbrotX0xD         : signed(DATA_W - 1 downto 0) := (others => '0');
         signal MandelbrotY0BasexD     : signed(DATA_W - 1 downto 0) := (others => '0');
-        signal MandelbrotY0xD         : signed_array_t(0 to C_BRAM_COUNT - 1)(DATA_W -1 downto 0);
+        signal MandelbrotY0xD         : signed_array_t(0 to C_BRAM_COUNT - 1);
         signal MandelbrotDxxD         : signed(DATA_W - 1 downto 0) := (others => '0');
         signal MandelbrotDyxD         : signed(DATA_W - 1 downto 0) := (others => '0');
         signal MandelbrotStartxS      : std_logic := '0';
@@ -613,6 +615,16 @@ begin
         signal BramWrAddrArrayxD      : slv_array_t(0 to C_BRAM_COUNT - 1)(C_BRAM_DEPTH_BITS - 1 downto 0);
         signal BramWrDataArrayxD      : slv_array_t(0 to C_BRAM_COUNT - 1)(6 downto 0);
         signal FrameDoneArrayxS       : std_logic_vector(C_BRAM_COUNT - 1 downto 0);
+        signal FrameAllReadyxS        : std_logic;
+
+        attribute mark_debug of FrameReadyxS      : signal is "true";
+        attribute keep of FrameReadyxS            : signal is "true";
+
+        attribute mark_debug of MandelbrotStartxS : signal is "true";
+        attribute keep of MandelbrotStartxS       : signal is "true";
+
+        attribute mark_debug of FrameAllReadyxS   : signal is "true";
+        attribute keep of FrameAllReadyxS         : signal is "true";
 
     begin  -- block PLxB
 
@@ -883,39 +895,36 @@ begin
 
             ClkUsrRstxRNA <= not ClkUsrRstxR;
 
-
-            MandelbrotStartAndFrameCounterxB : block is
+            MandelbrotStartGatexP : process(ClkUsrRstxR, ClkUsrxC)
             begin
-            
-                MandelbrotStartGatexP : process(ClkUsrRstxR, ClkUsrxC)
-                begin
-                    if ClkUsrRstxR = '1' then
-                        MandelbrotStartxS <= '0';
-                        FrameReadyxS      <= (others => '1');
-                        MandelbrotFrameCntxD <= (others => '0');
-                    elsif rising_edge(ClkUsrxC) then
-                        MandelbrotStartxS <= '0';
+                if ClkUsrRstxR = '1' then
+                    MandelbrotStartxS    <= '0';
+                    FrameReadyxS         <= (others => '1');
+                    MandelbrotFrameCntxD <= (others => '0');
+                    LastFramexS          <= '0';
+                    FrameAllReadyxS      <= '0';
+                elsif rising_edge(ClkUsrxC) then
+                    LastFramexS     <= '1' when MandelbrotFrameCntxD = 98 else '0';
+                    FrameAllReadyxS <= '1' when FrameReadyxS = (FrameReadyxS'range => '1') else '0';
+                    MandelbrotStartxS <= '0';
+                    for i in 0 to C_BRAM_COUNT - 1 loop
+                        if FrameDoneArrayxS(i) = '1' then
+                            FrameReadyxS(i) <= '1';
+                        end if;
+                    end loop;
 
-                        for i in 0 to C_BRAM_COUNT - 1 loop
-                            if FrameDoneArrayxS(i) = '1' then
-                                FrameReadyxS(i) <= FrameDoneArrayxS(i);
-                            end if;
-                        end loop;
-
-                        if FrameReadyxS = (FrameReadyxS'range => '1') then
-                            MandelbrotStartxS <= '1';
-                            FrameReadyxS      <= (others => '0');
-
-                            if MandelbrotFrameCntxD = 99 then
-                                MandelbrotFrameCntxD <= (others => '0');
-                            else
-                                MandelbrotFrameCntxD <= MandelbrotFrameCntxD + 1;
-                            end if;
+                    if FrameAllReadyxS = '1' then
+                        MandelbrotStartxS    <= '1';
+                        FrameReadyxS         <= (others => '0');
+                        if LastFramexS = '1' then
+                            MandelbrotFrameCntxD <= (others => '0');
+                        else
+                            MandelbrotFrameCntxD <= MandelbrotFrameCntxD + 1;
                         end if;
                     end if;
-                end process;
+                end if;
+            end process;
 
-            end block MandelbrotStartAndFrameCounterxB;
             ---------------------------------------------------------------------------
             -- Zoom parameter generator
             ---------------------------------------------------------------------------
@@ -926,16 +935,10 @@ begin
                     port map (
                         frame_counter => MandelbrotFrameCntxD,
                         x0            => MandelbrotX0xD,
-                        y0            => MandelbrotY0BasexD,   -- base y0 for gen 0
+                        y0            => MandelbrotY0xD,
                         dx            => MandelbrotDxxD,
                         dy            => MandelbrotDyxD
                     );
-
-                gen_y0 : for i in 0 to C_BRAM_COUNT - 1 generate
-                    MandelbrotY0xD(i) <= MandelbrotY0BasexD + 
-                        resize(to_signed(i * (C_BUFFER_HEIGHT/ C_BRAM_COUNT), DATA_W) * MandelbrotDyxD, DATA_W);
-                end generate;
-            
             end block MandelbrotZoomxB;
 
             ---------------------------------------------------------------------------
@@ -943,7 +946,6 @@ begin
             ---------------------------------------------------------------------------
             MandelbrotPictureGenxB : block is
             begin
-            
                 gen_picture : for i in 0 to C_BRAM_COUNT - 1 generate
                     MandelbrotPictureGenxI : entity work.mandelbrot_picture_gen(pipelined)
                         generic map (
