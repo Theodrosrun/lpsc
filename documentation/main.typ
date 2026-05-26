@@ -273,51 +273,57 @@ Port A Depth = 262144
 Port B Width = 7
 Port B Depth = 262144
 ```
-
 == Parallel BRAM organization
 
-In the final parallel version, the framebuffer is split into four independent BRAMs. Each BRAM stores one quarter of the image:
+In the final parallel version, the framebuffer is split into 32 independent BRAMs. Each BRAM stores one thirty-second of the image:
 
 $
-  262144 / 4 = 65536
+  262144 / 32 = 8192
 $
 
 Therefore, each BRAM has:
 
-```text
-Width = 7 bits
-Depth = 65536
-```
+#raw(
+  block: true,
+  lang: "text",
+  "Width = 7 bits
+Depth = 8192",
+)
 
 Since:
 
 $
-  65536 = 2^16
+  8192 = 2^13
 $
 
-each BRAM uses a 16-bit address. This is why the picture generators use:
+each BRAM uses a 13-bit address. This is why the picture generators use:
 
-```vhdl
-C_BRAM_ADDR_BIT_SIZE => C_BRAM_ADDR_BIT_SIZE - 2
-```
+#raw(
+  block: true,
+  lang: "vhdl",
+  "C_BRAM_ADDR_BIT_SIZE => C_BRAM_ADDR_BIT_SIZE - 5",
+)
 
 because:
 
 $
-  18 - 2 = 16
+  18 - 5 = 13
 $
 
-The four BRAMs together still store the complete 512 x 512 framebuffer:
+The 32 BRAMs together still store the complete 512 x 512 framebuffer:
 
-```text
-BRAM 0 -> 65536 pixels
-BRAM 1 -> 65536 pixels
-BRAM 2 -> 65536 pixels
-BRAM 3 -> 65536 pixels
-Total  -> 262144 pixels
-```
+#raw(
+  block: true,
+  lang: "text",
+  "BRAM 0  -> 8192 pixels
+BRAM 1  -> 8192 pixels
+BRAM 2  -> 8192 pixels
+...
+BRAM 31 -> 8192 pixels
+Total   -> 262144 pixels",
+)
 
-This organization has the same total framebuffer capacity as the single-BRAM version, but it allows the four Mandelbrot generators to write their results independently and in parallel.
+This organization has the same total framebuffer capacity as the single-BRAM version, but it allows the 32 Mandelbrot generators to write their results independently and in parallel. The schema represents four parallel generators:
 
 #align(center)[
   #image("images/parallelism.png", width: 80%)
@@ -501,7 +507,7 @@ The comparison is summarized below:
   [Architecture], [Constraint], [Period], [WNS], [Critical path], [Estimated Fmax],
   [FSM], [75 MHz], [13.333 ns], [0.512 ns], [12.821 ns], [78 MHz],
   [Single pipelined], [125 MHz], [8.000 ns], [0.857 ns], [7.143 ns], [140 MHz],
-  [Parallel pipelined], [125 MHz], [8.000 ns], [0.105 ns], [7.895 ns], [126.7 MHz],
+  [Parallel pipelined], [125 MHz], [8.000 ns], [0.134 ns], [7.895 ns], [126.7 MHz],
 )
 
 All implementations meet timing because all WNS values are positive. The FSM version was validated at 75 MHz, while both pipelined versions were validated at 125 MHz.
@@ -520,19 +526,19 @@ The resource utilization of the final implementation is summarized below:
   [Resource], [Used], [Available], [Utilization], [Comment],
   [LUT], [~6000], [46200], [13%], [Logic, control and arithmetic],
   [Flip-Flop], [~6500], [92400], [7%], [Pipeline and control registers],
-  [BRAM], [~56], [95], [59%], [Framebuffer memories],
-  [DSP], [~18], [160], [11%], [Fixed-point multiplications],
+  [BRAM], [~65], [95], [68%], [Framebuffer memories],
+  [DSP], [~128], [160], [80%], [Fixed-point multiplications],
 )
 
 The final implementation uses a moderate amount of LUTs and flip-flops. The LUT utilization is approximately 13%, while the flip-flop utilization is approximately 7%. These resources are mainly used for control logic, address generation, synchronization between the four generators, and pipeline registers.
 
-The most used resource is BRAM, with approximately 59% utilization. This is expected because the design stores the complete 512 x 512 framebuffer in FPGA memory. In the final parallel version, the framebuffer is divided into four independent BRAM regions. Each region stores one quarter of the image, which allows the four Mandelbrot generators to write their results independently and in parallel.
+The BRAM utilization is approximately 68%. This is expected because the design stores the complete 512 x 512 framebuffer in FPGA memory. In the final parallel version, the framebuffer is divided into four independent BRAM regions. Each region stores one quarter of the image, which allows the four Mandelbrot generators to write their results independently and in parallel.
 
-The DSP utilization is approximately 11%. These DSP blocks are mainly used by the fixed-point multiplications inside the Mandelbrot iteration units. Since the final architecture instantiates four pipelined Mandelbrot generators, several multiplication paths are active in parallel, which increases DSP usage compared to a single-generator version.
+The DSP utilization is approximately 80%. These DSP blocks are mainly used by the fixed-point multiplications inside the Mandelbrot iteration units. Since the final architecture instantiates four pipelined Mandelbrot generators, several multiplication paths are active in parallel. This explains the high DSP usage compared to the FSM and single pipelined versions.
 
-The parallel pipelined version uses more resources than the FSM and single pipelined versions. This is expected because the computation path is replicated four times and additional logic is required for BRAM selection, frame synchronization and framebuffer partitioning. However, the resource usage remains within the available FPGA limits.
+The parallel pipelined version uses more resources than the FSM and single pipelined versions. This is expected because the computation path is replicated four times and additional logic is required for BRAM selection, frame synchronization, and framebuffer partitioning. However, the resource usage remains within the available FPGA limits.
 
-This resource increase is justified by the performance improvement. The final parallel pipelined version reduces the frame generation time to approximately 34.6 ms, corresponding to about 28.9 FPS, while still meeting timing at 125 MHz.
+This resource increase is justified by the performance improvement. The final parallel pipelined version reduces the frame generation time to approximately 6.41 ms, corresponding to about 156 FPS, while still meeting timing at 125 MHz.
 
 = Frame generation time
 
@@ -548,7 +554,6 @@ Parallel pipelined version with four generators
 
 In the parallel pipelined version, the framebuffer is split into four independent parts. Four Mandelbrot picture generators run in parallel, and each generator computes one quarter of the image. Each generator writes to its own BRAM. A frame is considered complete only when all four generators have finished their part.
 
-
 == Frame generation comparison
 
 The comparison is summarized below:
@@ -559,10 +564,12 @@ The comparison is summarized below:
   [Architecture], [Clock], [Cycles per frame], [Frame time], [Frame rate],
   [FSM], [75 MHz], [27,400,456], [365 ms], [2.74 FPS],
   [Single pipelined], [125 MHz], [12,993,601], [104 ms], [9.62 FPS],
-  [Parallel pipelined], [125 MHz], [4,326,949], [34.6 ms], [28.9 FPS],
+  [Parallel pipelined], [125 MHz], [801,282], [6.41 ms], [156 FPS],
 )
 
-Compared to the FSM version, the single pipelined version improves the frame generation time by:
+The FSM implementation is the slowest version, with a frame generation time of 365 ms, corresponding to 2.74 FPS.
+
+The single pipelined implementation reduces the frame generation time to 104 ms, corresponding to 9.62 FPS. Compared to the FSM implementation, this gives an improvement of:
 
 $
   365 / 104 ≈ 3.51
@@ -570,20 +577,20 @@ $
 
 Therefore, the single pipelined version is approximately 3.5 times faster than the FSM version.
 
-Compared to the single pipelined version, the parallel pipelined version improves the frame generation time by:
+The parallel pipelined implementation further reduces the frame generation time to 6.41 ms, corresponding to 156 FPS. Compared to the single pipelined implementation, this gives an improvement of:
 
 $
-  104 / 34.6 ≈ 3.01
+  104 / 6.41 ≈ 16.22
 $
 
-Therefore, the parallel pipelined version is approximately 3.0 times faster than the single pipelined version.
+Therefore, the parallel pipelined version is approximately 16.2 times faster than the single pipelined version.
 
-Compared to the original FSM version, the parallel pipelined version improves the frame generation time by:
+Overall, compared to the original FSM implementation, the final parallel pipelined version improves the frame generation time by:
 
 $
-  365 / 34.6 ≈ 10.55
+  365 / 6.41 ≈ 56.94
 $
 
-Therefore, the final parallel pipelined version is approximately 10.5 times faster than the FSM version.
+Therefore, the final parallel pipelined version is approximately 56.9 times faster than the original FSM version.
 
-This improvement comes from two effects. First, the pipelined versions run at a higher clock frequency. Second, the parallel pipelined version divides the image into four independent regions, which are computed simultaneously by four Mandelbrot generators.
+This overall improvement is the result of two successive optimizations. The first improvement comes from replacing the FSM-based architecture with a pipelined architecture, which also allows the design to run at a higher clock frequency. The second improvement comes from the parallel pipelined architecture, where the image is divided into four independent regions computed simultaneously by four Mandelbrot generators.
