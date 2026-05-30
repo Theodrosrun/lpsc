@@ -126,10 +126,6 @@ This architecture is simple and easy to debug, but the throughput is limited bec
 
 The single pipelined version improves throughput by overlapping operations and reducing idle time. It allows the design to reach a higher operating frequency and a shorter frame generation time.
 
-#align(center)[
-  #image("images/pipeline.png", width: 100%)
-]
-
 In the pipelined version, the generator uses internal slots to keep track of several pixels that are currently being processed. Each slot stores the context of one pixel, including its position, current complex value, iteration count and state. This allows several pixels to share the same pipelined iteration unit without losing their context.
 
 #align(center)[
@@ -198,17 +194,6 @@ A full frame is considered complete only when all thirty-two generators have ass
 
 == Mandelbrot iteration unit
 
-The mandelbrot_iter block performs one step of the Mandelbrot/Julia recurrence:
-
-$
-  z_(n+1) = z_n^2 + c
-$
-
-It also computes the divergence condition:
-
-$
-  z_"re"^2 + z_"im"^2 >= 4
-$
 
 Two architectures are available:
 
@@ -223,6 +208,11 @@ In the combinational version, all arithmetic operations are placed in one combin
 
 In the pipelined version, the arithmetic operations are split into several stages separated by registers. This reduces the delay of each combinational stage and improves the timing performance. The drawback is additional latency, but this latency is handled by the valid signal and by the slot/tag mechanism in the pipelined picture generator.
 
+#align(center)[
+  #image("images/pipeline.png", width: 100%)
+]
+
+
 The pipelined iteration unit is divided into three main stages:
 
 #raw(
@@ -233,45 +223,11 @@ Stage 2 : fixed-point slicing and arithmetic
 Stage 3 : output generation and divergence comparison",
 )
 
-In the first stage, the unit computes:
-
-$
-  z_"re"^2
-$
-
-$
-  z_"im"^2
-$
-
-$
-  z_"re" * z_"im"
-$
-
-In the second stage, the next complex value is computed:
-
-$
-  z_"re,next" = z_"re"^2 - z_"im"^2 + c_"re"
-$
-
-$
-  z_"im,next" = 2 * z_"re" * z_"im" + c_"im"
-$
-
-The squared magnitude is also computed:
-
-$
-  |z|^2 = z_"re"^2 + z_"im"^2
-$
-
-In the third stage, the squared magnitude is compared with the divergence threshold:
-
-$
-  |z|^2 >= 4
-$
-
 If the condition is true, the output div is asserted. Otherwise, the pixel must continue iterating.
 
 The iteration unit only computes one iteration. The repeated loop over multiple iterations is managed by the picture generator and its slots.
+
+#pagebreak()
 
 = Framebuffer memory
 
@@ -330,6 +286,8 @@ Port A Depth = 262144
 Port B Width = 7
 Port B Depth = 262144",
 )
+
+#pagebreak()
 
 == Parallel BRAM organization
 
