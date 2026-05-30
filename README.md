@@ -13,6 +13,9 @@ Academic year 2025–2026
 
 This project consists of developing a hardware-accelerated Mandelbrot/Julia fractal generator on the SCALP FPGA platform. The design computes the fractal in VHDL using fixed-point arithmetic, stores the result in BRAM framebuffers, and displays it through VGA/HDMI. Several architectures were compared, from a simple FSM version to a pipelined and parallelized implementation using multiple generators to improve the frame generation time.
 
+## Report
+
+The report can be found here: [report.pdf](documentation/report.pdf)
 
 ## VHDL Source Files
 
