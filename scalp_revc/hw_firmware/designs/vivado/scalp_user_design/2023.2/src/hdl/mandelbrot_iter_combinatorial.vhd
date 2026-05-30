@@ -1,4 +1,24 @@
 
+
+----------------------------------------------------------------------------------
+--                                 _             _
+--                                | |_  ___ _ __(_)__ _
+--                                | ' \/ -_) '_ \ / _` |
+--                                |_||_\___| .__/_\__,_|
+--                                         |_|
+--
+----------------------------------------------------------------------------------
+--
+-- Company: hepia
+-- Authors: Andrè Costa, Theodros Mulugeta
+--
+-- Module Name: mandelbrot_iter_combinatorial - arch
+-- Description: mandelbrot_iter_combinatorial
+--
+-- Last update: 2026-05-30
+--
+----------------------------------------------------------------------------------
+
 architecture combinatorial of mandelbrot_iter is
 
     constant MUL_W : integer := 2 * DATA_W;   -- 36

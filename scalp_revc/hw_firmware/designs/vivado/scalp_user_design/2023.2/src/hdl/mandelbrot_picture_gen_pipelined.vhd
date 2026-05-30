@@ -1,3 +1,24 @@
+
+
+----------------------------------------------------------------------------------
+--                                 _             _
+--                                | |_  ___ _ __(_)__ _
+--                                | ' \/ -_) '_ \ / _` |
+--                                |_||_\___| .__/_\__,_|
+--                                         |_|
+--
+----------------------------------------------------------------------------------
+--
+-- Company: hepia
+-- Authors: Andrè Costa, Theodros Mulugeta
+--
+-- Module Name: mandelbrot_picture_gen_pipelined - arch
+-- Description: mandelbrot_picture_gen_pipelined
+--
+-- Last update: 2026-05-30
+--
+----------------------------------------------------------------------------------
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;

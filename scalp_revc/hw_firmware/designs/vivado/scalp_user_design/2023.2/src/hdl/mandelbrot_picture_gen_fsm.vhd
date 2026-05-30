@@ -1,5 +1,24 @@
-architecture fsm of mandelbrot_picture_gen is
 
+----------------------------------------------------------------------------------
+--                                 _             _
+--                                | |_  ___ _ __(_)__ _
+--                                | ' \/ -_) '_ \ / _` |
+--                                |_||_\___| .__/_\__,_|
+--                                         |_|
+--
+----------------------------------------------------------------------------------
+--
+-- Company: hepia
+-- Authors: Andrè Costa, Theodros Mulugeta
+--
+-- Module Name: mandelbrot_picture_gen_fsm - arch
+-- Description: mandelbrot_picture_gen_fsm
+--
+-- Last update: 2026-05-30
+--
+----------------------------------------------------------------------------------
+
+architecture fsm of mandelbrot_picture_gen is
     type state_t is (
         IDLE,
         SEND_PIXEL,
