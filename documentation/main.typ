@@ -77,6 +77,7 @@ Several architectures were implemented and compared. The first version uses a fi
 
 The objective is to evaluate the impact of fixed-point arithmetic, pipelining, memory partitioning and parallel computation on timing performance, FPGA resource usage and frame generation time.
 
+
 #pagebreak()
 
 = Global system architecture
@@ -89,18 +90,52 @@ The global computation and display flow is:
   #image("images/architecture.png", width: 50%)
 ]
 
-The image is generated region by region. For each pixel, the picture generator computes the corresponding complex coordinate and sends it to the Mandelbrot iteration unit. The iteration unit performs one iteration of the Mandelbrot/Julia recurrence and outputs the next complex value as well as the divergence flag. The picture generator repeats this operation until the pixel diverges or the maximum number of iterations is reached. The final iteration count is then written into the corresponding BRAM framebuffer.
+The image is generated region by region. Each picture generator computes pixel coordinates, iterates them until divergence or MAX_ITER, and writes the final iteration count to its BRAM.
+The final design uses thirty-two pipelined picture generators in parallel. Each one computes one thirty-second of the image and writes to an independent BRAM region.
 
-The design was first implemented with a single picture generator writing to one framebuffer. The final version improves the throughput by using thirty-two Mandelbrot picture generators in parallel. Each generator computes one thirty-second of the image and writes the result to its own independent BRAM region.
-
-During display, the VGA interface reads the framebuffer, sends the stored iteration value to the palette module, and outputs the corresponding RGB value.
+During display, the VGA interface reads the BRAM data, the palette converts the iteration count into RGB, and the resulting color is sent to the output.
 
 = Mandelbrot computation architecture
+
+== Mandelbrot iteration unit
+
+Two architectures are available:
+
+#raw(
+  block: true,
+  lang: "vhdl",
+  "mandelbrot_iter(combinatorial)
+mandelbrot_iter(pipelined)",
+)
+
+In the combinational version, all arithmetic operations are placed in one combinational path. This is simple, but it creates a long critical path.
+
+In the pipelined version, the arithmetic operations are split into several stages separated by registers. This reduces the delay of each combinational stage and improves the timing performance. The drawback is additional latency, but this latency is handled by the valid signal and by the slot/tag mechanism in the pipelined picture generator.
+
+#align(center)[
+  #image("images/pipeline.png", width: 100%)
+]
+
+
+The pipelined iteration unit is divided into three main stages:
+
+#raw(
+  block: true,
+  lang: "text",
+  "Stage 1 : fixed-point multiplications
+Stage 2 : fixed-point slicing and arithmetic
+Stage 3 : output generation and divergence comparison",
+)
+
+If the condition is true, the output div is asserted. Otherwise, the pixel must continue iterating.
+
+The iteration unit only computes one iteration. The repeated loop over multiple iterations is managed by the picture generator and its slots.
+
+#pagebreak()
 
 == Mandelbrot picture generator
 
 The mandelbrot_picture_gen block is responsible for scanning an image region. It generates the horizontal and vertical pixel positions and converts them into complex coordinates.
-
 Two architectures are available for this block:
 
 #raw(
@@ -117,44 +152,40 @@ The FSM version processes one pixel at a time. It waits for the computation of t
 The control flow is sequential:
 
 #align(center)[
-  #image("images/fsm.png", width: 50%)
+  #image("images/fsm.png", width: 35%)
 ]
 
 This architecture is simple and easy to debug, but the throughput is limited because the next pixel cannot start until the current pixel has finished.
 
 === Single pipelined picture generator
 
+==== Interaction
+
 The single pipelined version improves throughput by overlapping operations and reducing idle time. It allows the design to reach a higher operating frequency and a shorter frame generation time.
 
 In the pipelined version, the generator uses internal slots to keep track of several pixels that are currently being processed. Each slot stores the context of one pixel, including its position, current complex value, iteration count and state. This allows several pixels to share the same pipelined iteration unit without losing their context.
 
 #align(center)[
-  #image("images/slot.png", width: 100%)
+  #image("images/single_pipelined_generator.png", width: 80%)
 ]
 
 #pagebreak()
 
-A slot can be in one of three states:
+==== Slot mechanism
 
-#raw(
-  block: true,
-  lang: "vhdl",
-  "type slot_state_t is (INACTIVE, READY, ACTIVE);",
-)
+#align(center)[
+  #image("images/slot.png", width: 40%)
+]
 
-The meaning of each state is:
+A slot can be in one of three states: `INACTIVE`, `READY` or `ACTIVE`.
 
-#raw(
-  block: true,
-  lang: "text",
-  "INACTIVE : the slot is free and can receive a new pixel
-READY : the slot contains a pixel ready to enter the iteration unit
-ACTIVE : the slot has been sent to the pipeline and is waiting for the result",
-)
+`INACTIVE` means that the slot is free and can receive a new pixel. `READY` means that the slot already contains a pixel and is ready to be sent to the iteration unit. `ACTIVE` means that the slot has been sent to the pipeline and is waiting for the result.
 
 The iteration unit only performs one iteration. If the pixel has not diverged, the new complex value is written back into the corresponding slot, the iteration counter is incremented, and the slot becomes ready again for another iteration. If the pixel has diverged or has reached the maximum number of iterations, the final iteration count is written to BRAM and the slot becomes inactive.
 
 The slot mechanism is required because the pipelined iterator has latency. A result comes out several clock cycles after the input was applied. Therefore, the generator must remember which pixel the result belongs to. This is done with a tag pipeline, which carries the slot index through the same latency as the iterator.
+
+#pagebreak()
 
 === Parallel pipelined picture generator
 
@@ -192,41 +223,6 @@ pixels instead of the complete 512 x 512 image.
 
 A full frame is considered complete only when all thirty-two generators have asserted their individual FrameDone signal.
 
-== Mandelbrot iteration unit
-
-
-Two architectures are available:
-
-#raw(
-  block: true,
-  lang: "vhdl",
-  "mandelbrot_iter(combinatorial)
-mandelbrot_iter(pipelined)",
-)
-
-In the combinational version, all arithmetic operations are placed in one combinational path. This is simple, but it creates a long critical path.
-
-In the pipelined version, the arithmetic operations are split into several stages separated by registers. This reduces the delay of each combinational stage and improves the timing performance. The drawback is additional latency, but this latency is handled by the valid signal and by the slot/tag mechanism in the pipelined picture generator.
-
-#align(center)[
-  #image("images/pipeline.png", width: 100%)
-]
-
-
-The pipelined iteration unit is divided into three main stages:
-
-#raw(
-  block: true,
-  lang: "text",
-  "Stage 1 : fixed-point multiplications
-Stage 2 : fixed-point slicing and arithmetic
-Stage 3 : output generation and divergence comparison",
-)
-
-If the condition is true, the output div is asserted. Otherwise, the pixel must continue iterating.
-
-The iteration unit only computes one iteration. The repeated loop over multiple iterations is managed by the picture generator and its slots.
-
 #pagebreak()
 
 = Framebuffer memory
@@ -259,6 +255,8 @@ $
   2^7 = 128
 $
 
+#pagebreak()
+
 == Single-BRAM organization
 
 In the first versions, the complete framebuffer is stored in one BRAM. The required depth is:
@@ -286,8 +284,6 @@ Port A Depth = 262144
 Port B Width = 7
 Port B Depth = 262144",
 )
-
-#pagebreak()
 
 == Parallel BRAM organization
 
@@ -326,6 +322,8 @@ $
   18 - 5 = 13
 $
 
+#pagebreak()
+
 The 32 BRAMs together still store the complete 512 x 512 framebuffer:
 
 #raw(
@@ -345,9 +343,11 @@ This organization has the same total framebuffer capacity as the single-BRAM ver
   #image("images/parallelism.png", width: 80%)
 ]
 
+#pagebreak()
+
 = VGA scaling and display
 
-The framebuffer resolution is not equal to the display resolution. The Mandelbrot image is generated and stored in a 512 x 512 framebuffer, while the active VGA display area is 720 x 720 pixels:
+The Mandelbrot image is generated in a 512 x 512 framebuffer, while the active VGA display area is 720 x 720 pixels:
 
 #raw(
   block: true,
@@ -357,21 +357,15 @@ constant C_BUFFER_HEIGHT : integer := 512;
 constant C_VGA_ACTIVE_SIZE : integer := 720;",
 )
 
-Therefore, the VGA interface performs a scaling operation when reading the framebuffer. The horizontal and vertical display coordinates are converted into framebuffer coordinates using:
+The VGA interface therefore scales the display coordinates to framebuffer coordinates:
 
 #raw(
   block: true,
   lang: "vhdl",
   "HxScaledxD := (to_integer(unsigned(HxCntxDI)) * C_BUFFER_WIDTH) / C_VGA_ACTIVE_SIZE;
-VxScaledxD := (to_integer(unsigned(VxCntxDI)) * C_BUFFER_HEIGHT) / C_VGA_ACTIVE_SIZE;",
-)
+VxScaledxD := (to_integer(unsigned(VxCntxDI)) * C_BUFFER_HEIGHT) / C_VGA_ACTIVE_SIZE;
 
-Then the global framebuffer read address is computed with:
-
-#raw(
-  block: true,
-  lang: "vhdl",
-  "BramRdAddrxD := (VxScaledxD * C_BUFFER_WIDTH) + HxScaledxD;",
+BramRdAddrxD := (VxScaledxD * C_BUFFER_WIDTH) + HxScaledxD;",
 )
 
 The scaling factor is:
@@ -380,21 +374,19 @@ $
   720 / 512 ≈ 1.406
 $
 
-In the parallel BRAM version, the five most significant bits of the read address select which BRAM must be read. The remaining lower address bits select the pixel inside the selected BRAM.
-
-Since the complete framebuffer contains 262144 pixels, the global address width is 18 bits. With 32 BRAMs, each BRAM stores 8192 pixels, which requires 13 address bits. Therefore, the address is split as follows:
+In the parallel BRAM version, the 18-bit global framebuffer address is split into 5 BRAM selection bits and 13 local address bits:
 
 #raw(
   block: true,
   lang: "text",
   "Global address width = 18 bits
-BRAM select bits = 5 bits
-Local BRAM address = 13 bits",
+BRAM select bits     = 5 bits
+Local BRAM address   = 13 bits",
 )
 
-This allows the VGA interface to access the thirty-two BRAMs as one logical 512 x 512 framebuffer.
+This allows the VGA interface to access the 32 BRAMs as one logical 512 x 512 framebuffer. The displayed image is slightly upscaled, but this avoids computing and storing a full 720 x 720 framebuffer.
 
-The trade-off is that the displayed image is slightly upscaled, but the hardware cost is significantly lower than computing and storing a full 720 x 720 framebuffer.
+#pagebreak()
 
 = Color palette
 
@@ -414,17 +406,9 @@ This separation between computation and color generation is useful because the f
 
 = Simulation and test script
 
-A simulation script was created to automate the validation of the Mandelbrot VHDL blocks. The script uses GHDL to compile the sources, run the testbenches and generate VCD waveform files.
+A simulation script was created to validate the Mandelbrot VHDL blocks automatically. The script, located in `sim.sh`, uses GHDL to compile the sources, run the testbenches and generate VCD waveform files.
 
-The script is located in:
-
-#raw(
-  block: true,
-  lang: "text",
-  "sim.sh",
-)
-
-It compiles the Mandelbrot iteration unit, the FSM picture generator and the pipelined picture generator in the correct order. Then, it runs the corresponding testbenches:
+It runs the following testbenches:
 
 #raw(
   block: true,
@@ -435,7 +419,7 @@ simulate tb_mandelbrot_picture_gen 10000ms
 simulate tb_mandelbrot_picture_gen_pipelined 100ms",
 )
 
-The testbenches generate PPM image files. These files are then compared with cmp to verify that the different architectures produce the same image:
+The generated PPM images are compared to ensure that the FSM and pipelined picture generators produce the same result:
 
 #raw(
   block: true,
@@ -443,21 +427,11 @@ The testbenches generate PPM image files. These files are then compared with cmp
   "cmp $PICTURE_GEN_PIPELINED_OUTPUT_FILE $PICTURE_GEN_OUTPUT_FILE",
 )
 
-The comparison checks that the pipelined picture generator produces the same image as the FSM version.
+If the comparison succeeds, the script prints `All tests passed`, confirming that the tested blocks are functionally correct. The final parallel version reuses the validated pipelined generator thirty-two times.
 
-If all comparisons succeed, the script prints:
-
-#raw(
-  block: true,
-  lang: "text",
-  "All tests passed",
-)
-
-This confirms that the tested Mandelbrot blocks are functionally correct. The parallel version reuses the validated pipelined generator thirty-two times and distributes the framebuffer into independent regions.
+#pagebreak()
 
 = Timing analysis
-
-Vivado timing reports were used to evaluate the maximum operating frequency of the design. Three implementations were compared: the FSM implementation, the single pipelined implementation, and the final parallel pipelined implementation.
 
 == FSM implementation
 
@@ -545,6 +519,8 @@ $
 
 The parallel pipelined version still meets timing at 125 MHz, but with a smaller timing margin than the single pipelined version. This is expected because the design duplicates the Mandelbrot computation path thirty-two times and adds extra logic for BRAM selection, frame synchronization and framebuffer partitioning.
 
+#pagebreak()
+
 == Timing comparison
 
 The comparison is summarized below:
@@ -561,6 +537,8 @@ The comparison is summarized below:
 All implementations meet timing because all WNS values are positive. The FSM version was validated at 75 MHz, while both pipelined versions were validated at 125 MHz.
 
 The single pipelined version has the highest estimated maximum frequency. The parallel pipelined version has a lower estimated maximum frequency because it uses thirty-two computation paths in parallel and requires additional control and memory selection logic. However, it provides the best frame generation time because thirty-two image regions are computed simultaneously.
+
+#pagebreak()
 
 = FPGA resource utilization
 
@@ -619,6 +597,8 @@ The comparison is summarized below:
 
 The FSM implementation is the slowest version, with a frame generation time of 365 ms, corresponding to 2.74 FPS.
 
+#pagebreak()
+
 The single pipelined implementation reduces the frame generation time to 104 ms, corresponding to 9.62 FPS. Compared to the FSM implementation, this gives an improvement of:
 
 $
@@ -644,6 +624,8 @@ $
 Therefore, the final parallel pipelined version is approximately 56.9 times faster than the original FSM version.
 
 This overall improvement is the result of two successive optimizations. The first improvement comes from replacing the FSM-based architecture with a pipelined architecture, which also allows the design to run at a higher clock frequency. The second improvement comes from the parallel pipelined architecture, where the image is divided into thirty-two independent regions computed simultaneously by thirty-two Mandelbrot generators.
+
+#pagebreak()
 
 = Conclusion
 
