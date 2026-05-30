@@ -77,23 +77,11 @@ Several architectures were implemented and compared. The first version uses a fi
 
 The objective is to evaluate the impact of fixed-point arithmetic, pipelining, memory partitioning and parallel computation on timing performance, FPGA resource usage and frame generation time.
 
+#pagebreak()
+
 = Global system architecture
 
 The complete design is composed of the following main blocks:
-
-#raw(
-  block: true,
-  lang: "text",
-  "scalp_user_design
-├── Zynq processing system
-├── Clock and reset generation
-├── mandelbrot_zoom
-├── mandelbrot_picture_gen
-├── mandelbrot_iter
-├── BRAM framebuffers
-├── scalp_vga_if
-└── mandelbrot_palette",
-)
 
 The global computation and display flow is:
 
@@ -138,8 +126,17 @@ This architecture is simple and easy to debug, but the throughput is limited bec
 
 The single pipelined version improves throughput by overlapping operations and reducing idle time. It allows the design to reach a higher operating frequency and a shorter frame generation time.
 
+#align(center)[
+  #image("images/pipeline.png", width: 100%)
+]
 
 In the pipelined version, the generator uses internal slots to keep track of several pixels that are currently being processed. Each slot stores the context of one pixel, including its position, current complex value, iteration count and state. This allows several pixels to share the same pipelined iteration unit without losing their context.
+
+#align(center)[
+  #image("images/slot.png", width: 100%)
+]
+
+#pagebreak()
 
 A slot can be in one of three states:
 
